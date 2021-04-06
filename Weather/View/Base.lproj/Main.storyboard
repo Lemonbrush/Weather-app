@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9P-YM-QcY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ISl-Ed-mF8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,17 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--City View Controller-->
+        <!--General-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CityViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XL4-Wg-Dgi">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" rowHeight="80" id="cyr-Kj-kqq" customClass="CityTableViewCell" customModule="Weather">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
@@ -86,33 +86,101 @@
                             <constraint firstItem="XL4-Wg-Dgi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y6i-f2-nyu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sM8-zJ-d1Q"/>
+                    <tabBarItem key="tabBarItem" title="General" image="house" catalog="system" id="Ybr-ax-7xA"/>
+                    <navigationItem key="navigationItem" id="sM8-zJ-d1Q">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="r5e-aW-OcV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="hYE-f6-Bxf" kind="show" identifier="showCityDetailVC" id="laH-TJ-Ral"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937.68115942028987" y="94.419642857142847"/>
+            <point key="canvasLocation" x="4128" y="-325"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--City Detail View Controller-->
+        <scene sceneID="tMV-2t-YHR">
+            <objects>
+                <viewController id="hYE-f6-Bxf" customClass="CityDetailViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mt5-1I-gXI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4dZ-nY-jzj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9zX-eG-qc8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcX-Kx-yHL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4971" y="-325"/>
+        </scene>
+        <!--Saved-->
+        <scene sceneID="UVO-rT-jtn">
+            <objects>
+                <viewController id="qKy-jZ-lMx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rjP-uE-kbZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="55v-1b-YjC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Saved" image="list.bullet" catalog="system" id="XcZ-ym-wwc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Stm-bo-khf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3267" y="496"/>
+        </scene>
+        <!--Weather Tab Bar Controller-->
+        <scene sceneID="IuI-Wf-Mct">
+            <objects>
+                <tabBarController id="ISl-Ed-mF8" customClass="WeatherTabBarController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8Jy-m8-1Og"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Meb-RB-CeY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="f9P-YM-QcY" kind="relationship" relationship="viewControllers" id="kPx-6F-9Cn"/>
+                        <segue destination="qKy-jZ-lMx" kind="relationship" relationship="viewControllers" id="fyr-eD-FGq"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8g7-g1-ycp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2297" y="86"/>
+        </scene>
+        <!--General-->
         <scene sceneID="9J4-nU-voa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f9P-YM-QcY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="General" image="house" catalog="system" id="3wg-mW-kvu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Kgj-YI-Wba">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kgj-YI-Wba">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="gQS-LD-sEP"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dQV-8u-xuO"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1h-Ly-EB1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="27.536231884057973" y="94.419642857142847"/>
+            <point key="canvasLocation" x="3267" y="-325"/>
         </scene>
     </scenes>
     <resources>
+        <image name="house" catalog="system" width="128" height="106"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

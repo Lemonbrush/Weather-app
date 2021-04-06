@@ -23,8 +23,9 @@ class CityViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //navigationController?.setNavigationBarHidden(true, animated: false)
     }
+    
+    
 
 }
 
@@ -39,7 +40,12 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "showCityDetailVC", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
