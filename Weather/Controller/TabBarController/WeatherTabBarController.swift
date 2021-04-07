@@ -14,7 +14,6 @@ class WeatherTabBarController: UITabBarController {
 
         //navigationController?.setNavigationBarHidden(true, animated: false)
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

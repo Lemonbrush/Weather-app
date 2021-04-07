@@ -9,6 +9,8 @@ import UIKit
 
 class CityViewController: UIViewController {
 
+    @IBOutlet weak var cityTable: UITableView!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
@@ -18,11 +20,14 @@ class CityViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        cityTable.contentInset.top = 10 //Space before the first cell
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     
@@ -32,7 +37,7 @@ class CityViewController: UIViewController {
 extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 500
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
