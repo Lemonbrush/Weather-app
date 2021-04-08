@@ -15,6 +15,8 @@ class CityViewController: UIViewController {
         return .darkContent
     }
     
+    var weatherManager = WeatherManager()
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,8 @@ class CityViewController: UIViewController {
         
         cityTable.contentInset.top = 10 //Space before the first cell
         
+        weatherManager.delegate = self
+        weatherManager.fetchWeather(cityName: "Moscow")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,5 +56,17 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+extension CityViewController: WeatherManagerDelegate {
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        print(weather)
+    }
+    
+    func didFailWithError(error: Error) {
+        fatalError("Failed with - \(error)")
+    }
+    
 }
 
