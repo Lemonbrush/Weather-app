@@ -113,7 +113,7 @@
                                             <color key="tintColor" white="0.14000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                             <state key="normal">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                                <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
                                             </state>
                                             <connections>
                                                 <segue destination="sVP-fZ-dQ0" kind="presentation" identifier="addNewCity" id="yWr-wf-qZb"/>
@@ -215,6 +215,7 @@
                     <navigationItem key="navigationItem" id="JQ0-ai-ayK"/>
                     <connections>
                         <outlet property="CityTable" destination="w4r-Ak-u4P" id="hEm-cC-TXS"/>
+                        <outlet property="cityTable" destination="w4r-Ak-u4P" id="3CO-mZ-ph5"/>
                         <segue destination="hYE-f6-Bxf" kind="show" identifier="showCityDetails" id="igW-UU-VYt"/>
                     </connections>
                 </viewController>
@@ -263,7 +264,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
