@@ -15,30 +15,34 @@ class CityViewController: UIViewController {
         return .darkContent
     }
     
+    var refreshControl = UIRefreshControl()
+    
     var weatherManager = WeatherManager()
     var cityNames = ["Moscow", "London", "Kansas City", "Newcastle"] //Presaved queries
-    var displayWeather: [WeatherModel] = [] //Fetched data for tableviews
+    var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        cityTable.contentInset.top = 10 //Space before the first cell
+        //Refresh control settings
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refreshWeatherData(_:)), for: .valueChanged)
+        cityTable.addSubview(refreshControl)
+        
+        //Space before the first cell
+        cityTable.contentInset.top = 10
         
         weatherManager.delegate = self
+        
         fetchWeatherData()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.hidesBarsOnSwipe = true
-    }
-    
     //Helper functions
     func fetchWeatherData() {
+        
+        displayWeather.removeAll()
         
         for cityName in cityNames {
             weatherManager.fetchWeather(cityName: cityName)
@@ -46,6 +50,11 @@ class CityViewController: UIViewController {
             
             displayWeather.append(blankWeather)
         }
+    }
+    
+    @objc func refreshWeatherData(_ sender: AnyObject) {
+        fetchWeatherData()
+        refreshControl.endRefreshing()
     }
 
 }
