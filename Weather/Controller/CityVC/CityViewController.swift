@@ -10,6 +10,7 @@ import UIKit
 class CityViewController: UIViewController {
 
     @IBOutlet weak var cityTable: UITableView!
+    @IBOutlet weak var currentDateLabel: UILabel!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
@@ -24,6 +25,13 @@ class CityViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setting up the date label
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE dd MMMM"
+        let result = dateFormatter.string(from: currentDate)
+        currentDateLabel.text = result
         
         //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")

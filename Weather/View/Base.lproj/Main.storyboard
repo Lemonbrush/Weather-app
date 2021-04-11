@@ -70,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axD-Lj-C85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4898.5507246376819" y="-695.08928571428567"/>
+            <point key="canvasLocation" x="4867" y="-698"/>
         </scene>
         <!--City View Controller-->
         <scene sceneID="KLc-tM-cXc">
@@ -142,7 +142,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kdB-eF-5qe">
                                                             <rect key="frame" x="10" y="10" width="364" height="68"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-Rx-fag">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-Rx-fag">
                                                                     <rect key="frame" x="0.0" y="10.5" width="91.5" height="47"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moscow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLS-0a-waT">
@@ -216,6 +216,7 @@
                     <connections>
                         <outlet property="CityTable" destination="w4r-Ak-u4P" id="hEm-cC-TXS"/>
                         <outlet property="cityTable" destination="w4r-Ak-u4P" id="3CO-mZ-ph5"/>
+                        <outlet property="currentDateLabel" destination="9pv-zW-l0L" id="jM6-XH-hcI"/>
                         <segue destination="hYE-f6-Bxf" kind="show" identifier="showCityDetails" id="igW-UU-VYt"/>
                     </connections>
                 </viewController>
