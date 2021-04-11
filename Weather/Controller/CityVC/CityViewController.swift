@@ -19,7 +19,7 @@ class CityViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     
     var weatherManager = WeatherManager()
-    var cityNames = ["Moscow", "London", "Kansas City", "Newcastle"] //Presaved queries
+    var cityNames = ["Moscow", "London", "Kansas City", "Newcastle", "Paris", "Tokyo"] //Presaved queries
     var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
     
     //MARK: Lifecycle
@@ -54,12 +54,15 @@ class CityViewController: UIViewController {
         
         for cityName in cityNames {
             weatherManager.fetchWeather(cityName: cityName)
-            let blankWeather = WeatherModel(conditionId: 0, cityName: cityName, temperature: 0)
+            
+            //Populate table with blank cells
+            let blankWeather = WeatherModel(conditionId: 0, cityName: cityName, temperature: 0, timezone: 0)
             
             displayWeather.append(blankWeather)
         }
     }
     
+    //Pull-To-Refresh tableview
     @objc func refreshWeatherData(_ sender: AnyObject) {
         fetchWeatherData()
         refreshControl.endRefreshing()
@@ -76,9 +79,18 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell") as! CityTableViewCell
         
+        let weatherDataForCell = displayWeather[indexPath.row]
+        
         // Populate the cell with data
-        cell.cityNameLabel.text = displayWeather[indexPath.row].cityName
-        cell.degreeLabel.text = displayWeather[indexPath.row].weatherTemperatureString
+        cell.cityNameLabel.text = weatherDataForCell.cityName
+        cell.degreeLabel.text = weatherDataForCell.weatherTemperatureString
+        
+        //Setting up time label
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
+        dateFormatter.dateFormat = "hh:mm"
+        cell.TimeLabel.text = dateFormatter.string(from: date)
         
         return cell
     }
