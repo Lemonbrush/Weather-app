@@ -140,7 +140,7 @@
                                                     <rect key="frame" x="15" y="5" width="384" height="88"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kdB-eF-5qe">
-                                                            <rect key="frame" x="10" y="10" width="364" height="68"/>
+                                                            <rect key="frame" x="20" y="10" width="354" height="68"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-Rx-fag">
                                                                     <rect key="frame" x="0.0" y="10.5" width="91.5" height="47"/>
@@ -160,7 +160,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="65°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-8w-28B">
-                                                                    <rect key="frame" x="278.5" y="4" width="85.5" height="60"/>
+                                                                    <rect key="frame" x="268.5" y="4" width="85.5" height="60"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -172,14 +172,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="kdB-eF-5qe" secondAttribute="bottom" constant="10" id="IL3-dt-wdD"/>
                                                         <constraint firstAttribute="trailing" secondItem="kdB-eF-5qe" secondAttribute="trailing" constant="10" id="MSE-Oe-jdY"/>
-                                                        <constraint firstItem="kdB-eF-5qe" firstAttribute="leading" secondItem="2FJ-OZ-kjJ" secondAttribute="leading" constant="10" id="cbA-8q-z4T"/>
+                                                        <constraint firstItem="kdB-eF-5qe" firstAttribute="leading" secondItem="2FJ-OZ-kjJ" secondAttribute="leading" constant="20" id="cbA-8q-z4T"/>
                                                         <constraint firstItem="kdB-eF-5qe" firstAttribute="top" secondItem="2FJ-OZ-kjJ" secondAttribute="top" constant="10" id="k55-Iy-z32"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -193,6 +188,7 @@
                                             <outlet property="TimeLabel" destination="AaN-fj-1mF" id="8zA-kX-ahI"/>
                                             <outlet property="cityNameLabel" destination="fLS-0a-waT" id="VYs-lx-58i"/>
                                             <outlet property="degreeLabel" destination="cGz-8w-28B" id="wXY-Pu-FD5"/>
+                                            <outlet property="weatherBackgroundView" destination="2FJ-OZ-kjJ" id="4cp-sl-f7h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
