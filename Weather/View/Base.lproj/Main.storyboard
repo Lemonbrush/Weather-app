@@ -227,8 +227,21 @@
                     <view key="view" contentMode="scaleToFill" id="mt5-1I-gXI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnC-Y2-k9t">
+                                <rect key="frame" x="184" y="438" width="46" height="30"/>
+                                <state key="normal" title="Return"/>
+                                <connections>
+                                    <action selector="exitButtonPressed:" destination="hYE-f6-Bxf" eventType="touchUpInside" id="8Fi-KS-xnn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="4dZ-nY-jzj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pnC-Y2-k9t" firstAttribute="centerY" secondItem="4dZ-nY-jzj" secondAttribute="centerY" id="Knd-Lq-Uep"/>
+                            <constraint firstItem="pnC-Y2-k9t" firstAttribute="centerX" secondItem="4dZ-nY-jzj" secondAttribute="centerX" id="pqj-nN-NMb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9zX-eG-qc8"/>
                 </viewController>

@@ -14,7 +14,10 @@ class CityDetailViewController: UIViewController {
 
     }
     
-
+    @IBAction func exitButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

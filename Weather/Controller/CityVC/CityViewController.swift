@@ -40,9 +40,11 @@ class CityViewController: UIViewController {
         
         //Space before the first cell
         cityTable.contentInset.top = 10
+        //Getting rid of any delays between user touch and cell animation
+        cityTable.delaysContentTouches = false
         
         weatherManager.delegate = self
-        
+
         fetchWeatherData()
         
     }
@@ -66,6 +68,11 @@ class CityViewController: UIViewController {
     @objc func refreshWeatherData(_ sender: AnyObject) {
         fetchWeatherData()
         refreshControl.endRefreshing()
+    }
+    
+    //Transition to another viewcotroller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 
 }
@@ -97,9 +104,21 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "showCityDetailVC", sender: self)
+        performSegue(withIdentifier: "showCityDetails", sender: self)
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
+            cell.isHighlighted = true
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
+            cell.isHighlighted = false
+        }
     }
 }
 
