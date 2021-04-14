@@ -213,7 +213,7 @@
                         <outlet property="CityTable" destination="w4r-Ak-u4P" id="hEm-cC-TXS"/>
                         <outlet property="cityTable" destination="w4r-Ak-u4P" id="3CO-mZ-ph5"/>
                         <outlet property="currentDateLabel" destination="9pv-zW-l0L" id="jM6-XH-hcI"/>
-                        <segue destination="hYE-f6-Bxf" kind="show" identifier="showCityDetails" id="igW-UU-VYt"/>
+                        <segue destination="hYE-f6-Bxf" kind="show" identifier="detailShow" id="d9O-26-lAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCp-CC-YVX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -237,7 +237,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4dZ-nY-jzj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pnC-Y2-k9t" firstAttribute="centerY" secondItem="4dZ-nY-jzj" secondAttribute="centerY" id="Knd-Lq-Uep"/>
                             <constraint firstItem="pnC-Y2-k9t" firstAttribute="centerX" secondItem="4dZ-nY-jzj" secondAttribute="centerX" id="pqj-nN-NMb"/>

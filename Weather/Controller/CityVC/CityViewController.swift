@@ -16,6 +16,8 @@ class CityViewController: UIViewController {
         return .darkContent
     }
     
+    let fadeTransitionAnimator = FadeTransitionAnimator()
+    
     var refreshControl = UIRefreshControl()
     
     var weatherManager = WeatherManager()
@@ -25,6 +27,8 @@ class CityViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.delegate = self
         
         //Setting up the date label
         let currentDate = Date()
@@ -103,10 +107,7 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        performSegue(withIdentifier: "showCityDetails", sender: self)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "detailShow", sender: self)
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
@@ -145,5 +146,16 @@ extension CityViewController: WeatherManagerDelegate {
         fatalError("Failed with - \(error)")
     }
     
+}
+
+extension CityViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return fadeTransitionAnimator
+    }
 }
 
