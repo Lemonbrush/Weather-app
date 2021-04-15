@@ -24,6 +24,7 @@
 		70E7E1F426283E0700187412 /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E1F326283E0700187412 /* CityData.swift */; };
 		70E7E1FB26283F4D00187412 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E1FA26283F4D00187412 /* CityManager.swift */; };
 		70E7E1FE26284A4500187412 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E1FD26284A4500187412 /* CityModel.swift */; };
+		70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E235262861BB00187412 /* AddCityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		70E7E1F326283E0700187412 /* CityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 		70E7E1FA26283F4D00187412 /* CityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
 		70E7E1FD26284A4500187412 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		70E7E235262861BB00187412 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				709EE5DC261C8BC10095E184 /* TabBarController */,
 				709EE5D7261C83170095E184 /* CityDetailVC */,
 				709EE5D6261C83030095E184 /* CityVC */,
+				70E7E238262861C100187412 /* AddCityViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,6 +165,14 @@
 				70E7E1FD26284A4500187412 /* CityModel.swift */,
 			);
 			path = CitiesData;
+			sourceTree = "<group>";
+		};
+		70E7E238262861C100187412 /* AddCityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				70E7E235262861BB00187412 /* AddCityViewController.swift */,
+			);
+			path = AddCityViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				709EE5DE261C8BFC0095E184 /* WeatherTabBarController.swift in Sources */,
+				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
 				7017AAB1261B191000953C5B /* CityViewController.swift in Sources */,
 				70E7E1FE26284A4500187412 /* CityModel.swift in Sources */,
 				7017AAAD261B191000953C5B /* AppDelegate.swift in Sources */,

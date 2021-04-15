@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--City Detail View Controller-->
+        <!--Add City View Controller-->
         <scene sceneID="u7i-KS-0Ko">
             <objects>
-                <viewController id="sVP-fZ-dQ0" customClass="CityDetailViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sVP-fZ-dQ0" customClass="AddCityViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F17-4Y-o0q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="exitButtonPressed:" destination="sVP-fZ-dQ0" eventType="touchUpInside" id="YfE-ic-W7I"/>
+                                                            <action selector="cancelButtonPressed:" destination="sVP-fZ-dQ0" eventType="touchUpInside" id="NbY-A0-Yv4"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -232,7 +232,7 @@
                                 <rect key="frame" x="184" y="438" width="46" height="30"/>
                                 <state key="normal" title="Return"/>
                                 <connections>
-                                    <action selector="exitButtonPressed:" destination="hYE-f6-Bxf" eventType="touchUpInside" id="8Fi-KS-xnn"/>
+                                    <action selector="exitButtonPressed:" destination="hYE-f6-Bxf" eventType="touchUpInside" id="h0x-II-NlE"/>
                                 </connections>
                             </button>
                         </subviews>

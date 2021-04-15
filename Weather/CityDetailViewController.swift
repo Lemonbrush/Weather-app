@@ -15,16 +15,7 @@ class CityDetailViewController: UIViewController {
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {
-        let testM = CityManager()
-        let cityList = testM.getCityList()!
-        
-        for city in cityList {
-            print(city.cityName)
-        }
-        
-        print(cityList.count)
-        
-        //self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     /*
