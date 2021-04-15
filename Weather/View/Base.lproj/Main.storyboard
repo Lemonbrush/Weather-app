@@ -9,19 +9,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--City Detail View Controller-->
         <scene sceneID="u7i-KS-0Ko">
             <objects>
-                <viewController id="sVP-fZ-dQ0" sceneMemberID="viewController">
+                <viewController id="sVP-fZ-dQ0" customClass="CityDetailViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F17-4Y-o0q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dk6-iZ-24d">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a8X-IE-pYV">
-                                        <rect key="frame" x="20" y="5" width="374" height="66"/>
+                                        <rect key="frame" x="20" y="5" width="374" height="88"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter city, postcode or airport location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50J-OX-Hjg">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="17"/>
@@ -30,20 +30,20 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-VE-74E">
-                                                <rect key="frame" x="0.0" y="32" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="32" width="374" height="56"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rj-2r-91X">
-                                                        <rect key="frame" x="0.0" y="0.0" width="318" height="34"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                                    </textField>
+                                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="5ET-Zt-ief">
+                                                        <rect key="frame" x="0.0" y="0.0" width="318" height="56"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="search" textContentType="address-level2"/>
+                                                    </searchBar>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9O-VH-VVm">
-                                                        <rect key="frame" x="326" y="0.0" width="48" height="34"/>
+                                                        <rect key="frame" x="326" y="0.0" width="48" height="56"/>
                                                         <state key="normal" title="Cancel">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="exitButtonPressed:" destination="sVP-fZ-dQ0" eventType="touchUpInside" id="YfE-ic-W7I"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
