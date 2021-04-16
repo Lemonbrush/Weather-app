@@ -17,11 +17,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLh-gX-mic">
+                                <rect key="frame" x="0.0" y="98" width="414" height="744"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GoP-Pt-TV7">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="744"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dk6-iZ-24d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a8X-IE-pYV">
-                                        <rect key="frame" x="20" y="5" width="374" height="88"/>
+                                    <visualEffectView opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4pm-Cr-z9u">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Z94-Cd-k9A">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <blurEffect style="systemChromeMaterialDark"/>
+                                    </visualEffectView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="a8X-IE-pYV">
+                                        <rect key="frame" x="20" y="10" width="374" height="83"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter city, postcode or airport location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50J-OX-Hjg">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="17"/>
@@ -30,7 +48,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-VE-74E">
-                                                <rect key="frame" x="0.0" y="32" width="374" height="56"/>
+                                                <rect key="frame" x="0.0" y="27" width="374" height="56"/>
                                                 <subviews>
                                                     <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="5ET-Zt-ief">
                                                         <rect key="frame" x="0.0" y="0.0" width="318" height="56"/>
@@ -50,27 +68,36 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.14222002526124319" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="a8X-IE-pYV" secondAttribute="trailing" constant="20" id="8NM-Ek-90G"/>
+                                    <constraint firstItem="4pm-Cr-z9u" firstAttribute="leading" secondItem="dk6-iZ-24d" secondAttribute="leading" id="IrM-YG-EvI"/>
                                     <constraint firstAttribute="bottom" secondItem="a8X-IE-pYV" secondAttribute="bottom" constant="5" id="Ncz-LD-cbX"/>
-                                    <constraint firstItem="a8X-IE-pYV" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="top" constant="5" id="o5f-IY-p23"/>
+                                    <constraint firstItem="4pm-Cr-z9u" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="top" id="QCR-Y7-thA"/>
+                                    <constraint firstAttribute="trailing" secondItem="4pm-Cr-z9u" secondAttribute="trailing" id="XOu-Jm-LDW"/>
+                                    <constraint firstAttribute="bottom" secondItem="4pm-Cr-z9u" secondAttribute="bottom" id="lor-R0-1Aj"/>
+                                    <constraint firstItem="a8X-IE-pYV" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="top" constant="10" id="o5f-IY-p23"/>
                                     <constraint firstItem="a8X-IE-pYV" firstAttribute="leading" secondItem="dk6-iZ-24d" secondAttribute="leading" constant="20" id="yUn-m6-UIh"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ibl-Xh-Dw5"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zLh-gX-mic" secondAttribute="bottom" id="1gA-4g-mbu"/>
                             <constraint firstItem="dk6-iZ-24d" firstAttribute="leading" secondItem="ibl-Xh-Dw5" secondAttribute="leading" id="Jig-hn-mfi"/>
+                            <constraint firstItem="zLh-gX-mic" firstAttribute="leading" secondItem="ibl-Xh-Dw5" secondAttribute="leading" id="VSw-Jn-duu"/>
                             <constraint firstItem="dk6-iZ-24d" firstAttribute="trailing" secondItem="ibl-Xh-Dw5" secondAttribute="trailing" id="cp1-87-fqV"/>
+                            <constraint firstItem="zLh-gX-mic" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="bottom" id="nzO-mu-vVP"/>
+                            <constraint firstItem="ibl-Xh-Dw5" firstAttribute="trailing" secondItem="zLh-gX-mic" secondAttribute="trailing" id="vC5-pn-zBt"/>
                             <constraint firstItem="dk6-iZ-24d" firstAttribute="top" secondItem="ibl-Xh-Dw5" secondAttribute="top" id="yvQ-iA-NDh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="5ET-Zt-ief" id="9hU-Hb-Fjk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axD-Lj-C85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4867" y="-698"/>
+            <point key="canvasLocation" x="4866.666666666667" y="-698.4375"/>
         </scene>
         <!--City View Controller-->
         <scene sceneID="KLc-tM-cXc">

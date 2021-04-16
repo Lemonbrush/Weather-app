@@ -9,9 +9,13 @@ import UIKit
 
 class AddCityViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Setting up search bar appearance
+        searchBar.searchTextField.backgroundColor = UIColor.white
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
