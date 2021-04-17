@@ -18,6 +18,9 @@
 		70E7E22F26285EB400187412 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E22B26285EB300187412 /* CityManager.swift */; };
 		70E7E23026285EB400187412 /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E22C26285EB400187412 /* CityData.swift */; };
 		70E7E23126285EB400187412 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 70E7E22D26285EB400187412 /* CityList.json */; };
+		70E7E25F262AE38300187412 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E25E262AE38300187412 /* CityTableViewCell.swift */; };
+		70E7E263262B27FF00187412 /* CityCodesList.json in Resources */ = {isa = PBXBuildFile; fileRef = 70E7E262262B27FF00187412 /* CityCodesList.json */; };
+		70E7E266262B284400187412 /* CityCodeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E265262B284400187412 /* CityCodeData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		70E7E22B26285EB300187412 /* CityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
 		70E7E22C26285EB400187412 /* CityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 		70E7E22D26285EB400187412 /* CityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
+		70E7E25E262AE38300187412 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		70E7E262262B27FF00187412 /* CityCodesList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityCodesList.json; sourceTree = "<group>"; };
+		70E7E265262B284400187412 /* CityCodeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCodeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 		70E7E20C26285DE900187412 /* CityListDBCreator */ = {
 			isa = PBXGroup;
 			children = (
+				70E7E261262B27CF00187412 /* CityCodesData */,
 				70E7E22926285E9500187412 /* CitiesData */,
 				70E7E20D26285DE900187412 /* AppDelegate.swift */,
 				70E7E20F26285DE900187412 /* SceneDelegate.swift */,
@@ -75,6 +82,7 @@
 				70E7E21B26285DEC00187412 /* LaunchScreen.storyboard */,
 				70E7E21E26285DEC00187412 /* Info.plist */,
 				70E7E21626285DE900187412 /* CityListDBCreator.xcdatamodeld */,
+				70E7E25E262AE38300187412 /* CityTableViewCell.swift */,
 			);
 			path = CityListDBCreator;
 			sourceTree = "<group>";
@@ -88,6 +96,15 @@
 				70E7E22A26285EB300187412 /* CityModel.swift */,
 			);
 			path = CitiesData;
+			sourceTree = "<group>";
+		};
+		70E7E261262B27CF00187412 /* CityCodesData */ = {
+			isa = PBXGroup;
+			children = (
+				70E7E262262B27FF00187412 /* CityCodesList.json */,
+				70E7E265262B284400187412 /* CityCodeData.swift */,
+			);
+			path = CityCodesData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +167,7 @@
 				70E7E23126285EB400187412 /* CityList.json in Resources */,
 				70E7E21D26285DEC00187412 /* LaunchScreen.storyboard in Resources */,
 				70E7E21A26285DEC00187412 /* Assets.xcassets in Resources */,
+				70E7E263262B27FF00187412 /* CityCodesList.json in Resources */,
 				70E7E21526285DE900187412 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,8 +183,10 @@
 				70E7E23026285EB400187412 /* CityData.swift in Sources */,
 				70E7E21226285DE900187412 /* ViewController.swift in Sources */,
 				70E7E22F26285EB400187412 /* CityManager.swift in Sources */,
+				70E7E266262B284400187412 /* CityCodeData.swift in Sources */,
 				70E7E21826285DE900187412 /* CityListDBCreator.xcdatamodeld in Sources */,
 				70E7E20E26285DE900187412 /* AppDelegate.swift in Sources */,
+				70E7E25F262AE38300187412 /* CityTableViewCell.swift in Sources */,
 				70E7E21026285DE900187412 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
