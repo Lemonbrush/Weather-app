@@ -30,35 +30,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    //Helper functions
+    func isFirstLaunch() -> Bool {
+        let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
+        if (isFirstLaunch) {
+            UserDefaults.standard.set(true, forKey: hasBeenLaunchedBeforeFlag)
+            UserDefaults.standard.synchronize()
+        }
+        return isFirstLaunch
+    }
+    
+    func getDocumentsDirectory()-> URL {
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        
+        return documentsDirectory
+    }
 
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
+        
         let container = NSPersistentContainer(name: "CityListDBCreator")
+        
+        //Setting up container source
+        let storeUrl = self.getDocumentsDirectory().appendingPathComponent("CityListDBCreator.sqlite")
+        
+        //Prepopulate Core data database in the first time
+        if self.isFirstLaunch() {
+            let seededDataUrl = Bundle.main.url(forResource: "CityListDBCreator", withExtension: "sqlite")
+            try! FileManager.default.copyItem(at: seededDataUrl!, to: storeUrl)
+        }
+
+        //Setting up the container
+        let description = NSPersistentStoreDescription()
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldMigrateStoreAutomatically = true
+        description.url = storeUrl
+
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
     }()
+    
+    //This method deletes all the prepopulated files (just in case)
+    /*
+    func deleteFiles() {
+        let fileManager = FileManager.default
+        let documentsUrl =  FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first! as NSURL
+        let documentsPath = documentsUrl.path
+
+        do {
+            if let documentPath = documentsPath {
+                let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
+                print("all files in cache: \(fileNames)")
+                for fileName in fileNames {
+                    if (fileName.contains("CityListDBCreator")) {
+                        let filePathName = "\(documentPath)/\(fileName)"
+                        try fileManager.removeItem(atPath: filePathName)
+                    }
+                }
+                let files = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
+                print("all files in cache after deleting images: \(files)")
+            }
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+    }
+ */
 
     // MARK: - Core Data Saving support
 
@@ -68,8 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }

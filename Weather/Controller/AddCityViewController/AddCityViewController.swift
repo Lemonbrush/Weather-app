@@ -34,7 +34,12 @@ class AddCityViewController: UIViewController {
             print(error)
         }
         
-        print(cities)
+        //Delete this. Just a test
+        for (i, city) in cities.enumerated()  {
+            if i <= 100 {
+                print(city.value(forKey: "cityName")!)
+            }
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
