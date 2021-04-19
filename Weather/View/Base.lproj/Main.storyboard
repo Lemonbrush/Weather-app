@@ -100,7 +100,21 @@
                                                 <blurEffect style="regular"/>
                                             </vibrancyEffect>
                                         </visualEffectView>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U7V-Qg-KWV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="744"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="sVP-fZ-dQ0" id="GH5-go-v70"/>
+                                                <outlet property="delegate" destination="sVP-fZ-dQ0" id="Vov-d0-7NL"/>
+                                            </connections>
+                                        </tableView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="U7V-Qg-KWV" firstAttribute="top" secondItem="VUT-Sy-cdh" secondAttribute="top" id="Rgw-6V-yRu"/>
+                                        <constraint firstItem="U7V-Qg-KWV" firstAttribute="leading" secondItem="VUT-Sy-cdh" secondAttribute="leading" id="RiO-hh-mbX"/>
+                                        <constraint firstAttribute="trailing" secondItem="U7V-Qg-KWV" secondAttribute="trailing" id="UtD-sT-0PG"/>
+                                        <constraint firstAttribute="bottom" secondItem="U7V-Qg-KWV" secondAttribute="bottom" id="oXf-qC-hQC"/>
+                                    </constraints>
                                 </view>
                                 <blurEffect style="systemChromeMaterialDark"/>
                             </visualEffectView>
@@ -118,6 +132,7 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="5ET-Zt-ief" id="9hU-Hb-Fjk"/>
+                        <outlet property="searchResultsTable" destination="U7V-Qg-KWV" id="zgp-fZ-R3B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axD-Lj-C85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
