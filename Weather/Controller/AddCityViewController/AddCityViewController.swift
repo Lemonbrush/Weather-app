@@ -10,7 +10,8 @@ import CoreData
 
 class AddCityViewController: UIViewController {
 
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchCellBackground: UIView!
+    @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var searchResultsTable: UITableView!
     
     var cities: [NSManagedObject] = []
@@ -18,12 +19,12 @@ class AddCityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.delegate = self
+        //Setting up search cell appearance
+        searchCellBackground.layer.cornerRadius = 10
+        searchCellBackground.layer.cornerCurve = CALayerCornerCurve.continuous
         
-        //Setting up search bar appearance
-        searchBar.searchTextField.backgroundColor = UIColor.white
-        
-        searchResultsTable.backgroundColor = nil
+        //Connect Search textField to the textFieldDidChange method
+        searchBar.addTarget(self, action: #selector(AddCityViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -48,6 +49,26 @@ class AddCityViewController: UIViewController {
         }
         
         searchResultsTable.reloadData()
+    }
+    
+    // MARK: - TextField methods
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        if textField.text?.count != 0 {
+            
+            let request: NSFetchRequest<City> = City.fetchRequest() //Specify data type for search
+            let predicate = NSPredicate(format: "cityName BEGINSWITH[cd] %@", searchBar.text!)
+            
+            request.sortDescriptors = [NSSortDescriptor(key: "cityName", ascending: false)]
+            
+            loadCityList(with: request, predicate: predicate)
+            
+        } else {
+            
+            //Clear the table in case of empty search bar
+            cities.removeAll()
+            searchResultsTable.reloadData()
+        }
     }
 }
 
@@ -74,9 +95,11 @@ extension AddCityViewController: UITableViewDataSource {
             cell.textLabel?.text! += ", \(cityState)"
         }
         
-        cell.backgroundColor = nil
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
     }
 }
 
@@ -86,27 +109,5 @@ extension AddCityViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         //Handle cell selecting
-    }
-}
-
-extension AddCityViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchBar.text?.count != 0 {
-            
-            let request: NSFetchRequest<City> = City.fetchRequest() //Specify data type for search
-            let predicate = NSPredicate(format: "cityName BEGINSWITH[cd] %@", searchBar.text!)
-            
-            request.sortDescriptors = [NSSortDescriptor(key: "cityName", ascending: false)]
-            
-            loadCityList(with: request, predicate: predicate)
-            
-        } else {
-            
-            //Clear the table in case of empty search bar
-            cities.removeAll()
-            searchResultsTable.reloadData()
-        }
     }
 }
