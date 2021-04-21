@@ -13,6 +13,7 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchCellBackground: UIView!
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var searchResultsTable: UITableView!
+    @IBOutlet weak var welcomeImage: UIImageView!
     
     var cities: [NSManagedObject] = []
     
@@ -56,6 +57,8 @@ class AddCityViewController: UIViewController {
         
         if textField.text?.count != 0 {
             
+            welcomeImage.isHidden = true
+            
             let request: NSFetchRequest<City> = City.fetchRequest() //Specify data type for search
             let predicate = NSPredicate(format: "cityName BEGINSWITH[cd] %@", searchBar.text!)
             
@@ -68,6 +71,7 @@ class AddCityViewController: UIViewController {
             //Clear the table in case of empty search bar
             cities.removeAll()
             searchResultsTable.reloadData()
+            welcomeImage.isHidden = false
         }
     }
 }

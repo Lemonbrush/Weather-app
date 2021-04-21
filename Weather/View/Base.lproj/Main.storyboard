@@ -19,6 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="pSB-qd-ioH">
                                 <rect key="frame" x="0.0" y="94" width="414" height="748"/>
+                                <color key="backgroundColor" red="0.94912236930000005" green="0.9485244155" blue="0.9693283439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6of-n0-Xzx">
                                         <rect key="frame" x="20" y="55.5" width="374" height="44"/>
@@ -35,6 +36,13 @@
                                     <outlet property="delegate" destination="sVP-fZ-dQ0" id="FhP-jj-86b"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage" translatesAutoresizingMaskIntoConstraints="NO" id="vSe-Wj-Dnh" userLabel="WelcomeImage">
+                                <rect key="frame" x="57" y="254" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="0tW-2g-lpA"/>
+                                    <constraint firstAttribute="height" constant="300" id="sQD-qg-Ybl"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dk6-iZ-24d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                                 <subviews>
@@ -81,11 +89,12 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ibl-Xh-Dw5"/>
-                        <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vSe-Wj-Dnh" firstAttribute="centerX" secondItem="ibl-Xh-Dw5" secondAttribute="centerX" id="G7P-ae-JpZ"/>
                             <constraint firstItem="dk6-iZ-24d" firstAttribute="leading" secondItem="ibl-Xh-Dw5" secondAttribute="leading" id="Jig-hn-mfi"/>
                             <constraint firstItem="pSB-qd-ioH" firstAttribute="leading" secondItem="ibl-Xh-Dw5" secondAttribute="leading" id="UGk-gI-BdI"/>
                             <constraint firstItem="dk6-iZ-24d" firstAttribute="trailing" secondItem="ibl-Xh-Dw5" secondAttribute="trailing" id="cp1-87-fqV"/>
+                            <constraint firstItem="vSe-Wj-Dnh" firstAttribute="centerY" secondItem="ibl-Xh-Dw5" secondAttribute="centerY" id="frw-eQ-NAh"/>
                             <constraint firstAttribute="bottom" secondItem="pSB-qd-ioH" secondAttribute="bottom" id="jDh-2G-mDe"/>
                             <constraint firstItem="pSB-qd-ioH" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="bottom" id="qQb-eD-aSJ"/>
                             <constraint firstItem="ibl-Xh-Dw5" firstAttribute="trailing" secondItem="pSB-qd-ioH" secondAttribute="trailing" id="vVR-eT-pOf"/>
@@ -96,6 +105,7 @@
                         <outlet property="searchBar" destination="onO-YR-PgP" id="aLw-Tm-9CF"/>
                         <outlet property="searchCellBackground" destination="N3w-e6-VEQ" id="91W-mz-7zR"/>
                         <outlet property="searchResultsTable" destination="pSB-qd-ioH" id="2mo-Sl-r5V"/>
+                        <outlet property="welcomeImage" destination="vSe-Wj-Dnh" id="YDk-dH-HhY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axD-Lj-C85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -304,6 +314,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="WelcomeImage" width="2536" height="2535"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
