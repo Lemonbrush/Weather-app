@@ -18,18 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="pSB-qd-ioH">
-                                <rect key="frame" x="0.0" y="94" width="414" height="748"/>
+                                <rect key="frame" x="0.0" y="114" width="414" height="728"/>
                                 <color key="backgroundColor" red="0.94912236930000005" green="0.9485244155" blue="0.9693283439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6of-n0-Xzx">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6of-n0-Xzx" id="WVh-0j-5JB">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="sVP-fZ-dQ0" id="2JH-NE-phy"/>
@@ -44,10 +34,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dk6-iZ-24d">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3w-e6-VEQ">
-                                        <rect key="frame" x="20" y="40" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="60" width="374" height="44"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-VE-74E">
                                                 <rect key="frame" x="20" y="5" width="334" height="34"/>
@@ -84,7 +74,7 @@
                                     <constraint firstAttribute="bottom" secondItem="N3w-e6-VEQ" secondAttribute="bottom" constant="10" id="BMQ-lc-Cqv"/>
                                     <constraint firstItem="N3w-e6-VEQ" firstAttribute="leading" secondItem="dk6-iZ-24d" secondAttribute="leading" constant="20" id="NX6-g1-r1m"/>
                                     <constraint firstAttribute="trailing" secondItem="N3w-e6-VEQ" secondAttribute="trailing" constant="20" id="hy7-g7-EbK"/>
-                                    <constraint firstItem="N3w-e6-VEQ" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="top" constant="40" id="j8e-s1-OKM"/>
+                                    <constraint firstItem="N3w-e6-VEQ" firstAttribute="top" secondItem="dk6-iZ-24d" secondAttribute="top" constant="60" id="j8e-s1-OKM"/>
                                 </constraints>
                             </view>
                         </subviews>

@@ -53,6 +53,7 @@ class AddCityViewController: UIViewController {
     }
     
     // MARK: - TextField methods
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         if textField.text?.count != 0 {
@@ -74,6 +75,19 @@ class AddCityViewController: UIViewController {
             welcomeImage.isHidden = false
         }
     }
+    
+    // MARK: - Helper functions
+    
+    //Country id to country emoji flag converter
+    func countryFlag(byCode code: String) -> String {
+        let base: UInt32 = 127397
+        var s = ""
+        for v in code.unicodeScalars {
+            s.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+        }
+        
+        return String(s)
+    }
 }
 
 // MARK: - TableView methods
@@ -92,9 +106,11 @@ extension AddCityViewController: UITableViewDataSource {
         let cityName = cityToShow.value(forKey: "cityName") as! String
         let cityCountry = cityToShow.value(forKey: "countryName") as! String
         let cityState = cityToShow.value(forKey: "state") as! String
+        let cityCode = cityToShow.value(forKey: "countryId") as! String
         
-        cell.textLabel?.text = "\(cityName), \(cityCountry)"
+        cell.textLabel?.text = "\(countryFlag(byCode: cityCode)) \(cityName), \(cityCountry)"
         
+        //In case there is a state note
         if cityState != "" {
             cell.textLabel?.text! += ", \(cityState)"
         }
