@@ -88,6 +88,7 @@ class AddCityViewController: UIViewController {
         
         return String(s)
     }
+
 }
 
 // MARK: - TableView methods
@@ -129,5 +130,9 @@ extension AddCityViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         //Handle cell selecting
+        
+        let cityFileManager = CityDataFileManager()
+        try! cityFileManager.addNewCity("Moscow")
+        print(try! cityFileManager.getSavedCities())
     }
 }
