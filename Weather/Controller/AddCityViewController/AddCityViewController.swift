@@ -129,10 +129,10 @@ extension AddCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        //Handle cell selecting
+        //TODO: Move the code above to the Main weather ViewController
         
-        let cityFileManager = CityDataFileManager()
-        try! cityFileManager.addNewCity("Moscow")
-        print(try! cityFileManager.getSavedCities())
+        let cityIDToAdd = cities[indexPath.row].value(forKey: "id") as! Int64
+        
+        CityDataFileManager.addNewCity(String(cityIDToAdd))
     }
 }
