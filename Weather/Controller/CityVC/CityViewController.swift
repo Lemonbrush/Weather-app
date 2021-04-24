@@ -21,7 +21,7 @@ class CityViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     
     var weatherManager = WeatherManager()
-    var cityNames = ["Moscow", "London", "Kansas City", "Newcastle", "Paris", "Tokyo"] //Presaved queries
+    var cityIDs = [String]() //Presaved queries
     var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
     
     //MARK: Lifecycle
@@ -48,28 +48,22 @@ class CityViewController: UIViewController {
         cityTable.delaysContentTouches = false
         
         weatherManager.delegate = self
-
+        
+        //Fetching data by persisted IDs
+        cityIDs = try! CityDataFileManager.getSavedCities()
         fetchWeatherData()
         
     }
     
     //Helper functions
     func fetchWeatherData() {
-        
         displayWeather.removeAll()
-        
-        for cityName in cityNames {
-            weatherManager.fetchWeather(cityName: cityName)
-            
-            //Populate table with blank cells
-            let blankWeather = WeatherModel(conditionId: 0, cityName: cityName, temperature: 0, timezone: 0)
-            
-            displayWeather.append(blankWeather)
-        }
+        weatherManager.fetchWeather(cityIDs: cityIDs)
     }
     
     //Pull-To-Refresh tableview
     @objc func refreshWeatherData(_ sender: AnyObject) {
+        cityIDs = try! CityDataFileManager.getSavedCities()
         fetchWeatherData()
         refreshControl.endRefreshing()
     }
@@ -125,18 +119,10 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CityViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: [WeatherModel]) {
         
         DispatchQueue.main.async {
-            
-            //Find weather index and refresh its data
-            for (i,cityName) in self.cityNames.enumerated() {
-                
-                if cityName == weather.cityName {
-                    self.displayWeather[i] = weather
-                }
-            }
-            
+            self.displayWeather = weather
             self.cityTable.reloadData()
         }
         
@@ -144,6 +130,7 @@ extension CityViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         fatalError("Failed with - \(error)")
+        //TODO: handle network disconection
     }
     
 }

@@ -8,11 +8,22 @@
 import Foundation
 
 //Data struct for JSON decoding
-struct WeatherData: Codable {
+struct WeatherDataBundle: Codable {
+    let cnt: Int
+    let list: [WeatherList]
+}
+
+struct WeatherList: Codable {
     let name: String
     let main: Main
     let weather: [Weather]
+    let sys: WeatherSys
+}
+
+struct WeatherSys: Codable {
+    let country: String
     let timezone: Int
+    //TODO: add more here
 }
 
 struct Main: Codable {

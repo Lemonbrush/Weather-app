@@ -42,7 +42,7 @@ struct CityDataFileManager {
     }
     
     //Helper functions
-    private static func getSavedCities() throws -> [String] {
+    static func getSavedCities() throws -> [String] {
         
         guard let url = makeURL(forFileNamed: "savedCities.plist") else {
             throw Error.invalidDirectory
@@ -51,7 +51,7 @@ struct CityDataFileManager {
         guard fileManager.fileExists(atPath: url.path) else {
             throw Error.fileNotExists
         }
-        
+        //print(url.absoluteURL)
         return NSArray(contentsOf: url) as! [String]
     }
     

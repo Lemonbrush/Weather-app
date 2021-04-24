@@ -134,5 +134,7 @@ extension AddCityViewController: UITableViewDelegate {
         let cityIDToAdd = cities[indexPath.row].value(forKey: "id") as! Int64
         
         CityDataFileManager.addNewCity(String(cityIDToAdd))
+        
+        dismiss(animated: true, completion: nil)
     }
 }

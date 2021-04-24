@@ -8,12 +8,12 @@
 import Foundation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: [WeatherModel])
     func didFailWithError(error: Error)
 }
 
 struct WeatherManager {
-    let weatherURL = "http://api.openweathermap.org/data/2.5/weather?"
+    let weatherURL = "http://api.openweathermap.org/data/2.5/group?"
     var city = ""
     let appid = "3105f7f3ecb7b6032f375aaf58ed2253"
     var units = "metric"
@@ -21,8 +21,14 @@ struct WeatherManager {
     var delegate: WeatherManagerDelegate?
     
     //MARK: - Fetching weather data
-    func fetchWeather(cityName: String) {
-        let urlString = "\(weatherURL)q=\(cityName)&appid=\(appid)&units=\(units)"
+    func fetchWeather(cityIDs: [String]) {
+        guard cityIDs.count > 0 else {
+            return
+        }
+        
+        let cityIDsStr = cityIDs.joined(separator: ",")
+        
+        let urlString = "\(weatherURL)id=\(cityIDsStr)&appid=\(appid)&units=\(units)"
         performRequest(with: urlString)
     }
     
@@ -55,18 +61,22 @@ struct WeatherManager {
         }
     }
     
-    func parseJSON(_ weatherData: Data) -> WeatherModel? {
+    func parseJSON(_ weatherData: Data) -> [WeatherModel]? {
         let decoder = JSONDecoder() //Create decoder
         
         do {
-            let decodedData = try decoder.decode(WeatherData.self, from: weatherData) //Decode data to conform WeatherData properties
-
-            let weather = WeatherModel(conditionId: decodedData.weather[0].id,
-                                       cityName: decodedData.name,
-                                       temperature: decodedData.main.temp,
-                                       timezone: decodedData.timezone) //Create weather object
+            let decodedData = try decoder.decode(WeatherDataBundle.self, from: weatherData) //Decode data to conform WeatherData properties
             
-            return weather
+            var weatherBundle = [WeatherModel]()
+            
+            for weatherData in decodedData.list {
+                weatherBundle.append(WeatherModel(conditionId: weatherData.weather[0].id,
+                                                  cityName: weatherData.name,
+                                                  temperature: weatherData.main.temp,
+                                                  timezone: weatherData.sys.timezone))
+            }
+            
+            return weatherBundle
             
         } catch {
             delegate?.didFailWithError(error: error)

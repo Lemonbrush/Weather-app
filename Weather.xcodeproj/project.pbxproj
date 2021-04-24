@@ -83,6 +83,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7001F8C92634354200E5E593 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7017AAAC261B191000953C5B /* AppDelegate.swift */,
+				7017AAAE261B191000953C5B /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		7017AAA0261B191000953C5B = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +111,7 @@
 		7017AAAB261B191000953C5B /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				7017AAAC261B191000953C5B /* AppDelegate.swift */,
-				7017AAAE261B191000953C5B /* SceneDelegate.swift */,
+				7001F8C92634354200E5E593 /* AppDelegate */,
 				709EE5D5261C82F20095E184 /* Model */,
 				7017AAC5261B23E600953C5B /* View */,
 				7017AAC4261B23D700953C5B /* Controller */,
@@ -143,7 +151,6 @@
 		709EE5D6261C83030095E184 /* CityVC */ = {
 			isa = PBXGroup;
 			children = (
-				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
 				7017AAB0261B191000953C5B /* CityViewController.swift */,
 				7017AAC6261B242400953C5B /* CityTableViewCell.swift */,
 			);
@@ -171,6 +178,7 @@
 		70E7E238262861C100187412 /* AddCityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
 				70E7E235262861BB00187412 /* AddCityViewController.swift */,
 			);
 			path = AddCityViewController;
