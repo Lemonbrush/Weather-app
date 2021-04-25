@@ -50,7 +50,12 @@ class CityViewController: UIViewController {
         weatherManager.delegate = self
         
         //Fetching data by persisted IDs
-        cityIDs = try! CityDataFileManager.getSavedCities()
+        do {
+            cityIDs = try CityDataFileManager.getSavedCities()
+        } catch {
+            print("There is no saved cities yet")
+        }
+        
         fetchWeatherData()
         
     }
@@ -82,7 +87,7 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell") as! CityTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! CityTableViewCell
         
         let weatherDataForCell = displayWeather[indexPath.row]
         
@@ -101,7 +106,7 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detailShow", sender: self)
+        performSegue(withIdentifier: K.detailShowSegue, sender: self)
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {

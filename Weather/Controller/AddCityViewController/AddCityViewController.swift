@@ -63,7 +63,7 @@ class AddCityViewController: UIViewController {
             let request: NSFetchRequest<City> = City.fetchRequest() //Specify data type for search
             let predicate = NSPredicate(format: "cityName BEGINSWITH[cd] %@", searchBar.text!)
             
-            request.sortDescriptors = [NSSortDescriptor(key: "cityName", ascending: false)]
+            request.sortDescriptors = [NSSortDescriptor(key: K.CityEntity.cityName, ascending: false)]
             
             loadCityList(with: request, predicate: predicate)
             
@@ -104,10 +104,10 @@ extension AddCityViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
         let cityToShow = cities[indexPath.row]
-        let cityName = cityToShow.value(forKey: "cityName") as! String
-        let cityCountry = cityToShow.value(forKey: "countryName") as! String
-        let cityState = cityToShow.value(forKey: "state") as! String
-        let cityCode = cityToShow.value(forKey: "countryId") as! String
+        let cityName = cityToShow.value(forKey: K.CityEntity.cityName) as! String
+        let cityCountry = cityToShow.value(forKey: K.CityEntity.countryName) as! String
+        let cityState = cityToShow.value(forKey: K.CityEntity.state) as! String
+        let cityCode = cityToShow.value(forKey: K.CityEntity.countryId) as! String
         
         cell.textLabel?.text = "\(countryFlag(byCode: cityCode)) \(cityName), \(cityCountry)"
         
@@ -131,7 +131,7 @@ extension AddCityViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         //TODO: Move the code above to the Main weather ViewController
         
-        let cityIDToAdd = cities[indexPath.row].value(forKey: "id") as! Int64
+        let cityIDToAdd = cities[indexPath.row].value(forKey: K.CityEntity.id) as! Int64
         
         CityDataFileManager.addNewCity(String(cityIDToAdd))
         

@@ -21,7 +21,7 @@ struct CityDataFileManager {
     
     static func addNewCity(_ city: String) {
         
-        guard let url = makeURL(forFileNamed: "savedCities.plist") else {
+        guard let url = makeURL(forFileNamed: K.saveFileName) else {
             fatalError("Failed to get directory to save files")
         }
         
@@ -44,7 +44,7 @@ struct CityDataFileManager {
     //Helper functions
     static func getSavedCities() throws -> [String] {
         
-        guard let url = makeURL(forFileNamed: "savedCities.plist") else {
+        guard let url = makeURL(forFileNamed: K.saveFileName) else {
             throw Error.invalidDirectory
         }
         
