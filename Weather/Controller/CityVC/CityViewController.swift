@@ -49,26 +49,19 @@ class CityViewController: UIViewController {
         
         weatherManager.delegate = self
         
-        //Fetching data by persisted IDs
-        do {
-            cityIDs = try CityDataFileManager.getSavedCities()
-        } catch {
-            print("There is no saved cities yet")
-        }
-        
+        //Load saved city IDs and Fetch the data
         fetchWeatherData()
-        
     }
     
     //Helper functions
     func fetchWeatherData() {
+        cityIDs = CityDataFileManager.getSavedCities() ?? [String]()
         displayWeather.removeAll()
         weatherManager.fetchWeather(cityIDs: cityIDs)
     }
     
     //Pull-To-Refresh tableview
     @objc func refreshWeatherData(_ sender: AnyObject) {
-        cityIDs = try! CityDataFileManager.getSavedCities()
         fetchWeatherData()
         refreshControl.endRefreshing()
     }
@@ -76,9 +69,15 @@ class CityViewController: UIViewController {
     //Transition to another viewcotroller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "addNewCity" {
+            let destinationVC = segue.destination as! AddCityViewController
+            destinationVC.cityVCReference = self
+        }
     }
 
 }
+
+// MARK: - TableView
 
 extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -109,6 +108,27 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         performSegue(withIdentifier: K.detailShowSegue, sender: self)
     }
     
+    // Handle cell editing
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            //Deleting the data
+            displayWeather.remove(at: indexPath.row)
+            cityIDs.remove(at: indexPath.row)
+            CityDataFileManager.saveCities(cityIDs as NSArray)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    /*
+    // Customize cell editing buttons
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        <#code#>
+    }
+    */
+    
+    // Cell highlight functions
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
             cell.isHighlighted = true
@@ -121,6 +141,8 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+// MARK: - Fetching data Weather manager
 
 extension CityViewController: WeatherManagerDelegate {
     
@@ -139,6 +161,8 @@ extension CityViewController: WeatherManagerDelegate {
     }
     
 }
+
+// MARK: - Transition animation
 
 extension CityViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     

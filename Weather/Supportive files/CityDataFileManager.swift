@@ -9,52 +9,42 @@ import Foundation
 
 struct CityDataFileManager {
     
-    enum Error: Swift.Error {
-        case fileAlreadyExists
-        case fileNotExists
-        case invalidDirectory
-        case writingFailed
-        case readingFailed
-    }
-    
     static let fileManager = FileManager()
     
     static func addNewCity(_ city: String) {
         
-        guard let url = makeURL(forFileNamed: K.saveFileName) else {
-            fatalError("Failed to get directory to save files")
-        }
-        
-        var dataToSave = [String]()
-        
-        if fileManager.fileExists(atPath: url.path) {
-            
-            do {
-                dataToSave = try getSavedCities()
-            } catch {
-                print("Fail to get saved cities data with \(error)")
-            }
-        }
+        var dataToSave = getSavedCities() ?? [String]()
         
         dataToSave.append(city)
         
-        (dataToSave as NSArray).write(to: url, atomically: true)
+        saveCities(dataToSave as NSArray)
     }
     
-    //Helper functions
-    static func getSavedCities() throws -> [String] {
+    static func saveCities(_ dataToSave: NSArray) {
         
         guard let url = makeURL(forFileNamed: K.saveFileName) else {
-            throw Error.invalidDirectory
+            print("Failed to get directory to save files")
+            return
+        }
+        
+        dataToSave.write(to: url, atomically: true)
+    }
+    
+    static func getSavedCities() -> [String]? {
+        
+        guard let url = makeURL(forFileNamed: K.saveFileName) else {
+            print("Failed to get directory to save files")
+            return nil
         }
         
         guard fileManager.fileExists(atPath: url.path) else {
-            throw Error.fileNotExists
+            return nil
         }
         //print(url.absoluteURL)
-        return NSArray(contentsOf: url) as! [String]
+        return NSArray(contentsOf: url) as? [String]
     }
     
+    //Helper functions
     private static func makeURL(forFileNamed fileName: String) -> URL? {
         
         guard let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {

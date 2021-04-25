@@ -15,6 +15,8 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchResultsTable: UITableView!
     @IBOutlet weak var welcomeImage: UIImageView!
     
+    var cityVCReference =  CityViewController()
+    
     var cities: [NSManagedObject] = []
     
     override func viewDidLoad() {
@@ -135,6 +137,8 @@ extension AddCityViewController: UITableViewDelegate {
         
         CityDataFileManager.addNewCity(String(cityIDToAdd))
         
-        dismiss(animated: true, completion: nil)
+        //Return to the VC and fetch added data
+        self.cityVCReference.fetchWeatherData()
+        dismiss(animated: true)
     }
 }
