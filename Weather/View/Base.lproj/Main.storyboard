@@ -228,13 +228,22 @@
                                     <outlet property="delegate" destination="cPr-EZ-M6Z" id="Lgl-dl-2Pu"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage" translatesAutoresizingMaskIntoConstraints="NO" id="sN1-3u-jq9">
+                                <rect key="frame" x="57" y="303" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="VYj-P7-PKd"/>
+                                    <constraint firstAttribute="width" constant="300" id="b8E-rO-Yc9"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GeM-5X-aZ0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="trailing" secondItem="GeM-5X-aZ0" secondAttribute="trailing" id="5db-tB-Lqh"/>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="leading" secondItem="GeM-5X-aZ0" secondAttribute="leading" id="6jC-b3-Sch"/>
+                            <constraint firstItem="sN1-3u-jq9" firstAttribute="centerX" secondItem="GeM-5X-aZ0" secondAttribute="centerX" id="BYW-a0-Ptb"/>
                             <constraint firstAttribute="bottom" secondItem="w4r-Ak-u4P" secondAttribute="bottom" id="CSK-QG-2YO"/>
+                            <constraint firstItem="sN1-3u-jq9" firstAttribute="centerY" secondItem="GeM-5X-aZ0" secondAttribute="centerY" id="hUb-vx-Vq0"/>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="top" secondItem="GeM-5X-aZ0" secondAttribute="top" id="mlf-JD-Cc1"/>
                         </constraints>
                     </view>
@@ -243,12 +252,13 @@
                         <outlet property="CityTable" destination="w4r-Ak-u4P" id="hEm-cC-TXS"/>
                         <outlet property="cityTable" destination="w4r-Ak-u4P" id="3CO-mZ-ph5"/>
                         <outlet property="currentDateLabel" destination="9pv-zW-l0L" id="jM6-XH-hcI"/>
+                        <outlet property="welcomeImage" destination="sN1-3u-jq9" id="EQR-dV-mX4"/>
                         <segue destination="hYE-f6-Bxf" kind="show" identifier="detailShow" id="d9O-26-lAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCp-CC-YVX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4089.8550724637685" y="-325.44642857142856"/>
+            <point key="canvasLocation" x="4098.5507246376819" y="-325.44642857142856"/>
         </scene>
         <!--City Detail View Controller-->
         <scene sceneID="tMV-2t-YHR">

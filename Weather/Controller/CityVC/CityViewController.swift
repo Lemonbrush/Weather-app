@@ -11,6 +11,7 @@ class CityViewController: UIViewController {
 
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var welcomeImage: UIImageView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
@@ -60,6 +61,15 @@ class CityViewController: UIViewController {
         weatherManager.fetchWeather(cityIDs: cityIDs)
     }
     
+    // Hide and show welcome image depending on content
+    func welcomeImageCheck() {
+        if displayWeather.count != 0 {
+            welcomeImage.isHidden = true
+        } else {
+            welcomeImage.isHidden = false
+        }
+    }
+    
     //Pull-To-Refresh tableview
     @objc func refreshWeatherData(_ sender: AnyObject) {
         fetchWeatherData()
@@ -82,6 +92,10 @@ class CityViewController: UIViewController {
 extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // Hide welcome image if there is something to show
+        welcomeImageCheck()
+        
         return displayWeather.count
     }
     
