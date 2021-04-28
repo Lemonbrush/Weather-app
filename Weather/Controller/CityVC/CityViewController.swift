@@ -183,6 +183,11 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     
     // Setting up cell appearance while dragging and dropping
     func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        
+        //Haptic effect
+        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+        selectionFeedbackGenerator.selectionChanged()
+        
         return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
     }
     
@@ -237,4 +242,3 @@ extension CityViewController: UIViewControllerTransitioningDelegate, UINavigatio
         return fadeTransitionAnimator
     }
 }
-
