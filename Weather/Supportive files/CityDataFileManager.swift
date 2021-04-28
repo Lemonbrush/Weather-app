@@ -20,14 +20,14 @@ struct CityDataFileManager {
         saveCities(dataToSave as NSArray)
     }
     
-    static func saveCities(_ dataToSave: NSArray) {
-        
-        guard let url = makeURL(forFileNamed: K.saveFileName) else {
-            print("Failed to get directory to save files")
+    static func swapCities(atRow firstCity: Int, and secondCity: Int) {
+        guard var cities = getSavedCities() else {
             return
         }
         
-        dataToSave.write(to: url, atomically: true)
+        cities.swapAt(firstCity, secondCity)
+        
+        saveCities(cities as NSArray)
     }
     
     static func getSavedCities() -> [String]? {
@@ -44,7 +44,8 @@ struct CityDataFileManager {
         return NSArray(contentsOf: url) as? [String]
     }
     
-    //Helper functions
+    // MARK: - Helper functions
+    
     private static func makeURL(forFileNamed fileName: String) -> URL? {
         
         guard let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -53,4 +54,14 @@ struct CityDataFileManager {
         
         return url.appendingPathComponent(fileName)
     }
+    
+    static func saveCities(_ dataToSave: NSArray) {
+            
+            guard let url = makeURL(forFileNamed: K.saveFileName) else {
+                print("Failed to get directory to save files")
+                return
+            }
+            
+            dataToSave.write(to: url, atomically: true)
+        }
 }

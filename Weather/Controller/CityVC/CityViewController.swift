@@ -11,6 +11,7 @@ class CityViewController: UIViewController {
 
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var currentDateLabel: UILabel!
+    
     @IBOutlet weak var welcomeImage: UIImageView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -47,6 +48,11 @@ class CityViewController: UIViewController {
         cityTable.contentInset.top = 10
         //Getting rid of any delays between user touch and cell animation
         cityTable.delaysContentTouches = false
+        
+        //Setting up drag and drop delegates
+        cityTable.dragDelegate = self
+        cityTable.dropDelegate = self
+        cityTable.dragInteractionEnabled = true
         
         weatherManager.delegate = self
         
@@ -89,7 +95,7 @@ class CityViewController: UIViewController {
 
 // MARK: - TableView
 
-extension CityViewController: UITableViewDelegate, UITableViewDataSource {
+extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -153,6 +159,49 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
             cell.isHighlighted = false
         }
+    }
+    
+    // MARK: - tableView reorder functionality
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let mover = displayWeather.remove(at: sourceIndexPath.row)
+        displayWeather.insert(mover, at: destinationIndexPath.row)
+        
+        CityDataFileManager.swapCities(atRow: sourceIndexPath.row, and: destinationIndexPath.row)
+    }
+    
+    // Drag and drop functionality
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {}
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragItem = UIDragItem(itemProvider:  NSItemProvider())
+        dragItem.localObject = displayWeather[indexPath.row]
+        
+        return [dragItem]
+    }
+    
+    // Setting up cell appearance while dragging and dropping
+    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
+    }
+    
+    func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell else {
+            return nil
+        }
+        
+        let param = UIDragPreviewParameters()
+        param.backgroundColor = .clear
+        param.visiblePath = UIBezierPath(roundedRect: cell.weatherBackgroundView.frame, cornerRadius: cell.weatherBackgroundView.layer.cornerRadius)
+        param.shadowPath = UIBezierPath(rect: .zero)
+        
+        return param
     }
 }
 

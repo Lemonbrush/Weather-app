@@ -34,7 +34,6 @@ class CityTableViewCell: UITableViewCell {
         weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
         weatherBackgroundView.layer.shadowOpacity = 0.07
         weatherBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
