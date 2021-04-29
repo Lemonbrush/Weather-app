@@ -200,13 +200,9 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     
     func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell else {
-            return nil
-        }
-        
+        //Getting rid of system design
         let param = UIDragPreviewParameters()
         param.backgroundColor = .clear
-        param.visiblePath = UIBezierPath(roundedRect: cell.weatherBackgroundView.frame, cornerRadius: cell.weatherBackgroundView.layer.cornerRadius)
         param.shadowPath = UIBezierPath(rect: .zero)
         
         return param
