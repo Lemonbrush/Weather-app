@@ -121,6 +121,9 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
         dateFormatter.dateFormat = "hh:mm"
         cell.TimeLabel.text = dateFormatter.string(from: date)
         
+        //Setting up gradient background
+        //...
+        
         return cell
     }
 
