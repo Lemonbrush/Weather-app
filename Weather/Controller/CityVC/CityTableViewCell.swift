@@ -19,7 +19,8 @@ class CityTableViewCell: UITableViewCell {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var weatherBackgroundView: UIView!
     
-    let gradient = CAGradientLayer()
+    private let gradient = CAGradientLayer()
+    private let cellShapeMask = UIView()
     
     override var isHighlighted: Bool {
         didSet{
@@ -35,6 +36,8 @@ class CityTableViewCell: UITableViewCell {
         
         //Configuring gradient frame when views calculating
         gradient.frame = weatherBackgroundView.bounds
+        
+        setCellComponentShape(view: gradient)
     }
     
     override func awakeFromNib() {
@@ -42,9 +45,8 @@ class CityTableViewCell: UITableViewCell {
         
         self.selectionStyle = .none
         
-        //Making proper round corners
-        weatherBackgroundView.layer.cornerCurve = CALayerCornerCurve.continuous
-        weatherBackgroundView.layer.cornerRadius = 15
+        //Setting up cell shape
+        setCellComponentShape(view: weatherBackgroundView.layer)
         
         //Making shadow
         weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
@@ -61,14 +63,12 @@ class CityTableViewCell: UITableViewCell {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradient.locations = [NSNumber(floatLiteral: 0.0), NSNumber(floatLiteral: 1.0)]
         
-        //weatherBackgroundView.layer.masksToBounds = true
-        
         setGradient(withStyle: .blank)
         
         weatherBackgroundView.layer.insertSublayer(gradient, at: 0) //Adding gradient
-        
     }
     
+    // Helper functions
     func setGradient(withStyle style: GradientColors) {
         switch style {
         case .day: gradient.colors = [UIColor(red: 68/255, green: 166/255, blue: 252/255, alpha: 1).cgColor,
@@ -79,10 +79,16 @@ class CityTableViewCell: UITableViewCell {
         case .blank: gradient.colors = nil
         }
     }
+    
+    private func setCellComponentShape(view: CALayer) {
+        
+        //Making proper round corners
+        view.cornerCurve = CALayerCornerCurve.continuous
+        view.cornerRadius = 15
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     //Cell bounce animation
