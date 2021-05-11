@@ -50,7 +50,7 @@ class CityTableViewCell: UITableViewCell {
         
         //Making shadow
         weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        weatherBackgroundView.layer.shadowOpacity = 0.2
+        weatherBackgroundView.layer.shadowOpacity = 0.1
         weatherBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 3)
         weatherBackgroundView.layer.shadowRadius = 7
         
