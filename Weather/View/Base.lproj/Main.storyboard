@@ -267,16 +267,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HL-ei-OtQ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HL-ei-OtQ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8N-KS-2hX" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1262.3333333333333"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPc-iB-06y" userLabel="whiteBackground">
-                                                <rect key="frame" x="0.0" y="717" width="414" height="1283"/>
+                                                <rect key="frame" x="0.0" y="717" width="414" height="545.33333333333348"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-k3-ZYC" userLabel="weeklyForecastTable">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-k3-ZYC" userLabel="WeeklyForecastTable">
                                                         <rect key="frame" x="8" y="133" width="398" height="116"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xgE-Gf-d8W">
@@ -292,7 +292,7 @@
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="xgE-Gf-d8W" secondAttribute="bottom" constant="8" id="DCg-15-JP0"/>
                                                             <constraint firstItem="xgE-Gf-d8W" firstAttribute="leading" secondItem="hZG-k3-ZYC" secondAttribute="leading" constant="8" id="EvG-wK-hjS"/>
@@ -300,14 +300,14 @@
                                                             <constraint firstAttribute="trailing" secondItem="xgE-Gf-d8W" secondAttribute="trailing" constant="8" id="eDW-H4-Lf7"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vd9-QQ-dQw">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vd9-QQ-dQw" userLabel="HourlyBack">
                                                         <rect key="frame" x="8" y="8" width="398" height="100"/>
-                                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="ac5-W8-aa3"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-th-dyV">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-th-dyV" userLabel="HumidityBack">
                                                         <rect key="frame" x="8" y="274" width="398" height="251.33333333333337"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="SrT-4Z-iSM">
@@ -475,7 +475,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="SrT-4Z-iSM" secondAttribute="bottom" constant="20" id="2JG-fV-f4g"/>
                                                             <constraint firstAttribute="trailing" secondItem="SrT-4Z-iSM" secondAttribute="trailing" constant="20" id="5g3-hT-1l3"/>
@@ -484,11 +484,12 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="GWf-th-dyV" secondAttribute="trailing" constant="8" id="2Ft-0m-f4N"/>
                                                     <constraint firstItem="hZG-k3-ZYC" firstAttribute="leading" secondItem="vPc-iB-06y" secondAttribute="leading" constant="8" id="8C8-fe-jc8"/>
                                                     <constraint firstItem="GWf-th-dyV" firstAttribute="top" secondItem="hZG-k3-ZYC" secondAttribute="bottom" constant="25" id="8vU-km-4fx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GWf-th-dyV" secondAttribute="bottom" constant="20" id="AcL-9k-akU"/>
                                                     <constraint firstAttribute="trailing" secondItem="hZG-k3-ZYC" secondAttribute="trailing" constant="8" id="TjJ-W4-Ufr"/>
                                                     <constraint firstItem="vd9-QQ-dQw" firstAttribute="leading" secondItem="vPc-iB-06y" secondAttribute="leading" constant="8" id="UtY-IL-UvM"/>
                                                     <constraint firstAttribute="trailing" secondItem="vd9-QQ-dQw" secondAttribute="trailing" constant="8" id="cJv-rl-ogz"/>
@@ -542,19 +543,18 @@
                                             <constraint firstAttribute="trailing" secondItem="vPc-iB-06y" secondAttribute="trailing" id="ZXN-Sj-snJ"/>
                                             <constraint firstItem="l1B-23-vYd" firstAttribute="top" secondItem="s8N-KS-2hX" secondAttribute="top" id="k9f-J7-2hR"/>
                                             <constraint firstItem="vPc-iB-06y" firstAttribute="top" secondItem="l1B-23-vYd" secondAttribute="bottom" id="liy-KK-aIs"/>
-                                            <constraint firstAttribute="height" constant="2000" id="nKj-Sc-t7e"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="trailing" secondItem="BRP-dI-Qal" secondAttribute="trailing" id="4Wo-2Q-SPU"/>
+                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="trailing" secondItem="1HL-ei-OtQ" secondAttribute="trailing" id="4Wo-2Q-SPU"/>
                                     <constraint firstItem="s8N-KS-2hX" firstAttribute="top" secondItem="1HL-ei-OtQ" secondAttribute="top" id="KNs-kh-9QS"/>
-                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="bottom" secondItem="BRP-dI-Qal" secondAttribute="bottom" id="UJU-Ny-xDO"/>
-                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="width" secondItem="lQp-PU-Usc" secondAttribute="width" id="j4q-yG-6bF"/>
-                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="leading" secondItem="BRP-dI-Qal" secondAttribute="leading" id="yx9-6A-SFq"/>
+                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="bottom" secondItem="1HL-ei-OtQ" secondAttribute="bottom" id="UJU-Ny-xDO"/>
+                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="width" secondItem="1HL-ei-OtQ" secondAttribute="width" id="j4q-yG-6bF"/>
+                                    <constraint firstItem="s8N-KS-2hX" firstAttribute="leading" secondItem="1HL-ei-OtQ" secondAttribute="leading" id="yx9-6A-SFq"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="BRP-dI-Qal"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="lQp-PU-Usc"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="QQa-Bk-TFS"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="hIx-nX-4ed"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4dZ-nY-jzj"/>
@@ -569,10 +569,12 @@
                     <navigationItem key="navigationItem" id="9zX-eG-qc8"/>
                     <connections>
                         <outlet property="hourlyForecastHeight" destination="ac5-W8-aa3" id="0QJ-FJ-tuQ"/>
+                        <outlet property="humidityBackground" destination="GWf-th-dyV" id="po0-rT-5Rb"/>
                         <outlet property="scrollView" destination="1HL-ei-OtQ" id="3xS-EA-Ib2"/>
                         <outlet property="scrollViewContentView" destination="s8N-KS-2hX" id="FtF-on-CYE"/>
                         <outlet property="tableHight" destination="sjg-go-sA9" id="hyb-GU-ain"/>
                         <outlet property="weekForecast" destination="xgE-Gf-d8W" id="dDy-xP-eZr"/>
+                        <outlet property="weeklyTableBackground" destination="hZG-k3-ZYC" id="zaq-po-dfs"/>
                         <outlet property="whiteBackgroundView" destination="9AS-88-fTx" id="lBm-e4-RdQ"/>
                     </connections>
                 </viewController>
@@ -607,14 +609,11 @@
     <resources>
         <image name="WelcomeImage" width="2536" height="2535"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

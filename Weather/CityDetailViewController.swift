@@ -16,27 +16,44 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var scrollViewContentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var weeklyTableBackground: UIView!
+    @IBOutlet weak var humidityBackground: UIView!
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set up background shapes
+        DesignManager.setBackgroundStandartShape(layer: weeklyTableBackground.layer)
+        DesignManager.setBackgroundStandartShape(layer: humidityBackground.layer)
+        
+        //Set up background shadows
+        DesignManager.setBackgroundStandartShadow(layer: weeklyTableBackground.layer)
+        DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
         
     }
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        tableHight.constant = weekForecast.contentSize.height
         
+        //Set tableview height according to its contents
+        tableHight.constant = weekForecast.contentSize.height
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        whiteBackgroundView.constant = view.frame.height - 100
+        whiteBackgroundView.constant = view.frame.height - 100 //TODO: - fix that
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //Helper functions
+    func applyBackgroundDesign(to view: UIView) {
+        
+    }
 }
 
 extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {

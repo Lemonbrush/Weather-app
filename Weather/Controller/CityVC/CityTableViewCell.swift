@@ -9,7 +9,7 @@ import UIKit
 
 class CityTableViewCell: UITableViewCell {
     
-    //Gradient variants
+    //Cell styles
     enum GradientColors {
         case night, day, fog, blank
     }
@@ -37,7 +37,7 @@ class CityTableViewCell: UITableViewCell {
         //Configuring gradient frame when views calculating
         gradient.frame = weatherBackgroundView.bounds
         
-        setCellComponentShape(view: gradient)
+        DesignManager.setBackgroundStandartShape(layer: gradient)
     }
     
     override func awakeFromNib() {
@@ -46,13 +46,10 @@ class CityTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         
         //Setting up cell shape
-        setCellComponentShape(view: weatherBackgroundView.layer)
+        DesignManager.setBackgroundStandartShape(layer: weatherBackgroundView.layer)
         
         //Making shadow
-        weatherBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        weatherBackgroundView.layer.shadowOpacity = 0.1
-        weatherBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        weatherBackgroundView.layer.shadowRadius = 7
+        DesignManager.setBackgroundStandartShadow(layer: weatherBackgroundView.layer)
         
         //Making cells shadow be able to spill over other cells
         layer.masksToBounds = false
@@ -63,9 +60,9 @@ class CityTableViewCell: UITableViewCell {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradient.locations = [NSNumber(floatLiteral: 0.0), NSNumber(floatLiteral: 1.0)]
         
-        setGradient(withStyle: .blank)
+        setGradient(withStyle: .blank) //Set basic design
         
-        weatherBackgroundView.layer.insertSublayer(gradient, at: 0) //Adding gradient
+        weatherBackgroundView.layer.insertSublayer(gradient, at: 0) //Adding gradient at the bottom
     }
     
     // Helper functions
@@ -80,13 +77,8 @@ class CityTableViewCell: UITableViewCell {
         }
     }
     
-    private func setCellComponentShape(view: CALayer) {
-        
-        //Making proper round corners
-        view.cornerCurve = CALayerCornerCurve.continuous
-        view.cornerRadius = 15
-    }
-
+    //MARK: - Cell animation by user interaction
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
