@@ -12,7 +12,7 @@ struct DesignManager {
     //Making proper round corners
     static func setBackgroundStandartShape(layer: CALayer) {
         layer.cornerCurve = CALayerCornerCurve.continuous
-        layer.cornerRadius = 15
+        layer.cornerRadius = 20
     }
     
     //Making shadow

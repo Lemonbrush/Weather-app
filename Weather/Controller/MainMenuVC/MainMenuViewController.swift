@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CityViewController: UIViewController {
+class MainMenuViewController: UIViewController {
 
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var currentDateLabel: UILabel!
@@ -95,7 +95,7 @@ class CityViewController: UIViewController {
 
 // MARK: - TableView
 
-extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
+extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -106,7 +106,7 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! CityTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
         
         let weatherDataForCell = displayWeather[indexPath.row]
         
@@ -153,13 +153,13 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     
     // Cell highlight functions
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
+        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
             cell.isHighlighted = true
         }
     }
     
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell {
+        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
             cell.isHighlighted = false
         }
     }
@@ -211,7 +211,7 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource, UITabl
 
 // MARK: - Fetching data Weather manager
 
-extension CityViewController: WeatherManagerDelegate {
+extension MainMenuViewController: WeatherManagerDelegate {
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: [WeatherModel]) {
         
@@ -231,7 +231,7 @@ extension CityViewController: WeatherManagerDelegate {
 
 // MARK: - Transition animation
 
-extension CityViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
+extension MainMenuViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController,
                               animationControllerFor operation: UINavigationController.Operation,

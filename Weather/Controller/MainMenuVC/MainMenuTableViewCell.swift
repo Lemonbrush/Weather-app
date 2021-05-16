@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CityTableViewCell: UITableViewCell {
+class MainMenuTableViewCell: UITableViewCell {
     
     //Cell styles
     enum GradientColors {

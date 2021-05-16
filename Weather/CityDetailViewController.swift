@@ -14,6 +14,7 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var whiteBackgroundView: NSLayoutConstraint!
     @IBOutlet weak var hourlyForecastHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewContentView: UIView!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var weeklyTableBackground: UIView!
@@ -31,6 +32,8 @@ class CityDetailViewController: UIViewController {
         DesignManager.setBackgroundStandartShadow(layer: weeklyTableBackground.layer)
         DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
         
+        //Getting rid of the gap at the bottom
+        scrollView.contentInsetAdjustmentBehavior = .never
     }
     
     override func viewWillLayoutSubviews() {
@@ -43,7 +46,7 @@ class CityDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        whiteBackgroundView.constant = view.frame.height - 100 //TODO: - fix that
+        whiteBackgroundView.constant = view.frame.height - (hourlyForecastHeight.constant + 60)
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {

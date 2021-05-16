@@ -15,7 +15,7 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchResultsTable: UITableView!
     @IBOutlet weak var welcomeImage: UIImageView!
     
-    var cityVCReference =  CityViewController()
+    var cityVCReference =  MainMenuViewController()
     
     var cities: [NSManagedObject] = []
     
