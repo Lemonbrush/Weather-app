@@ -14,6 +14,7 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var whiteBackgroundView: NSLayoutConstraint!
     @IBOutlet weak var hourlyForecastHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewContentView: UIView!
+    @IBOutlet weak var hourlySpringConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -23,6 +24,8 @@ class CityDetailViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.delegate = self
         
         //Set up background shapes
         DesignManager.setBackgroundStandartShape(layer: weeklyTableBackground.layer)
@@ -46,16 +49,34 @@ class CityDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        whiteBackgroundView.constant = view.frame.height - (hourlyForecastHeight.constant + 60)
+        //Adjast view so that hourly forecast only could be seen at the bottom
+        whiteBackgroundView.constant = view.frame.height - (hourlyForecastHeight.constant + hourlySpringConstraint.constant)
     }
+    
+    //MARK: - Helper functions
     
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    //Helper functions
-    func applyBackgroundDesign(to view: UIView) {
+}
+
+extension CityDetailViewController: UIScrollViewDelegate {
+    
+    //Calls on scrolling scrollView
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        let oldConstant = self.hourlySpringConstraint.constant
+        //The constraint will change its value by scrolling to half of its size
+        let newConstant: CGFloat = scrollView.contentOffset.y < hourlySpringConstraint.constant/2 ? 50 : 25
+        
+        //Adjast hourlyForecast view by scrolling
+        if oldConstant != newConstant {
+            UIView.animate(withDuration: 0.1) {
+                self.hourlySpringConstraint.constant = newConstant
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
 

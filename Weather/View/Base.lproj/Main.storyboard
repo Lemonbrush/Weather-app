@@ -271,13 +271,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8N-KS-2hX" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1307.3333333333333"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1332.3333333333333"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPc-iB-06y" userLabel="whiteBackground">
-                                                <rect key="frame" x="0.0" y="717" width="414" height="590.33333333333348"/>
+                                                <rect key="frame" x="0.0" y="717" width="414" height="615.33333333333348"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="iDn-bg-Noq">
-                                                        <rect key="frame" x="20" y="132.99999999999997" width="374" height="392.33333333333326"/>
+                                                        <rect key="frame" x="20" y="157.99999999999997" width="374" height="392.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZG-k3-ZYC" userLabel="WeeklyForecastTable">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="116"/>
@@ -483,7 +483,7 @@
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vd9-QQ-dQw" userLabel="HourlyBack">
                                                         <rect key="frame" x="8" y="8" width="398" height="100"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="ac5-W8-aa3"/>
                                                         </constraints>
@@ -491,7 +491,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="White98"/>
                                                 <constraints>
-                                                    <constraint firstItem="iDn-bg-Noq" firstAttribute="top" secondItem="vd9-QQ-dQw" secondAttribute="bottom" constant="25" id="3E4-09-iUY"/>
+                                                    <constraint firstItem="iDn-bg-Noq" firstAttribute="top" secondItem="vd9-QQ-dQw" secondAttribute="bottom" constant="50" id="3E4-09-iUY"/>
                                                     <constraint firstAttribute="trailing" secondItem="iDn-bg-Noq" secondAttribute="trailing" constant="20" id="TIh-S6-mg7"/>
                                                     <constraint firstItem="vd9-QQ-dQw" firstAttribute="leading" secondItem="vPc-iB-06y" secondAttribute="leading" constant="8" id="UtY-IL-UvM"/>
                                                     <constraint firstItem="iDn-bg-Noq" firstAttribute="leading" secondItem="vPc-iB-06y" secondAttribute="leading" constant="20" id="WfY-PH-TUq"/>
@@ -571,6 +571,7 @@
                     <navigationItem key="navigationItem" id="9zX-eG-qc8"/>
                     <connections>
                         <outlet property="hourlyForecastHeight" destination="ac5-W8-aa3" id="0QJ-FJ-tuQ"/>
+                        <outlet property="hourlySpringConstraint" destination="3E4-09-iUY" id="ICz-Ju-pRY"/>
                         <outlet property="humidityBackground" destination="GWf-th-dyV" id="po0-rT-5Rb"/>
                         <outlet property="scrollView" destination="1HL-ei-OtQ" id="3xS-EA-Ib2"/>
                         <outlet property="scrollViewContentView" destination="s8N-KS-2hX" id="FtF-on-CYE"/>
@@ -612,13 +613,16 @@
         <image name="WelcomeImage" width="2536" height="2535"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <namedColor name="White98">
-            <color white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color white="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
