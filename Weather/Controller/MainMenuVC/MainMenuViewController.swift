@@ -56,6 +56,9 @@ class MainMenuViewController: UIViewController {
         
         weatherManager.delegate = self
         
+        //Populate displayWeather with data from the previous session
+        //...
+        
         //Load saved city IDs and Fetch the data
         fetchWeatherData()
     }
@@ -65,15 +68,6 @@ class MainMenuViewController: UIViewController {
         cityIDs = CityDataFileManager.getSavedCities() ?? [String]()
         displayWeather.removeAll()
         weatherManager.fetchWeather(cityIDs: cityIDs)
-    }
-    
-    // Hide and show welcome image depending on content
-    func welcomeImageCheck() {
-        if displayWeather.count != 0 {
-            welcomeImage.isHidden = true
-        } else {
-            welcomeImage.isHidden = false
-        }
     }
     
     //Pull-To-Refresh tableview
@@ -100,7 +94,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Hide welcome image if there is something to show
-        welcomeImageCheck()
+        welcomeImage.isHidden = displayWeather.count != 0 ? true : false
         
         return displayWeather.count
     }
