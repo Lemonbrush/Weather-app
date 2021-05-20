@@ -220,6 +220,15 @@
                                             <outlet property="weatherBackgroundView" destination="2FJ-OZ-kjJ" id="4cp-sl-f7h"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="129" id="OHZ-i1-Er0" customClass="LoadingCell" customModule="Weather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="208.33333396911621" width="414" height="129"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHZ-i1-Er0" id="yfJ-QS-u2w">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.55096055980000003" green="0.10302228250000001" blue="0.00020777244440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>

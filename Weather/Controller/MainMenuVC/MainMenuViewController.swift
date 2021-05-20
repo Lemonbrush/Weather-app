@@ -94,31 +94,39 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Hide welcome image if there is something to show
-        welcomeImage.isHidden = displayWeather.count != 0 ? true : false
+        welcomeImage.isHidden = cityIDs.count != 0 ? true : false
         
-        return displayWeather.count
+        return cityIDs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
         
-        let weatherDataForCell = displayWeather[indexPath.row]
-        
-        // Populate the cell with data
-        cell.cityNameLabel.text = weatherDataForCell.cityName
-        cell.degreeLabel.text = weatherDataForCell.weatherTemperatureString
-        
-        //Setting up time label
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
-        dateFormatter.dateFormat = "hh:mm"
-        cell.TimeLabel.text = dateFormatter.string(from: date)
-        
-        //Setting up gradient background
-        //...
-        
-        return cell
+        //If the data is loaded for cells
+        if displayWeather.count == cityIDs.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
+            
+            let weatherDataForCell = displayWeather[indexPath.row]
+            
+            // Populate the cell with data
+            cell.cityNameLabel.text = weatherDataForCell.cityName
+            cell.degreeLabel.text = weatherDataForCell.weatherTemperatureString
+            
+            //Setting up time label
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
+            dateFormatter.dateFormat = "hh:mm"
+            cell.TimeLabel.text = dateFormatter.string(from: date)
+            
+            //Setting up gradient background
+            //...
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell") as! LoadingCell
+            
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -217,7 +225,7 @@ extension MainMenuViewController: WeatherManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        fatalError("Failed with - \(error)")
+        print("Failed with - \(error)")
         //TODO: handle network disconection
     }
     
