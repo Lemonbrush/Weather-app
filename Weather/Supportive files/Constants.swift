@@ -14,6 +14,7 @@ struct K {
     static let saveFileName = "savedCities.plist"
     
     static let cityCellIdentifier = "cityCell"
+    static let cityLoadingCellIdentifier = "cityLoadingCell"
     static let detailShowSegue = "detailShow"
     
     struct CityEntity {

@@ -116,16 +116,14 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
             dateFormatter.dateFormat = "hh:mm"
-            cell.TimeLabel.text = dateFormatter.string(from: date)
+            cell.timeLabel.text = dateFormatter.string(from: date)
             
             //Setting up gradient background
             //...
             
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell") as! LoadingCell
-            
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
         }
     }
 
