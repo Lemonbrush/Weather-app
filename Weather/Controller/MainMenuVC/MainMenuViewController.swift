@@ -63,7 +63,16 @@ class MainMenuViewController: UIViewController {
         fetchWeatherData()
     }
     
-    //Helper functions
+    //MARK: - navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "addNewCity" {
+            let destinationVC = segue.destination as! AddCityViewController
+            destinationVC.cityVCReference = self
+        }
+    }
+    
+    //MARK: - Helper functions
     func fetchWeatherData() {
         cityIDs = CityDataFileManager.getSavedCities() ?? [String]()
         displayWeather.removeAll()
@@ -75,16 +84,6 @@ class MainMenuViewController: UIViewController {
         fetchWeatherData()
         refreshControl.endRefreshing()
     }
-    
-    //Transition to another viewcotroller
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "addNewCity" {
-            let destinationVC = segue.destination as! AddCityViewController
-            destinationVC.cityVCReference = self
-        }
-    }
-
 }
 
 // MARK: - TableView

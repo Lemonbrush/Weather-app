@@ -21,9 +21,18 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
     
+    let gradientBackground = CAGradientLayer()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setting up gradint background
+        gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientBackground.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientBackground.locations = [NSNumber(floatLiteral: 0.0), NSNumber(floatLiteral: 1.0)]
+        gradientBackground.colors = DesignManager.getStandartGradientColor(withStyle: .day)
+        self.view.layer.insertSublayer(gradientBackground, at: 0)
         
         scrollView.delegate = self
         
@@ -44,6 +53,9 @@ class CityDetailViewController: UIViewController {
         
         //Set tableview height according to its contents
         tableHight.constant = weekForecast.contentSize.height
+        
+        //Calculate gradient size
+        gradientBackground.frame = view.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
