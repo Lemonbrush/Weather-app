@@ -117,6 +117,13 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             dateFormatter.dateFormat = "hh:mm"
             cell.timeLabel.text = dateFormatter.string(from: date)
             
+            //Reset the image only in case if it is needed for better future animation
+            if cell.conditionImage.image != UIImage(systemName: weatherDataForCell.conditionName) {
+                
+                //Setting up weather condition image
+                cell.conditionImage.image = UIImage(systemName: weatherDataForCell.conditionName)
+            }
+            
             //Setting up gradient background
             //...
             
@@ -216,7 +223,13 @@ extension MainMenuViewController: WeatherManagerDelegate {
         
         DispatchQueue.main.async {
             self.displayWeather = weather
-            self.cityTable.reloadData()
+            
+            //Animated reloading tableView
+            UIView.transition(with: self.cityTable,
+                              duration: 0.10,
+                              options: .transitionCrossDissolve) {
+                self.cityTable.reloadData()
+            }
         }
         
     }

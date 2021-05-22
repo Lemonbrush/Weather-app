@@ -188,12 +188,27 @@
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="65°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-8w-28B">
-                                                                    <rect key="frame" x="268.66666666666669" y="4" width="85.333333333333314" height="60"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="GVk-NU-lCB">
+                                                                    <rect key="frame" x="194" y="14" width="160" height="40"/>
+                                                                    <subviews>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage" translatesAutoresizingMaskIntoConstraints="NO" id="pdu-4g-6pj">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="40" id="XrC-lr-JbW"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="iPw-TD-gWS"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="65°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-8w-28B">
+                                                                            <rect key="frame" x="70" y="0.0" width="90" height="40"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="RrV-cN-MiZ"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
@@ -215,6 +230,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cityNameLabel" destination="fLS-0a-waT" id="VYs-lx-58i"/>
+                                            <outlet property="conditionImage" destination="pdu-4g-6pj" id="fhD-sE-gyZ"/>
                                             <outlet property="degreeLabel" destination="cGz-8w-28B" id="wXY-Pu-FD5"/>
                                             <outlet property="timeLabel" destination="AaN-fj-1mF" id="8zA-kX-ahI"/>
                                             <outlet property="weatherBackgroundView" destination="2FJ-OZ-kjJ" id="4cp-sl-f7h"/>

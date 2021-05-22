@@ -13,6 +13,7 @@ class MainMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var weatherBackgroundView: UIView!
+    @IBOutlet weak var conditionImage: UIImageView!
     
     private let gradient = CAGradientLayer()
     private let cellShapeMask = UIView()
