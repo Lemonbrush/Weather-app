@@ -26,7 +26,8 @@ class MainMenuViewController: UIViewController {
     var cityIDs = [String]() //Presaved queries
     var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
     
-    //MARK: Lifecycle
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,9 +56,6 @@ class MainMenuViewController: UIViewController {
         cityTable.dragInteractionEnabled = true
         
         weatherManager.delegate = self
-        
-        //Populate displayWeather with data from the previous session
-        //...
         
         //Load saved city IDs and Fetch the data
         fetchWeatherData()
@@ -137,25 +135,28 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
         performSegue(withIdentifier: K.detailShowSegue, sender: self)
     }
     
-    // Handle cell editing
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            //Deleting the data
-            displayWeather.remove(at: indexPath.row)
-            cityIDs.remove(at: indexPath.row)
-            CityDataFileManager.saveCities(cityIDs as NSArray)
+    // Cell editing
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            //Deleting the data
+            self.displayWeather.remove(at: indexPath.row)
+            self.cityIDs.remove(at: indexPath.row)
+            CityDataFileManager.saveCities(self.cityIDs as NSArray)
+            
+            tableView.deleteRows(at: [indexPath], with: .bottom)
+            
+            completionHandler(true)
         }
+        
+        deleteAction.image = UIImage(named: "DeleteAction")
+        deleteAction.backgroundColor = .white
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
     }
-    
-    /*
-    // Customize cell editing buttons
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        <#code#>
-    }
-    */
     
     // Cell highlight functions
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
