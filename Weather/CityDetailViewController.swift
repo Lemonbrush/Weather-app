@@ -20,12 +20,21 @@ class CityDetailViewController: UIViewController {
     
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
+    @IBOutlet weak var navBar: UINavigationItem!
     
     let gradientBackground = CAGradientLayer()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setting up navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .clear
+        appearance.backgroundEffect = UIBlurEffect(style: .light)
+        navigationController?.navigationBar.backgroundColor = .clear //This one probably should be in viewWillAppear/disappear
+        UINavigationBar.appearance().standardAppearance = appearance
         
         //Setting up gradint background
         gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
@@ -44,7 +53,7 @@ class CityDetailViewController: UIViewController {
         DesignManager.setBackgroundStandartShadow(layer: weeklyTableBackground.layer)
         DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
         
-        //Getting rid of the gap at the bottom
+        //Getting rid of the gap at the bottom - header view begins under the navigation bar
         scrollView.contentInsetAdjustmentBehavior = .never
     }
     
