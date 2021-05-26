@@ -22,19 +22,17 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var humidityBackground: UIView!
     @IBOutlet weak var navBar: UINavigationItem!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     let gradientBackground = CAGradientLayer()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Setting up navigation bar appearance
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .clear
-        appearance.backgroundEffect = UIBlurEffect(style: .light)
-        navigationController?.navigationBar.backgroundColor = .clear //This one probably should be in viewWillAppear/disappear
-        UINavigationBar.appearance().standardAppearance = appearance
+        setNavigationBarClearAppearance()
         
         //Setting up gradint background
         gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
@@ -80,6 +78,13 @@ class CityDetailViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    private func setNavigationBarClearAppearance() {
+        navigationController?.navigationBar.barStyle = UIBarStyle.default
+    }
+    
+    private func setNavigationBarBlurAppearance() {
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+    }
 }
 
 extension CityDetailViewController: UIScrollViewDelegate {
@@ -87,6 +92,13 @@ extension CityDetailViewController: UIScrollViewDelegate {
     //Calls on scrolling scrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        if scrollView.contentOffset.y >= (navigationController?.navigationBar.frame.height)! {
+            setNavigationBarBlurAppearance()
+        } else {
+            setNavigationBarClearAppearance()
+        }
+        
+        // Hourly forecast view handling
         let oldConstant = self.hourlySpringConstraint.constant
         //The constraint will change its value by scrolling to half of its size
         let newConstant: CGFloat = scrollView.contentOffset.y < hourlySpringConstraint.constant/2 ? 50 : 25
