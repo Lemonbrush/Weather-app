@@ -675,10 +675,10 @@
                         <outlet property="hourlyForecastHeight" destination="ac5-W8-aa3" id="0QJ-FJ-tuQ"/>
                         <outlet property="hourlySpringConstraint" destination="3E4-09-iUY" id="ICz-Ju-pRY"/>
                         <outlet property="humidityBackground" destination="GWf-th-dyV" id="po0-rT-5Rb"/>
-                        <outlet property="navBar" destination="9zX-eG-qc8" id="KD4-cR-4rx"/>
                         <outlet property="scrollView" destination="1HL-ei-OtQ" id="3xS-EA-Ib2"/>
-                        <outlet property="scrollViewContentView" destination="s8N-KS-2hX" id="FtF-on-CYE"/>
                         <outlet property="tableHight" destination="sjg-go-sA9" id="hyb-GU-ain"/>
+                        <outlet property="topStackView" destination="1Gy-tS-8pR" id="fXL-FO-Ddm"/>
+                        <outlet property="transparentTopBAckground" destination="l1B-23-vYd" id="ghZ-sf-pGr"/>
                         <outlet property="weekForecast" destination="xgE-Gf-d8W" id="dDy-xP-eZr"/>
                         <outlet property="weeklyTableBackground" destination="hZG-k3-ZYC" id="zaq-po-dfs"/>
                         <outlet property="whiteBackgroundView" destination="9AS-88-fTx" id="lBm-e4-RdQ"/>

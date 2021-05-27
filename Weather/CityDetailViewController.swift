@@ -13,35 +13,54 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var tableHight: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: NSLayoutConstraint!
     @IBOutlet weak var hourlyForecastHeight: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewContentView: UIView!
     @IBOutlet weak var hourlySpringConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var transparentTopBAckground: UIView!
+    @IBOutlet weak var topStackView: UIStackView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
-    @IBOutlet weak var navBar: UINavigationItem!
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
     
     let gradientBackground = CAGradientLayer()
+    let navigationBarBlurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNavigationBarClearAppearance()
+        //Setting up clear background for navigation bar
+        navigationController?.navigationBar.barStyle = UIBarStyle.default
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.backgroundColor = .clear
         
-        //Setting up gradint background
+        //Setting up background navigation bar blur view
+        let navBarSize = navigationController?.navigationBar.bounds ?? CGRect.zero
+        let statusBarSize = UIApplication.shared.windows[0].windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+        let overallNavBarHeight = navBarSize.height + statusBarSize.height
+        
+        navigationBarBlurBackground.bounds = CGRect(x: -statusBarSize.width/2,
+                                                    y: -overallNavBarHeight/2,
+                                   width: navBarSize.width,
+                                   height: overallNavBarHeight)
+        
+        navigationBarBlurBackground.alpha = 0
+        
+        view.addSubview(navigationBarBlurBackground)
+        
+        //ScrollView
+        scrollView.delegate = self
+        //Header view begins under the navigation bar and getting rid of the gap at the bottom
+        scrollView.contentInsetAdjustmentBehavior = .never
+        
+        //Setting up gradient background
         gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradientBackground.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientBackground.locations = [NSNumber(floatLiteral: 0.0), NSNumber(floatLiteral: 1.0)]
         gradientBackground.colors = DesignManager.getStandartGradientColor(withStyle: .day)
         self.view.layer.insertSublayer(gradientBackground, at: 0)
-        
-        scrollView.delegate = self
         
         //Set up background shapes
         DesignManager.setBackgroundStandartShape(layer: weeklyTableBackground.layer)
@@ -50,9 +69,6 @@ class CityDetailViewController: UIViewController {
         //Set up background shadows
         DesignManager.setBackgroundStandartShadow(layer: weeklyTableBackground.layer)
         DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
-        
-        //Getting rid of the gap at the bottom - header view begins under the navigation bar
-        scrollView.contentInsetAdjustmentBehavior = .never
     }
     
     override func viewWillLayoutSubviews() {
@@ -77,14 +93,6 @@ class CityDetailViewController: UIViewController {
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    private func setNavigationBarClearAppearance() {
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
-    }
-    
-    private func setNavigationBarBlurAppearance() {
-        navigationController?.navigationBar.barStyle = UIBarStyle.black
-    }
 }
 
 extension CityDetailViewController: UIScrollViewDelegate {
@@ -92,11 +100,13 @@ extension CityDetailViewController: UIScrollViewDelegate {
     //Calls on scrolling scrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y >= (navigationController?.navigationBar.frame.height)! {
-            setNavigationBarBlurAppearance()
-        } else {
-            setNavigationBarClearAppearance()
-        }
+        //Handle navigation bar appearance according to the scroll view offset
+        let targetHeight = (transparentTopBAckground.bounds.height - topStackView.bounds.height)/2 - navigationBarBlurBackground.bounds.height
+        
+        //Calculate how much has been scrolled relative to the target
+        let offset = scrollView.contentOffset.y/targetHeight
+        
+        navigationBarBlurBackground.alpha = offset
         
         // Hourly forecast view handling
         let oldConstant = self.hourlySpringConstraint.constant
