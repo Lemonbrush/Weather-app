@@ -7,17 +7,26 @@
 
 import Foundation
 
+struct SavedCity: Codable {
+    let position: Int
+    let name: String
+    let latitude: Double
+    let longitude: Double
+}
+
 struct CityDataFileManager {
     
     static let fileManager = FileManager()
     
-    static func addNewCity(_ city: String) {
+    static func addNewCity(_ city: String, lat: Double, long: Double) {
         
-        var dataToSave = getSavedCities() ?? [String]()
+        var dataToSave = getSavedCities() ?? [SavedCity]()
         
-        dataToSave.append(city)
+        let newCity = SavedCity(position: dataToSave.count, name: city, latitude: lat, longitude: long)
         
-        saveCities(dataToSave as NSArray)
+        dataToSave.append(newCity)
+        
+        saveCities(dataToSave as [SavedCity])
     }
     
     static func swapCities(atRow firstCity: Int, and secondCity: Int) {
@@ -27,10 +36,10 @@ struct CityDataFileManager {
         
         cities.swapAt(firstCity, secondCity)
         
-        saveCities(cities as NSArray)
+        saveCities(cities)
     }
     
-    static func getSavedCities() -> [String]? {
+    static func getSavedCities() -> [SavedCity]? {
         
         guard let url = makeURL(forFileNamed: K.saveFileName) else {
             print("Failed to get directory to save files")
@@ -38,10 +47,19 @@ struct CityDataFileManager {
         }
         
         guard fileManager.fileExists(atPath: url.path) else {
+            print("File does not exist yet")
             return nil
         }
-        //print(url.absoluteURL)
-        return NSArray(contentsOf: url) as? [String]
+        
+        print(url.absoluteURL)
+        
+        //Decode and return data
+        let decoder = JSONDecoder()
+        if let loadedData = try? decoder.decode([SavedCity].self, from: Data(contentsOf: url)) {
+            return loadedData
+        }
+        
+        return nil
     }
     
     // MARK: - Helper functions
@@ -55,13 +73,22 @@ struct CityDataFileManager {
         return url.appendingPathComponent(fileName)
     }
     
-    static func saveCities(_ dataToSave: NSArray) {
+    static func saveCities(_ dataToSave: [SavedCity]) {
             
-            guard let url = makeURL(forFileNamed: K.saveFileName) else {
-                print("Failed to get directory to save files")
-                return
-            }
-            
-            dataToSave.write(to: url, atomically: true)
+        guard let url = makeURL(forFileNamed: K.saveFileName) else {
+            print("Failed to get directory to save files")
+            return
         }
+        
+        //Encode and save data as JSON
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(dataToSave) {
+            
+            do {
+                try encoded.write(to: url)
+            } catch {
+                print("Error encoding file to save")
+            }
+        }
+    }
 }

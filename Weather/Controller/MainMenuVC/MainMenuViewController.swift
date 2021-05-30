@@ -23,7 +23,8 @@ class MainMenuViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     
     var weatherManager = WeatherManager()
-    var cityIDs = [String]() //Presaved queries
+    
+    var savedCities = [SavedCity]()
     var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
     
     //MARK: - Lifecycle
@@ -84,9 +85,14 @@ class MainMenuViewController: UIViewController {
     
     //MARK: - Helper functions
     func fetchWeatherData() {
-        cityIDs = CityDataFileManager.getSavedCities() ?? [String]()
+        guard let savedCities = CityDataFileManager.getSavedCities() else { return }
+        
+        self.savedCities = savedCities
         displayWeather.removeAll()
-        weatherManager.fetchWeather(cityIDs: cityIDs)
+        
+        for city in savedCities {
+            weatherManager.fetchWeather(by: city)
+        }
     }
     
     //Pull-To-Refresh tableview
@@ -103,15 +109,15 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Hide welcome image if there is something to show
-        welcomeImage.isHidden = cityIDs.count != 0 ? true : false
+        welcomeImage.isHidden = savedCities.count != 0 ? true : false
         
-        return cityIDs.count
+        return savedCities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //If the data is loaded for cells
-        if displayWeather.count == cityIDs.count {
+        if displayWeather.count == savedCities.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
             
             let weatherDataForCell = displayWeather[indexPath.row]
@@ -153,8 +159,8 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             
             //Deleting the data
             self.displayWeather.remove(at: indexPath.row)
-            self.cityIDs.remove(at: indexPath.row)
-            CityDataFileManager.saveCities(self.cityIDs as NSArray)
+            self.savedCities.remove(at: indexPath.row)
+            CityDataFileManager.saveCities(self.savedCities)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
@@ -232,10 +238,10 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
 
 extension MainMenuViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: [WeatherModel]) {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         
         DispatchQueue.main.async {
-            self.displayWeather = weather
+            self.displayWeather.append(weather)
             
             //Animated reloading tableView
             UIView.transition(with: self.cityTable,

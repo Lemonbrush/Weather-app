@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CoreData
+import MapKit
 
 class AddCityViewController: UIViewController {
 
@@ -15,12 +15,15 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchResultsTable: UITableView!
     @IBOutlet weak var welcomeImage: UIImageView!
     
-    var cityVCReference =  MainMenuViewController()
+    var cityVCReference =  MainMenuViewController() // <--- probably an issue
     
-    var cities: [NSManagedObject] = []
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchCompleter.delegate = self
         
         //Setting up search cell appearance
         searchCellBackground.layer.cornerRadius = 10
@@ -34,48 +37,15 @@ class AddCityViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - CoreData helper functions
-    
-    func loadCityList(with request: NSFetchRequest<City> = City.fetchRequest(),
-                      predicate: NSPredicate? = nil) {
-        
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        if let additionalPredicate = predicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate])
-        }
-        
-        do {
-            cities = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context: \(error)")
-        }
-        
-        searchResultsTable.reloadData()
-    }
-    
     // MARK: - TextField methods
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        if textField.text?.count != 0 {
-            
-            welcomeImage.isHidden = true
-            
-            let request: NSFetchRequest<City> = City.fetchRequest() //Specify data type for search
-            let predicate = NSPredicate(format: "cityName BEGINSWITH[cd] %@", searchBar.text!)
-            
-            request.sortDescriptors = [NSSortDescriptor(key: K.CityEntity.cityName, ascending: false)]
-            
-            loadCityList(with: request, predicate: predicate)
-            
-        } else {
-            
-            //Clear the table in case of empty search bar
-            cities.removeAll()
-            searchResultsTable.reloadData()
-            welcomeImage.isHidden = false
-        }
+        //change searchCompleter depends on searchBar's text
+        guard let query = textField.text else {return}
+        
+        searchCompleter.queryFragment = query
+        searchCompleter.resultTypes = .address
     }
     
     // MARK: - Helper functions
@@ -93,52 +63,68 @@ class AddCityViewController: UIViewController {
 
 }
 
-// MARK: - TableView methods
+// MARK: - Search completer
 
-extension AddCityViewController: UITableViewDataSource {
+extension AddCityViewController: MKLocalSearchCompleterDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        cities.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        
-        let cityToShow = cities[indexPath.row]
-        let cityName = cityToShow.value(forKey: K.CityEntity.cityName) as! String
-        let cityCountry = cityToShow.value(forKey: K.CityEntity.countryName) as! String
-        let cityState = cityToShow.value(forKey: K.CityEntity.state) as! String
-        let cityCode = cityToShow.value(forKey: K.CityEntity.countryId) as! String
-        
-        cell.textLabel?.text = "\(countryFlag(byCode: cityCode)) \(cityName), \(cityCountry)"
-        
-        //In case there is a state note
-        if cityState != "" {
-            cell.textLabel?.text! += ", \(cityState)"
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+            //get result, transform it to our needs and fill our dataSource
+        self.searchResults = completer.results
+        DispatchQueue.main.async {
+            self.searchResultsTable.reloadData()
         }
-        
-        return cell
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        //handle the error
+        print(error.localizedDescription)
     }
 }
 
-extension AddCityViewController: UITableViewDelegate {
+// MARK: - TableView methods
+
+extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // Hide welcome image if there is something to show
+        welcomeImage.isHidden = searchResults.count != 0 ? true : false
+        
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let searchResult = searchResults[indexPath.row]
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = searchResult.title
+        cell.detailTextLabel?.text = searchResult.subtitle
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let result = searchResults[indexPath.row]
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        //TODO: Move the code above to the Main weather ViewController
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = result.title
         
-        let cityIDToAdd = cities[indexPath.row].value(forKey: K.CityEntity.id) as! Int64
+        let search = MKLocalSearch(request: searchRequest)
+
+        search.start { response, error in
+            
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+            
+            let item = response.mapItems.first!
+            print(item.name!,"\n",item.placemark.coordinate.latitude,item.placemark.coordinate.longitude)
+            
+            //Save chosen city
+            CityDataFileManager.addNewCity(item.name!, lat: item.placemark.coordinate.latitude, long: item.placemark.coordinate.longitude)
+        }
         
-        CityDataFileManager.addNewCity(String(cityIDToAdd))
-        
-        //Return to the VC and fetch added data
-        self.cityVCReference.fetchWeatherData()
-        dismiss(animated: true)
+        cityVCReference.fetchWeatherData()
+        dismiss(animated: true, completion: nil)
     }
 }
