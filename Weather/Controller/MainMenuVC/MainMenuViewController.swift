@@ -25,7 +25,7 @@ class MainMenuViewController: UIViewController {
     var weatherManager = WeatherManager()
     
     var savedCities = [SavedCity]()
-    var displayWeather: [WeatherModel] = [] //Fetched data for display in the tableview
+    var displayWeather: [WeatherModel?] = [] //Fetched data for display in the tableview
     
     //MARK: - Lifecycle
     
@@ -90,8 +90,13 @@ class MainMenuViewController: UIViewController {
         self.savedCities = savedCities
         displayWeather.removeAll()
         
-        for city in savedCities {
-            weatherManager.fetchWeather(by: city)
+        for _ in savedCities {
+            displayWeather.append(nil)
+        }
+        print(displayWeather.count)
+        
+        for (i,city) in savedCities.enumerated() {
+            weatherManager.fetchWeather(by: city, at: i)
         }
     }
     
@@ -117,27 +122,27 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //If the data is loaded for cells
-        if displayWeather.count == savedCities.count {
+        if displayWeather[indexPath.row] != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
             
             let weatherDataForCell = displayWeather[indexPath.row]
             
             // Populate the cell with data
-            cell.cityNameLabel.text = weatherDataForCell.cityName
-            cell.degreeLabel.text = weatherDataForCell.weatherTemperatureString
+            cell.cityNameLabel.text = savedCities[indexPath.row].name
+            cell.degreeLabel.text = weatherDataForCell!.weatherTemperatureString
             
             //Setting up time label
             let date = Date()
             let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell!.timezone)
             dateFormatter.dateFormat = "hh:mm"
             cell.timeLabel.text = dateFormatter.string(from: date)
             
             //Reset the image only in case if it is needed for better future animation
-            if cell.conditionImage.image != UIImage(systemName: weatherDataForCell.conditionName) {
+            if cell.conditionImage.image != UIImage(systemName: weatherDataForCell!.conditionName) {
                 
                 //Setting up weather condition image
-                cell.conditionImage.image = UIImage(systemName: weatherDataForCell.conditionName)
+                cell.conditionImage.image = UIImage(systemName: weatherDataForCell!.conditionName)
             }
             
             //Setting up gradient background
@@ -238,10 +243,11 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
 
 extension MainMenuViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
         
         DispatchQueue.main.async {
-            self.displayWeather.append(weather)
+            
+            self.displayWeather[position] = weather
             
             //Animated reloading tableView
             UIView.transition(with: self.cityTable,

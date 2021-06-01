@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int)
     func didFailWithError(error: Error)
 }
 
@@ -21,14 +21,14 @@ struct WeatherManager {
     var delegate: WeatherManagerDelegate?
     
     //MARK: - Fetching weather data
-    func fetchWeather(by city: SavedCity) {
+    func fetchWeather(by city: SavedCity, at position: Int) {
         
         let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)"
-        performRequest(with: urlString)
+        performRequest(with: urlString, at: position)
     }
     
     //MARK: - Networking
-    func performRequest(with urlString: String) {
+    func performRequest(with urlString: String, at position: Int) {
         
         //Getting rid of any spaces in the URL string
         let encodedURLString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -47,7 +47,7 @@ struct WeatherManager {
                 //Handling result
                 if let safeData = data {
                     if let weather = self.parseJSON(safeData) {
-                        delegate?.didUpdateWeather(self, weather: weather) //Let the delegate refresh data tables
+                        delegate?.didUpdateWeather(self, weather: weather, at: position) //Let the delegate refresh data tables
                     }
                 }
             }
@@ -62,7 +62,10 @@ struct WeatherManager {
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData) //Decode data to conform WeatherData properties
 
-            let result = WeatherModel(conditionId: decodedData.weather[0].id, cityName: decodedData.name, temperature: decodedData.main.temp, timezone: decodedData.timezone)
+            let result = WeatherModel(conditionId: decodedData.weather[0].id,
+                                      cityName: decodedData.name,
+                                      temperature: decodedData.main.temp,
+                                      timezone: decodedData.timezone)
             
             print(result)
             

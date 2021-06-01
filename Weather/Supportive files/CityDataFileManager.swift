@@ -8,7 +8,6 @@
 import Foundation
 
 struct SavedCity: Codable {
-    let position: Int
     let name: String
     let latitude: Double
     let longitude: Double
@@ -22,7 +21,7 @@ struct CityDataFileManager {
         
         var dataToSave = getSavedCities() ?? [SavedCity]()
         
-        let newCity = SavedCity(position: dataToSave.count, name: city, latitude: lat, longitude: long)
+        let newCity = SavedCity(name: city, latitude: lat, longitude: long)
         
         dataToSave.append(newCity)
         
