@@ -68,7 +68,7 @@ class AddCityViewController: UIViewController {
 extension AddCityViewController: MKLocalSearchCompleterDelegate {
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-            //get result, transform it to our needs and fill our dataSource
+        //get result, transform it to our needs and fill our dataSource
         self.searchResults = completer.results
         DispatchQueue.main.async {
             self.searchResultsTable.reloadData()
@@ -124,7 +124,8 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
             CityDataFileManager.addNewCity(item.name!, lat: item.placemark.coordinate.latitude, long: item.placemark.coordinate.longitude)
         }
         
-        cityVCReference.fetchWeatherData()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            self.cityVCReference.fetchWeatherData()
+        }
     }
 }

@@ -90,10 +90,9 @@ class MainMenuViewController: UIViewController {
         self.savedCities = savedCities
         displayWeather.removeAll()
         
-        for _ in savedCities {
+        for _ in 0...savedCities.count {
             displayWeather.append(nil)
         }
-        print(displayWeather.count)
         
         for (i,city) in savedCities.enumerated() {
             weatherManager.fetchWeather(by: city, at: i)
@@ -165,7 +164,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             //Deleting the data
             self.displayWeather.remove(at: indexPath.row)
             self.savedCities.remove(at: indexPath.row)
-            CityDataFileManager.saveCities(self.savedCities)
+            CityDataFileManager.deleteCity(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
@@ -201,7 +200,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
         let mover = displayWeather.remove(at: sourceIndexPath.row)
         displayWeather.insert(mover, at: destinationIndexPath.row)
         
-        CityDataFileManager.swapCities(atRow: sourceIndexPath.row, and: destinationIndexPath.row)
+        CityDataFileManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     // Drag and drop functionality

@@ -67,8 +67,6 @@ struct WeatherManager {
                                       temperature: decodedData.main.temp,
                                       timezone: decodedData.timezone)
             
-            print(result)
-            
             return result
             
         } catch {

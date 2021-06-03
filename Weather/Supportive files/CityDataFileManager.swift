@@ -28,12 +28,23 @@ struct CityDataFileManager {
         saveCities(dataToSave as [SavedCity])
     }
     
-    static func swapCities(atRow firstCity: Int, and secondCity: Int) {
+    static func deleteCity(at index: Int) {
         guard var cities = getSavedCities() else {
             return
         }
         
-        cities.swapAt(firstCity, secondCity)
+        cities.remove(at: index)
+        
+        saveCities(cities)
+    }
+    
+    static func rearrangeCity(atRow firstCity: Int, to secondCity: Int) {
+        guard var cities = getSavedCities() else {
+            return
+        }
+        
+        let mover = cities.remove(at: firstCity)
+        cities.insert(mover, at: secondCity)
         
         saveCities(cities)
     }
@@ -50,7 +61,7 @@ struct CityDataFileManager {
             return nil
         }
         
-        print(url.absoluteURL)
+        //print(url.absoluteURL) // <---- delete
         
         //Decode and return data
         let decoder = JSONDecoder()
