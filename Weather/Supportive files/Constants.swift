@@ -17,12 +17,12 @@ struct K {
     static let cityLoadingCellIdentifier = "cityLoadingCell"
     static let detailShowSegue = "detailShow"
     
-    struct CityEntity {
-        static let cityName = "cityName"
-        static let countryName = "countryName"
-        static let state = "state"
-        static let countryId = "countryId"
-        static let id = "id"
+    struct SegueId {
+        static let addNewCity = "addNewCity"
+    }
+    
+    struct ImageName {
+        static let deleteImage = "DeleteAction"
     }
     
     //Colors

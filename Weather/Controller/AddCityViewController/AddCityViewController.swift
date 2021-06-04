@@ -70,6 +70,15 @@ extension AddCityViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         //get result, transform it to our needs and fill our dataSource
         self.searchResults = completer.results
+        self.searchResults = completer.results.filter { result in
+            
+            //Getting rid of any results that contain digits
+            if result.title.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
+            if result.subtitle.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
+            
+            return true
+        }
+        
         DispatchQueue.main.async {
             self.searchResultsTable.reloadData()
         }

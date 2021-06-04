@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,78 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documentsDirectory = paths[0]
         
         return documentsDirectory
-    }
-
-    // MARK: - Core Data stack
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "CityListDBCreator")
-        
-        //Setting up container source
-        let storeUrl = self.getDocumentsDirectory().appendingPathComponent("CityListDBCreator.sqlite")
-        
-        //Prepopulate Core data database in the first time
-        if self.isFirstLaunch() {
-            let seededDataUrl = Bundle.main.url(forResource: "CityListDBCreator", withExtension: "sqlite")
-            try! FileManager.default.copyItem(at: seededDataUrl!, to: storeUrl)
-        }
-
-        //Setting up the container
-        let description = NSPersistentStoreDescription()
-        description.shouldInferMappingModelAutomatically = true
-        description.shouldMigrateStoreAutomatically = true
-        description.url = storeUrl
-
-        container.persistentStoreDescriptions = [description]
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    //This method deletes all the prepopulated files (just in case)
-    /*
-    func deleteFiles() {
-        let fileManager = FileManager.default
-        let documentsUrl =  FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first! as NSURL
-        let documentsPath = documentsUrl.path
-
-        do {
-            if let documentPath = documentsPath {
-                let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
-                print("all files in cache: \(fileNames)")
-                for fileName in fileNames {
-                    if (fileName.contains("CityListDBCreator")) {
-                        let filePathName = "\(documentPath)/\(fileName)"
-                        try fileManager.removeItem(atPath: filePathName)
-                    }
-                }
-                let files = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
-                print("all files in cache after deleting images: \(files)")
-            }
-        } catch {
-            print("Could not clear temp folder: \(error)")
-        }
-    }
- */
-
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 }
 

@@ -77,7 +77,7 @@ class MainMenuViewController: UIViewController {
     //MARK: - navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "addNewCity" {
+        if segue.identifier == K.SegueId.addNewCity {
             let destinationVC = segue.destination as! AddCityViewController
             destinationVC.cityVCReference = self
         }
@@ -171,7 +171,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             completionHandler(true)
         }
         
-        deleteAction.image = UIImage(named: "DeleteAction")
+        deleteAction.image = UIImage(named: K.ImageName.deleteImage)
         deleteAction.backgroundColor = .white
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])

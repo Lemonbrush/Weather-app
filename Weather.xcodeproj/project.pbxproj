@@ -24,8 +24,6 @@
 		709EE5D9261C834D0095E184 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709EE5D8261C834D0095E184 /* CityDetailViewController.swift */; };
 		70E7E1EA262712A100187412 /* FadeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E1E9262712A100187412 /* FadeTransitionAnimator.swift */; };
 		70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E235262861BB00187412 /* AddCityViewController.swift */; };
-		70E7E28D262C5A5800187412 /* CityListDBCreator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E28B262C5A5700187412 /* CityListDBCreator.xcdatamodeld */; };
-		70E7E298262CB4C600187412 /* CityListDBCreator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 70E7E297262CB4C600187412 /* CityListDBCreator.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +46,6 @@
 		709EE5D8261C834D0095E184 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CityDetailViewController.swift; path = Weather/CityDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		70E7E1E9262712A100187412 /* FadeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransitionAnimator.swift; sourceTree = "<group>"; };
 		70E7E235262861BB00187412 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
-		70E7E28C262C5A5700187412 /* CityListDBCreator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CityListDBCreator.xcdatamodel; sourceTree = "<group>"; };
-		70E7E297262CB4C600187412 /* CityListDBCreator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CityListDBCreator.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +155,6 @@
 		709EE5D5261C82F20095E184 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				70E7E29D262CC2C100187412 /* CityListDB */,
 				70E7E1EE26283CDA00187412 /* WeatherData */,
 			);
 			path = Model;
@@ -199,15 +194,6 @@
 				70E7E235262861BB00187412 /* AddCityViewController.swift */,
 			);
 			path = AddCityViewController;
-			sourceTree = "<group>";
-		};
-		70E7E29D262CC2C100187412 /* CityListDB */ = {
-			isa = PBXGroup;
-			children = (
-				70E7E297262CB4C600187412 /* CityListDBCreator.sqlite */,
-				70E7E28B262C5A5700187412 /* CityListDBCreator.xcdatamodeld */,
-			);
-			path = CityListDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +256,6 @@
 				7017AAB9261B191200953C5B /* LaunchScreen.storyboard in Resources */,
 				7017AAB6261B191200953C5B /* Assets.xcassets in Resources */,
 				7017AAB4261B191000953C5B /* Main.storyboard in Resources */,
-				70E7E298262CB4C600187412 /* CityListDBCreator.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +268,6 @@
 			files = (
 				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
 				7017AAB1261B191000953C5B /* MainMenuViewController.swift in Sources */,
-				70E7E28D262C5A5800187412 /* CityListDBCreator.xcdatamodeld in Sources */,
 				704173AA265131CC001B1335 /* DesignManager.swift in Sources */,
 				7017AAAD261B191000953C5B /* AppDelegate.swift in Sources */,
 				705BB8CC261EF84600D658C4 /* WeatherManager.swift in Sources */,
@@ -497,19 +481,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		70E7E28B262C5A5700187412 /* CityListDBCreator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				70E7E28C262C5A5700187412 /* CityListDBCreator.xcdatamodel */,
-			);
-			currentVersion = 70E7E28C262C5A5700187412 /* CityListDBCreator.xcdatamodel */;
-			path = CityListDBCreator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7017AAA1261B191000953C5B /* Project object */;
 }
