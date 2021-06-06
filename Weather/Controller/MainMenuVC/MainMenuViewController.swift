@@ -147,6 +147,8 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             //Setting up gradient background
             //...
             
+            cell.layoutIfNeeded() // Eliminate layouts left from loading cells
+            
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
