@@ -9,7 +9,7 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    @IBOutlet weak var cityTable: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentDateLabel: UILabel!
     
     @IBOutlet weak var welcomeImage: UIImageView!
@@ -44,17 +44,17 @@ class MainMenuViewController: UIViewController {
         //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refreshWeatherData(_:)), for: .valueChanged)
-        cityTable.addSubview(refreshControl)
+        tableView.addSubview(refreshControl)
         
         //Space before the first cell
-        cityTable.contentInset.top = 10
+        tableView.contentInset.top = 10
         //Getting rid of any delays between user touch and cell animation
-        cityTable.delaysContentTouches = false
+        tableView.delaysContentTouches = false
         
         //Setting up drag and drop delegates
-        cityTable.dragDelegate = self
-        cityTable.dropDelegate = self
-        cityTable.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
         
         weatherManager.delegate = self
         
@@ -77,10 +77,17 @@ class MainMenuViewController: UIViewController {
     //MARK: - navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == K.SegueId.addNewCity {
+        switch segue.identifier {
+        case K.SegueId.addNewCity:
             let destinationVC = segue.destination as! AddCityViewController
-            destinationVC.cityVCReference = self
+            destinationVC.delegate = self
+        case K.SegueId.detailShow:
+            let destinationVC = segue.destination as! CityDetailViewController
+            destinationVC.title = "Test city"
+        default:
+            return
         }
+        
     }
     
     //MARK: - Helper functions
@@ -90,7 +97,7 @@ class MainMenuViewController: UIViewController {
         self.savedCities = savedCities
         displayWeather.removeAll()
         
-        for _ in 0...savedCities.count {
+        for _ in 0..<savedCities.count {
             displayWeather.append(nil)
         }
         
@@ -106,6 +113,20 @@ class MainMenuViewController: UIViewController {
     }
 }
 
+extension MainMenuViewController: AddCityDelegate {
+    
+    func didAddNewCity() {
+        displayWeather.append(nil)
+        tableView.insertRows(at: [IndexPath(row: self.displayWeather.count-1, section: 0)], with: .automatic)
+        
+        fetchWeatherData()
+    }
+    
+    func didFailAddingNewCityWithError(error: Error?) {
+        //handle errors here
+    }
+}
+
 // MARK: - TableView
 
 extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
@@ -113,9 +134,9 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Hide welcome image if there is something to show
-        welcomeImage.isHidden = savedCities.count != 0 ? true : false
+        welcomeImage.isHidden = displayWeather.count != 0 ? true : false
         
-        return savedCities.count
+        return displayWeather.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -250,12 +271,8 @@ extension MainMenuViewController: WeatherManagerDelegate {
             
             self.displayWeather[position] = weather
             
-            //Animated reloading tableView
-            UIView.transition(with: self.cityTable,
-                              duration: 0.10,
-                              options: .transitionCrossDissolve) {
-                self.cityTable.reloadData()
-            }
+            let indexPath = IndexPath(row: position, section: 0)
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
         
     }

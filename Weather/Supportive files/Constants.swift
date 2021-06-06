@@ -19,6 +19,7 @@ struct K {
     
     struct SegueId {
         static let addNewCity = "addNewCity"
+        static let detailShow = "detailShow"
     }
     
     struct ImageName {

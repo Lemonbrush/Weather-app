@@ -8,6 +8,11 @@
 import UIKit
 import MapKit
 
+protocol AddCityDelegate {
+    func didAddNewCity()
+    func didFailAddingNewCityWithError(error: Error?)
+}
+
 class AddCityViewController: UIViewController {
 
     @IBOutlet weak var searchCellBackground: UIView!
@@ -15,7 +20,7 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchResultsTable: UITableView!
     @IBOutlet weak var welcomeImage: UIImageView!
     
-    var cityVCReference =  MainMenuViewController() // <--- probably an issue
+    var delegate: AddCityDelegate!
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
@@ -123,18 +128,24 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let response = response else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error").")
+                
+                self.dismiss(animated: true) {
+                    self.delegate.didFailAddingNewCityWithError(error: error)
+                }
+                
                 return
             }
             
             let item = response.mapItems.first!
-            print(item.name!,"\n",item.placemark.coordinate.latitude,item.placemark.coordinate.longitude)
+            let itemCoordinate = item.placemark.coordinate
             
             //Save chosen city
-            CityDataFileManager.addNewCity(item.name!, lat: item.placemark.coordinate.latitude, long: item.placemark.coordinate.longitude)
+            CityDataFileManager.addNewCity(item.name ?? "---", lat: itemCoordinate.latitude, long: itemCoordinate.longitude)
+            
+            self.dismiss(animated: true) {
+                self.delegate?.didAddNewCity()
+            }
         }
         
-        dismiss(animated: true) {
-            self.cityVCReference.fetchWeatherData()
-        }
     }
 }
