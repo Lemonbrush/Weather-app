@@ -83,11 +83,12 @@ class MainMenuViewController: UIViewController {
             destinationVC.delegate = self
         case K.SegueId.detailShow:
             let destinationVC = segue.destination as! CityDetailViewController
-            destinationVC.title = "Test city"
+            //forse-unwrap because we are sure that there is a value there
+            let indexPath = self.tableView.indexPathForSelectedRow!
+            destinationVC.title = savedCities[indexPath.row].name
         default:
             return
         }
-        
     }
     
     //MARK: - Helper functions
@@ -158,7 +159,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             dateFormatter.dateFormat = "hh:mm"
             cell.timeLabel.text = dateFormatter.string(from: date)
             
-            //Reset the image only in case if it is needed for better future animation
+            //Reset the image only in case if it is needed for smooth animation
             if cell.conditionImage.image != UIImage(systemName: weatherDataForCell!.conditionName) {
                 
                 //Setting up weather condition image
@@ -274,14 +275,12 @@ extension MainMenuViewController: WeatherManagerDelegate {
             let indexPath = IndexPath(row: position, section: 0)
             self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
-        
     }
     
     func didFailWithError(error: Error) {
         print("Failed with - \(error)")
         //TODO: handle network disconection
     }
-    
 }
 
 // MARK: - Transition animation
