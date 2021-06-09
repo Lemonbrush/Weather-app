@@ -13,7 +13,7 @@ protocol WeatherManagerDelegate {
 }
 
 struct WeatherManager {
-    let weatherURL = "https://api.openweathermap.org/data/2.5/weather?"
+    let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?"
     var city = ""
     let appid = K.weatherAPIKey
     var units = "metric"
@@ -23,7 +23,7 @@ struct WeatherManager {
     //MARK: - Fetching weather data
     func fetchWeather(by city: SavedCity, at position: Int) {
         
-        let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)"
+        let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)&exclude=minutely"
         performRequest(with: urlString, at: position)
     }
     
@@ -62,10 +62,10 @@ struct WeatherManager {
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData) //Decode data to conform WeatherData properties
 
-            let result = WeatherModel(conditionId: decodedData.weather[0].id,
-                                      cityName: decodedData.name,
-                                      temperature: decodedData.main.temp,
-                                      timezone: decodedData.timezone)
+            let result = WeatherModel(conditionId: decodedData.current.weather[0].id,
+                                      cityName: "-",
+                                      temperature: decodedData.current.temp,
+                                      timezone: decodedData.timezone_offset)
             
             return result
             

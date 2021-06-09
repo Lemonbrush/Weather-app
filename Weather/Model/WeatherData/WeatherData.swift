@@ -9,30 +9,17 @@ import Foundation
 
 //Data struct for JSON decoding
 struct WeatherData: Codable {
-    let coord: Coord
-    let weather: [Weather]
-    let main: Main
-    let sys: Sys
-    let timezone: Int
-    let name: String
+    let lat: Double
+    let lon: Double
+    let timezone_offset: Int
+    let current: Current
 }
 
-struct Sys: Codable {
-    let country: String
-    //TODO: add more here
-}
-
-struct Main: Codable {
+struct Current: Codable {
     let temp: Double
+    let weather: [Weather]
 }
 
 struct Weather: Codable {
     let id: Int
-    let main: String
-    let description: String
-}
-
-struct Coord: Codable {
-    let lon: Double
-    let lat: Double
 }

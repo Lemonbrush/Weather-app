@@ -85,7 +85,7 @@ class MainMenuViewController: UIViewController {
             let destinationVC = segue.destination as! CityDetailViewController
             //forse-unwrap because we are sure that there is a value there
             let indexPath = self.tableView.indexPathForSelectedRow!
-            destinationVC.title = savedCities[indexPath.row].name
+            destinationVC.weatherModel = displayWeather[indexPath.row]
         default:
             return
         }
@@ -149,7 +149,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             let weatherDataForCell = displayWeather[indexPath.row]
             
             // Populate the cell with data
-            cell.cityNameLabel.text = savedCities[indexPath.row].name
+            cell.cityNameLabel.text = displayWeather[indexPath.row]?.cityName
             cell.degreeLabel.text = weatherDataForCell!.weatherTemperatureString
             
             //Setting up time label
@@ -187,7 +187,6 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             
             //Deleting the data
             self.displayWeather.remove(at: indexPath.row)
-            self.savedCities.remove(at: indexPath.row)
             CityDataFileManager.deleteCity(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
@@ -273,6 +272,10 @@ extension MainMenuViewController: WeatherManagerDelegate {
             self.displayWeather[position] = weather
             
             let indexPath = IndexPath(row: position, section: 0)
+            
+            //Put chosen city name from addCity autoCompletion into weather data model
+            self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
+            
             self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
     }

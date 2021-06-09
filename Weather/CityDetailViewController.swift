@@ -23,6 +23,19 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
     
+    //Labels
+    @IBOutlet weak var tempLebel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var uvIndexLabel: UILabel!
+    @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet weak var cloudinessLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var visibilityLabel: UILabel!
+    
+    var weatherModel: WeatherModel!
+    
     let gradientBackground = CAGradientLayer()
     let navigationBarBlurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
@@ -69,6 +82,11 @@ class CityDetailViewController: UIViewController {
         //Set up background shadows
         DesignManager.setBackgroundStandartShadow(layer: weeklyTableBackground.layer)
         DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
+        
+        //Setting up display data
+        title = weatherModel.cityName
+        
+        tempLebel.text = weatherModel.weatherTemperatureString
     }
     
     override func viewWillLayoutSubviews() {
