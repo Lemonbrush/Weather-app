@@ -86,7 +86,17 @@ class CityDetailViewController: UIViewController {
         //Setting up display data
         title = weatherModel.cityName
         
-        tempLebel.text = weatherModel.weatherTemperatureString
+        tempLebel.text = weatherModel.temperatureString
+        
+        descriptionLabel.text = weatherModel.description
+        feelsLikeLabel.text = weatherModel.feelsLikeString
+        
+        humidityLabel.text = weatherModel.humidityString
+        uvIndexLabel.text = String(weatherModel.uviIndex)
+        windLabel.text = weatherModel.windString
+        cloudinessLabel.text = weatherModel.cloudinessString
+        pressureLabel.text = weatherModel.pressureString
+        visibilityLabel.text = weatherModel.visibilityString
     }
     
     override func viewWillLayoutSubviews() {
@@ -140,6 +150,8 @@ extension CityDetailViewController: UIScrollViewDelegate {
         }
     }
 }
+
+// MARK: - TableView
 
 extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {
     

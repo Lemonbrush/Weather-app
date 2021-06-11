@@ -150,7 +150,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             
             // Populate the cell with data
             cell.cityNameLabel.text = displayWeather[indexPath.row]?.cityName
-            cell.degreeLabel.text = weatherDataForCell!.weatherTemperatureString
+            cell.degreeLabel.text = weatherDataForCell!.temperatureString
             
             //Setting up time label
             let date = Date()

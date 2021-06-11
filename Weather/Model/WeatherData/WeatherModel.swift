@@ -13,8 +13,41 @@ struct WeatherModel {
     var cityName: String
     let temperature: Double
     let timezone: Int
+    let feelsLike: Double
+    let description: String
     
-    var weatherTemperatureString: String {
+    let humidity: Int
+    let uviIndex: Double
+    let wind: Double
+    let cloudiness: Int
+    let pressure: Int
+    let visibility: Int
+    
+    var humidityString: String {
+        String("\(humidity)%")
+    }
+    
+    var windString: String {
+        String("\(wind) m/s")
+    }
+    
+    var cloudinessString: String {
+        String("\(cloudiness)%")
+    }
+    
+    var pressureString: String {
+        String("\(pressure) hPa")
+    }
+    
+    var visibilityString: String {
+        String("\(visibility) m.")
+    }
+    
+    var feelsLikeString: String {
+        String(format: "Feels like %.0f°", feelsLike)
+    }
+    
+    var temperatureString: String {
         String(format: "%.0f°", temperature)
     }
     

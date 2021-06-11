@@ -61,11 +61,19 @@ struct WeatherManager {
         
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData) //Decode data to conform WeatherData properties
-
+            
             let result = WeatherModel(conditionId: decodedData.current.weather[0].id,
                                       cityName: "-",
                                       temperature: decodedData.current.temp,
-                                      timezone: decodedData.timezone_offset)
+                                      timezone: decodedData.timezone_offset,
+                                      feelsLike: decodedData.current.feels_like,
+                                      description: decodedData.current.weather[0].description,
+                                      humidity: decodedData.current.humidity,
+                                      uviIndex: decodedData.current.uvi,
+                                      wind: decodedData.current.wind_speed,
+                                      cloudiness: decodedData.current.clouds,
+                                      pressure: decodedData.current.pressure,
+                                      visibility: decodedData.current.visibility)
             
             return result
             
