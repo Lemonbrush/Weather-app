@@ -158,12 +158,23 @@ extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {
     // TODO: here should be weekly forecast
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return weatherModel.daily.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = "\(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.dailyCellIdentifier) as! DailyTableViewCell
+        
+        let targetWeather = weatherModel.daily[indexPath.row]
+        
+        //Setting up date
+        let date = Date(timeIntervalSince1970: TimeInterval(targetWeather.dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherModel.timezone)
+        dateFormatter.dateFormat = "d EE"
+        
+        cell.monthLabel.text = dateFormatter.string(from: date)
+        cell.temperatureLabel.text = String(format: "%.0f°", targetWeather.temp.max)
+        cell.minTemperatureLabel.text = String(format: "%.0f°", targetWeather.temp.min)
         
         return cell
     }

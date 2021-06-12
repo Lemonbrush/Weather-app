@@ -23,6 +23,8 @@ struct WeatherModel {
     let pressure: Int
     let visibility: Int
     
+    let daily: [Daily]
+    
     var humidityString: String {
         String("\(humidity)%")
     }

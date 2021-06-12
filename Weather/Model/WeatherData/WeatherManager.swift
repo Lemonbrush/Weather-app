@@ -73,7 +73,8 @@ struct WeatherManager {
                                       wind: decodedData.current.wind_speed,
                                       cloudiness: decodedData.current.clouds,
                                       pressure: decodedData.current.pressure,
-                                      visibility: decodedData.current.visibility)
+                                      visibility: decodedData.current.visibility,
+                                      daily: decodedData.daily)
             
             return result
             
