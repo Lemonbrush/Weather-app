@@ -12,6 +12,7 @@ class DailyTableViewCell: UITableViewCell {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var minTemperatureLabel: UILabel!
+    @IBOutlet weak var conditionImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

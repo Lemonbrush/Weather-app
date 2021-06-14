@@ -16,6 +16,7 @@ struct K {
     static let cityCellIdentifier = "cityCell"
     static let dailyCellIdentifier = "dailyCell"
     static let cityLoadingCellIdentifier = "cityLoadingCell"
+    static let hourlyCellIdentifier = "hourlyCell"
     
     static let detailShowSegue = "detailShow"
     

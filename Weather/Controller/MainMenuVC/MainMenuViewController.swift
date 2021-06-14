@@ -37,7 +37,7 @@ class MainMenuViewController: UIViewController {
         //Setting up the date label
         let currentDate = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE dd MMMM"
+        dateFormatter.dateFormat = "EEEE d MMMM"
         let result = dateFormatter.string(from: currentDate)
         currentDateLabel.text = result
         
@@ -159,11 +159,11 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             dateFormatter.dateFormat = "hh:mm"
             cell.timeLabel.text = dateFormatter.string(from: date)
             
+            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: weatherDataForCell!.conditionId)
+            
             //Reset the image only in case if it is needed for smooth animation
-            if cell.conditionImage.image != UIImage(systemName: weatherDataForCell!.conditionName) {
-                
-                //Setting up weather condition image
-                cell.conditionImage.image = UIImage(systemName: weatherDataForCell!.conditionName)
+            if cell.conditionImage.image != UIImage(systemName: cellImageName) {
+                cell.conditionImage.image = UIImage(systemName: cellImageName)
             }
             
             //Setting up gradient background

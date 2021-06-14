@@ -24,6 +24,7 @@ struct WeatherModel {
     let visibility: Int
     
     let daily: [Daily]
+    let hourly: [Hourly]
     
     var humidityString: String {
         String("\(humidity)%")
@@ -53,8 +54,8 @@ struct WeatherModel {
         String(format: "%.0f°", temperature)
     }
     
-    var conditionName: String {
-        switch conditionId {
+    static func getcConditionNameBy(conditionId id: Int) -> String {
+        switch id {
         case 200...232:
             return "cloud.bolt"
         case 300...321:

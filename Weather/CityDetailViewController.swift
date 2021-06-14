@@ -10,6 +10,8 @@ import UIKit
 class CityDetailViewController: UIViewController {
     
     @IBOutlet weak var weekForecast: UITableView!
+    
+    //Constraints
     @IBOutlet weak var tableHight: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: NSLayoutConstraint!
     @IBOutlet weak var hourlyForecastHeight: NSLayoutConstraint!
@@ -22,6 +24,8 @@ class CityDetailViewController: UIViewController {
     
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
+    
+    @IBOutlet weak var conditionImage: UIImageView!
     
     //Labels
     @IBOutlet weak var tempLebel: UILabel!
@@ -86,9 +90,15 @@ class CityDetailViewController: UIViewController {
         //Setting up display data
         title = weatherModel.cityName
         
+        let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: weatherModel.conditionId)
+        conditionImage.image = UIImage(systemName: conditionImageName)
+        
         tempLebel.text = weatherModel.temperatureString
         
-        descriptionLabel.text = weatherModel.description
+        //Capitalize the first letter
+        let feelsLikeDescriptionString = weatherModel.description.prefix(1).capitalized + weatherModel.description.dropFirst()
+        descriptionLabel.text = feelsLikeDescriptionString
+        
         feelsLikeLabel.text = weatherModel.feelsLikeString
         
         humidityLabel.text = weatherModel.humidityString
@@ -122,6 +132,8 @@ class CityDetailViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
+
+// MARK: - ScrollView
 
 extension CityDetailViewController: UIScrollViewDelegate {
     
@@ -173,10 +185,50 @@ extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {
         dateFormatter.dateFormat = "d EE"
         
         cell.monthLabel.text = dateFormatter.string(from: date)
+        
         cell.temperatureLabel.text = String(format: "%.0f°", targetWeather.temp.max)
         cell.minTemperatureLabel.text = String(format: "%.0f°", targetWeather.temp.min)
+        
+        let cellImageName = WeatherModel.getcConditionNameBy(conditionId: targetWeather.weather[0].id)
+        cell.conditionImage.image = UIImage(systemName: cellImageName)
         
         return cell
     }
     
+}
+
+// MARK: - CollectionView
+
+extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    // DataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weatherModel.hourly.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.hourlyCellIdentifier, for: indexPath) as! HourlyCollectionViewCell
+        
+        let targetHourlyForecast = weatherModel.hourly[indexPath.row]
+        
+        cell.degreeLabel.text = String(format: "%.0f°", targetHourlyForecast.temp)
+        
+        //Setting up date
+        let date = Date(timeIntervalSince1970: TimeInterval(targetHourlyForecast.dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherModel.timezone)
+        dateFormatter.dateFormat = "h a"
+        
+        cell.timeLabel.text = dateFormatter.string(from: date)
+        
+        let cellImageName = WeatherModel.getcConditionNameBy(conditionId: targetHourlyForecast.weather[0].id)
+        cell.image.image = UIImage(systemName: cellImageName)
+        
+        return cell
+    }
+    
+    //Space insets
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
 }
