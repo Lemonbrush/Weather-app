@@ -801,6 +801,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cloudinessLabel" destination="rOD-mB-E2G" id="Zru-Go-hfG"/>
+                        <outlet property="collectionView" destination="HFy-kG-YxK" id="fac-RD-GTm"/>
                         <outlet property="conditionImage" destination="Bv7-QB-WYl" id="GCs-At-QS5"/>
                         <outlet property="descriptionLabel" destination="mBf-zq-Pq9" id="pd1-Oc-9tF"/>
                         <outlet property="feelsLikeLabel" destination="pIL-yM-Hj1" id="zL8-cB-HNM"/>
@@ -811,12 +812,12 @@
                         <outlet property="pressureLabel" destination="H0f-2l-3IE" id="ERy-8D-F0q"/>
                         <outlet property="scrollView" destination="1HL-ei-OtQ" id="3xS-EA-Ib2"/>
                         <outlet property="tableHight" destination="sjg-go-sA9" id="hyb-GU-ain"/>
+                        <outlet property="tableView" destination="xgE-Gf-d8W" id="dDy-xP-eZr"/>
                         <outlet property="tempLebel" destination="SWO-mb-2Lh" id="KNQ-rp-FfW"/>
                         <outlet property="topStackView" destination="1Gy-tS-8pR" id="fXL-FO-Ddm"/>
                         <outlet property="transparentTopBAckground" destination="l1B-23-vYd" id="ghZ-sf-pGr"/>
                         <outlet property="uvIndexLabel" destination="8GY-Bh-cQH" id="9HU-wL-doJ"/>
                         <outlet property="visibilityLabel" destination="XBd-lN-RxI" id="wFg-3r-b7J"/>
-                        <outlet property="weekForecast" destination="xgE-Gf-d8W" id="dDy-xP-eZr"/>
                         <outlet property="weeklyTableBackground" destination="hZG-k3-ZYC" id="zaq-po-dfs"/>
                         <outlet property="whiteBackgroundView" destination="9AS-88-fTx" id="lBm-e4-RdQ"/>
                         <outlet property="windLabel" destination="0pR-gC-rpK" id="un0-vA-phW"/>

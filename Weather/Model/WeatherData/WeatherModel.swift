@@ -9,6 +9,9 @@ import Foundation
 
 struct WeatherModel {
     
+    let lat: Double
+    let lon: Double
+    
     let conditionId: Int
     var cityName: String
     let temperature: Double
@@ -25,6 +28,10 @@ struct WeatherModel {
     
     let daily: [Daily]
     let hourly: [Hourly]
+    
+    var cityRequest: SavedCity {
+        return SavedCity(name: cityName, latitude: lat, longitude: lon)
+    }
     
     var humidityString: String {
         String("\(humidity)%")

@@ -7,9 +7,17 @@
 
 import UIKit
 
+/*
+enum hourlyCellType {
+    case weatherType;
+    case sunType;
+}
+*/
+
 class CityDetailViewController: UIViewController {
     
-    @IBOutlet weak var weekForecast: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     //Constraints
     @IBOutlet weak var tableHight: NSLayoutConstraint!
@@ -22,6 +30,7 @@ class CityDetailViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    //Background views
     @IBOutlet weak var weeklyTableBackground: UIView!
     @IBOutlet weak var humidityBackground: UIView!
     
@@ -38,14 +47,23 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var visibilityLabel: UILabel!
     
-    var weatherModel: WeatherModel!
+    var weatherModel: WeatherModel! //The data sourse
+    
+    //var hourlyData: [hourlyCellType]!
+    
+    var weatherManager = WeatherManager()
     
     let gradientBackground = CAGradientLayer()
+    
     let navigationBarBlurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
+    var updateTimer: Timer!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weatherManager.delegate = self
         
         //Setting up clear background for navigation bar
         navigationController?.navigationBar.barStyle = UIBarStyle.default
@@ -89,6 +107,43 @@ class CityDetailViewController: UIViewController {
         
         //Setting up display data
         title = weatherModel.cityName
+        updateDisplayData()
+        
+        //Setting up autoFetching data timer
+        updateTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(fetchWeatherData), userInfo: nil, repeats: true)
+        updateTimer.fire()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        
+        //Set tableview height according to its contents
+        tableHight.constant = tableView.contentSize.height
+        
+        //Calculate gradient size
+        gradientBackground.frame = view.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Adjast view so that hourly forecast only could be seen at the bottom
+        whiteBackgroundView.constant = view.frame.height - (hourlyForecastHeight.constant + hourlySpringConstraint.constant)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        updateTimer.invalidate()
+    }
+    
+    //MARK: - Helper functions
+    
+    @objc func fetchWeatherData() {
+        weatherManager.fetchWeather(by: weatherModel.cityRequest)
+    }
+    
+    func updateDisplayData() {
         
         let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: weatherModel.conditionId)
         conditionImage.image = UIImage(systemName: conditionImageName)
@@ -107,26 +162,10 @@ class CityDetailViewController: UIViewController {
         cloudinessLabel.text = weatherModel.cloudinessString
         pressureLabel.text = weatherModel.pressureString
         visibilityLabel.text = weatherModel.visibilityString
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.updateViewConstraints()
         
-        //Set tableview height according to its contents
-        tableHight.constant = weekForecast.contentSize.height
-        
-        //Calculate gradient size
-        gradientBackground.frame = view.bounds
+        tableView.reloadData()
+        collectionView.reloadData()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //Adjast view so that hourly forecast only could be seen at the bottom
-        whiteBackgroundView.constant = view.frame.height - (hourlyForecastHeight.constant + hourlySpringConstraint.constant)
-    }
-    
-    //MARK: - Helper functions
     
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -230,5 +269,22 @@ extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDe
     //Space insets
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
+}
+
+// MARK: - Data fetching
+
+extension CityDetailViewController: WeatherManagerDelegate {
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
+        
+        DispatchQueue.main.async {
+            self.weatherModel = weather
+            self.updateDisplayData()
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        //Handle the error
     }
 }
