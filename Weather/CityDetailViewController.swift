@@ -179,6 +179,9 @@ extension CityDetailViewController: UIScrollViewDelegate {
     //Calls on scrolling scrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        //Check if CollectionView is currently scrolling and break if so
+        if collectionView.isDragging || collectionView.isDecelerating { return }
+            
         //Handle navigation bar appearance according to the scroll view offset
         let targetHeight = (transparentTopBAckground.bounds.height - topStackView.bounds.height)/2 - navigationBarBlurBackground.bounds.height
         
@@ -200,6 +203,7 @@ extension CityDetailViewController: UIScrollViewDelegate {
             }
         }
     }
+    
 }
 
 // MARK: - TableView
