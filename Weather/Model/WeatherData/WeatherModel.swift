@@ -7,6 +7,22 @@
 
 import Foundation
 
+//Enum for different types of collectionView cells
+enum SunStateDescription {
+    case sunset
+    case sunrise
+}
+
+struct SunState {
+    let description: SunStateDescription
+    let dt: Int
+}
+
+enum HourlyDataType {
+    case weatherType(Hourly)
+    case sunState(SunState)
+}
+
 struct WeatherModel {
     
     let lat: Double
@@ -32,10 +48,40 @@ struct WeatherModel {
     let daily: [Daily]
     let hourly: [Hourly]
     
+    var hourlyDisplayData: [HourlyDataType] {
+        var hourlyDataMix = [HourlyDataType]()
+        
+        //SunType cells data for sunset/sunrise for the current day and the next one
+        var sunStates = [SunState(description: .sunrise, dt: sunrise),
+                         SunState(description: .sunset, dt: sunset),
+                         SunState(description: .sunrise, dt: daily[1].sunrise),
+                         SunState(description: .sunset, dt: daily[1].sunset)]
+        
+        for i in 0...24  {
+            let currentHour = hourly[i]
+            
+            //Add SunType cell data
+            for (i, sunState) in sunStates.enumerated() {
+                //Add sunType cell data after current time cell and before the next time cell
+                if sunState.dt < currentHour.dt &&  sunState.dt > Int(Date().timeIntervalSince1970) {
+                    hourlyDataMix.append(HourlyDataType.sunState(SunState(description: sunState.description, dt: sunState.dt)))
+                    sunStates.remove(at: i)
+                }
+            }
+            
+            //Add weather cell data
+            let currentTemp = HourlyDataType.weatherType(currentHour)
+            hourlyDataMix.append(currentTemp)
+        }
+        
+        return hourlyDataMix
+    }
+    
     var cityRequest: SavedCity {
         return SavedCity(name: cityName, latitude: lat, longitude: lon)
     }
     
+    //Strings
     var humidityString: String {
         String("\(humidity)%")
     }

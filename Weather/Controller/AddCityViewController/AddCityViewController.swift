@@ -120,7 +120,7 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
         let result = searchResults[indexPath.row]
         
         let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = result.title
+        searchRequest.naturalLanguageQuery = result.title + " " + result.subtitle
         
         let search = MKLocalSearch(request: searchRequest)
 

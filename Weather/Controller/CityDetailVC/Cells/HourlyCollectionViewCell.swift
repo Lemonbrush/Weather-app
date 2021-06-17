@@ -8,7 +8,7 @@
 import UIKit
 
 class HourlyCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var degreeLabel: UILabel!
+    @IBOutlet weak var bottomLabel: UILabel!
 }

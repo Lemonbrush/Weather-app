@@ -7,22 +7,6 @@
 
 import UIKit
 
-//Enum for different types of collectionView cells
-enum SunStateDescription {
-    case sunset
-    case sunrise
-}
-
-struct SunState {
-    let description: SunStateDescription
-    let dt: Int
-}
-
-enum HourlyDataType {
-    case weatherType(Hourly)
-    case sunState(SunState)
-}
-
 class CityDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -57,8 +41,6 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var visibilityLabel: UILabel!
     
     var weatherModel: WeatherModel! //The data sourse
-    
-    var hourlyData = [HourlyDataType]()
     
     var weatherManager = WeatherManager()
     
@@ -155,7 +137,8 @@ class CityDetailViewController: UIViewController {
     func updateDisplayData() {
         
         let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: weatherModel.conditionId)
-        conditionImage.image = UIImage(systemName: conditionImageName)
+        conditionImage.image = UIImage(systemName: conditionImageName)?.withRenderingMode(.alwaysTemplate)
+        conditionImage.tintColor = .white // <-- remove later
         
         tempLebel.text = weatherModel.temperatureString
         
@@ -174,35 +157,6 @@ class CityDetailViewController: UIViewController {
         
         tableView.reloadData()
         collectionView.reloadData()
-        
-        //Populate hourlyData with Temperature cells data and SunType cells data
-        hourlyData.removeAll()
-        
-        //SunType cells data for sunset/sunrise for the current day and the next one
-        let currentWeatherSunrise = SunState(description: .sunrise, dt: weatherModel.sunrise)
-        let currentWeatherSunset = SunState(description: .sunset, dt: weatherModel.sunset)
-        let tomorrowWeatherSunrise = SunState(description: .sunrise, dt: weatherModel.daily[1].sunrise)
-        let tomorrowWeatherSunset = SunState(description: .sunset, dt: weatherModel.daily[1].sunset)
-        
-        var sunStates = [currentWeatherSunrise, currentWeatherSunset, tomorrowWeatherSunrise, tomorrowWeatherSunset]
-        
-        for i in 0...24  {
-            let currentHour = weatherModel.hourly[i]
-            
-            //Add SunType cell data
-            for (i, sunState) in sunStates.enumerated() {
-                
-                //Add sunType cell data after the first cell and at the right place
-                if currentHour.dt > sunState.dt &&  sunState.dt > weatherModel.hourly[0].dt {
-                    hourlyData.append(HourlyDataType.sunState(SunState(description: sunState.description, dt: sunState.dt)))
-                    sunStates.remove(at: i)
-                }
-            }
-            
-            //Add weather cell data
-            let currentTemp = HourlyDataType.weatherType(currentHour)
-            hourlyData.append(currentTemp)
-        }
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {
@@ -271,7 +225,8 @@ extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {
         cell.minTemperatureLabel.text = String(format: "%.0f°", targetWeather.temp.min)
         
         let cellImageName = WeatherModel.getcConditionNameBy(conditionId: targetWeather.weather[0].id)
-        cell.conditionImage.image = UIImage(systemName: cellImageName)
+        cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
+        cell.conditionImage.tintColor = .black // <-- remove later
         
         return cell
     }
@@ -284,26 +239,28 @@ extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDe
     
     // DataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hourlyData.count
+        return weatherModel.hourlyDisplayData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.hourlyCellIdentifier, for: indexPath) as! HourlyCollectionViewCell
+        cell.image.tintColor = .black // <-- remove later
         
-        let targetHourlyForecast = hourlyData[indexPath.row]
+        let targetHourlyForecast = weatherModel.hourlyDisplayData[indexPath.row]
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherModel.timezone)
         
         switch targetHourlyForecast {
         case .weatherType(let currentHour):
-            cell.degreeLabel.text = String(format: "%.0f°", currentHour.temp)
+            cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
             
             //Setting up time
             let date = Date(timeIntervalSince1970: TimeInterval(currentHour.dt))
             dateFormatter.dateFormat = "h a"
             
-            cell.timeLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
+            //cell.timeLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
+            cell.topLabel.text = dateFormatter.string(from: date)
             
             let cellImageName = WeatherModel.getcConditionNameBy(conditionId: currentHour.weather[0].id)
             cell.image.image = UIImage(systemName: cellImageName)
@@ -316,8 +273,8 @@ extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDe
             let date = Date(timeIntervalSince1970: TimeInterval(sunStete.dt))
             dateFormatter.dateFormat = "h:mm a"
             
-            cell.timeLabel.text = dateFormatter.string(from: date)
-            cell.degreeLabel.text = sunStete.description == .sunrise ? "Sunrise" : "Sunset"
+            cell.topLabel.text = dateFormatter.string(from: date)
+            cell.bottomLabel.text = sunStete.description == .sunrise ? "Sunrise" : "Sunset"
             
             return cell
         }

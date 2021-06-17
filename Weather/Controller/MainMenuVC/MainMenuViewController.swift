@@ -163,7 +163,8 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             
             //Reset the image only in case if it is needed for smooth animation
             if cell.conditionImage.image != UIImage(systemName: cellImageName) {
-                cell.conditionImage.image = UIImage(systemName: cellImageName)
+                cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
+                cell.conditionImage.tintColor = .black // <-- remove later
             }
             
             //Setting up gradient background
