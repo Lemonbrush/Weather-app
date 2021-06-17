@@ -77,8 +77,8 @@ struct Hourly: Codable {
 struct Daily: Codable {
     let dt: Int
     
-    //let sunrise: Int
-    //let sunset: Int
+    let sunrise: Int
+    let sunset: Int
     
     //let moonrise: Int
     //let moonset: Int

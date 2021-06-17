@@ -26,6 +26,9 @@ struct WeatherModel {
     let pressure: Int
     let visibility: Int
     
+    let sunrise: Int
+    let sunset: Int
+    
     let daily: [Daily]
     let hourly: [Hourly]
     

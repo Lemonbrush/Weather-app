@@ -76,6 +76,8 @@ struct WeatherManager {
                                       cloudiness: decodedData.current.clouds,
                                       pressure: decodedData.current.pressure,
                                       visibility: decodedData.current.visibility,
+                                      sunrise: decodedData.current.sunrise,
+                                      sunset: decodedData.current.sunset,
                                       daily: decodedData.daily,
                                       hourly: decodedData.hourly)
             
