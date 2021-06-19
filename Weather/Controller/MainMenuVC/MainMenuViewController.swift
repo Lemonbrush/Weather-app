@@ -85,7 +85,7 @@ class MainMenuViewController: UIViewController {
             let destinationVC = segue.destination as! CityDetailViewController
             //forse-unwrap because we are sure that there is a value there
             let indexPath = self.tableView.indexPathForSelectedRow!
-            destinationVC.weatherModel = displayWeather[indexPath.row]
+            destinationVC.localWeatherData = displayWeather[indexPath.row]
         default:
             return
         }

@@ -40,7 +40,7 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var visibilityLabel: UILabel!
     
-    var weatherModel: WeatherModel! //The data sourse
+    var localWeatherData: WeatherModel! //The data sourse
     
     var weatherManager = WeatherManager()
     
@@ -97,8 +97,8 @@ class CityDetailViewController: UIViewController {
         DesignManager.setBackgroundStandartShadow(layer: humidityBackground.layer)
         
         //Setting up display data
-        title = weatherModel.cityName
-        updateDisplayData()
+        title = localWeatherData.cityName
+        setLabelsAndImages(with: localWeatherData)
         
         //Setting up autoFetching data timer
         updateTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(fetchWeatherData), userInfo: nil, repeats: true)
@@ -131,32 +131,41 @@ class CityDetailViewController: UIViewController {
     //MARK: - Helper functions
     
     @objc func fetchWeatherData() {
-        weatherManager.fetchWeather(by: weatherModel.cityRequest)
+        weatherManager.fetchWeather(by: localWeatherData.cityRequest)
     }
     
-    func updateDisplayData() {
+    func setLabelsAndImages(with newData: WeatherModel) {
         
-        let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: weatherModel.conditionId)
+        let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: newData.conditionId)
         conditionImage.image = UIImage(systemName: conditionImageName)?.withRenderingMode(.alwaysTemplate)
         conditionImage.tintColor = .white // <-- remove later
         
-        tempLebel.text = weatherModel.temperatureString
+        tempLebel.text = newData.temperatureString
         
         //Capitalize the first letter
-        let feelsLikeDescriptionString = weatherModel.description.prefix(1).capitalized + weatherModel.description.dropFirst()
+        let feelsLikeDescriptionString = newData.description.prefix(1).capitalized + newData.description.dropFirst()
         descriptionLabel.text = feelsLikeDescriptionString
         
-        feelsLikeLabel.text = weatherModel.feelsLikeString
+        feelsLikeLabel.text = newData.feelsLikeString
         
-        humidityLabel.text = weatherModel.humidityString
-        uvIndexLabel.text = String(weatherModel.uviIndex)
-        windLabel.text = weatherModel.windString
-        cloudinessLabel.text = weatherModel.cloudinessString
-        pressureLabel.text = weatherModel.pressureString
-        visibilityLabel.text = weatherModel.visibilityString
+        humidityLabel.text = newData.humidityString
+        uvIndexLabel.text = String(newData.uviIndex)
+        windLabel.text = newData.windString
+        cloudinessLabel.text = newData.cloudinessString
+        pressureLabel.text = newData.pressureString
+        visibilityLabel.text = newData.visibilityString
+    }
+    
+    func updateDisplayData(with newData: WeatherModel) {
         
+        setLabelsAndImages(with: newData)
+        
+        //Reloading cells in tables/collections
         tableView.reloadData()
         collectionView.reloadData()
+        
+        //Set external weather variable with the new data
+        localWeatherData = newData
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {
@@ -205,18 +214,18 @@ extension CityDetailViewController: UITableViewDataSource, UITableViewDelegate {
     // TODO: here should be weekly forecast
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weatherModel.daily.count
+        return localWeatherData.daily.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.dailyCellIdentifier) as! DailyTableViewCell
         
-        let targetWeather = weatherModel.daily[indexPath.row]
+        let targetWeather = localWeatherData.daily[indexPath.row]
         
         //Setting up date
         let date = Date(timeIntervalSince1970: TimeInterval(targetWeather.dt))
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherModel.timezone)
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: localWeatherData.timezone)
         dateFormatter.dateFormat = "d EE"
         
         cell.monthLabel.text = indexPath.row == 0 ? "Today" : dateFormatter.string(from: date)
@@ -239,17 +248,17 @@ extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDe
     
     // DataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weatherModel.hourlyDisplayData.count
+        return localWeatherData.hourlyDisplayData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.hourlyCellIdentifier, for: indexPath) as! HourlyCollectionViewCell
         cell.image.tintColor = .black // <-- remove later
         
-        let targetHourlyForecast = weatherModel.hourlyDisplayData[indexPath.row]
+        let targetHourlyForecast = localWeatherData.hourlyDisplayData[indexPath.row]
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherModel.timezone)
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: localWeatherData.timezone)
         
         switch targetHourlyForecast {
         case .weatherType(let currentHour):
@@ -259,8 +268,7 @@ extension CityDetailViewController: UICollectionViewDelegate, UICollectionViewDe
             let date = Date(timeIntervalSince1970: TimeInterval(currentHour.dt))
             dateFormatter.dateFormat = "h a"
             
-            //cell.timeLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
-            cell.topLabel.text = dateFormatter.string(from: date)
+            cell.topLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
             
             let cellImageName = WeatherModel.getcConditionNameBy(conditionId: currentHour.weather[0].id)
             cell.image.image = UIImage(systemName: cellImageName)
@@ -294,8 +302,7 @@ extension CityDetailViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
         
         DispatchQueue.main.async {
-            self.weatherModel = weather
-            self.updateDisplayData()
+            self.updateDisplayData(with: weather)
         }
     }
     

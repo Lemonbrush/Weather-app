@@ -62,6 +62,7 @@ struct WeatherModel {
             
             //Add SunType cell data
             for (i, sunState) in sunStates.enumerated() {
+                //Check the next hour syntetically
                 //Add sunType cell data after current time cell and before the next time cell
                 if sunState.dt < currentHour.dt &&  sunState.dt > Int(Date().timeIntervalSince1970) {
                     hourlyDataMix.append(HourlyDataType.sunState(SunState(description: sunState.description, dt: sunState.dt)))
