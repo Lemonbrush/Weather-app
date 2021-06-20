@@ -16,7 +16,9 @@ struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?"
     var city = ""
     let appid = K.weatherAPIKey
-    var units = "metric"
+    var units: String {
+        return UserDefaultsManager.getUnitData() ?? "metric"
+    }
     
     var delegate: WeatherManagerDelegate?
     
