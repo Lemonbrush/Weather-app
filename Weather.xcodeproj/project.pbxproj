@@ -125,32 +125,24 @@
 			isa = PBXGroup;
 			children = (
 				7001F8C92634354200E5E593 /* AppDelegate */,
-				709EE5D5261C82F20095E184 /* Model */,
-				7017AAC5261B23E600953C5B /* View */,
-				7017AAC4261B23D700953C5B /* Controller */,
+				DD55457626E4C86F005DB276 /* Network manager */,
+				7017AAC5261B23E600953C5B /* Delete */,
+				709EE5D7261C83170095E184 /* City details  */,
+				709EE5D6261C83030095E184 /* Main menu */,
+				70E7E238262861C100187412 /* Add city */,
+				7070112B267FD8A000B1B0F4 /* Settings */,
 				7001F8C22633525C00E5E593 /* Resources */,
 				7001F8BF26334E7B00E5E593 /* Supportive files */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
 		};
-		7017AAC4261B23D700953C5B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				709EE5D7261C83170095E184 /* CityDetailVC */,
-				709EE5D6261C83030095E184 /* MainMenuVC */,
-				70E7E238262861C100187412 /* AddCityVC */,
-				7070112B267FD8A000B1B0F4 /* SettingsTVC */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		7017AAC5261B23E600953C5B /* View */ = {
+		7017AAC5261B23E600953C5B /* Delete */ = {
 			isa = PBXGroup;
 			children = (
 				7017AAB2261B191000953C5B /* Main.storyboard */,
 			);
-			path = View;
+			path = Delete;
 			sourceTree = "<group>";
 		};
 		704173CB265684F9001B1335 /* Cells */ = {
@@ -171,57 +163,49 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		7070112B267FD8A000B1B0F4 /* SettingsTVC */ = {
+		7070112B267FD8A000B1B0F4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				7070112C267FD8EB00B1B0F4 /* SettingsTableViewController.swift */,
 			);
-			path = SettingsTVC;
+			path = Settings;
 			sourceTree = "<group>";
 		};
-		709EE5D5261C82F20095E184 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				70E7E1EE26283CDA00187412 /* WeatherData */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		709EE5D6261C83030095E184 /* MainMenuVC */ = {
+		709EE5D6261C83030095E184 /* Main menu */ = {
 			isa = PBXGroup;
 			children = (
 				7017AAB0261B191000953C5B /* MainMenuViewController.swift */,
 				704173CB265684F9001B1335 /* Cells */,
 			);
-			path = MainMenuVC;
+			path = "Main menu";
 			sourceTree = "<group>";
 		};
-		709EE5D7261C83170095E184 /* CityDetailVC */ = {
+		709EE5D7261C83170095E184 /* City details  */ = {
 			isa = PBXGroup;
 			children = (
 				707010FE2675645E00B1B0F4 /* Cells */,
 				709EE5D8261C834D0095E184 /* CityDetailViewController.swift */,
 			);
-			path = CityDetailVC;
+			path = "City details ";
 			sourceTree = "<group>";
 		};
-		70E7E1EE26283CDA00187412 /* WeatherData */ = {
+		70E7E238262861C100187412 /* Add city */ = {
+			isa = PBXGroup;
+			children = (
+				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
+				70E7E235262861BB00187412 /* AddCityViewController.swift */,
+			);
+			path = "Add city";
+			sourceTree = "<group>";
+		};
+		DD55457626E4C86F005DB276 /* Network manager */ = {
 			isa = PBXGroup;
 			children = (
 				705BB8CB261EF84600D658C4 /* WeatherManager.swift */,
 				705BB8CE261EFB8300D658C4 /* WeatherModel.swift */,
 				705BB8D1261EFC3D00D658C4 /* WeatherData.swift */,
 			);
-			path = WeatherData;
-			sourceTree = "<group>";
-		};
-		70E7E238262861C100187412 /* AddCityVC */ = {
-			isa = PBXGroup;
-			children = (
-				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
-				70E7E235262861BB00187412 /* AddCityViewController.swift */,
-			);
-			path = AddCityVC;
+			path = "Network manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -367,7 +367,6 @@
         <!--Settings-->
         <scene sceneID="mMS-jv-Yxg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hF6-jm-2XS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController title="Settings" id="JdQ-De-cmL" customClass="SettingsTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="KUm-fu-Gi7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -425,6 +424,7 @@
                         <outlet property="unitSwitch" destination="U7a-PG-nyS" id="uM2-3l-N1Y"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hF6-jm-2XS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4099" y="572"/>
         </scene>
