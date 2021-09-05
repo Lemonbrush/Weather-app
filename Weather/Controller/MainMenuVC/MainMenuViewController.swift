@@ -9,10 +9,19 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var currentDateLabel: UILabel!
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+    }()
     
-    @IBOutlet weak var welcomeImage: UIImageView!
+    var currentDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    var welcomeImage: UIImageView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
@@ -40,6 +49,7 @@ class MainMenuViewController: UIViewController {
         dateFormatter.dateFormat = "EEEE d MMMM"
         let result = dateFormatter.string(from: currentDate)
         currentDateLabel.text = result
+        view.addSubview(currentDateLabel)
         
         //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -47,19 +57,19 @@ class MainMenuViewController: UIViewController {
         tableView.addSubview(refreshControl)
         
         //Space before the first cell
-        tableView.contentInset.top = 10
-        //Getting rid of any delays between user touch and cell animation
-        tableView.delaysContentTouches = false
-        
-        //Setting up drag and drop delegates
+        tableView.contentInset.top = 10 //Getting rid of any delays between user touch and cell animation
+        tableView.delaysContentTouches = false //Setting up drag and drop delegates
+        tableView.delegate = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
+        view.addSubview(tableView)
         
         weatherManager.delegate = self
         
-        //Load saved city IDs and Fetch the data
-        fetchWeatherData()
+        setUpConstraints()
+        
+        //fetchWeatherData() //Load saved city IDs and Fetch the data
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,8 +101,8 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    //MARK: - Helper functions
-    func fetchWeatherData() {
+    //MARK: - Private functions
+    private func fetchWeatherData() {
         guard let savedCities = CityDataFileManager.getSavedCities() else { return }
         
         self.savedCities = savedCities
@@ -107,7 +117,14 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    //Pull-To-Refresh tableview
+    private func setUpConstraints() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    //MARK: - Actions
     @objc func refreshWeatherData(_ sender: AnyObject) {
         fetchWeatherData()
         refreshControl.endRefreshing()
