@@ -9,8 +9,14 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var currentDateLabel: UILabel!
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+    }()
+    
+    //@IBOutlet weak var currentDateLabel: UILabel!
     
     @IBOutlet weak var welcomeImage: UIImageView!
     
@@ -39,7 +45,9 @@ class MainMenuViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE d MMMM"
         let result = dateFormatter.string(from: currentDate)
-        currentDateLabel.text = result
+        //currentDateLabel.text = result
+        
+        view.addSubview(tableView)
         
         //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -47,9 +55,9 @@ class MainMenuViewController: UIViewController {
         tableView.addSubview(refreshControl)
         
         //Space before the first cell
-        tableView.contentInset.top = 10
+        //tableView.contentInset.top = 10
         //Getting rid of any delays between user touch and cell animation
-        tableView.delaysContentTouches = false
+        //tableView.delaysContentTouches = false
         
         //Setting up drag and drop delegates
         tableView.dataSource = self
@@ -59,6 +67,8 @@ class MainMenuViewController: UIViewController {
         tableView.dragInteractionEnabled = true
         
         weatherManager.delegate = self
+        
+        setUpConstraints()
         
         //Load saved city IDs and Fetch the data
         fetchWeatherData()
@@ -113,6 +123,13 @@ class MainMenuViewController: UIViewController {
     @objc func refreshWeatherData(_ sender: AnyObject) {
         fetchWeatherData()
         refreshControl.endRefreshing()
+    }
+    
+    private func setUpConstraints() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
 
@@ -279,7 +296,7 @@ extension MainMenuViewController: WeatherManagerDelegate {
             //Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
             
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            self.tableView.reloadData()
         }
     }
     
