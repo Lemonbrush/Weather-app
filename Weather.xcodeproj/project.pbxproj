@@ -28,6 +28,7 @@
 		709EE5D9261C834D0095E184 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709EE5D8261C834D0095E184 /* CityDetailViewController.swift */; };
 		70E7E1EA262712A100187412 /* FadeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E1E9262712A100187412 /* FadeTransitionAnimator.swift */; };
 		70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E235262861BB00187412 /* AddCityViewController.swift */; };
+		DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		709EE5D8261C834D0095E184 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CityDetailViewController.swift; path = Weather/CityDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		70E7E1E9262712A100187412 /* FadeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransitionAnimator.swift; sourceTree = "<group>"; };
 		70E7E235262861BB00187412 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		DD55457926E4CA6A005DB276 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +176,8 @@
 		709EE5D6261C83030095E184 /* Main menu */ = {
 			isa = PBXGroup;
 			children = (
-				7017AAB0261B191000953C5B /* MainMenuViewController.swift */,
+				DD55457726E4C994005DB276 /* Controller */,
+				DD55457826E4C99D005DB276 /* View */,
 				704173CB265684F9001B1335 /* Cells */,
 			);
 			path = "Main menu";
@@ -206,6 +209,22 @@
 				705BB8D1261EFC3D00D658C4 /* WeatherData.swift */,
 			);
 			path = "Network manager";
+			sourceTree = "<group>";
+		};
+		DD55457726E4C994005DB276 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7017AAB0261B191000953C5B /* MainMenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD55457826E4C99D005DB276 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */,
 				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
 				7017AAB1261B191000953C5B /* MainMenuViewController.swift in Sources */,
 				704173AA265131CC001B1335 /* DesignManager.swift in Sources */,

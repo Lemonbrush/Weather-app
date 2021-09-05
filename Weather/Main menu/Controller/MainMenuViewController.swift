@@ -9,19 +9,16 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
     }()
     
-    var currentDateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    var welcomeImage: UIImageView!
+    //@IBOutlet weak var currentDateLabel: UILabel!
+    
+    @IBOutlet weak var welcomeImage: UIImageView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
@@ -48,8 +45,9 @@ class MainMenuViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE d MMMM"
         let result = dateFormatter.string(from: currentDate)
-        currentDateLabel.text = result
-        view.addSubview(currentDateLabel)
+        //currentDateLabel.text = result
+        
+        view.addSubview(tableView)
         
         //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -57,19 +55,22 @@ class MainMenuViewController: UIViewController {
         tableView.addSubview(refreshControl)
         
         //Space before the first cell
-        tableView.contentInset.top = 10 //Getting rid of any delays between user touch and cell animation
-        tableView.delaysContentTouches = false //Setting up drag and drop delegates
+        //tableView.contentInset.top = 10
+        //Getting rid of any delays between user touch and cell animation
+        //tableView.delaysContentTouches = false
+        
+        //Setting up drag and drop delegates
         tableView.delegate = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
-        view.addSubview(tableView)
         
         weatherManager.delegate = self
         
         setUpConstraints()
         
-        //fetchWeatherData() //Load saved city IDs and Fetch the data
+        //Load saved city IDs and Fetch the data
+        fetchWeatherData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +102,8 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    //MARK: - Private functions
-    private func fetchWeatherData() {
+    //MARK: - Helper functions
+    func fetchWeatherData() {
         guard let savedCities = CityDataFileManager.getSavedCities() else { return }
         
         self.savedCities = savedCities
@@ -117,17 +118,17 @@ class MainMenuViewController: UIViewController {
         }
     }
     
+    //Pull-To-Refresh tableview
+    @objc func refreshWeatherData(_ sender: AnyObject) {
+        fetchWeatherData()
+        refreshControl.endRefreshing()
+    }
+    
     private func setUpConstraints() {
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
-    //MARK: - Actions
-    @objc func refreshWeatherData(_ sender: AnyObject) {
-        fetchWeatherData()
-        refreshControl.endRefreshing()
     }
 }
 
@@ -153,7 +154,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
         
         // Hide welcome image if there is something to show
         welcomeImage.isHidden = displayWeather.count != 0 ? true : false
-        
+        print(displayWeather.count)
         return displayWeather.count
     }
     
@@ -294,7 +295,7 @@ extension MainMenuViewController: WeatherManagerDelegate {
             //Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
             
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            self.tableView.reloadData()
         }
     }
     
