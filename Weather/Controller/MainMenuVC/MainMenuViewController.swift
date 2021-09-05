@@ -52,6 +52,8 @@ class MainMenuViewController: UIViewController {
         tableView.delaysContentTouches = false
         
         //Setting up drag and drop delegates
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
@@ -135,8 +137,8 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Hide welcome image if there is something to show
-        welcomeImage.isHidden = displayWeather.count != 0 ? true : false
-        
+        //welcomeImage.isHidden = displayWeather.count != 0 ? true : false
+        print(displayWeather.count)
         return displayWeather.count
     }
     
@@ -174,7 +176,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UI
             
             return cell
         } else {
-            return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
+            return UITableViewCell()
         }
     }
 
