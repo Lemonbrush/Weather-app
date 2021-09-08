@@ -7,12 +7,51 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UIViewController {
     
-    @IBOutlet weak var unitSwitch: UISegmentedControl!
+    //MARK: - Private properties
+    
+    private var unitSwitch: UISegmentedControl = {
+        let items = ["°C", "°F"]
+        let switcher = UISegmentedControl(items: items)
+        switcher.selectedSegmentIndex = 0
+        switcher.backgroundColor = .systemGreen
+        switcher.addTarget(self, action: #selector(unitSwitchToggled), for: .valueChanged)
+        return switcher
+    }()
+    
+    private let temperatureLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "Temperature"
+        return label
+    }()
+    
+    private var temperatureCellStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private var temperatureCell = UITableViewCell()
+    
+    private var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    //MARK: - Public properties
+    
+    var mainMenuDelegate: MainMenuDelegate?
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         switch UserDefaultsManager.getUnitData() {
         case "metric":
@@ -22,17 +61,46 @@ class SettingsTableViewController: UITableViewController {
         default:
             unitSwitch.selectedSegmentIndex = 0
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        temperatureCellStackView.addArrangedSubview(temperatureLabel)
+        temperatureCellStackView.addArrangedSubview(unitSwitch)
+        
+        temperatureCell.contentView.addSubview(temperatureCellStackView)
+        
+        view.addSubview(tableView)
+        
+        setUpConstraints()
     }
     
-    @IBAction func unitSwitchToggled(_ sender: UISegmentedControl) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        switch sender.selectedSegmentIndex {
+        mainMenuDelegate?.fetchWeatherData()
+    }
+    
+    //MARK: - Private functions
+    
+    private func setUpConstraints() {
+        
+        //TableView
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        //TemperatureCell
+        temperatureCellStackView.topAnchor.constraint(equalTo: temperatureCell.contentView.topAnchor, constant: 10).isActive = true
+        temperatureCellStackView.bottomAnchor.constraint(equalTo: temperatureCell.contentView.bottomAnchor, constant: -10).isActive = true
+        temperatureCellStackView.leadingAnchor.constraint(equalTo: temperatureCell.contentView.leadingAnchor, constant: 20).isActive = true
+        temperatureCellStackView.trailingAnchor.constraint(equalTo: temperatureCell.contentView.trailingAnchor, constant: -20).isActive = true
+        
+        unitSwitch.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    
+    //MARK: - Actions
+    
+    @objc func unitSwitchToggled() {
+        switch unitSwitch.selectedSegmentIndex {
         case 0:
             UserDefaultsManager.setUnitData(with: "metric")
         case 1:
@@ -41,72 +109,15 @@ class SettingsTableViewController: UITableViewController {
             break
         }
     }
+}
+
+extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return temperatureCell
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

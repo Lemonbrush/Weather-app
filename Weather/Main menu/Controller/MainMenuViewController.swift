@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MainMenuViewController: UIViewController {
+protocol MainMenuDelegate {
+    func fetchWeatherData()
+}
+
+class MainMenuViewController: UIViewController, MainMenuDelegate {
     
     //MARK: - Private properties
     
@@ -71,7 +75,9 @@ class MainMenuViewController: UIViewController {
     }
     
     func showSettingsVC() {
-        present(SettingsTableViewController(), animated: true, completion: nil)
+        let destinationVC = SettingsTableViewController()
+        destinationVC.mainMenuDelegate = self
+        present(destinationVC, animated: true, completion: nil)
     }
 
     func fetchWeatherData() {
