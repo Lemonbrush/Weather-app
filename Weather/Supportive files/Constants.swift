@@ -8,7 +8,6 @@
 import Foundation
 
 struct K {
-    
     static let weatherAPIKey = "3105f7f3ecb7b6032f375aaf58ed2253"
     
     static let saveFileName = "savedCities.plist"
@@ -20,15 +19,10 @@ struct K {
     
     static let detailShowSegue = "detailShow"
     
-    struct SegueId {
-        static let addNewCity = "addNewCity"
-        static let detailShow = "detailShow"
-    }
-    
     struct ImageName {
         static let deleteImage = "DeleteAction"
     }
     
     //Colors
-    
+    // ...
 }

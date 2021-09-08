@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9P-YM-QcY">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -153,7 +154,7 @@
                                                 <constraint firstAttribute="width" constant="30" id="EGh-Md-iVt"/>
                                                 <constraint firstAttribute="height" constant="30" id="fWe-JE-YyJ"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <color key="tintColor" white="0.14000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                             <state key="normal">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -245,7 +246,6 @@
                                         <connections>
                                             <outlet property="cityNameLabel" destination="fLS-0a-waT" id="VYs-lx-58i"/>
                                             <outlet property="conditionImage" destination="pdu-4g-6pj" id="fhD-sE-gyZ"/>
-                                            <outlet property="degreeLabel" destination="cGz-8w-28B" id="wXY-Pu-FD5"/>
                                             <outlet property="timeLabel" destination="AaN-fj-1mF" id="8zA-kX-ahI"/>
                                             <outlet property="weatherBackgroundView" destination="2FJ-OZ-kjJ" id="4cp-sl-f7h"/>
                                         </connections>
@@ -333,22 +333,13 @@
                                     <outlet property="delegate" destination="cPr-EZ-M6Z" id="Lgl-dl-2Pu"/>
                                 </connections>
                             </tableView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage" translatesAutoresizingMaskIntoConstraints="NO" id="sN1-3u-jq9">
-                                <rect key="frame" x="57" y="325" width="300" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="VYj-P7-PKd"/>
-                                    <constraint firstAttribute="width" constant="300" id="b8E-rO-Yc9"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GeM-5X-aZ0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="trailing" secondItem="GeM-5X-aZ0" secondAttribute="trailing" id="5db-tB-Lqh"/>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="leading" secondItem="GeM-5X-aZ0" secondAttribute="leading" id="6jC-b3-Sch"/>
-                            <constraint firstItem="sN1-3u-jq9" firstAttribute="centerX" secondItem="GeM-5X-aZ0" secondAttribute="centerX" id="BYW-a0-Ptb"/>
                             <constraint firstAttribute="bottom" secondItem="w4r-Ak-u4P" secondAttribute="bottom" id="CSK-QG-2YO"/>
-                            <constraint firstItem="sN1-3u-jq9" firstAttribute="centerY" secondItem="GeM-5X-aZ0" secondAttribute="centerY" id="hUb-vx-Vq0"/>
                             <constraint firstItem="w4r-Ak-u4P" firstAttribute="top" secondItem="GeM-5X-aZ0" secondAttribute="top" id="mlf-JD-Cc1"/>
                         </constraints>
                     </view>
@@ -356,7 +347,6 @@
                     <connections>
                         <outlet property="currentDateLabel" destination="9pv-zW-l0L" id="jM6-XH-hcI"/>
                         <outlet property="tableView" destination="w4r-Ak-u4P" id="3CO-mZ-ph5"/>
-                        <outlet property="welcomeImage" destination="sN1-3u-jq9" id="EQR-dV-mX4"/>
                         <segue destination="hYE-f6-Bxf" kind="show" identifier="detailShow" id="d9O-26-lAK"/>
                     </connections>
                 </viewController>
