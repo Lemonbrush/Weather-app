@@ -8,69 +8,38 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
-
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tableView
-    }()
     
-    //@IBOutlet weak var currentDateLabel: UILabel!
+    //MARK: - Private properties
     
-    @IBOutlet weak var welcomeImage: UIImageView!
+    private let fadeTransitionAnimator = FadeTransitionAnimator()
+    private var weatherManager = WeatherManager()
+    private var tableView: UITableView?
+    private var savedCities = [SavedCity]()
+    private let mainManuView = MainMenuView()
+    
+    //MARK: - Public properties
+    
+    var displayWeather: [WeatherModel?] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
     
-    let fadeTransitionAnimator = FadeTransitionAnimator()
-    
-    var refreshControl = UIRefreshControl()
-    
-    var weatherManager = WeatherManager()
-    
-    var savedCities = [SavedCity]()
-    var displayWeather: [WeatherModel?] = [] //Fetched data for display in the tableview
-    
     //MARK: - Lifecycle
+    
+    override func loadView() {
+        super.loadView()
+        view = mainManuView
+        mainManuView.viewController = self
+        tableView = mainManuView.tableView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.delegate = self
-        
-        //Setting up the date label
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE d MMMM"
-        let result = dateFormatter.string(from: currentDate)
-        //currentDateLabel.text = result
-        
-        view.addSubview(tableView)
-        
-        //Refresh control settings
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refreshWeatherData(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-        
-        //Space before the first cell
-        //tableView.contentInset.top = 10
-        //Getting rid of any delays between user touch and cell animation
-        //tableView.delaysContentTouches = false
-        
-        //Setting up drag and drop delegates
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        tableView.dragInteractionEnabled = true
-        
         weatherManager.delegate = self
         
-        setUpConstraints()
-        
-        //Load saved city IDs and Fetch the data
         fetchWeatherData()
     }
     
@@ -86,24 +55,25 @@ class MainMenuViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    //MARK: - navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        switch segue.identifier {
-        case K.SegueId.addNewCity:
-            let destinationVC = segue.destination as! AddCityViewController
-            destinationVC.delegate = self
-        case K.SegueId.detailShow:
-            let destinationVC = segue.destination as! CityDetailViewController
-            //forse-unwrap because we are sure that there is a value there
-            let indexPath = self.tableView.indexPathForSelectedRow!
-            destinationVC.localWeatherData = displayWeather[indexPath.row]
-        default:
-            return
-        }
+    //MARK: - Functions
+    
+    func showAddCityVC() {
+        let destinationVC = AddCityViewController()
+        destinationVC.delegate = self
+        present(destinationVC, animated: true, completion: nil)
     }
     
-    //MARK: - Helper functions
+    func showDetailViewVC() {
+        let destinationVC = CityDetailViewController()
+        let indexPath = self.tableView?.indexPathForSelectedRow!
+        destinationVC.localWeatherData = displayWeather[indexPath!.row]
+        present(destinationVC, animated: true, completion: nil)
+    }
+    
+    func showSettingsVC() {
+        present(SettingsTableViewController(), animated: true, completion: nil)
+    }
+
     func fetchWeatherData() {
         guard let savedCities = CityDataFileManager.getSavedCities() else { return }
         
@@ -118,26 +88,13 @@ class MainMenuViewController: UIViewController {
             weatherManager.fetchWeather(by: city, at: i)
         }
     }
-    
-    //Pull-To-Refresh tableview
-    @objc func refreshWeatherData(_ sender: AnyObject) {
-        fetchWeatherData()
-        refreshControl.endRefreshing()
-    }
-    
-    private func setUpConstraints() {
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
 }
 
 extension MainMenuViewController: AddCityDelegate {
     
     func didAddNewCity() {
         displayWeather.append(nil)
-        tableView.insertRows(at: [IndexPath(row: self.displayWeather.count-1, section: 0)], with: .automatic)
+        tableView?.insertRows(at: [IndexPath(row: self.displayWeather.count-1, section: 0)], with: .automatic)
         
         fetchWeatherData()
     }
@@ -146,142 +103,6 @@ extension MainMenuViewController: AddCityDelegate {
         //handle errors here
     }
 }
-
-// MARK: - TableView
-
-extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        // Hide welcome image if there is something to show
-        //welcomeImage.isHidden = displayWeather.count != 0 ? true : false
-        print(displayWeather.count)
-        return displayWeather.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //If the data is loaded for cells
-        if displayWeather[indexPath.row] != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
-            
-            let weatherDataForCell = displayWeather[indexPath.row]
-            
-            // Populate the cell with data
-            cell.cityNameLabel.text = displayWeather[indexPath.row]?.cityName
-            cell.degreeLabel.text = weatherDataForCell!.temperatureString
-            
-            //Setting up time label
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell!.timezone)
-            dateFormatter.dateFormat = "hh:mm"
-            cell.timeLabel.text = dateFormatter.string(from: date)
-            
-            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: weatherDataForCell!.conditionId)
-            
-            //Reset the image only in case if it is needed for smooth animation
-            if cell.conditionImage.image != UIImage(systemName: cellImageName) {
-                cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-                cell.conditionImage.tintColor = .black // <-- remove later
-            }
-            
-            //Setting up gradient background
-            //...
-            
-            cell.layoutIfNeeded() // Eliminate layouts left from loading cells
-            
-            return cell
-        } else {
-            return UITableViewCell()
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: K.detailShowSegue, sender: self)
-    }
-    
-    // Cell editing
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            
-            //Deleting the data
-            self.displayWeather.remove(at: indexPath.row)
-            CityDataFileManager.deleteCity(at: indexPath.row)
-            
-            tableView.deleteRows(at: [indexPath], with: .bottom)
-            
-            completionHandler(true)
-        }
-        
-        deleteAction.image = UIImage(named: K.ImageName.deleteImage)
-        deleteAction.backgroundColor = .white
-
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-        configuration.performsFirstActionWithFullSwipe = false
-        
-        return configuration
-    }
-    
-    // Cell highlight functions
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
-            cell.isHighlighted = true
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
-            cell.isHighlighted = false
-        }
-    }
-    
-    // MARK: - tableView reorder functionality
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let mover = displayWeather.remove(at: sourceIndexPath.row)
-        displayWeather.insert(mover, at: destinationIndexPath.row)
-        
-        CityDataFileManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
-    }
-    
-    // Drag and drop functionality
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {}
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider:  NSItemProvider())
-        dragItem.localObject = displayWeather[indexPath.row]
-        
-        return [dragItem]
-    }
-    
-    // Setting up cell appearance while dragging and dropping
-    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        
-        //Haptic effect
-        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-        selectionFeedbackGenerator.selectionChanged()
-        
-        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
-    }
-    
-    func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        
-        //Getting rid of system design
-        let param = UIDragPreviewParameters()
-        param.backgroundColor = .clear
-        param.shadowPath = UIBezierPath(rect: .zero)
-        
-        return param
-    }
-}
-
-// MARK: - Fetching data Weather manager
 
 extension MainMenuViewController: WeatherManagerDelegate {
     
@@ -296,7 +117,7 @@ extension MainMenuViewController: WeatherManagerDelegate {
             //Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
             
-            self.tableView.reloadData()
+            self.tableView?.reloadRows(at: [indexPath], with: .fade)
         }
     }
     

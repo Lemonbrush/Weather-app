@@ -11,17 +11,65 @@ class MainMenuView: UIView {
     
     //MARK: - Private properties
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tableView
+    private var tableViewHeaderView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private lazy var currentDateLabel: UILabel = {
+    private var currentDateLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.textColor = .darkGray
+        label.text = "date label"
         return label
+    }()
+    
+    private var todayLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.text = "Today"
+        return label
+    }()
+    
+    private var settingsButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "switch.2"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
+    private var searchButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.tintColor = .darkGray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private var mainHeaderStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .bottom
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private var leftStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    private var todayStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        return stackView
     }()
     
     private var refreshControl = UIRefreshControl()
@@ -30,6 +78,23 @@ class MainMenuView: UIView {
     
     //MARK: Public properties
     
+    var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        
+        //Space before the first cell
+        tableView.contentInset.top = 10 //Getting rid of any delays between user touch and cell animation
+        tableView.delaysContentTouches = false //Setting up drag and drop delegates
+        tableView.dragInteractionEnabled = true
+        tableView.register(LoadingCell.self, forCellReuseIdentifier: K.cityLoadingCellIdentifier)
+        tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.cityCellIdentifier)
+        tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor(named: "White98")
+        
+        return tableView
+    }()
+    
     weak var viewController: MainMenuViewController?
     
     //MARK: - Construction
@@ -37,21 +102,34 @@ class MainMenuView: UIView {
     required init() {
         super.init(frame: .zero)
         
-        //Space before the first cell
-        tableView.contentInset.top = 10 //Getting rid of any delays between user touch and cell animation
-        tableView.delaysContentTouches = false //Setting up drag and drop delegates
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE d MMMM"
+        let result = dateFormatter.string(from: currentDate)
+        currentDateLabel.text = result
+        
+        tableView.dataSource = self
         tableView.delegate = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
-        tableView.dragInteractionEnabled = true
         self.addSubview(tableView)
         
-        //Refresh control settings
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refreshWeatherData(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
-        self.addSubview(currentDateLabel)
+        todayStackView.addArrangedSubview(todayLabel)
+        todayStackView.addArrangedSubview(settingsButton)
+        
+        leftStackView.addArrangedSubview(currentDateLabel)
+        leftStackView.addArrangedSubview(todayStackView)
+        
+        mainHeaderStackView.addArrangedSubview(leftStackView)
+        mainHeaderStackView.addArrangedSubview(searchButton)
+        
+        tableViewHeaderView.addSubview(mainHeaderStackView)
+        
+        tableView.tableHeaderView = tableViewHeaderView
         
         setUpConstraints()
     }
@@ -63,16 +141,25 @@ class MainMenuView: UIView {
     //MARK: - Private Fucnctions
     
     private func setUpConstraints() {
+        //TableView
         tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    //MARK: - Public Functions
-    
-    func refreshTable(_ indexPaths: [IndexPath]) {
-        tableView.reloadRows(at: indexPaths, with: .fade)
+        
+        //TableView header
+        tableViewHeaderView.heightAnchor.constraint(equalToConstant: 85).isActive = true
+        tableViewHeaderView.widthAnchor.constraint(equalTo: tableView.widthAnchor).isActive = true
+        
+        //Main stackView
+        mainHeaderStackView.leadingAnchor.constraint(equalTo: tableViewHeaderView.leadingAnchor, constant: 15).isActive = true
+        mainHeaderStackView.trailingAnchor.constraint(equalTo: tableViewHeaderView.trailingAnchor, constant: -15).isActive = true
+        mainHeaderStackView.bottomAnchor.constraint(equalTo: tableViewHeaderView.bottomAnchor, constant: -5).isActive = true
+        mainHeaderStackView.topAnchor.constraint(equalTo: tableViewHeaderView.topAnchor, constant: 5).isActive = true
+        
+        //Search button
+        searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     //MARK: - Actions
@@ -81,136 +168,12 @@ class MainMenuView: UIView {
         viewController?.fetchWeatherData()
         refreshControl.endRefreshing()
     }
-}
-
-//MARK: - TableView
-
-extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Hide welcome image if there is something to show
-        welcomeImage.isHidden = viewController?.displayWeather.count != 0 ? true : false
-        return viewController!.displayWeather.count
+    @objc func addNewCityButtonPressed() {
+        viewController?.showAddCityVC()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //If the data is loaded for cells
-        if viewController?.displayWeather[indexPath.row] != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
-            
-            let weatherDataForCell = viewController?.displayWeather[indexPath.row]
-            
-            // Populate the cell with data
-            cell.cityNameLabel.text = viewController?.displayWeather[indexPath.row]?.cityName
-            cell.degreeLabel.text = weatherDataForCell!.temperatureString
-            
-            //Setting up time label
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell!.timezone)
-            dateFormatter.dateFormat = "hh:mm"
-            cell.timeLabel.text = dateFormatter.string(from: date)
-            
-            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: weatherDataForCell!.conditionId)
-            
-            //Reset the image only in case if it is needed for smooth animation
-            if cell.conditionImage.image != UIImage(systemName: cellImageName) {
-                cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-                cell.conditionImage.tintColor = .black // <-- remove later
-            }
-            
-            //Setting up gradient background
-            //...
-            
-            cell.layoutIfNeeded() // Eliminate layouts left from loading cells
-            
-            return cell
-        } else {
-            return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: K.detailShowSegue, sender: self)
-    }
-    
-    // Cell editing
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            
-            //Deleting the data
-            self.viewController?.displayWeather.remove(at: indexPath.row)
-            CityDataFileManager.deleteCity(at: indexPath.row)
-            
-            tableView.deleteRows(at: [indexPath], with: .bottom)
-            
-            completionHandler(true)
-        }
-        
-        deleteAction.image = UIImage(named: K.ImageName.deleteImage)
-        deleteAction.backgroundColor = .white
-
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-        configuration.performsFirstActionWithFullSwipe = false
-        
-        return configuration
-    }
-    
-    // Cell highlight functions
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
-            cell.isHighlighted = true
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? MainMenuTableViewCell {
-            cell.isHighlighted = false
-        }
-    }
-}
-
-// MARK: - tableView reorder functionality
-
-extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
-        viewController?.displayWeather.insert(mover, at: destinationIndexPath.row)
-        
-        CityDataFileManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider:  NSItemProvider())
-        dragItem.localObject = viewController?.displayWeather[indexPath.row]
-        
-        return [dragItem]
-    }
-    
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
-    
-    // Setting up cell appearance while dragging and dropping
-    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        //Haptic effect
-        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-        selectionFeedbackGenerator.selectionChanged()
-        
-        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        return getDragAndDropCellAppearance(tableView ,forCellAt: indexPath)
-    }
-    
-    func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        //Getting rid of system design
-        let param = UIDragPreviewParameters()
-        param.backgroundColor = .clear
-        param.shadowPath = UIBezierPath(rect: .zero)
-        
-        return param
+    @objc func settingsButtonPressed() {
+        viewController?.showSettingsVC()
     }
 }
