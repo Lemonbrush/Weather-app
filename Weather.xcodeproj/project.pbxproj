@@ -30,6 +30,7 @@
 		70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E7E235262861BB00187412 /* AddCityViewController.swift */; };
 		DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
 		DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */; };
+		DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5826EA887300DD5FAC /* AddCityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		70E7E235262861BB00187412 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		DD55457926E4CA6A005DB276 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuView+UITableViewDelegate.swift"; sourceTree = "<group>"; };
+		DDAE0B5826EA887300DD5FAC /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +78,8 @@
 			children = (
 				70E7E1E9262712A100187412 /* FadeTransitionAnimator.swift */,
 			);
-			path = TransitionAnimation;
+			name = TransitionAnimation;
+			path = "../Add city/TransitionAnimation";
 			sourceTree = "<group>";
 		};
 		7001F8BF26334E7B00E5E593 /* Supportive files */ = {
@@ -178,6 +181,7 @@
 		709EE5D6261C83030095E184 /* Main menu */ = {
 			isa = PBXGroup;
 			children = (
+				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
 				DD55457726E4C994005DB276 /* Controller */,
 				DD55457826E4C99D005DB276 /* View */,
 				704173CB265684F9001B1335 /* Cells */,
@@ -197,8 +201,8 @@
 		70E7E238262861C100187412 /* Add city */ = {
 			isa = PBXGroup;
 			children = (
-				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
-				70E7E235262861BB00187412 /* AddCityViewController.swift */,
+				DDAE0B5526EA883200DD5FAC /* View */,
+				DDAE0B5426EA881B00DD5FAC /* Controller */,
 			);
 			path = "Add city";
 			sourceTree = "<group>";
@@ -226,6 +230,22 @@
 			children = (
 				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
 				DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDAE0B5426EA881B00DD5FAC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70E7E235262861BB00187412 /* AddCityViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DDAE0B5526EA883200DD5FAC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAE0B5826EA887300DD5FAC /* AddCityView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +333,7 @@
 				7017AAC7261B242400953C5B /* MainMenuTableViewCell.swift in Sources */,
 				70322D682631777900089674 /* CityDataFileManager.swift in Sources */,
 				7001F8CC2635756000E5E593 /* Constants.swift in Sources */,
+				DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */,
 				7017AAAF261B191000953C5B /* SceneDelegate.swift in Sources */,
 				705BB8CF261EFB8300D658C4 /* WeatherModel.swift in Sources */,
 				7070112F267FDDD200B1B0F4 /* UserDefaultsManager.swift in Sources */,

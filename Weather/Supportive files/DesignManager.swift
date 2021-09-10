@@ -39,4 +39,14 @@ struct DesignManager {
         case .blank: return [UIColor.clear.cgColor]
         }
     }
+    
+    //Country id to country emoji flag converter
+    static func countryFlag(byCode code: String) -> String {
+        let base: UInt32 = 127397
+        var s = ""
+        for v in code.unicodeScalars {
+            s.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+        }
+        return String(s)
+    }
 }
