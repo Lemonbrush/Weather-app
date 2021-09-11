@@ -33,8 +33,9 @@ class MainMenuTableViewCell: UITableViewCell {
     
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 8
-        stackView.alignment = .leading
+        stackView.spacing = 5
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -62,6 +63,7 @@ class MainMenuTableViewCell: UITableViewCell {
     var timeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,6 +71,7 @@ class MainMenuTableViewCell: UITableViewCell {
     var cityNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25, weight: .regular)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -93,10 +96,8 @@ class MainMenuTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         
-        //Setting up cell shape
+        //Setting up cell appearance
         DesignManager.setBackgroundStandartShape(layer: weatherBackgroundView.layer)
-        
-        //Making shadow
         DesignManager.setBackgroundStandartShadow(layer: weatherBackgroundView.layer)
         
         //Making cells shadow be able to spill over other cells
@@ -158,14 +159,6 @@ class MainMenuTableViewCell: UITableViewCell {
         weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
         weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
-        
-        //LoadingTitle
-        cityNameLabel.heightAnchor.constraint(equalToConstant: 21).isActive = true
-        cityNameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        //Loading time
-        timeLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        timeLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         //Condition image
         conditionImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true

@@ -54,7 +54,8 @@ class LoadingCell: UITableViewCell {
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 8
-        stackView.alignment = .leading
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -76,8 +77,9 @@ class LoadingCell: UITableViewCell {
         
         selectionStyle = .none 
         
-        //Setting up cell shape
+        //Setting up cell appearance
         DesignManager.setBackgroundStandartShape(layer: weatherBackgroundView.layer)
+        DesignManager.setBackgroundStandartShadow(layer: weatherBackgroundView.layer)
         
         //Making cells shadow be able to spill over other cells
         layer.masksToBounds = false

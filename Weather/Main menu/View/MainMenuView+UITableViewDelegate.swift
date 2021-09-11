@@ -90,10 +90,6 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
             cell.isHighlighted = false
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95
-    }
 }
 
 // MARK: - tableView reorder functionality
