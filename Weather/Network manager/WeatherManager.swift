@@ -26,6 +26,7 @@ struct WeatherManager {
     func fetchWeather(by city: SavedCity, at position: Int = 0) {
         
         let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)&exclude=minutely"
+        print(urlString)
         performRequest(with: urlString, at: position)
     }
     
@@ -39,7 +40,8 @@ struct WeatherManager {
             
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                
+                let str = String(decoding: data!, as: UTF8.self)
+                print("\n\n\n\(str)\n\n\n")
                 //In case of error
                 guard (error == nil) else{
                     delegate?.didFailWithError(error: error!) //let the delegate handle the error
