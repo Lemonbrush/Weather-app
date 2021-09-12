@@ -82,8 +82,8 @@ class MainMenuView: UIView {
         let tableView = UITableView(frame: .zero, style: .plain)
         
         //Space before the first cell
-        tableView.contentInset.top = 10 //Getting rid of any delays between user touch and cell animation
-        tableView.delaysContentTouches = false //Setting up drag and drop delegates
+        tableView.contentInset.top = 10 ///Getting rid of any delays between user touch and cell animation
+        tableView.delaysContentTouches = false ///Setting up drag and drop delegates
         tableView.dragInteractionEnabled = true
         tableView.register(LoadingCell.self, forCellReuseIdentifier: K.cityLoadingCellIdentifier)
         tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.cityCellIdentifier)
@@ -132,6 +132,7 @@ class MainMenuView: UIView {
         tableView.tableHeaderView = tableViewHeaderView
         
         setUpConstraints()
+        tableView.layoutIfNeeded()
     }
         
     required init?(coder: NSCoder) {

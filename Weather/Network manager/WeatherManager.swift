@@ -26,6 +26,7 @@ struct WeatherManager {
     func fetchWeather(by city: SavedCity, at position: Int = 0) {
         
         let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)&exclude=minutely"
+        print(urlString)
         performRequest(with: urlString, at: position)
     }
     

@@ -71,7 +71,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         let destinationVC = CityDetailViewController()
         let indexPath = self.tableView?.indexPathForSelectedRow!
         destinationVC.localWeatherData = displayWeather[indexPath!.row]
-        present(destinationVC, animated: true, completion: nil)
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func showSettingsVC() {
