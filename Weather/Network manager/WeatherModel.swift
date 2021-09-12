@@ -111,7 +111,7 @@ struct WeatherModel {
         String(format: "%.0f°", temperature)
     }
     
-    static func getcConditionNameBy(conditionId id: Int) -> String {
+    static func getConditionNameBy(conditionId id: Int) -> String {
         switch id {
         case 200...232:
             return "cloud.bolt"

@@ -61,8 +61,6 @@ struct CityDataFileManager {
             return nil
         }
         
-        //print(url.absoluteURL) // <---- delete
-        
         //Decode and return data
         let decoder = JSONDecoder()
         if let loadedData = try? decoder.decode([SavedCity].self, from: Data(contentsOf: url)) {
