@@ -16,40 +16,32 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //If the data is loaded for cells
-        if viewController?.displayWeather[indexPath.row] != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
-            
-            let weatherDataForCell = viewController?.displayWeather[indexPath.row]
-            
-            // Populate the cell with data
-            cell.cityNameLabel.text = viewController?.displayWeather[indexPath.row]?.cityName
-            cell.degreeLabel.text = weatherDataForCell!.temperatureString
-            
-            //Setting up time label
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell!.timezone)
-            dateFormatter.dateFormat = "hh:mm"
-            cell.timeLabel.text = dateFormatter.string(from: date)
-            
-            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: weatherDataForCell!.conditionId)
-            
-            //Reset the image only in case if it is needed for smooth animation
-            if cell.conditionImage.image != UIImage(systemName: cellImageName) {
-                cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-                cell.conditionImage.tintColor = .black // <-- remove later
-            }
-            
-            //Setting up gradient background
-            //...
-            
-            cell.layoutIfNeeded() // Eliminate layouts left from loading cells
-            
-            return cell
-        } else {
+        guard viewController?.displayWeather[indexPath.row] != nil,
+              let weatherDataForCell = viewController?.displayWeather[indexPath.row] else {
             return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
         }
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
+        
+        let builder = MainMenuCellBuilder()
+        
+        let cityName = viewController?.displayWeather[indexPath.row]?.cityName ?? "-"
+        let temperature = weatherDataForCell.temperatureString
+        let timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
+        let cellImageName = WeatherModel.getConditionNameBy(conditionId: weatherDataForCell.conditionId)
+        
+        cell = builder
+            .erase()
+            .build(cityLabelByString: cityName)
+            .build(degreeLabelByString: temperature)
+            .build(timeLabelByTimeZone: timeZone)
+            .build(imageByConditionName: cellImageName)
+            .content
+        
+        cell.layoutIfNeeded() // Eliminate layouts left from loading cells
+        
+        return cell
+
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

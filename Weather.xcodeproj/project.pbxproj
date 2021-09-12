@@ -34,6 +34,7 @@
 		DDAE0B6526ED0D2F00DD5FAC /* WeeklyForecastTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6426ED0D2F00DD5FAC /* WeeklyForecastTableView.swift */; };
 		DDAE0B6826ED4B4300DD5FAC /* WeatherQualityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6726ED4B4300DD5FAC /* WeatherQualityInfoView.swift */; };
 		DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */; };
+		DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		DDAE0B6426ED0D2F00DD5FAC /* WeeklyForecastTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyForecastTableView.swift; sourceTree = "<group>"; };
 		DDAE0B6726ED4B4300DD5FAC /* WeatherQualityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityInfoView.swift; sourceTree = "<group>"; };
 		DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityItemView.swift; sourceTree = "<group>"; };
+		DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			children = (
 				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
 				DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */,
+				DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				70E7E1EA262712A100187412 /* FadeTransitionAnimator.swift in Sources */,
 				DDAE0B6826ED4B4300DD5FAC /* WeatherQualityInfoView.swift in Sources */,
 				DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */,
+				DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
