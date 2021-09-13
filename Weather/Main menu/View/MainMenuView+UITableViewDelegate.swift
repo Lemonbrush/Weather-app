@@ -52,9 +52,8 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             
-            //Deleting the data
             self.viewController?.displayWeather.remove(at: indexPath.row)
-            CityDataFileManager.deleteCity(at: indexPath.row)
+            WeatherCoreDataManager.deleteCity(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
@@ -93,7 +92,7 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
         let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
         viewController?.displayWeather.insert(mover, at: destinationIndexPath.row)
         
-        CityDataFileManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
+        WeatherCoreDataManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {

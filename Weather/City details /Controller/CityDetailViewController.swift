@@ -141,7 +141,7 @@ class CityDetailViewController: UIViewController {
     private var weeklyTableBackground: UIView = UIView()
     
     private let gradientBackground = CAGradientLayer()
-    private var weatherManager = WeatherManager()
+    private var weatherManager = NetworkManager()
     private var updateTimer: Timer?
     
     //MARK: - Lifecycle
@@ -361,9 +361,9 @@ extension CityDetailViewController: UIScrollViewDelegate {
 
 // MARK: - Data fetching
 
-extension CityDetailViewController: WeatherManagerDelegate {
+extension CityDetailViewController: NetworkManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
+    func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         DispatchQueue.main.async {
             self.updateDisplayData(with: weather)
         }

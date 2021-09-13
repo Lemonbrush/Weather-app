@@ -37,7 +37,7 @@ class AddCityViewController: UIViewController {
     //MARK: - Functions
     
     func didChoseCity(_ name: String, lat: CLLocationDegrees, long: CLLocationDegrees) {
-        CityDataFileManager.addNewCity(name, lat: lat, long: long)
+        WeatherCoreDataManager.addNewCity(name, lat: lat, long: long)
         
         dismiss(animated: true) {
             self.delegate?.didAddNewCity()
