@@ -63,7 +63,7 @@ class CityDetailViewController: UIViewController {
     
     private var conditionImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "WelcomeImage")
+        imageView.image = UIImage(named: K.ImageName.defaultImage)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

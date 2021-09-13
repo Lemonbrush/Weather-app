@@ -172,7 +172,7 @@ extension AddCityView: MKLocalSearchCompleterDelegate {
     }
 
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        //handle the error
+        //TODO: handle completer error
         print(error.localizedDescription)
     }
 }

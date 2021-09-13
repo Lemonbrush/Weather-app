@@ -15,7 +15,7 @@ class WeeklyForecastTableView: UIView {
     
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.register(WeeklyForecastTableViewCell.self, forCellReuseIdentifier: K.weeklyCellIdentifier)
+        tableView.register(WeeklyForecastTableViewCell.self, forCellReuseIdentifier: K.CellIdentifier.dailyForecastCell)
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,13 +82,11 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
     // TODO: here should be weekly forecast
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(dataSource?.daily.count ?? 0)
-        
         return dataSource?.daily.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.weeklyCellIdentifier) as! WeeklyForecastTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.dailyForecastCell) as! WeeklyForecastTableViewCell
         
         guard let safeWeatherData = dataSource else {
             return UITableViewCell()

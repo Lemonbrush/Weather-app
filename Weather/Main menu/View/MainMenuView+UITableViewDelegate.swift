@@ -18,10 +18,10 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard viewController?.displayWeather[indexPath.row] != nil,
               let weatherDataForCell = viewController?.displayWeather[indexPath.row] else {
-            return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
+            return tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityLoadingCell) as! LoadingCell
         }
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityCell) as! MainMenuTableViewCell
         
         let builder = MainMenuCellBuilder()
         
@@ -53,7 +53,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             
             self.viewController?.displayWeather.remove(at: indexPath.row)
-            WeatherCoreDataManager.deleteCity(at: indexPath.row)
+            self.viewController?.dataStorage?.deleteItem(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
@@ -92,7 +92,7 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
         let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
         viewController?.displayWeather.insert(mover, at: destinationIndexPath.row)
         
-        WeatherCoreDataManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
+        self.viewController?.dataStorage?.rearrangeItems(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
