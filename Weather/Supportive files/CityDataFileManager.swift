@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct SavedCity: Codable {
-    let name: String
-    let latitude: Double
-    let longitude: Double
-}
-
 struct CityDataFileManager {
     
     static let fileManager = FileManager()

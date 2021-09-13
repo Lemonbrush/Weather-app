@@ -16,7 +16,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     //MARK: - Private properties
     
     private let fadeTransitionAnimator = FadeTransitionAnimator()
-    private var weatherManager = WeatherManager()
+    private var weatherManager = NetworkManager()
     private var tableView: UITableView?
     private var savedCities = [SavedCity]()
     private let mainManuView = MainMenuView()
@@ -81,7 +81,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func fetchWeatherData() {
-        guard let savedCities = CityDataFileManager.getSavedCities() else { return }
+        guard let savedCities = WeatherCoreDataManager.getSavedCities() else { return }
         
         self.savedCities = savedCities
         displayWeather.removeAll()
@@ -110,9 +110,9 @@ extension MainMenuViewController: AddCityDelegate {
     }
 }
 
-extension MainMenuViewController: WeatherManagerDelegate {
+extension MainMenuViewController: NetworkManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
+    func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         
         DispatchQueue.main.async {
             

@@ -25,4 +25,14 @@ struct K {
     
     //Colors
     // ...
+    
+    struct CoreData {
+        struct City {
+            static let entityName = "City"
+            static let name = "name"
+            static let latitude = "latitude"
+            static let longitude = "longitude"
+            static let orderPosition = "orderPosition"
+        }
+    }
 }

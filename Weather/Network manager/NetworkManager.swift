@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int)
+protocol NetworkManagerDelegate {
+    func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int)
     func didFailWithError(error: Error)
 }
 
-struct WeatherManager {
+struct NetworkManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?"
     var city = ""
     let appid = K.weatherAPIKey
@@ -20,7 +20,7 @@ struct WeatherManager {
         return UserDefaultsManager.getUnitData() ?? "metric"
     }
     
-    var delegate: WeatherManagerDelegate?
+    var delegate: NetworkManagerDelegate?
     
     //MARK: - Fetching weather data
     func fetchWeather(by city: SavedCity, at position: Int = 0) {
