@@ -14,29 +14,25 @@ struct SavedCity: Codable {
     let longitude: Double
 }
 
-class WeatherCoreDataManager {
+protocol DataStorageBasicProtocol {
+    var getSavedItems: [SavedCity]? { get }
+    func deleteItem(at index: Int)
+    func rearrangeItems(at firstIndex: Int, to secondIndex: Int)
+    func addNewItem(_ city: String, lat: Double, long: Double)
+}
+
+protocol DataStorageProtocol: DataStorageBasicProtocol {
+    var managedContext: NSManagedObjectContext { get set }
+}
+
+class WeatherCoreDataManager: DataStorageProtocol {
     
-    //MARK: - Public functions
+    //MARK: - Public properties
     
-    static func deleteCity(at index: Int) {
-        guard let cityEntities = getSavedCitiesManagedObjects(),
-              let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-          
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        managedContext.delete(cityEntities[index])
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
-    }
+    internal var managedContext: NSManagedObjectContext
     
-    static func getSavedCities() -> [SavedCity]? {
-        guard let savedCitiesEntities = getSavedCitiesManagedObjects() else {
+    var getSavedItems: [SavedCity]? {
+        guard let savedCitiesEntities = getManagedObjects() else {
             return nil
         }
         
@@ -56,17 +52,36 @@ class WeatherCoreDataManager {
         return savedCities
     }
     
-    static func rearrangeCity(atRow firstCity: Int, to secondCity: Int) {
-        guard var cityEntities = getSavedCitiesManagedObjects(),
-              let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+    //MARK: - Construction
+    
+    init(managedContext: NSManagedObjectContext) {
+        self.managedContext = managedContext
+    }
+
+    //MARK: - Public functions
+    
+    func deleteItem(at index: Int) {
+        guard let cityEntities = getManagedObjects() else {
             return
         }
-          
-        let managedContext = appDelegate.persistentContainer.viewContext
         
-        let mover = cityEntities[firstCity]
-        cityEntities.remove(at: firstCity)
-        cityEntities.insert(mover, at: secondCity)
+        managedContext.delete(cityEntities[index])
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func rearrangeItems(at firstIndex: Int, to secondIndex: Int) {
+        guard var cityEntities = getManagedObjects() else {
+            return
+        }
+        
+        let mover = cityEntities[firstIndex]
+        cityEntities.remove(at: firstIndex)
+        cityEntities.insert(mover, at: secondIndex)
         
         for (index, entity) in cityEntities.enumerated() {
             entity.orderPosition = index
@@ -79,21 +94,13 @@ class WeatherCoreDataManager {
         }
     }
     
-    static func addNewCity(_ city: String, lat: Double, long: Double) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let cityEntitiesCount = getSavedCitiesManagedObjects()?.count ?? 0
-          
-        let managedContext = appDelegate.persistentContainer.viewContext
-          
+    func addNewItem(_ city: String, lat: Double, long: Double) {
         let entity = NSEntityDescription.entity(forEntityName: "City", in: managedContext)!
-        
         let citySavingObject = NSManagedObject(entity: entity, insertInto: managedContext)
         citySavingObject.setValue(city, forKey: K.CoreData.City.name)
         citySavingObject.setValue(lat, forKey: K.CoreData.City.latitude)
         citySavingObject.setValue(long, forKey: K.CoreData.City.longitude)
+        let cityEntitiesCount = getManagedObjects()?.count ?? 0
         citySavingObject.setValue(cityEntitiesCount, forKey: K.CoreData.City.orderPosition)
         
         do {
@@ -105,10 +112,7 @@ class WeatherCoreDataManager {
     
     //MARK: - Private functions
     
-    static func getSavedCitiesManagedObjects() -> [City]? {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedContext = appDelegate?.persistentContainer.viewContext
-          
+    private func getManagedObjects() -> [City]? {
         //Fetch objects with order
         let fetchRequest = NSFetchRequest<City>(entityName: K.CoreData.City.entityName)
         let sortDescriptor = NSSortDescriptor(key: K.CoreData.City.orderPosition, ascending: true)
@@ -117,7 +121,7 @@ class WeatherCoreDataManager {
         var entitiesToReturn: [City]?
         
         do {
-            entitiesToReturn = try managedContext?.fetch(fetchRequest)
+            entitiesToReturn = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

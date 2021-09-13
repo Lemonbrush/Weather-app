@@ -85,8 +85,8 @@ class MainMenuView: UIView {
         tableView.contentInset.top = 10 ///Getting rid of any delays between user touch and cell animation
         tableView.delaysContentTouches = false ///Setting up drag and drop delegates
         tableView.dragInteractionEnabled = true
-        tableView.register(LoadingCell.self, forCellReuseIdentifier: K.cityLoadingCellIdentifier)
-        tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.cityCellIdentifier)
+        tableView.register(LoadingCell.self, forCellReuseIdentifier: K.CellIdentifier.cityLoadingCell)
+        tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.CellIdentifier.cityCell)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.showsVerticalScrollIndicator = false
