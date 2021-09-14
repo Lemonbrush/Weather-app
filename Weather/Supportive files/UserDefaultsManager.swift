@@ -7,12 +7,17 @@
 
 import Foundation
 
+enum Unit: String {
+    case metric = "metric"
+    case imperial = "imperial"
+}
+
 struct UserDefaultsManager {
     static func getUnitData() -> String? {
         return UserDefaults.standard.string(forKey: K.UserDefaults.unit)
     }
     
-    static func setUnitData(with unit: String) {
-        UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+    static func setUnitData(with unit: Unit) {
+        UserDefaults.standard.setValue(unit, forKey: unit.rawValue)
     }
 }

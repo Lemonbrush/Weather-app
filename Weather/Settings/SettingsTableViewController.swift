@@ -54,9 +54,9 @@ class SettingsTableViewController: UIViewController {
         tableView.dataSource = self
         
         switch UserDefaultsManager.getUnitData() {
-        case "metric":
+        case Unit.metric.rawValue:
             unitSwitch.selectedSegmentIndex = 0
-        case "imperial":
+        case Unit.imperial.rawValue:
             unitSwitch.selectedSegmentIndex = 1
         default:
             unitSwitch.selectedSegmentIndex = 0
@@ -102,9 +102,9 @@ class SettingsTableViewController: UIViewController {
     @objc func unitSwitchToggled() {
         switch unitSwitch.selectedSegmentIndex {
         case 0:
-            UserDefaultsManager.setUnitData(with: "metric")
+            UserDefaultsManager.setUnitData(with: .metric)
         case 1:
-            UserDefaultsManager.setUnitData(with: "imperial")
+            UserDefaultsManager.setUnitData(with: .imperial)
         default:
             break
         }
