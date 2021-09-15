@@ -54,9 +54,9 @@ class SettingsTableViewController: UIViewController {
         tableView.dataSource = self
         
         switch UserDefaultsManager.getUnitData() {
-        case Unit.metric.rawValue:
+        case K.UserDefaults.metric:
             unitSwitch.selectedSegmentIndex = 0
-        case Unit.imperial.rawValue:
+        case K.UserDefaults.imperial:
             unitSwitch.selectedSegmentIndex = 1
         default:
             unitSwitch.selectedSegmentIndex = 0
@@ -66,6 +66,7 @@ class SettingsTableViewController: UIViewController {
         temperatureCellStackView.addArrangedSubview(unitSwitch)
         
         temperatureCell.contentView.addSubview(temperatureCellStackView)
+        temperatureCell.selectionStyle = .none
         
         view.addSubview(tableView)
         
@@ -74,7 +75,6 @@ class SettingsTableViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         mainMenuDelegate?.fetchWeatherData()
     }
     
@@ -102,9 +102,10 @@ class SettingsTableViewController: UIViewController {
     @objc func unitSwitchToggled() {
         switch unitSwitch.selectedSegmentIndex {
         case 0:
-            UserDefaultsManager.setUnitData(with: .metric)
+            UserDefaultsManager.setUnitData(with: K.UserDefaults.metric)
         case 1:
-            UserDefaultsManager.setUnitData(with: .imperial)
+            UserDefaultsManager.setUnitData(with: K.UserDefaults.imperial)
+            
         default:
             break
         }

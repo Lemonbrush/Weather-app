@@ -11,6 +11,7 @@ struct K {
     static let weatherAPIKey = "7a40aa4dd6b7cf1344d8f5679243fb0a"
     
     struct CoreData {
+        static let modelName = "CitiesModel"
         struct City {
             static let entityName = "City"
             static let name = "name"
@@ -34,6 +35,8 @@ struct K {
     
     struct UserDefaults {
         static let unit = "Unit"
+        static let imperial = "imperial"
+        static let metric = "metric"
     }
     
     //TODO: Colors

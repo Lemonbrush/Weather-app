@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let rootViewController = MainMenuViewController()
-        rootViewController.dataStorage = WeatherCoreDataManager(managedContext: persistentContainer.viewContext)
+        rootViewController.dataStorage = WeatherCoreDataManager(managedContext: persistentContainer.newBackgroundContext())
         let navigationController = UINavigationController(rootViewController: rootViewController)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
