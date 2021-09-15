@@ -13,6 +13,8 @@ struct UserDefaultsManager {
     }
     
     static func setUnitData(with unit: String) {
-        UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+        if unit == K.UserDefaults.imperial || unit == K.UserDefaults.metric {
+            UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+        }
     }
 }

@@ -110,6 +110,18 @@ class WeatherCoreDataManager: DataStorageProtocol {
         }
     }
     
+    func deleteAll() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: K.CoreData.City.entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try managedContext.execute(deleteRequest)
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not delete all items. \(error), \(error.userInfo)")
+        }
+    }
+    
     //MARK: - Private functions
     
     private func getManagedObjects() -> [City]? {
