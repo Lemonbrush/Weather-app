@@ -8,12 +8,13 @@
 import Foundation
 
 struct UserDefaultsManager {
-    
     static func getUnitData() -> String? {
-        return UserDefaults.standard.string(forKey: "Unit")
+        return UserDefaults.standard.string(forKey: K.UserDefaults.unit)
     }
     
     static func setUnitData(with unit: String) {
-        UserDefaults.standard.setValue(unit, forKey: "Unit")
+        if unit == K.UserDefaults.imperial || unit == K.UserDefaults.metric {
+            UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+        }
     }
 }

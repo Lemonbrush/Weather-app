@@ -8,11 +8,6 @@
 import UIKit
 import MapKit
 
-protocol AddCityDelegate {
-    func didAddNewCity()
-    func didFailAddingNewCityWithError(error: Error?)
-}
-
 class AddCityViewController: UIViewController {
     
     //MARK: - Public properties
@@ -37,7 +32,7 @@ class AddCityViewController: UIViewController {
     //MARK: - Functions
     
     func didChoseCity(_ name: String, lat: CLLocationDegrees, long: CLLocationDegrees) {
-        CityDataFileManager.addNewCity(name, lat: lat, long: long)
+        delegate?.addNewItem(name, lat: lat, long: long)
         
         dismiss(animated: true) {
             self.delegate?.didAddNewCity()

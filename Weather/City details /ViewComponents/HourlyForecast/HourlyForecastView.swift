@@ -19,7 +19,7 @@ class HourlyForecastView: UIView {
         layout.estimatedItemSize = CGSize(width: 1, height: 1)
         layout.shouldInvalidateLayout(forBoundsChange: CGRect.init())
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: K.hourlyCellIdentifier)
+        collectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: K.CellIdentifier.hourlyForecastCell)
         collectionView.backgroundColor = .none
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -56,7 +56,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
     
     @objc func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.hourlyCellIdentifier, for: indexPath) as! HourlyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellIdentifier.hourlyForecastCell, for: indexPath) as! HourlyCollectionViewCell
         //cell.image.tintColor = .black // <-- remove later
         
         guard let safeWeatherData = dataSource else {
@@ -74,7 +74,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             dateFormatter.dateFormat = "h a"
             
             cell.topLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
-            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: currentHour.weather[0].id)
+            let cellImageName = WeatherModel.getConditionNameBy(conditionId: currentHour.weather[0].id)
             cell.imageView.image = UIImage(systemName: cellImageName)
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
             
@@ -86,7 +86,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             dateFormatter.dateFormat = "h:mm a"
             
             cell.topLabel.text = dateFormatter.string(from: date)
-            cell.imageView.image = UIImage(named: "WelcomeImage")
+            cell.imageView.image = UIImage(named: K.ImageName.defaultImage)
             cell.bottomLabel.text = sunStete.description == .sunrise ? "Sunrise" : "Sunset"
             
             return cell

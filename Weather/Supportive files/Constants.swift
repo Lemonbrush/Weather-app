@@ -10,19 +10,35 @@ import Foundation
 struct K {
     static let weatherAPIKey = "7a40aa4dd6b7cf1344d8f5679243fb0a"
     
-    static let saveFileName = "savedCities.plist"
+    struct CoreData {
+        static let modelName = "CitiesModel"
+        struct City {
+            static let entityName = "City"
+            static let name = "name"
+            static let latitude = "latitude"
+            static let longitude = "longitude"
+            static let orderPosition = "orderPosition"
+        }
+    }
     
-    static let cityCellIdentifier = "cityCell"
-    static let weeklyCellIdentifier = "dailyCell"
-    static let cityLoadingCellIdentifier = "cityLoadingCell"
-    static let hourlyCellIdentifier = "hourlyCell"
-    
-    static let detailShowSegue = "detailShow"
+    struct CellIdentifier {
+        static let cityCell = "cityCell"
+        static let cityLoadingCell = "cityLoadingCell"
+        static let dailyForecastCell = "dailyForecastCell"
+        static let hourlyForecastCell = "hourlyForecastCell"
+    }
     
     struct ImageName {
         static let deleteImage = "DeleteAction"
+        static let defaultImage = "WelcomeImage"
     }
     
-    //Colors
+    struct UserDefaults {
+        static let unit = "Unit"
+        static let imperial = "imperial"
+        static let metric = "metric"
+    }
+    
+    //TODO: Colors
     // ...
 }

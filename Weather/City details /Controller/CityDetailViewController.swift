@@ -63,13 +63,14 @@ class CityDetailViewController: UIViewController {
     
     private var conditionImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "WelcomeImage")
+        imageView.image = UIImage(named: K.ImageName.defaultImage)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private var tempLebel: UILabel = {
         let label = UILabel()
+        label.accessibilityIdentifier = "CityDetailsMainDegreeLabel"
         label.font = UIFont.systemFont(ofSize: 90, weight: .medium)
         return label
     }()
@@ -141,7 +142,7 @@ class CityDetailViewController: UIViewController {
     private var weeklyTableBackground: UIView = UIView()
     
     private let gradientBackground = CAGradientLayer()
-    private var weatherManager = WeatherManager()
+    private var weatherManager = NetworkManager()
     private var updateTimer: Timer?
     
     //MARK: - Lifecycle
@@ -291,7 +292,7 @@ class CityDetailViewController: UIViewController {
     }
     
     private func setLabelsAndImages(with newData: WeatherModel) {
-        let conditionImageName = WeatherModel.getcConditionNameBy(conditionId: newData.conditionId)
+        let conditionImageName = WeatherModel.getConditionNameBy(conditionId: newData.conditionId)
         conditionImage.image = UIImage(systemName: conditionImageName)?.withRenderingMode(.alwaysTemplate)
         conditionImage.tintColor = .white
         
@@ -361,9 +362,9 @@ extension CityDetailViewController: UIScrollViewDelegate {
 
 // MARK: - Data fetching
 
-extension CityDetailViewController: WeatherManagerDelegate {
+extension CityDetailViewController: NetworkManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
+    func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         DispatchQueue.main.async {
             self.updateDisplayData(with: weather)
         }

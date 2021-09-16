@@ -11,18 +11,26 @@ protocol MainMenuDelegate {
     func fetchWeatherData()
 }
 
+protocol AddCityProtocol {
+    func didAddNewCity()
+    func didFailAddingNewCityWithError(error: Error?)
+}
+
+protocol AddCityDelegate: AddCityProtocol, DataStorageBasicProtocol {}
+
 class MainMenuViewController: UIViewController, MainMenuDelegate {
     
     //MARK: - Private properties
     
     private let fadeTransitionAnimator = FadeTransitionAnimator()
-    private var weatherManager = WeatherManager()
+    private var weatherManager = NetworkManager()
     private var tableView: UITableView?
     private var savedCities = [SavedCity]()
     private let mainManuView = MainMenuView()
     
     //MARK: - Public properties
     
+    var dataStorage: DataStorageProtocol?
     var displayWeather: [WeatherModel?] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -61,6 +69,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     
     //MARK: - Functions
     
+    //Navigation functions
     func showAddCityVC() {
         let destinationVC = AddCityViewController()
         destinationVC.delegate = self
@@ -81,7 +90,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func fetchWeatherData() {
-        guard let savedCities = CityDataFileManager.getSavedCities() else { return }
+        guard let savedCities = dataStorage?.getSavedItems else { return }
         
         self.savedCities = savedCities
         displayWeather.removeAll()
@@ -97,6 +106,21 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 }
 
 extension MainMenuViewController: AddCityDelegate {
+    var getSavedItems: [SavedCity]? {
+        return dataStorage?.getSavedItems
+    }
+    
+    func addNewItem(_ city: String, lat: Double, long: Double) {
+        dataStorage?.addNewItem(city, lat: lat, long: long)
+    }
+    
+    func deleteItem(at index: Int) {
+        dataStorage?.deleteItem(at: index)
+    }
+    
+    func rearrangeItems(at firstIndex: Int, to secondIndex: Int) {
+        dataStorage?.rearrangeItems(at: firstIndex, to: secondIndex)
+    }
     
     func didAddNewCity() {
         displayWeather.append(nil)
@@ -106,13 +130,12 @@ extension MainMenuViewController: AddCityDelegate {
     }
     
     func didFailAddingNewCityWithError(error: Error?) {
-        //handle errors here
+        //TODO: handle new city adding failure
     }
 }
 
-extension MainMenuViewController: WeatherManagerDelegate {
-    
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel, at position: Int) {
+extension MainMenuViewController: NetworkManagerDelegate {
+    func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         
         DispatchQueue.main.async {
             
@@ -136,7 +159,6 @@ extension MainMenuViewController: WeatherManagerDelegate {
 // MARK: - Transition animation
 
 extension MainMenuViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
-    
     func navigationController(_ navigationController: UINavigationController,
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,

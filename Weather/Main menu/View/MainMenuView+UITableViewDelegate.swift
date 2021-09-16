@@ -16,40 +16,32 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //If the data is loaded for cells
-        if viewController?.displayWeather[indexPath.row] != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.cityCellIdentifier) as! MainMenuTableViewCell
-            
-            let weatherDataForCell = viewController?.displayWeather[indexPath.row]
-            
-            // Populate the cell with data
-            cell.cityNameLabel.text = viewController?.displayWeather[indexPath.row]?.cityName
-            cell.degreeLabel.text = weatherDataForCell!.temperatureString
-            
-            //Setting up time label
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: weatherDataForCell!.timezone)
-            dateFormatter.dateFormat = "hh:mm"
-            cell.timeLabel.text = dateFormatter.string(from: date)
-            
-            let cellImageName = WeatherModel.getcConditionNameBy(conditionId: weatherDataForCell!.conditionId)
-            
-            //Reset the image only in case if it is needed for smooth animation
-            if cell.conditionImage.image != UIImage(systemName: cellImageName) {
-                cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-                cell.conditionImage.tintColor = .black // <-- remove later
-            }
-            
-            //Setting up gradient background
-            //...
-            
-            cell.layoutIfNeeded() // Eliminate layouts left from loading cells
-            
-            return cell
-        } else {
-            return tableView.dequeueReusableCell(withIdentifier: K.cityLoadingCellIdentifier) as! LoadingCell
+        guard viewController?.displayWeather[indexPath.row] != nil,
+              let weatherDataForCell = viewController?.displayWeather[indexPath.row] else {
+            return tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityLoadingCell) as! LoadingCell
         }
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityCell) as! MainMenuTableViewCell
+        
+        let builder = MainMenuCellBuilder()
+        
+        let cityName = viewController?.displayWeather[indexPath.row]?.cityName ?? "-"
+        let temperature = weatherDataForCell.temperatureString
+        let timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
+        let cellImageName = WeatherModel.getConditionNameBy(conditionId: weatherDataForCell.conditionId)
+        
+        cell = builder
+            .erase()
+            .build(cityLabelByString: cityName)
+            .build(degreeLabelByString: temperature)
+            .build(timeLabelByTimeZone: timeZone)
+            .build(imageByConditionName: cellImageName)
+            .content
+        
+        cell.layoutIfNeeded() // Eliminate layouts left from loading cells
+        
+        return cell
+
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -60,9 +52,8 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             
-            //Deleting the data
             self.viewController?.displayWeather.remove(at: indexPath.row)
-            CityDataFileManager.deleteCity(at: indexPath.row)
+            self.viewController?.dataStorage?.deleteItem(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
@@ -101,7 +92,7 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
         let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
         viewController?.displayWeather.insert(mover, at: destinationIndexPath.row)
         
-        CityDataFileManager.rearrangeCity(atRow: sourceIndexPath.row, to: destinationIndexPath.row)
+        self.viewController?.dataStorage?.rearrangeItems(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
