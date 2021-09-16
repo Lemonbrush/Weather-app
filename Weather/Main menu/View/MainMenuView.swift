@@ -82,7 +82,6 @@ class MainMenuView: UIView {
     
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.accessibilityIdentifier = "MainScreenTableView"
         //Space before the first cell
         tableView.contentInset.top = 10 ///Getting rid of any delays between user touch and cell animation
         tableView.delaysContentTouches = false ///Setting up drag and drop delegates
