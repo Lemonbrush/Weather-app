@@ -34,6 +34,7 @@ class MainMenuView: UIView {
     
     private var settingsButton: UIButton = {
         let button = UIButton()
+        button.accessibilityIdentifier = "SettingsButton"
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "switch.2"), for: .normal)
         button.tintColor = .black
@@ -42,6 +43,7 @@ class MainMenuView: UIView {
     
     private var searchButton: UIButton = {
         let button = UIButton()
+        button.accessibilityIdentifier = "SearchButton"
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         button.tintColor = .darkGray
@@ -80,7 +82,7 @@ class MainMenuView: UIView {
     
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        
+        tableView.accessibilityIdentifier = "MainScreenTableView"
         //Space before the first cell
         tableView.contentInset.top = 10 ///Getting rid of any delays between user touch and cell animation
         tableView.delaysContentTouches = false ///Setting up drag and drop delegates

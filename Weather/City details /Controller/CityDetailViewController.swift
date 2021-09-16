@@ -70,6 +70,7 @@ class CityDetailViewController: UIViewController {
     
     private var tempLebel: UILabel = {
         let label = UILabel()
+        label.accessibilityIdentifier = "CityDetailsMainDegreeLabel"
         label.font = UIFont.systemFont(ofSize: 90, weight: .medium)
         return label
     }()

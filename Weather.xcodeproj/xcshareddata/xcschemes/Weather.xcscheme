@@ -68,17 +68,16 @@
                BlueprintName = "WeatherTests"
                ReferencedContainer = "container:Weather.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AddCityScreenTests">
-               </Test>
-               <Test
-                  Identifier = "UserDefaultsManagerTests">
-               </Test>
-               <Test
-                  Identifier = "WeatherTests">
-               </Test>
-            </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DD42156F26F3B39600BD4C4F"
+               BuildableName = "WeatherUITests.xctest"
+               BlueprintName = "WeatherUITests"
+               ReferencedContainer = "container:Weather.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
