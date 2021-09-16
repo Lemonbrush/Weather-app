@@ -14,6 +14,7 @@ class SettingsTableViewController: UIViewController {
     private var unitSwitch: UISegmentedControl = {
         let items = ["°C", "°F"]
         let switcher = UISegmentedControl(items: items)
+        switcher.accessibilityIdentifier = "SettingsUnitSwitch"
         switcher.selectedSegmentIndex = 0
         switcher.backgroundColor = .systemGreen
         switcher.addTarget(self, action: #selector(unitSwitchToggled), for: .valueChanged)
@@ -37,6 +38,7 @@ class SettingsTableViewController: UIViewController {
     
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.accessibilityIdentifier = "SettingsTableView"
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

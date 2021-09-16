@@ -24,7 +24,7 @@ class NetworkManagerTests: XCTestCase {
         let queryCity = SavedCity(name: "Moscow", latitude: 0, longitude: 0)
         // act
         sut.fetchWeather(by: queryCity)
-        //assert
+        // assert
         wait(for: [expectation], timeout: 10.0)
     }
 }
