@@ -64,6 +64,9 @@
 		DD42156B26F27C1400BD4C4F /* MainMenuTableViewCellBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42156A26F27C1400BD4C4F /* MainMenuTableViewCellBuilderTests.swift */; };
 		DD42157326F3B39600BD4C4F /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42157226F3B39600BD4C4F /* SettingsScreenTests.swift */; };
 		DD42157B26F3C16700BD4C4F /* CityDetailsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42157A26F3C16700BD4C4F /* CityDetailsScreenTests.swift */; };
+		DD42158526F3D5E200BD4C4F /* AddCityScreenPageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42158426F3D5E200BD4C4F /* AddCityScreenPageObject.swift */; };
+		DD42158826F3D94200BD4C4F /* MainMenuScreenPageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42158726F3D94200BD4C4F /* MainMenuScreenPageObject.swift */; };
+		DD42158926F3DB1D00BD4C4F /* AddCityScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42158126F3D55E00BD4C4F /* AddCityScreenTests.swift */; };
 		DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
 		DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */; };
 		DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5826EA887300DD5FAC /* AddCityView.swift */; };
@@ -127,6 +130,9 @@
 		DD42157226F3B39600BD4C4F /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		DD42157426F3B39600BD4C4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD42157A26F3C16700BD4C4F /* CityDetailsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailsScreenTests.swift; sourceTree = "<group>"; };
+		DD42158126F3D55E00BD4C4F /* AddCityScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityScreenTests.swift; sourceTree = "<group>"; };
+		DD42158426F3D5E200BD4C4F /* AddCityScreenPageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityScreenPageObject.swift; sourceTree = "<group>"; };
+		DD42158726F3D94200BD4C4F /* MainMenuScreenPageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScreenPageObject.swift; sourceTree = "<group>"; };
 		DD55457926E4CA6A005DB276 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuView+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		DDAE0B5826EA887300DD5FAC /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
@@ -357,6 +363,8 @@
 		DD42157126F3B39600BD4C4F /* WeatherUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DD42158626F3D8FC00BD4C4F /* PageObjects */,
+				DD42158326F3D58900BD4C4F /* AddCityScreenTests */,
 				DD42157D26F3C1B600BD4C4F /* CityDetailsScreenTests */,
 				DD42157C26F3C1A600BD4C4F /* SettingsScreenTests */,
 				DD42157426F3B39600BD4C4F /* Info.plist */,
@@ -378,6 +386,23 @@
 				DD42157A26F3C16700BD4C4F /* CityDetailsScreenTests.swift */,
 			);
 			path = CityDetailsScreenTests;
+			sourceTree = "<group>";
+		};
+		DD42158326F3D58900BD4C4F /* AddCityScreenTests */ = {
+			isa = PBXGroup;
+			children = (
+				DD42158126F3D55E00BD4C4F /* AddCityScreenTests.swift */,
+			);
+			path = AddCityScreenTests;
+			sourceTree = "<group>";
+		};
+		DD42158626F3D8FC00BD4C4F /* PageObjects */ = {
+			isa = PBXGroup;
+			children = (
+				DD42158426F3D5E200BD4C4F /* AddCityScreenPageObject.swift */,
+				DD42158726F3D94200BD4C4F /* MainMenuScreenPageObject.swift */,
+			);
+			path = PageObjects;
 			sourceTree = "<group>";
 		};
 		DD55457626E4C86F005DB276 /* Network manager */ = {
@@ -690,7 +715,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD42157326F3B39600BD4C4F /* SettingsScreenTests.swift in Sources */,
+				DD42158526F3D5E200BD4C4F /* AddCityScreenPageObject.swift in Sources */,
 				DD42157B26F3C16700BD4C4F /* CityDetailsScreenTests.swift in Sources */,
+				DD42158826F3D94200BD4C4F /* MainMenuScreenPageObject.swift in Sources */,
+				DD42158926F3DB1D00BD4C4F /* AddCityScreenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

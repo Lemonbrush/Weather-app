@@ -30,6 +30,7 @@ class AddCityView: UIView {
     
     private var textField: UITextField = {
         let textField = UITextField()
+        textField.accessibilityIdentifier = "AddCityTextField"
         textField.placeholder = "City"
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
@@ -37,6 +38,7 @@ class AddCityView: UIView {
     
     private var cancelButton: UIButton = {
         let button = UIButton()
+        button.accessibilityIdentifier = "AddCityCancelButton"
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitleColor(.systemGray3, for: .highlighted)
@@ -192,6 +194,7 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = searchResult.subtitle
         cell.detailTextLabel?.textColor = .darkGray
         cell.contentView.backgroundColor = .none
+        cell.accessibilityIdentifier = "AddCityCell"
         return cell
     }
     
