@@ -8,14 +8,14 @@
 import XCTest
 
 class NetworkManagerDelegateMock: NetworkManagerDelegate {
-    
+
     var expection: XCTestExpectation?
-    
+
     func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         expection?.fulfill()
     }
-    
+
     func didFailWithError(error: Error) {
-        XCTFail()
+        XCTFail("didFailWithError failed")
     }
 }

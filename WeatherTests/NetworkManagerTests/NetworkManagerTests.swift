@@ -8,10 +8,10 @@
 import XCTest
 
 class NetworkManagerTests: XCTestCase {
-    
+
     var sut = NetworkManager()
     var networkManagerDelegate = NetworkManagerDelegateMock()
-    
+
     override func setUp() {
         super.setUp()
         sut.delegate = networkManagerDelegate

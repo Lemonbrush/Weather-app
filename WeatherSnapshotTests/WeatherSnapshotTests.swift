@@ -8,12 +8,12 @@
 import XCTest
 import SnapshotTesting
 
-//@testable import Weather
+// @testable import Weather
 
 class TestAddCityScreen: XCTestCase {
-    
+
     override class func setUp() {
-        
+
     }
 
     func testAddCityScreenSnapshot() throws {
