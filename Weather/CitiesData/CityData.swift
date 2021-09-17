@@ -44,11 +44,10 @@
 
 import Foundation
 
-//Data struct for JSON encoding
+// Data struct for JSON encoding
 struct CityData: Codable {
     let id: Int
     let state: String
     let country: String
     let name: String
 }
-

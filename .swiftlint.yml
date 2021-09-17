@@ -53,6 +53,7 @@ identifier_name:
     error: 50
   excluded:
     - id
+    - i
 
 nesting:
   type_level: 3
@@ -79,6 +80,8 @@ excluded:
   - buildDevice
   - tempFatBinaries
   - buildLogs
+  - Weather/Network manager/WeatherData.swift
+  - Weather/Supportive files/Constants.swift
 
 
 custom_rules:
@@ -95,10 +98,3 @@ custom_rules:
     regex: "(infix|postfix|prefix)\\s+operator"
     message: "Объявление оператора запрещено вне MPFoundation.framework"
     severity: error
-  disable_print:
-    included: ".*\\.swift"
-    excluded: ".*Tests\\.swift"
-    name: "print usage"
-    regex: "(^| |Swift.)(?<!func )(print|debugPrint)\\("
-    message: "Необходимо использовать log() из DebugHelper.framework"
-    severity: warning
