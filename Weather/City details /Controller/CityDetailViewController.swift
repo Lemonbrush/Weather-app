@@ -220,7 +220,6 @@ class CityDetailViewController: UIViewController {
 
     private func setUpConstraints() {
         setUpNavBar()
-        setupBlurableNavBar()
         setUpScrollView()
         setUpScrollContentView()
         setUpTopTranslucentView()
