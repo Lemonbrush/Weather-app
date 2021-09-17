@@ -8,39 +8,39 @@
 import UIKit
 
 class LoadingCell: UITableViewCell {
-    
-    //MARK: - Private properties
-    
+
+    // MARK: - Private properties
+
     private let gradient = CAGradientLayer()
-    
+
     private var cityLoadView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private var timeLoadView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private var degreeLoadView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private var weatherBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private var mainStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 8
@@ -50,7 +50,7 @@ class LoadingCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 8
@@ -60,7 +60,7 @@ class LoadingCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     private var rightStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 30
@@ -69,94 +69,95 @@ class LoadingCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     // MARK: - Lifecycle
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        selectionStyle = .none 
-        
-        //Setting up cell appearance
+
+        selectionStyle = .none
+
+        // Setting up cell appearance
         DesignManager.setBackgroundStandartShape(layer: weatherBackgroundView.layer)
         DesignManager.setBackgroundStandartShadow(layer: weatherBackgroundView.layer)
-        
-        //Making cells shadow be able to spill over other cells
+
+        // Making cells shadow be able to spill over other cells
         layer.masksToBounds = false
         backgroundColor = .clear
-        
-        //Setting up gradient layer
+
+        // Setting up gradient layer
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
-        gradient.locations = [NSNumber(floatLiteral: 0.0), NSNumber(floatLiteral: 1.0)]
-        
+
         gradient.colors = DesignManager.getStandartGradientColor(withStyle: .blank)
-        
-        weatherBackgroundView.layer.insertSublayer(gradient, at: 0) //Adding gradient at the bottom
-        
+
+        weatherBackgroundView.layer.insertSublayer(gradient, at: 0) // Adding gradient at the bottom
+
         let loader = UIActivityIndicatorView()
         loader.startAnimating()
-    
-        
+
         leftStackView.addArrangedSubview(cityLoadView)
         leftStackView.addArrangedSubview(timeLoadView)
-        
+
         rightStackView.addArrangedSubview(loader)
         rightStackView.addArrangedSubview(degreeLoadView)
-        
+
         mainStackView.addArrangedSubview(leftStackView)
         mainStackView.addArrangedSubview(rightStackView)
-        
+
         addSubview(weatherBackgroundView)
         weatherBackgroundView.addSubview(mainStackView)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        
-        //Configuring gradient frame when views calculating
-        //gradient.frame = weatherBackgroundView.bounds < -- Return
-        
+
+        // Configuring gradient frame when views calculating
+        // gradient.frame = weatherBackgroundView.bounds < -- Return
+
         DesignManager.setBackgroundStandartShape(layer: gradient)
-        
-        //Setting up gray lines corners
+
+        // Setting up gray lines corners
         cityLoadView.layer.cornerRadius = 5
         timeLoadView.layer.cornerRadius = 5
         degreeLoadView.layer.cornerRadius = 10
-        
+
         setUpConstraints()
     }
-    
-    //MARK: - Private functions
-    
+
+    // MARK: - Private functions
+
     private func setUpConstraints() {
-        
+
         // Background
         weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
         weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
         weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
-        
-        //LoadingTitle
+
+        // LoadingTitle
         cityLoadView.heightAnchor.constraint(equalToConstant: 21).isActive = true
         cityLoadView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        //Loading time
+
+        // Loading time
         timeLoadView.heightAnchor.constraint(equalToConstant: 15).isActive = true
         timeLoadView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        //Degree view
+
+        // Degree view
         degreeLoadView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         degreeLoadView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        //MainStackView
+
+        // MainStackView
         mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: 10).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: weatherBackgroundView.bottomAnchor, constant: -10).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: weatherBackgroundView.leadingAnchor, constant: 20).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: weatherBackgroundView.trailingAnchor, constant: -10).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: weatherBackgroundView.bottomAnchor,
+                                              constant: -10).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: weatherBackgroundView.leadingAnchor,
+                                               constant: 20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: weatherBackgroundView.trailingAnchor,
+                                                constant: -10).isActive = true
     }
 }

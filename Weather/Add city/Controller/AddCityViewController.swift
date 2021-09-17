@@ -9,36 +9,35 @@ import UIKit
 import MapKit
 
 class AddCityViewController: UIViewController {
-    
-    //MARK: - Public properties
-    
+
+    // MARK: - Public properties
+
     var delegate: AddCityDelegate?
-    
+
     private let addCityView = AddCityView()
-    
-    //MARK: - Lifecycle
-    
+
+    // MARK: - Lifecycle
+
     override func loadView() {
-        super.loadView()
         view = addCityView
         addCityView.viewControllerOwner = self
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
-    
-    //MARK: - Functions
-    
+
+    // MARK: - Functions
+
     func didChoseCity(_ name: String, lat: CLLocationDegrees, long: CLLocationDegrees) {
         delegate?.addNewItem(name, lat: lat, long: long)
-        
+
         dismiss(animated: true) {
             self.delegate?.didAddNewCity()
         }
     }
-    
+
     func didFinishedWithError(error: Error?) {
         delegate?.didFailAddingNewCityWithError(error: error)
     }

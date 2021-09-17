@@ -9,19 +9,20 @@ import XCTest
 import CoreData
 
 class CoreDataTests: XCTestCase {
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
         let description = NSPersistentStoreDescription()
         description.url = URL(fileURLWithPath: "/dev/null")
-        
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: K.CoreData.modelName, withExtension:"momd") else {
+
+        guard let modelURL = Bundle(for: type(of: self))
+                .url(forResource: K.CoreData.modelName, withExtension: "momd") else {
                 fatalError("Error loading model from bundle")
         }
 
         guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
             fatalError("Error initializing mom from: \(modelURL)")
         }
-        
+
         let container = NSPersistentContainer(name: K.CoreData.modelName, managedObjectModel: mom)
         container.persistentStoreDescriptions = [description]
         container.loadPersistentStores { _, error in
@@ -31,16 +32,16 @@ class CoreDataTests: XCTestCase {
         }
         return container
     }()
-    
+
     var sut: WeatherCoreDataManager?
-    
+
     override func setUp() {
         super.setUp()
         let context = persistentContainer.newBackgroundContext()
         sut = WeatherCoreDataManager(managedContext: context)
-        
+
     }
-    
+
     func testDeleteItem() {
         // arrange
         let cityToDelete = SavedCity(name: "CityToDelete",
@@ -52,7 +53,7 @@ class CoreDataTests: XCTestCase {
         // act
         sut?.deleteItem(at: 0)
         guard let result = sut?.getSavedItems else {
-            XCTFail()
+            XCTFail("testDeleteItem failed")
             return
         }
         // assert
@@ -68,7 +69,7 @@ class CoreDataTests: XCTestCase {
         // assert
         XCTAssertNotNil(result)
     }
-    
+
     func testGetManagedObjects() {
         // arrange
         for iterator in 0...5 {
@@ -78,13 +79,13 @@ class CoreDataTests: XCTestCase {
         }
         // act
         guard let savedCities = sut?.getSavedItems else {
-            XCTFail()
+            XCTFail("testGetManagedObjects failed")
             return
         }
         // assert
         XCTAssertEqual(savedCities.count, 6)
     }
-    
+
     func testDeleteAll() {
         // arrange
         for iterator in 0...10 {
@@ -95,13 +96,13 @@ class CoreDataTests: XCTestCase {
         // act
         sut?.deleteAll()
         guard let result = sut?.getSavedItems else {
-            XCTFail()
+            XCTFail("testDeleteAll failed")
             return
         }
         // assert
         XCTAssertEqual(result.count, 0)
     }
-    
+
     func testRearrangeItems() {
         // arrange
         sut?.addNewItem("TestCity1", lat: 0, long: 0)
@@ -109,7 +110,7 @@ class CoreDataTests: XCTestCase {
         // act
         sut?.rearrangeItems(at: 1, to: 0)
         guard let result = sut?.getSavedItems?.first else {
-            XCTFail()
+            XCTFail("testRearrangeItems failed")
             return
         }
         // assert
