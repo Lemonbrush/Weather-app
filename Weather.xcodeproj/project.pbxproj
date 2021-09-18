@@ -36,7 +36,6 @@
 		DD42151B26F11B4E00BD4C4F /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 		DD42151D26F11B4E00BD4C4F /* WeatherCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */; };
 		DD42151E26F11B4E00BD4C4F /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7070112E267FDDD200B1B0F4 /* UserDefaultsManager.swift */; };
-		DD42151F26F11B4E00BD4C4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017AAAC261B191000953C5B /* AppDelegate.swift */; };
 		DD42152026F11B4E00BD4C4F /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6226ED0B1500DD5FAC /* CityDetailViewController.swift */; };
 		DD42152126F11B4E00BD4C4F /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017AAC6261B242400953C5B /* MainMenuTableViewCell.swift */; };
 		DD42152226F11B4E00BD4C4F /* WeeklyForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707010FF2675648800B1B0F4 /* WeeklyForecastCell.swift */; };
@@ -88,7 +87,6 @@
 		DD4215BC26F4F17000BD4C4F /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149826EFDE1F00BD4C4F /* City+CoreDataProperties.swift */; };
 		DD4215BD26F4F17000BD4C4F /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017AAC6261B242400953C5B /* MainMenuTableViewCell.swift */; };
 		DD4215BE26F4F17000BD4C4F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BB8CB261EF84600D658C4 /* NetworkManager.swift */; };
-		DD4215BF26F4F17000BD4C4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017AAAC261B191000953C5B /* AppDelegate.swift */; };
 		DD4215C026F4F17000BD4C4F /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6226ED0B1500DD5FAC /* CityDetailViewController.swift */; };
 		DD4215C126F4F17000BD4C4F /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 		DD4215C226F4F17000BD4C4F /* DesignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704173A9265131CC001B1335 /* DesignManager.swift */; };
@@ -932,7 +930,6 @@
 				DD42152E26F11B4E00BD4C4F /* WeeklyForecastTableView.swift in Sources */,
 				DD42151826F11B4E00BD4C4F /* HourlyCollectionViewCell.swift in Sources */,
 				DD42151D26F11B4E00BD4C4F /* WeatherCoreDataManager.swift in Sources */,
-				DD42151F26F11B4E00BD4C4F /* AppDelegate.swift in Sources */,
 				DD42156B26F27C1400BD4C4F /* MainMenuTableViewCellBuilderTests.swift in Sources */,
 				DD42152626F11B4E00BD4C4F /* NetworkManager.swift in Sources */,
 				DD42152026F11B4E00BD4C4F /* CityDetailViewController.swift in Sources */,
@@ -977,7 +974,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD4215C426F4F17000BD4C4F /* WeeklyForecastTableView.swift in Sources */,
-				DD4215BF26F4F17000BD4C4F /* AppDelegate.swift in Sources */,
 				DD4215BC26F4F17000BD4C4F /* City+CoreDataProperties.swift in Sources */,
 				DD4215C326F4F17000BD4C4F /* WeatherQualityItemView.swift in Sources */,
 				DD4215AF26F4F13500BD4C4F /* City+CoreDataClass.swift in Sources */,
