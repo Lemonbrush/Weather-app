@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,12 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootViewController.dataStorage = WeatherCoreDataManager(managedContext:
                                                                     persistentContainer.newBackgroundContext())
         let navigationController = UINavigationController(rootViewController: rootViewController)
-
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
         self.window = window
+
+        FirebaseApp.configure()
 
         return true
     }
