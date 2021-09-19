@@ -63,11 +63,22 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-
-        imageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        let stackViewLeadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5)
+        stackViewLeadingConstraint.priority = UILayoutPriority(999)
+        stackViewLeadingConstraint.isActive = true
+        
+        let stackViewTrailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+        stackViewTrailingConstraint.priority = UILayoutPriority(999)
+        stackViewTrailingConstraint.isActive = true
+        
+        let imageViewWidthConstraint = imageView.widthAnchor.constraint(equalToConstant: 25)
+        imageViewWidthConstraint.priority = UILayoutPriority(999)
+        imageViewWidthConstraint.isActive = true
+        
+        let imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 25)
+        imageViewHeightConstraint.priority = UILayoutPriority(999)
+        imageViewHeightConstraint.isActive = true
     }
 
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes)

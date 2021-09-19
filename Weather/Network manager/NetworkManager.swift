@@ -41,8 +41,8 @@ struct NetworkManager {
         if let url = URL(string: encodedURLString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, _, error in
-                let str = String(decoding: data!, as: UTF8.self)
-                print("\n\n\n\(str)\n\n\n")
+                //let str = String(decoding: data!, as: UTF8.self)
+                //print("\n\n\n\(str)\n\n\n")
                 // In case of error
                 guard error == nil else {
                     delegate?.didFailWithError(error: error!) // let the delegate handle the error
