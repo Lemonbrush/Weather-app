@@ -84,7 +84,7 @@ class WeatherCoreDataManager: DataStorageProtocol {
         cityEntities.insert(mover, at: secondIndex)
 
         for (index, entity) in cityEntities.enumerated() {
-            entity.orderPosition = index
+            entity.orderPosition = Int32(index)
         }
 
         do {

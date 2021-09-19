@@ -156,8 +156,12 @@ class MainMenuView: UIView {
         // Main stackView
         mainHeaderStackView.leadingAnchor.constraint(equalTo: tableViewHeaderView.leadingAnchor,
                                                      constant: 15).isActive = true
-        mainHeaderStackView.trailingAnchor.constraint(equalTo: tableViewHeaderView.trailingAnchor,
-                                                      constant: -15).isActive = true
+
+        let mainHeaderStackViewConstaint = mainHeaderStackView.trailingAnchor.constraint(equalTo: tableViewHeaderView.trailingAnchor,
+                                                                                         constant: -15)
+        mainHeaderStackViewConstaint.priority = UILayoutPriority(999)
+        mainHeaderStackViewConstaint.isActive = true
+
         mainHeaderStackView.bottomAnchor.constraint(equalTo: tableViewHeaderView.bottomAnchor,
                                                     constant: -5).isActive = true
         mainHeaderStackView.topAnchor.constraint(equalTo: tableViewHeaderView.topAnchor,

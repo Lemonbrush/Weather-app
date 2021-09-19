@@ -16,7 +16,7 @@ class HourlyForecastView: UIView {
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: 1, height: 1)
+        layout.estimatedItemSize = CGSize(width: 50, height: 100)
         layout.shouldInvalidateLayout(forBoundsChange: CGRect())
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HourlyCollectionViewCell.self,

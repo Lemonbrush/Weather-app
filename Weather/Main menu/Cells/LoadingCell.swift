@@ -54,7 +54,7 @@ class LoadingCell: UITableViewCell {
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 8
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -140,12 +140,22 @@ class LoadingCell: UITableViewCell {
         weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
 
         // LoadingTitle
-        cityLoadView.heightAnchor.constraint(equalToConstant: 21).isActive = true
-        cityLoadView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        let cityLoadViewHeightConstraint = cityLoadView.heightAnchor.constraint(equalToConstant: 21)
+        cityLoadViewHeightConstraint.priority = UILayoutPriority(999)
+        cityLoadViewHeightConstraint.isActive = true
+        
+        let cityLoadViewWidthConstraint = cityLoadView.widthAnchor.constraint(equalToConstant: 100)
+        cityLoadViewWidthConstraint.priority = UILayoutPriority(999)
+        cityLoadViewWidthConstraint.isActive = true
 
         // Loading time
-        timeLoadView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        timeLoadView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        let timeLoadViewHeightConstraint = timeLoadView.heightAnchor.constraint(equalToConstant: 15)
+        timeLoadViewHeightConstraint.priority = UILayoutPriority(999)
+        timeLoadViewHeightConstraint.isActive = true
+        
+        let timeLoadViewWidthConstraint = timeLoadView.widthAnchor.constraint(equalToConstant: 60)
+        timeLoadViewWidthConstraint.priority = UILayoutPriority(999)
+        timeLoadViewWidthConstraint.isActive = true
 
         // Degree view
         degreeLoadView.heightAnchor.constraint(equalToConstant: 60).isActive = true
