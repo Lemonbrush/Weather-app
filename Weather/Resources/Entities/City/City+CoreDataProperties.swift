@@ -18,7 +18,7 @@ extension City {
     @NSManaged public var name: String?
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var orderPosition: Int
+    @NSManaged public var orderPosition: Int32
 
 }
 
