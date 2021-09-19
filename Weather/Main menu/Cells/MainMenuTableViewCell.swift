@@ -156,12 +156,12 @@ class MainMenuTableViewCell: UITableViewCell {
     private func setUpConstraints() {
         // Background
         weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        let weatherBackgroundViewBottomConstraint = weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+        let weatherBackgroundViewBottomConstraint = weatherBackgroundView.bottomAnchor
+            .constraint(equalTo: bottomAnchor, constant: -5)
         weatherBackgroundViewBottomConstraint.priority = UILayoutPriority(999)
         weatherBackgroundViewBottomConstraint.isActive = true
         weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
-        
 
         // Condition image
         conditionImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true

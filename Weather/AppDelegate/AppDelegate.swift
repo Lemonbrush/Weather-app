@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = window
 
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
 
         return true

@@ -143,7 +143,7 @@ class LoadingCell: UITableViewCell {
         let cityLoadViewHeightConstraint = cityLoadView.heightAnchor.constraint(equalToConstant: 21)
         cityLoadViewHeightConstraint.priority = UILayoutPriority(999)
         cityLoadViewHeightConstraint.isActive = true
-        
+
         let cityLoadViewWidthConstraint = cityLoadView.widthAnchor.constraint(equalToConstant: 100)
         cityLoadViewWidthConstraint.priority = UILayoutPriority(999)
         cityLoadViewWidthConstraint.isActive = true
@@ -152,7 +152,7 @@ class LoadingCell: UITableViewCell {
         let timeLoadViewHeightConstraint = timeLoadView.heightAnchor.constraint(equalToConstant: 15)
         timeLoadViewHeightConstraint.priority = UILayoutPriority(999)
         timeLoadViewHeightConstraint.isActive = true
-        
+
         let timeLoadViewWidthConstraint = timeLoadView.widthAnchor.constraint(equalToConstant: 60)
         timeLoadViewWidthConstraint.priority = UILayoutPriority(999)
         timeLoadViewWidthConstraint.isActive = true
