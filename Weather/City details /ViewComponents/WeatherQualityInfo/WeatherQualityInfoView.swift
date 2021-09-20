@@ -22,8 +22,8 @@ class WeatherQualityInfoView: UIView {
 
     private var uvIndexItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: "sun.max")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.imageView.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysTemplate)
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultSunColor
         qualityItem.titleLabel.text = "UV index"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
@@ -31,8 +31,8 @@ class WeatherQualityInfoView: UIView {
 
     private var humidityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: "drop")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.imageView.image = UIImage(systemName: "drop.fill")?.withRenderingMode(.alwaysTemplate)
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
         qualityItem.titleLabel.text = "Humidity"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
@@ -40,8 +40,8 @@ class WeatherQualityInfoView: UIView {
 
     private var cloudinessItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: "cloud")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.imageView.image = UIImage(systemName: "cloud.fill")?.withRenderingMode(.alwaysTemplate)
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
         qualityItem.titleLabel.text = "Cloudiness"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
@@ -50,7 +50,7 @@ class WeatherQualityInfoView: UIView {
     private var windItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: "wind")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
         qualityItem.titleLabel.text = "Wind"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
@@ -59,7 +59,7 @@ class WeatherQualityInfoView: UIView {
     private var pressureItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: "arrow.down.to.line")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
         qualityItem.titleLabel.text = "Pressure"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
@@ -67,8 +67,8 @@ class WeatherQualityInfoView: UIView {
 
     private var visibilityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: "eye")?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = .systemGray4
+        qualityItem.imageView.image = UIImage(systemName: "eye.fill")?.withRenderingMode(.alwaysTemplate)
+        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
         qualityItem.titleLabel.text = "Visibility"
         qualityItem.subTitleLabel.text = "-"
         return qualityItem
