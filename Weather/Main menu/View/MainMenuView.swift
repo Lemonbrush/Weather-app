@@ -63,7 +63,7 @@ class MainMenuView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 10
+        stackView.spacing = 5
         return stackView
     }()
 
