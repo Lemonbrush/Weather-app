@@ -14,6 +14,7 @@ class WeatherQualityItemView: UIView {
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
+        stackView.spacing = 5
         stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false

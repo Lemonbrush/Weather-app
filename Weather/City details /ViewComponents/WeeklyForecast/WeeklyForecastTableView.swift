@@ -112,8 +112,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
 
         let cellImageName = WeatherModel.getConditionNameBy(conditionId: targetWeather.weather[0].id)
         cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-        cell.conditionImage.tintColor = .black
-
+        cell.conditionImage.tintColor = K.Colors.WeatherIcons.defaultColor
         return cell
     }
 
