@@ -76,8 +76,13 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
 
             cell.topLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
             let cellImageName = WeatherModel.getConditionNameBy(conditionId: currentHour.weather[0].id)
-            cell.imageView.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-            cell.imageView.tintColor = K.Colors.WeatherIcons.defaultColor
+            
+            let imageBuilder = ConditionImageBuilder()
+            cell.imageView.image = imageBuilder
+                .erase(.defaultColors)
+                .build(systemImageName: cellImageName)
+                .buildColor()
+                .content
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
 
             return cell
