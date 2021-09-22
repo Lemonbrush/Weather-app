@@ -57,5 +57,10 @@ struct K {
             static let blank = [UIColor.clear.cgColor]
             static let fog = [UIColor.clear.cgColor]
         }
+        
+        struct WeatherIcons {
+            static let defaultColor = UIColor(red: 121 / 255, green: 199 / 255, blue: 248 / 255, alpha: 1)
+            static let defaultSunColor = UIColor(red: 244 / 255, green: 189 / 255, blue: 59 / 255, alpha: 1)
+        }
     }
 }

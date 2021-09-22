@@ -65,8 +65,15 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
     }
 
     func build(imageByConditionName imageName: String) -> Self {
-        let newImage = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
-        _content.conditionImage.image = newImage?.withTintColor(.black)
+        let imageBuilder = ConditionImageBuilder()
+        let newImage = imageBuilder
+            .erase(.defaultColors)
+            .build(systemImageName: imageName)
+            .buildColor()
+            .content
+        
+        _content.conditionImage.image = newImage
+
         return self
     }
 
