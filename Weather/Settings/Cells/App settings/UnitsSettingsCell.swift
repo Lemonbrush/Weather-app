@@ -27,14 +27,30 @@ class UnitsSettingsCell: UITableViewCell {
 
     private let temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.text = "Temperature"
         return label
+    }()
+    
+    private let settingsIcon: UIImageView = {
+        let imageView = UIImageView()
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        imageView.image = UIImage(systemName: "ruler", withConfiguration: imageConfiguration) ?? UIImage()
+        imageView.tintColor = .black
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
     private var temperatureCellStackView: UIStackView = {
         let stack = UIStackView()
+        stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private var leftStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 10
         return stack
     }()
     
@@ -56,7 +72,10 @@ class UnitsSettingsCell: UITableViewCell {
             unitSwitch.selectedSegmentIndex = 0
         }
         
-        temperatureCellStackView.addArrangedSubview(temperatureLabel)
+        leftStackView.addArrangedSubview(settingsIcon)
+        leftStackView.addArrangedSubview(temperatureLabel)
+        
+        temperatureCellStackView.addArrangedSubview(leftStackView)
         temperatureCellStackView.addArrangedSubview(unitSwitch)
 
         contentView.addSubview(temperatureCellStackView)

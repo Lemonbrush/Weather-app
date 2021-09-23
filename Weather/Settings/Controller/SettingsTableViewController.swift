@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct SettingsSection {
+    var title: String?
+    var cells: [UITableViewCell]
+}
+
 class SettingsViewController: UIViewController {
     
     // MARK: - Private properties
@@ -34,7 +39,9 @@ class SettingsViewController: UIViewController {
         
         unitsSettingsCell.delegate = self
         
-        mainView.settingCells?.append(unitsSettingsCell)
+        let appSettingsSection = SettingsSection(title: "APP", cells: [unitsSettingsCell])
+        
+        mainView.settingsSections?.append(appSettingsSection)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
