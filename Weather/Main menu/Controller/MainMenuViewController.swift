@@ -83,9 +83,11 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func showSettingsVC() {
-        let destinationVC = SettingsTableViewController()
+        let destinationVC = SettingsViewController()
         destinationVC.mainMenuDelegate = self
-        present(destinationVC, animated: true, completion: nil)
+        
+        let navigationController = UINavigationController(rootViewController: destinationVC)
+        present(navigationController, animated: true, completion: nil)
     }
 
     func fetchWeatherData() {
