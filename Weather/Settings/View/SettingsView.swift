@@ -21,7 +21,7 @@ class SettingsView: UIView {
     // MARK: - Public properties
     
     weak var viewControllerOwner: SettingsViewController?
-    var settingCells: [UITableViewCell]? = []
+    var settingsSections: [SettingsSection]? = []
     
     // MARK: - Construction
     
@@ -53,15 +53,21 @@ class SettingsView: UIView {
 extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingCells?.count ?? 0
+        return settingsSections?[section].cells.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        return settingCells?[indexPath.row] ?? UITableViewCell()
+        guard let safeCell = settingsSections?[indexPath.section].cells[indexPath.row] else {
+            return UITableViewCell()
+        }
+        return safeCell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return settingsSections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return settingsSections?[section].title
     }
 }
