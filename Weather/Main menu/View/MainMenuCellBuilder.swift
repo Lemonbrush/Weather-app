@@ -65,14 +65,14 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
     }
 
     func build(imageByConditionName imageName: String) -> Self {
-        let newImage = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
+        let imageBuilder = ConditionImageBuilder()
+        let newImage = imageBuilder
+            .erase(.defaultColors)
+            .build(systemImageName: imageName)
+            .buildColor()
+            .content
+        
         _content.conditionImage.image = newImage
-
-        if imageName == "sun.max.fill" {
-            _content.conditionImage.tintColor = K.Colors.WeatherIcons.defaultSunColor
-        } else {
-            _content.conditionImage.tintColor = K.Colors.WeatherIcons.defaultColor
-        }
 
         return self
     }

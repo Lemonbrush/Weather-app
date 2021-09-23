@@ -250,8 +250,13 @@ class CityDetailViewController: UIViewController {
 
     private func setLabelsAndImages(with newData: WeatherModel) {
         let conditionImageName = WeatherModel.getConditionNameBy(conditionId: newData.conditionId)
-        conditionImage.image = UIImage(systemName: conditionImageName)?.withRenderingMode(.alwaysTemplate)
-        conditionImage.tintColor = .white
+        
+        let imageBuilder = ConditionImageBuilder()
+        conditionImage.image = imageBuilder
+            .erase(.onlyWhite)
+            .build(systemImageName: conditionImageName)
+            .buildColor()
+            .content
 
         tempLebel.text = newData.temperatureString
 

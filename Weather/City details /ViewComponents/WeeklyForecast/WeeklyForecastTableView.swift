@@ -111,8 +111,12 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         cell.minTemperatureLabel.text = String(format: "%.0f°", targetWeather.temp.min)
 
         let cellImageName = WeatherModel.getConditionNameBy(conditionId: targetWeather.weather[0].id)
-        cell.conditionImage.image = UIImage(systemName: cellImageName)?.withRenderingMode(.alwaysTemplate)
-        cell.conditionImage.tintColor = K.Colors.WeatherIcons.defaultColor
+        let conditionImageBuilder = ConditionImageBuilder()
+        cell.conditionImage.image = conditionImageBuilder
+            .erase(.defaultColors)
+            .build(systemImageName: cellImageName)
+            .buildColor()
+            .content
         return cell
     }
 
