@@ -83,7 +83,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func showSettingsVC() {
-        let destinationVC = SettingsTableViewController()
+        let destinationVC = SettingsViewController()
         destinationVC.mainMenuDelegate = self
         
         let navigationController = UINavigationController(rootViewController: destinationVC)
