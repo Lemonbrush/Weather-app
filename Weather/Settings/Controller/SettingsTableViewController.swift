@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     // MARK: - Private properties
     
     private let unitsSettingsCell = UnitsSettingsCell()
+    private let colorThemeSettingsCell = ColorThemeSettingsCell()
     
     private let mainView = SettingsView()
 
@@ -38,8 +39,11 @@ class SettingsViewController: UIViewController {
         navigationItem.title = "Settings"
         
         unitsSettingsCell.delegate = self
+        colorThemeSettingsCell.delegate = self
         
-        let appSettingsSection = SettingsSection(title: "APP", cells: [unitsSettingsCell])
+        let appSettingsSection = SettingsSection(title: "APP",
+                                                 cells: [unitsSettingsCell,
+                                                         colorThemeSettingsCell])
         
         mainView.settingsSections?.append(appSettingsSection)
     }
@@ -60,5 +64,12 @@ extension SettingsViewController: UnitSwitchCellDelegate {
         default:
             break
         }
+    }
+}
+
+extension SettingsViewController: ColorThemeSettingsCellDelegste {
+    func presentColorThemes() {
+        navigationController?.pushViewController(ColorThemeSettingsViewController(),
+                                                 animated: true)
     }
 }
