@@ -57,15 +57,7 @@ class ColorThemeSettingsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        themeColorBlocksView.setupColors([.systemBlue,
-                                          .systemOrange,
-                                            .systemPink,
-                                            .systemBrown,
-                                            .systemRed,
-                                          .systemPurple,
-                                            .systemYellow,
-                                          .lightText,
-                                            .systemTeal])
+        themeColorBlocksView.setupColors(ColorThemeManager.getColorThemes()?.first?.clearSky)
         
         leftStackView.addArrangedSubview(themeIcon)
         leftStackView.addArrangedSubview(themeLabel)

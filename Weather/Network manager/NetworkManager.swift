@@ -32,7 +32,7 @@ struct NetworkManager {
         performRequest(with: urlString, at: position)
     }
 
-    // MARK: - Public functions
+    // MARK: - Private functions
 
     private func performRequest(with urlString: String, at position: Int) {
         // Getting rid of any spaces in the URL string

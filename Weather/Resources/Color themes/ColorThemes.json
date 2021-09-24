@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Default",
+    "clear_sky": [
+      "#46c4f8",
+      "#f4a231"
+    ],
+    "few_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "scattered_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "broken_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "shower_rain": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "rain": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "thunderstorm": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "snow": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "mist": [
+      "#ffb80c",
+      "#ffb80c"
+    ]
+  }
+]

@@ -31,6 +31,10 @@
 		DD2A875A26FE395D002AC36C /* ColorThemeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A875926FE395D002AC36C /* ColorThemeSettingsView.swift */; };
 		DD2A875C26FE3D7F002AC36C /* SettingsCellTappableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A875B26FE3D7F002AC36C /* SettingsCellTappableProtocol.swift */; };
 		DD2A875F26FE406A002AC36C /* ThemeColorsBlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A875E26FE406A002AC36C /* ThemeColorsBlocksView.swift */; };
+		DD2A876226FE5C86002AC36C /* ColorThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = DD2A876126FE5C86002AC36C /* ColorThemes.json */; };
+		DD2A876726FE616A002AC36C /* ColorThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876626FE616A002AC36C /* ColorThemeData.swift */; };
+		DD2A876926FE6306002AC36C /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876826FE6306002AC36C /* ColorThemeModel.swift */; };
+		DD2A876B26FE6800002AC36C /* ColorThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876A26FE6800002AC36C /* ColorThemeManager.swift */; };
 		DD42149126EFB7D100BD4C4F /* WeatherCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */; };
 		DD42149926EFDE1F00BD4C4F /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */; };
 		DD42149A26EFDE1F00BD4C4F /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149826EFDE1F00BD4C4F /* City+CoreDataProperties.swift */; };
@@ -129,6 +133,10 @@
 		DD2A875926FE395D002AC36C /* ColorThemeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeSettingsView.swift; sourceTree = "<group>"; };
 		DD2A875B26FE3D7F002AC36C /* SettingsCellTappableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellTappableProtocol.swift; sourceTree = "<group>"; };
 		DD2A875E26FE406A002AC36C /* ThemeColorsBlocksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorsBlocksView.swift; sourceTree = "<group>"; };
+		DD2A876126FE5C86002AC36C /* ColorThemes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ColorThemes.json; sourceTree = "<group>"; };
+		DD2A876626FE616A002AC36C /* ColorThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeData.swift; sourceTree = "<group>"; };
+		DD2A876826FE6306002AC36C /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
+		DD2A876A26FE6800002AC36C /* ColorThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeManager.swift; sourceTree = "<group>"; };
 		DD42148E26EFB3D500BD4C4F /* CitiesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CitiesModel.xcdatamodel; sourceTree = "<group>"; };
 		DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoreDataManager.swift; sourceTree = "<group>"; };
 		DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "City+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -211,6 +219,7 @@
 				DD42149626EFDDE100BD4C4F /* Entities */,
 				7017AAB5261B191200953C5B /* Assets.xcassets */,
 				7017AAB7261B191200953C5B /* LaunchScreen.storyboard */,
+				DD2A876326FE5C8E002AC36C /* Color themes */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -271,9 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				DD2A875326FE375A002AC36C /* Theme screen */,
-				DD2A874326FD01DE002AC36C /* Cells */,
-				DD2A874726FD02D8002AC36C /* Controller */,
-				DD2A874826FD02E2002AC36C /* View */,
+				DD2A876426FE60D1002AC36C /* Settings screen */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -284,7 +291,6 @@
 				7001F8BD26334E2100E5E593 /* TransitionAnimation */,
 				DD55457726E4C994005DB276 /* Controller */,
 				DD55457826E4C99D005DB276 /* View */,
-				704173CB265684F9001B1335 /* Cells */,
 			);
 			path = "Main menu";
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 		DD2A874826FD02E2002AC36C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD2A874326FD01DE002AC36C /* Cells */,
 				DD2A874926FD0339002AC36C /* SettingsView.swift */,
 			);
 			path = View;
@@ -389,6 +396,50 @@
 				DD2A875E26FE406A002AC36C /* ThemeColorsBlocksView.swift */,
 			);
 			path = "Color boxes";
+			sourceTree = "<group>";
+		};
+		DD2A876326FE5C8E002AC36C /* Color themes */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A876126FE5C86002AC36C /* ColorThemes.json */,
+			);
+			path = "Color themes";
+			sourceTree = "<group>";
+		};
+		DD2A876426FE60D1002AC36C /* Settings screen */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A876526FE611F002AC36C /* Model */,
+				DD2A874726FD02D8002AC36C /* Controller */,
+				DD2A874826FD02E2002AC36C /* View */,
+			);
+			path = "Settings screen";
+			sourceTree = "<group>";
+		};
+		DD2A876526FE611F002AC36C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A876D26FE6832002AC36C /* Color theme manager */,
+				DD2A876E26FE6843002AC36C /* Color theme data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD2A876D26FE6832002AC36C /* Color theme manager */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A876826FE6306002AC36C /* ColorThemeModel.swift */,
+				DD2A876A26FE6800002AC36C /* ColorThemeManager.swift */,
+			);
+			path = "Color theme manager";
+			sourceTree = "<group>";
+		};
+		DD2A876E26FE6843002AC36C /* Color theme data */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A876626FE616A002AC36C /* ColorThemeData.swift */,
+			);
+			path = "Color theme data";
 			sourceTree = "<group>";
 		};
 		DD42148C26EFB2F200BD4C4F /* Model */ = {
@@ -553,6 +604,7 @@
 		DD55457826E4C99D005DB276 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				704173CB265684F9001B1335 /* Cells */,
 				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
 				DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */,
 				DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */,
@@ -740,6 +792,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7017AAB9261B191200953C5B /* LaunchScreen.storyboard in Resources */,
+				DD2A876226FE5C86002AC36C /* ColorThemes.json in Resources */,
 				7017AAB6261B191200953C5B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -770,8 +823,10 @@
 				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
 				7017AAB1261B191000953C5B /* MainMenuViewController.swift in Sources */,
 				704173AA265131CC001B1335 /* DesignManager.swift in Sources */,
+				DD2A876926FE6306002AC36C /* ColorThemeModel.swift in Sources */,
 				7070112A2677225600B1B0F4 /* HourlyCollectionViewCell.swift in Sources */,
 				DDAE0B6526ED0D2F00DD5FAC /* WeeklyForecastTableView.swift in Sources */,
+				DD2A876726FE616A002AC36C /* ColorThemeData.swift in Sources */,
 				DD2A874626FD0220002AC36C /* UnitsSettingsCell.swift in Sources */,
 				DD55272526FBACCF0098A8B2 /* ConditionImageBuilder.swift in Sources */,
 				7017AAAD261B191000953C5B /* AppDelegate.swift in Sources */,
@@ -794,6 +849,7 @@
 				7070112F267FDDD200B1B0F4 /* UserDefaultsManager.swift in Sources */,
 				705BB8D2261EFC3D00D658C4 /* WeatherData.swift in Sources */,
 				DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */,
+				DD2A876B26FE6800002AC36C /* ColorThemeManager.swift in Sources */,
 				DDAE0B6326ED0B1500DD5FAC /* CityDetailViewController.swift in Sources */,
 				DDAE0B5B26ED092600DD5FAC /* HourlyForecastView.swift in Sources */,
 				70E7E1EA262712A100187412 /* FadeTransitionAnimator.swift in Sources */,
