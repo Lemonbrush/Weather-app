@@ -17,4 +17,14 @@ struct UserDefaultsManager {
             UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
         }
     }
+    
+    struct ColorTheme {
+        static func getCurrentColorThemeNumber() -> Int? {
+            return UserDefaults.standard.integer(forKey: K.UserDefaults.colorThemePositionNumber)
+        }
+
+        static func setChosenPositionColorTheme(with position: Int) {
+            UserDefaults.standard.setValue(position, forKey: K.UserDefaults.colorThemePositionNumber)
+        }
+    }
 }

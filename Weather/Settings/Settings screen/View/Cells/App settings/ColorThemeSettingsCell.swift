@@ -57,7 +57,7 @@ class ColorThemeSettingsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        themeColorBlocksView.setupColors(ColorThemeManager.getColorThemes()?.first?.clearSky)
+        setupCurrentThemeColors()
         
         leftStackView.addArrangedSubview(themeIcon)
         leftStackView.addArrangedSubview(themeLabel)
@@ -90,6 +90,19 @@ class ColorThemeSettingsCell: UITableViewCell {
         
         // Color blocks
         //theme
+    }
+    
+    func setupCurrentThemeColors() {
+        let colorTheme = ColorThemeManager.getColorThemes()![UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()!]
+        
+        var colors: [UIColor] = []
+        colors.append(colorTheme.clearSky.first ?? .white)
+        colors.append(colorTheme.fewClouds.first ?? .white)
+        colors.append(colorTheme.showerRain.first ?? .white)
+        colors.append(colorTheme.thunderstorm.first ?? .white)
+        colors.append(colorTheme.snow.first ?? .white)
+        
+        themeColorBlocksView.setupColors(colors)
     }
 }
 

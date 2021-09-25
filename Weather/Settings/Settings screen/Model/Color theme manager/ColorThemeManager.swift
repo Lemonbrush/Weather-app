@@ -32,12 +32,10 @@ struct ColorThemeManager {
         } catch {
             print(error)
         }
-        
         return nil
     }
     
     static private func parseJSON(_ colorThemeData: Data) -> [ColorThemeModel]? {
-        
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode([ColorThemesData].self, from: colorThemeData)

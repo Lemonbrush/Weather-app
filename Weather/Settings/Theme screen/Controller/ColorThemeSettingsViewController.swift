@@ -13,15 +13,12 @@ class ColorThemeSettingsViewController: UIViewController {
     
     private let mainView = ColorThemeSettingsView()
     
-    // MARK: - Public properties
-    
-    
-    
     // MARK: - Lifecycle
     
     override func loadView() {
         view = mainView
         mainView.viewControllerOwner = self
+        mainView.colorThemes = ColorThemeManager.getColorThemes()
     }
     
     override func viewDidLoad() {

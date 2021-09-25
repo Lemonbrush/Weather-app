@@ -11,6 +11,8 @@ class ThemeColorsBlocksView: UIView {
     
     // MARK: - Private functions
     
+    private let numberOfBlocks = 5
+    
     private var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 5
@@ -19,6 +21,8 @@ class ThemeColorsBlocksView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private var blocks: [UIView] = []
     
     // MARK: - Construction
     
@@ -29,6 +33,7 @@ class ThemeColorsBlocksView: UIView {
         addSubview(stackView)
         
         setupConstraints()
+        setupBlocks()
     }
     
     required init?(coder: NSCoder) {
@@ -44,12 +49,25 @@ class ThemeColorsBlocksView: UIView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
+    private func setupBlocks() {
+        for _ in 0...numberOfBlocks {
+            let block = makeColorBlock(color: .white)
+            blocks.append(block)
+            stackView.addArrangedSubview(block)
+        }
+    }
+    
     private func makeColorBlock(color: UIColor) -> UIView {
-        let blockSize: CGFloat = 25
+        let blockSize: CGFloat = 20
         let block = UIView()
         block.backgroundColor = color
         block.layer.cornerRadius = 5
         block.translatesAutoresizingMaskIntoConstraints = false
+       
+        block.layer.shadowColor = UIColor.black.cgColor
+        block.layer.shadowOpacity = 0.1
+        block.layer.shadowOffset = CGSize(width: 0, height: 3)
+        block.layer.shadowRadius = 7
         
         block.heightAnchor.constraint(equalToConstant: blockSize).isActive = true
         block.widthAnchor.constraint(equalToConstant: blockSize).isActive = true
@@ -60,19 +78,12 @@ class ThemeColorsBlocksView: UIView {
     // MARK: - Public functions
     
     func setupColors(_ colors: [UIColor]?) {
-        guard let safeColors = colors else {
-            let emptyLabel = UILabel()
-            emptyLabel.text = "Empty"
-            emptyLabel.textColor = .lightGray
-            stackView.addArrangedSubview(emptyLabel)
+        guard let safeColors = colors, colors?.count == numberOfBlocks else {
             return
         }
         
         for (i, color) in safeColors.enumerated() {
-            if i >= 5 {
-                break
-            }
-            stackView.addArrangedSubview(makeColorBlock(color: color))
+            blocks[i].backgroundColor = color
         }
     }
 }

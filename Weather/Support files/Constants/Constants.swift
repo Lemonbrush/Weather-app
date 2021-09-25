@@ -35,6 +35,8 @@ struct K {
         static let unit = "Unit"
         static let imperial = "imperial"
         static let metric = "metric"
+        
+        static let colorThemePositionNumber = "colorThemePositionNumber"
     }
 
     struct Network {

@@ -3,6 +3,45 @@
     "title": "Default",
     "clear_sky": [
       "#46c4f8",
+      "#0a94e6"
+    ],
+    "few_clouds": [
+      "#c0dae7",
+      "#0cc5ff"
+    ],
+    "scattered_clouds": [
+      "#50a3b9",
+      "#7d0cff"
+    ],
+    "broken_clouds": [
+      "#2754b4",
+      "#ffb80c"
+    ],
+    "shower_rain": [
+      "#759ed7",
+      "#ffb80c"
+    ],
+    "rain": [
+      "#bce9f6",
+      "#ffb80c"
+    ],
+    "thunderstorm": [
+      "#0e3ba9",
+      "#ffb80c"
+    ],
+    "snow": [
+      "#e6f7f7",
+      "#ffb80c"
+    ],
+    "mist": [
+      "#f4faf9",
+      "#ffb80c"
+    ]
+  },
+  {
+    "title": "Dark",
+    "clear_sky": [
+      "#46c4f8",
       "#f4a231"
     ],
     "few_clouds": [
@@ -36,6 +75,75 @@
     "mist": [
       "#ffb80c",
       "#ffb80c"
+    ]
+  },
+  {
+    "title": "Light",
+    "clear_sky": [
+      "#46c4f8",
+      "#f4a231"
+    ],
+    "few_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "scattered_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "broken_clouds": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "shower_rain": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "rain": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "thunderstorm": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "snow": [
+      "#ffb80c",
+      "#ffb80c"
+    ],
+    "mist": [
+      "#ffb80c",
+      "#ffb80c"
+    ]
+  },
+  {
+    "title": "Only white",
+    "clear_sky": [
+      "#ffffff"
+    ],
+    "few_clouds": [
+      "#ffffff"
+    ],
+    "scattered_clouds": [
+      "#ffffff"
+    ],
+    "broken_clouds": [
+      "#ffffff"
+    ],
+    "shower_rain": [
+      "#ffffff"
+    ],
+    "rain": [
+      "#ffffff"
+    ],
+    "thunderstorm": [
+      "#ffffff"
+    ],
+    "snow": [
+      "#ffffff"
+    ],
+    "mist": [
+      "#ffffff"
     ]
   }
 ]

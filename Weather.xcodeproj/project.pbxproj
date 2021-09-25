@@ -35,6 +35,7 @@
 		DD2A876726FE616A002AC36C /* ColorThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876626FE616A002AC36C /* ColorThemeData.swift */; };
 		DD2A876926FE6306002AC36C /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876826FE6306002AC36C /* ColorThemeModel.swift */; };
 		DD2A876B26FE6800002AC36C /* ColorThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A876A26FE6800002AC36C /* ColorThemeManager.swift */; };
+		DD2A877126FF0FF0002AC36C /* ColorThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A877026FF0FF0002AC36C /* ColorThemeCell.swift */; };
 		DD42149126EFB7D100BD4C4F /* WeatherCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */; };
 		DD42149926EFDE1F00BD4C4F /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */; };
 		DD42149A26EFDE1F00BD4C4F /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149826EFDE1F00BD4C4F /* City+CoreDataProperties.swift */; };
@@ -137,6 +138,7 @@
 		DD2A876626FE616A002AC36C /* ColorThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeData.swift; sourceTree = "<group>"; };
 		DD2A876826FE6306002AC36C /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
 		DD2A876A26FE6800002AC36C /* ColorThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeManager.swift; sourceTree = "<group>"; };
+		DD2A877026FF0FF0002AC36C /* ColorThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeCell.swift; sourceTree = "<group>"; };
 		DD42148E26EFB3D500BD4C4F /* CitiesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CitiesModel.xcdatamodel; sourceTree = "<group>"; };
 		DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoreDataManager.swift; sourceTree = "<group>"; };
 		DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "City+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -353,22 +355,15 @@
 			children = (
 				DD2A875626FE3776002AC36C /* Controller */,
 				DD2A875526FE376F002AC36C /* View */,
-				DD2A875426FE3767002AC36C /* Model */,
 			);
 			path = "Theme screen";
-			sourceTree = "<group>";
-		};
-		DD2A875426FE3767002AC36C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		DD2A875526FE376F002AC36C /* View */ = {
 			isa = PBXGroup;
 			children = (
 				DD2A875926FE395D002AC36C /* ColorThemeSettingsView.swift */,
+				DD2A876F26FF0FC8002AC36C /* Cell */,
 				DD2A876026FE4076002AC36C /* Color boxes */,
 			);
 			path = View;
@@ -440,6 +435,14 @@
 				DD2A876626FE616A002AC36C /* ColorThemeData.swift */,
 			);
 			path = "Color theme data";
+			sourceTree = "<group>";
+		};
+		DD2A876F26FF0FC8002AC36C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD2A877026FF0FF0002AC36C /* ColorThemeCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DD42148C26EFB2F200BD4C4F /* Model */ = {
@@ -818,6 +821,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD2A877126FF0FF0002AC36C /* ColorThemeCell.swift in Sources */,
 				DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */,
 				DD2A875226FE3244002AC36C /* ColorThemeSettingsCell.swift in Sources */,
 				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
