@@ -69,7 +69,10 @@ extension SettingsViewController: UnitSwitchCellDelegate {
 
 extension SettingsViewController: ColorThemeSettingsCellDelegste {
     func presentColorThemes() {
-        navigationController?.pushViewController(ColorThemeSettingsViewController(),
+        let colorThemeSettingsViewController = ColorThemeSettingsViewController()
+        colorThemeSettingsViewController.delegate = colorThemeSettingsCell
+        
+        navigationController?.pushViewController(colorThemeSettingsViewController,
                                                  animated: true)
     }
 }

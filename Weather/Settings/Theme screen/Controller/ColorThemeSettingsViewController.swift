@@ -13,6 +13,10 @@ class ColorThemeSettingsViewController: UIViewController {
     
     private let mainView = ColorThemeSettingsView()
     
+    // MARK: - Public properties
+    
+    var delegate: SettingsCellRefreshableProtocol?
+    
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -24,5 +28,11 @@ class ColorThemeSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Color theme"
+    }
+    
+    // MARK: - Public properties
+    
+    func refreshCurrentColorThemeSettingsCell() {
+        delegate?.refresh()
     }
 }
