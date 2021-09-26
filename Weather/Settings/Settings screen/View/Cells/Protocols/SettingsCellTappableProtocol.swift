@@ -16,3 +16,13 @@ extension SettingsCellTappableProtocol {
         
     }
 }
+
+protocol SettingsCellRefreshableProtocol {
+    func refresh()
+}
+
+extension SettingsCellRefreshableProtocol {
+    func refresh() {
+        
+    }
+}

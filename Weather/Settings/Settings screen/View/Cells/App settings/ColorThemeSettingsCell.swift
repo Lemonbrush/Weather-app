@@ -57,7 +57,7 @@ class ColorThemeSettingsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupCurrentThemeColors()
+        refresh()
         
         leftStackView.addArrangedSubview(themeIcon)
         leftStackView.addArrangedSubview(themeLabel)
@@ -78,7 +78,6 @@ class ColorThemeSettingsCell: UITableViewCell {
     // MARK: - Private functions
     
     func setupConstraints() {
-        // TemperatureCell
         mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
                                                       constant: 10).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
@@ -87,12 +86,11 @@ class ColorThemeSettingsCell: UITableViewCell {
                                                           constant: 20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                            constant: -20).isActive = true
-        
-        // Color blocks
-        //theme
     }
-    
-    func setupCurrentThemeColors() {
+}
+
+extension ColorThemeSettingsCell: SettingsCellRefreshableProtocol {
+    func refresh() {
         let colorTheme = ColorThemeManager.getColorThemes()![UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()!]
         
         var colors: [UIColor] = []
