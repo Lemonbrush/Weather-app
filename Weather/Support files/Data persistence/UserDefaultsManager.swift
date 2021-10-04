@@ -26,5 +26,16 @@ struct UserDefaultsManager {
         static func setChosenPositionColorTheme(with position: Int) {
             UserDefaults.standard.setValue(position, forKey: K.UserDefaults.colorThemePositionNumber)
         }
+        
+        static func getCurrentColorTheme() -> ColorThemeModel? {
+            guard let colorThemes = ColorThemeManager.getColorThemes(),
+                  let currentColorThemeNumber = self.getCurrentColorThemeNumber(),
+                  currentColorThemeNumber <= colorThemes.count else {
+                      
+                return nil
+            }
+            
+            return colorThemes[currentColorThemeNumber]
+        }
     }
 }

@@ -88,6 +88,7 @@
 		DDAE0B6826ED4B4300DD5FAC /* WeatherQualityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6726ED4B4300DD5FAC /* WeatherQualityInfoView.swift */; };
 		DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */; };
 		DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
+		DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4A628270B648700CE9FFB /* AppComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		DDAE0B6726ED4B4300DD5FAC /* WeatherQualityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityInfoView.swift; sourceTree = "<group>"; };
 		DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityItemView.swift; sourceTree = "<group>"; };
 		DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellBuilder.swift; sourceTree = "<group>"; };
+		DDB4A628270B648700CE9FFB /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 		7001F8BF26334E7B00E5E593 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
+				DDB4A627270B646F00CE9FFB /* App components */,
 				DD55272926FBC9FD0098A8B2 /* Constants */,
 				DD55272326FBACAE0098A8B2 /* Design Manager */,
 				DD55272826FBC53A0098A8B2 /* Data persistence */,
@@ -692,6 +695,14 @@
 			path = WeatherQualityInfo;
 			sourceTree = "<group>";
 		};
+		DDB4A627270B646F00CE9FFB /* App components */ = {
+			isa = PBXGroup;
+			children = (
+				DDB4A628270B648700CE9FFB /* AppComponents.swift */,
+			);
+			path = "App components";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -862,6 +873,7 @@
 				DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */,
 				DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */,
 				DD2A875826FE3799002AC36C /* ColorThemeSettingsViewController.swift in Sources */,
+				DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
