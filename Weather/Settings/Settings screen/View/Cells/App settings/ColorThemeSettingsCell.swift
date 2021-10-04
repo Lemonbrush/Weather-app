@@ -49,7 +49,7 @@ class ColorThemeSettingsCell: UITableViewCell {
     
     // MARK: - Public functions
     
-    var currentThemeColors: [UIColor]?
+    var colorThemeComponent: ColorThemeProtocol?
     var delegate: ColorThemeSettingsCellDelegste?
     
     // MARK: - Constructions
@@ -91,14 +91,16 @@ class ColorThemeSettingsCell: UITableViewCell {
 
 extension ColorThemeSettingsCell: SettingsCellRefreshableProtocol {
     func refresh() {
-        let colorTheme = ColorThemeManager.getColorThemes()![UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()!]
+        guard let safeColorThemeAppComponent = colorThemeComponent?.colorTheme else {
+            return
+        }
         
         var colors: [UIColor] = []
-        colors.append(colorTheme.clearSky.first ?? .white)
-        colors.append(colorTheme.fewClouds.first ?? .white)
-        colors.append(colorTheme.showerRain.first ?? .white)
-        colors.append(colorTheme.thunderstorm.first ?? .white)
-        colors.append(colorTheme.snow.first ?? .white)
+        colors.append(safeColorThemeAppComponent.clearSky.first ?? .white)
+        colors.append(safeColorThemeAppComponent.fewClouds.first ?? .white)
+        colors.append(safeColorThemeAppComponent.showerRain.first ?? .white)
+        colors.append(safeColorThemeAppComponent.thunderstorm.first ?? .white)
+        colors.append(safeColorThemeAppComponent.snow.first ?? .white)
         
         themeColorBlocksView.setupColors(colors)
     }

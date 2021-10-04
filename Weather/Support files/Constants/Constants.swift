@@ -36,6 +36,7 @@ struct K {
         static let imperial = "imperial"
         static let metric = "metric"
         
+        static let currentColorTheme = "currentColorTheme"
         static let colorThemePositionNumber = "colorThemePositionNumber"
     }
 

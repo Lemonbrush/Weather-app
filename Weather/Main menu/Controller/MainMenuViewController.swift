@@ -30,6 +30,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // MARK: - Public properties
 
+    var appComponents: AppComponents?
     var dataStorage: DataStorageProtocol?
     var displayWeather: [WeatherModel?] = []
 
@@ -85,7 +86,8 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     func showSettingsVC() {
         let destinationVC = SettingsViewController()
         destinationVC.mainMenuDelegate = self
-        
+        destinationVC.colorThemeComponent = appComponents
+
         let navigationController = UINavigationController(rootViewController: destinationVC)
         present(navigationController, animated: true, completion: nil)
     }
