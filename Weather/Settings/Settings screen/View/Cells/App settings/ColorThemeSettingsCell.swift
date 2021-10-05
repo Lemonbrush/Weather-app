@@ -94,7 +94,6 @@ extension ColorThemeSettingsCell: SettingsCellRefreshableProtocol {
         guard let safeColorThemeAppComponent = colorThemeComponent?.colorTheme else {
             return
         }
-        
         var colors: [UIColor] = []
         colors.append(safeColorThemeAppComponent.clearSky.first ?? .white)
         colors.append(safeColorThemeAppComponent.fewClouds.first ?? .white)

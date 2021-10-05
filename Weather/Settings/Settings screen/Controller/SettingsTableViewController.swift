@@ -74,6 +74,7 @@ extension SettingsViewController: ColorThemeSettingsCellDelegste {
     func presentColorThemes() {
         let colorThemeSettingsViewController = ColorThemeSettingsViewController()
         colorThemeSettingsViewController.delegate = colorThemeSettingsCell
+        colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
         
         navigationController?.pushViewController(colorThemeSettingsViewController,
                                                  animated: true)

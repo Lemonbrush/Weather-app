@@ -95,6 +95,6 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserDefaultsManager.ColorTheme.setChosenPositionColorTheme(with: indexPath.row)
         refreshCheckedColorTmeme()
-        viewControllerOwner?.refreshCurrentColorThemeSettingsCell()
+        viewControllerOwner?.refreshCurrentColorThemeSettingsCell(colorThemePosition: indexPath.row)
     }
 }
