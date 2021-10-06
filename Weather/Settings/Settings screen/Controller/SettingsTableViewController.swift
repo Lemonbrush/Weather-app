@@ -50,10 +50,10 @@ class SettingsViewController: UIViewController {
         
         mainView.settingsSections?.append(appSettingsSection)
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        mainMenuDelegate?.fetchWeatherData()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        colorThemeSettingsCell.refresh()
     }
 }
 
@@ -67,13 +67,15 @@ extension SettingsViewController: UnitSwitchCellDelegate {
         default:
             break
         }
+        
+        mainMenuDelegate?.fetchWeatherData()
     }
 }
 
 extension SettingsViewController: ColorThemeSettingsCellDelegste {
     func presentColorThemes() {
         let colorThemeSettingsViewController = ColorThemeSettingsViewController()
-        colorThemeSettingsViewController.delegate = colorThemeSettingsCell
+        colorThemeSettingsViewController.mainMenuDelegate = mainMenuDelegate
         colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
         
         navigationController?.pushViewController(colorThemeSettingsViewController,

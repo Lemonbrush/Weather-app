@@ -14,13 +14,6 @@ class MainMenuTableViewCell: UITableViewCell {
     private let gradient = CAGradientLayer()
     private let cellShapeMask = UIView()
 
-    private var weatherBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     private var mainStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.spacing = 8
@@ -52,6 +45,13 @@ class MainMenuTableViewCell: UITableViewCell {
     }()
 
     // MARK: - Public properties
+    
+    var weatherBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     var degreeLabel: UILabel = {
         let label = UILabel()

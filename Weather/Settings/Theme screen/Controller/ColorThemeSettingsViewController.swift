@@ -16,7 +16,7 @@ class ColorThemeSettingsViewController: UIViewController {
     // MARK: - Public properties
     
     var colorThemeComponent: ColorThemeProtocol?
-    var delegate: SettingsCellRefreshableProtocol?
+    var mainMenuDelegate: MainMenuDelegate?
     
     // MARK: - Lifecycle
     
@@ -35,7 +35,6 @@ class ColorThemeSettingsViewController: UIViewController {
     
     func refreshCurrentColorThemeSettingsCell(colorThemePosition: Int) {
         colorThemeComponent?.colorTheme = UserDefaultsManager.ColorTheme.getColorTheme(colorThemePosition)
-        
-        delegate?.refresh()
+        mainMenuDelegate?.reloadTable()
     }
 }
