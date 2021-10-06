@@ -78,7 +78,7 @@ class MainMenuView: UIView {
 
     private var welcomeImage: UIImageView!
 
-    // MARK: Public properties
+    // MARK: - Public properties
 
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -97,6 +97,7 @@ class MainMenuView: UIView {
     }()
 
     weak var viewController: MainMenuViewController?
+    var colorThemeComponent: ColorThemeProtocol?
 
     // MARK: - Construction
 

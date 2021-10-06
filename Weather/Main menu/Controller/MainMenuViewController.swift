@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainMenuDelegate: AnyObject {
     func fetchWeatherData()
+    func reloadTable()
 }
 
 protocol AddCityProtocol {
@@ -43,6 +44,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     override func loadView() {
         view = mainManuView
         mainManuView.viewController = self
+        mainManuView.colorThemeComponent = appComponents
         tableView = mainManuView.tableView
     }
 
@@ -105,6 +107,10 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         for (i, city) in savedCities.enumerated() {
             weatherManager.fetchWeather(by: city, at: i)
         }
+    }
+    
+    func reloadTable() {
+        tableView?.reloadData()
     }
 }
 

@@ -41,6 +41,9 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
             .build(degreeLabelByString: temperature)
             .build(timeLabelByTimeZone: timeZone)
             .build(imageByConditionName: cellImageName)
+            .build(colorThemeModel: colorThemeComponent?.colorTheme,
+                   conditionId: weatherDataForCell.conditionId,
+                   isDay: true)
             .content
 
         cell.layoutIfNeeded() // Eliminate layouts left from loading cells

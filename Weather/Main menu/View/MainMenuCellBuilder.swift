@@ -26,7 +26,7 @@ protocol MainMenuCellBuilderProtocol: AnyObject {
     func build(imageByConditionName: String) -> Self
 
     @discardableResult
-    func build(gradient: CGGradient) -> Self
+    func build(colorThemeModel: ColorThemeModel?, conditionId: Int, isDay: Bool)-> Self
 
     var content: MainMenuTableViewCell { get }
 }
@@ -77,9 +77,12 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         return self
     }
 
-    func build(gradient: CGGradient) -> Self {
-        // Setting up gradient background
-        // ...
+    func build(colorThemeModel: ColorThemeModel?, conditionId: Int, isDay: Bool) -> Self {
+        guard let safeColorThemeModel = colorThemeModel else {
+            return self
+        }
+        
+        _content.weatherBackgroundView.backgroundColor = safeColorThemeModel.clearSky.first
         return self
     }
 

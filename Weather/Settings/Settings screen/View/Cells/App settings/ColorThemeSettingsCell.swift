@@ -87,9 +87,7 @@ class ColorThemeSettingsCell: UITableViewCell {
         mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                            constant: -20).isActive = true
     }
-}
-
-extension ColorThemeSettingsCell: SettingsCellRefreshableProtocol {
+    
     func refresh() {
         guard let safeColorThemeAppComponent = colorThemeComponent?.colorTheme else {
             return
