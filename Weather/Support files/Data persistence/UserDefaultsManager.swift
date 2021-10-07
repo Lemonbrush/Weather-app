@@ -28,7 +28,6 @@ struct UserDefaultsManager {
         }
         
         static func getColorTheme(_ num: Int) -> ColorThemeModel? {
-            
             guard let colorThemes = ColorThemeManager.getColorThemes(),
                   colorThemes.count >= num else {
                 return nil

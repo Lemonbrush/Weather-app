@@ -115,19 +115,19 @@ struct WeatherModel {
     static func getConditionNameBy(conditionId id: Int) -> String {
         switch id {
         case 200...232:
-            return "cloud.bolt.fill"
+            return K.systemImageName.cloudBoltFill
         case 300...321:
-            return "cloud.drizzle.fill"
+            return K.systemImageName.cloudDrizzleFill
         case 500...531:
-            return "cloud.rain.fill"
+            return K.systemImageName.cloudRainFill
         case 600...622:
-            return "cloud.snow.fill"
+            return K.systemImageName.cloudSnowFill
         case 701...781:
-            return "cloud.fog.fill"
+            return K.systemImageName.cloudFogFill
         case 800:
-            return "sun.max.fill"
+            return K.systemImageName.sunMaxFill
         case 801...804:
-            return "cloud.fill"
+            return K.systemImageName.cloudFill
         default:
             return "error"
         }
