@@ -30,6 +30,22 @@ struct K {
         static let deleteImage = "DeleteAction"
         static let defaultImage = "WelcomeImage"
     }
+    
+    struct systemImageName {
+        static let sunMaxFill = "sun.max.fill"
+        static let sunriseFill = "sunrise.fill"
+        static let sunsetFill = "sunset.fill"
+        static let eyeFill = "eye.fill"
+        static let arrowDownLine = "arrow.down.to.line"
+        static let wind = "wind"
+        static let cloudFill = "cloud.fill"
+        static let drop = "drop.fill"
+        static let cloudFogFill = "cloud.fog.fill"
+        static let cloudSnowFill = "cloud.snow.fill"
+        static let cloudRainFill = "cloud.rain.fill"
+        static let cloudDrizzleFill = "cloud.drizzle.fill"
+        static let cloudBoltFill = "cloud.bolt.fill"
+    }
 
     struct UserDefaults {
         static let unit = "Unit"

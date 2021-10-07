@@ -63,7 +63,7 @@ extension ConditionImageBuilder: ConditionImageBuilderProtocol {
         }
         
         switch imageName {
-        case "sun.max.fill":
+        case K.systemImageName.sunMaxFill:
             _content = _content.withTintColor(colorConfigurator.makeColorForSunImage)
         default:
             _content = _content.withTintColor(colorConfigurator.makeColorForDefaultImage)
