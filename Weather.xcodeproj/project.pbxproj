@@ -89,6 +89,7 @@
 		DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */; };
 		DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 		DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4A628270B648700CE9FFB /* AppComponents.swift */; };
+		DDDDF3D827149F8F00F8F6C3 /* ColorThemesExtended.json in Resources */ = {isa = PBXBuildFile; fileRef = DDDDF3D727149F8F00F8F6C3 /* ColorThemesExtended.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityItemView.swift; sourceTree = "<group>"; };
 		DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellBuilder.swift; sourceTree = "<group>"; };
 		DDB4A628270B648700CE9FFB /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
+		DDDDF3D727149F8F00F8F6C3 /* ColorThemesExtended.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ColorThemesExtended.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				DD2A876126FE5C86002AC36C /* ColorThemes.json */,
+				DDDDF3D727149F8F00F8F6C3 /* ColorThemesExtended.json */,
 			);
 			path = "Color themes";
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 			files = (
 				7017AAB9261B191200953C5B /* LaunchScreen.storyboard in Resources */,
 				DD2A876226FE5C86002AC36C /* ColorThemes.json in Resources */,
+				DDDDF3D827149F8F00F8F6C3 /* ColorThemesExtended.json in Resources */,
 				7017AAB6261B191200953C5B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
