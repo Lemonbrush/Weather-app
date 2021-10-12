@@ -81,11 +81,11 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
         }
         var colors: [UIColor] = []
         
-        colors.append(colorTheme.clearSky.first ?? .white)
-        colors.append(colorTheme.fewClouds.first ?? .white)
-        colors.append(colorTheme.showerRain.first ?? .white)
-        colors.append(colorTheme.thunderstorm.first ?? .white)
-        colors.append(colorTheme.snow.first ?? .white)
+        colors.append(colorTheme.clearSky.colors.first ?? .white)
+        colors.append(colorTheme.fewClouds.colors.first ?? .white)
+        colors.append(colorTheme.showerRain.colors.first ?? .white)
+        colors.append(colorTheme.thunderstorm.colors.first ?? .white)
+        colors.append(colorTheme.snow.colors.first ?? .white)
         
         cell.colorBoxesView.setupColors(colors)
         

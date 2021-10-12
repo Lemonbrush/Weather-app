@@ -93,11 +93,11 @@ class ColorThemeSettingsCell: UITableViewCell {
             return
         }
         var colors: [UIColor] = []
-        colors.append(safeColorThemeAppComponent.clearSky.first ?? .white)
-        colors.append(safeColorThemeAppComponent.fewClouds.first ?? .white)
-        colors.append(safeColorThemeAppComponent.showerRain.first ?? .white)
-        colors.append(safeColorThemeAppComponent.thunderstorm.first ?? .white)
-        colors.append(safeColorThemeAppComponent.snow.first ?? .white)
+        colors.append(safeColorThemeAppComponent.clearSky.colors.first ?? .white)
+        colors.append(safeColorThemeAppComponent.fewClouds.colors.first ?? .white)
+        colors.append(safeColorThemeAppComponent.showerRain.colors.first ?? .white)
+        colors.append(safeColorThemeAppComponent.thunderstorm.colors.first ?? .white)
+        colors.append(safeColorThemeAppComponent.snow.colors.first ?? .white)
         
         themeColorBlocksView.setupColors(colors)
     }

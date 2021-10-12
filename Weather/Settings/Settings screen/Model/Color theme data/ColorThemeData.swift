@@ -7,15 +7,21 @@
 
 import Foundation
 
-struct ColorThemesData: Codable {
+struct ColorThemeData: Codable {
     let title: String
-    let clear_sky: [String]
-    let few_clouds: [String]
-    let scattered_clouds: [String]
-    let broken_clouds: [String]
-    let shower_rain: [String]
-    let rain: [String]
-    let thunderstorm: [String]
-    let snow: [String]
-    let mist: [String]
+    let clear_sky: Colors
+    let few_clouds: Colors
+    let scattered_clouds: Colors
+    let broken_clouds: Colors
+    let shower_rain: Colors
+    let rain: Colors
+    let thunderstorm: Colors
+    let snow: Colors
+    let mist: Colors
+    let backgroundColors: [String]
+}
+
+struct Colors: Codable {
+    let colors: [String]
+    let iconColors: String
 }
