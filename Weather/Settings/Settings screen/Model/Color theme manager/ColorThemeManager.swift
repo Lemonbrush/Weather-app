@@ -38,19 +38,10 @@ struct ColorThemeManager {
     static private func parseJSON(_ colorThemeData: Data) -> [ColorThemeModel]? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode([ColorThemesData].self, from: colorThemeData)
+            let decodedData = try decoder.decode([ColorThemeData].self, from: colorThemeData)
             var result: [ColorThemeModel] = []
             for colorTheme in decodedData {
-                result.append(ColorThemeModel(title: colorTheme.title,
-                                             clearSky: colorTheme.clear_sky,
-                                             fewClouds: colorTheme.few_clouds,
-                                             scatteredClouds: colorTheme.scattered_clouds,
-                                             brokenClouds: colorTheme.broken_clouds,
-                                             showerRain: colorTheme.shower_rain,
-                                             rain: colorTheme.rain,
-                                             thunderstorm: colorTheme.thunderstorm,
-                                             snow: colorTheme.snow,
-                                             mist: colorTheme.mist))
+                result.append(ColorThemeModel(colorThemeData: colorTheme))
             }
             return result
         } catch {

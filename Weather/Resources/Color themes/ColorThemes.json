@@ -1,149 +1,133 @@
 [
   {
     "title": "Default",
-    "clear_sky": [
-      "#46c4f8",
-      "#0a94e6"
-    ],
-    "few_clouds": [
-      "#c0dae7",
-      "#0cc5ff"
-    ],
-    "scattered_clouds": [
-      "#50a3b9",
-      "#7d0cff"
-    ],
-    "broken_clouds": [
-      "#2754b4",
+    "clear_sky": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "few_clouds": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "scattered_clouds": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "broken_clouds": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "shower_rain": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "rain": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "thunderstorm": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "snow": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "mist": {
+      "colors": [
+        "#ffffff"
+      ],
+      "iconColors": "#000000"
+    },
+    "backgroundColors": [
+      "#86d3fa",
       "#ffb80c"
-    ],
-    "shower_rain": [
-      "#759ed7",
-      "#ffb80c"
-    ],
-    "rain": [
-      "#bce9f6",
-      "#ffb80c"
-    ],
-    "thunderstorm": [
-      "#0e3ba9",
-      "#ffb80c"
-    ],
-    "snow": [
-      "#e6f7f7",
-      "#ffb80c"
-    ],
-    "mist": [
+    ]
+  },
+  {
+    "title": "Colorful",
+    "clear_sky": {
+      "colors": [
+        "#46c4f8",
+        "#0a94e6"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "few_clouds": {
+      "colors": [
+        "#c0dae7",
+        "#0cc5ff"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "scattered_clouds": {
+      "colors": [
+        "#50a3b9",
+        "#7d0cff"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "broken_clouds": {
+      "colors": [
+        "#2754b4",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "shower_rain": {
+      "colors": [
+        "#759ed7",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "rain": {
+      "colors": [
+        "#bce9f6",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "thunderstorm": {
+      "colors": [
+        "#0e3ba9",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "snow": {
+      "colors": [
+        "#e6f7f7",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "mist": {
+      "colors": [
+        "#f4faf9",
+        "#ffb80c"
+      ],
+      "iconColors": "#ffffff"
+    },
+    "backgroundColors": [
       "#f4faf9",
       "#ffb80c"
-    ]
-  },
-  {
-    "title": "Dark",
-    "clear_sky": [
-      "#cce2eb",
-      "#f4a231"
-    ],
-    "few_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "scattered_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "broken_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "shower_rain": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "rain": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "thunderstorm": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "snow": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "mist": [
-      "#ffb80c",
-      "#ffb80c"
-    ]
-  },
-  {
-    "title": "Light",
-    "clear_sky": [
-      "#46c4f8",
-      "#f4a231"
-    ],
-    "few_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "scattered_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "broken_clouds": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "shower_rain": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "rain": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "thunderstorm": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "snow": [
-      "#ffb80c",
-      "#ffb80c"
-    ],
-    "mist": [
-      "#ffb80c",
-      "#ffb80c"
-    ]
-  },
-  {
-    "title": "Only white",
-    "clear_sky": [
-      "#ffffff"
-    ],
-    "few_clouds": [
-      "#ffffff"
-    ],
-    "scattered_clouds": [
-      "#ffffff"
-    ],
-    "broken_clouds": [
-      "#ffffff"
-    ],
-    "shower_rain": [
-      "#ffffff"
-    ],
-    "rain": [
-      "#ffffff"
-    ],
-    "thunderstorm": [
-      "#ffffff"
-    ],
-    "snow": [
-      "#ffffff"
-    ],
-    "mist": [
-      "#ffffff"
     ]
   }
 ]

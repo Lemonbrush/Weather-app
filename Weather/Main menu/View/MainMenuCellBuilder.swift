@@ -82,7 +82,7 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
             return self
         }
         
-        _content.weatherBackgroundView.backgroundColor = safeColorThemeModel.clearSky.first
+        _content.weatherBackgroundView.backgroundColor = safeColorThemeModel.backgroundColors.first
         return self
     }
 

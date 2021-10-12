@@ -7,132 +7,85 @@
 
 import UIKit
 
+struct ColorThemeColorsModel {
+    let colors: [UIColor]
+    let iconColors: UIColor
+}
+
 struct ColorThemeModel {
     
     // MARK: - Private properties
     
-    private let clearSkyHexes: [String]
-    private let fewCloudsHexes: [String]
-    private let scatteredCloudsHexes: [String]
-    private let brokenCloudsHexes: [String]
-    private let showerRainHexes: [String]
-    private let rainHexes: [String]
-    private let thunderstormHexes: [String]
-    private let snowHexes: [String]
-    private let mistHexes: [String]
+    private let rowColorThemeDataModel: ColorThemeData
     
     // MARK: - Public properties
     
-    let title: String
-    
-    var clearSky: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in clearSkyHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var title: String {
+        rowColorThemeDataModel.title
     }
     
-    var fewClouds: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in fewCloudsHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var clearSky: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.clear_sky)
     }
     
-    var scatteredClouds: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in scatteredCloudsHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var fewClouds: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.few_clouds)
     }
     
-    var brokenClouds: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in brokenCloudsHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var scatteredClouds: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.scattered_clouds)
     }
     
-    var showerRain: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in showerRainHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var brokenClouds: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.broken_clouds)
     }
     
-    var rain: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in rainHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var showerRain: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.shower_rain)
     }
     
-    var thunderstorm: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in thunderstormHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var rain: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.rain)
     }
     
-    var snow: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in snowHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var thunderstorm: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.thunderstorm)
     }
     
-    var mist: [UIColor] {
-        var colors: [UIColor] = []
-        for colorHex in mistHexes {
-            colors.append(makeColor(hex: colorHex))
-        }
-        
-        return colors
+    var snow: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.snow)
+    }
+    
+    var mist: ColorThemeColorsModel {
+        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.mist)
+    }
+    
+    var backgroundColors: [UIColor] {
+        makeColors(hexes: rowColorThemeDataModel.backgroundColors)
     }
     
     // MARK: - Construction
     
-    init(title: String,
-         clearSky: [String],
-         fewClouds: [String],
-         scatteredClouds: [String],
-         brokenClouds: [String],
-         showerRain: [String],
-         rain: [String],
-         thunderstorm: [String],
-         snow: [String],
-         mist: [String]) {
-        self.title = title
-        clearSkyHexes = clearSky
-        fewCloudsHexes = fewClouds
-        scatteredCloudsHexes = scatteredClouds
-        brokenCloudsHexes = brokenClouds
-        showerRainHexes = showerRain
-        rainHexes = rain
-        thunderstormHexes = thunderstorm
-        snowHexes = snow
-        mistHexes = mist
+    init(colorThemeData: ColorThemeData) {
+        rowColorThemeDataModel = colorThemeData
     }
     
     // MARK: - Private functions
     
-    private func makeColor(hex:String) -> UIColor {
+    private func convertToColorThemeModel(colorsModel: Colors) -> ColorThemeColorsModel {
+        return ColorThemeColorsModel(colors: makeColors(hexes: colorsModel.colors),
+                                     iconColors: makeColor(hex: colorsModel.iconColors))
+    }
+    
+    private func makeColors(hexes: [String]) -> [UIColor] {
+        var colors: [UIColor] = []
+        for colorHex in hexes {
+            colors.append(makeColor(hex: colorHex))
+        }
+        return colors
+    }
+    
+    private func makeColor(hex: String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if (cString.hasPrefix("#")) {
