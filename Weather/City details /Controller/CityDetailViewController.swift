@@ -12,6 +12,7 @@ class CityDetailViewController: UIViewController {
     // MARK: - Public properties
 
     var localWeatherData: WeatherModel?
+    var colorThemeComponent: ColorThemeProtocol?
 
     // MARK: - Private properties
 
@@ -255,7 +256,7 @@ class CityDetailViewController: UIViewController {
         conditionImage.image = imageBuilder
             .erase(.onlyWhite)
             .build(systemImageName: conditionImageName)
-            .buildColor()
+            .buildColor((colorThemeComponent?.colorTheme?.getColorByConditionId(newData.conditionId).iconsColor)!)
             .content
 
         tempLebel.text = newData.temperatureString
