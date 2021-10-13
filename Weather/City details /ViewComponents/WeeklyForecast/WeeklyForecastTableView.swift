@@ -115,7 +115,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         cell.conditionImage.image = conditionImageBuilder
             .erase(.defaultColors)
             .build(systemImageName: cellImageName)
-            .buildColor()
+            .buildColor(.black)
             .content
         return cell
     }

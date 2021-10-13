@@ -12,6 +12,7 @@ struct ColorThemeManager {
     // MARK: - Public functions
     
     static func getColorThemes() -> [ColorThemeModel]? {
+        
         guard let colorThemesFile = readLocalFile(forName: "ColorThemes"),
               let result = parseJSON(colorThemesFile) else {
                   
@@ -39,13 +40,14 @@ struct ColorThemeManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode([ColorThemeData].self, from: colorThemeData)
+            
             var result: [ColorThemeModel] = []
             for colorTheme in decodedData {
                 result.append(ColorThemeModel(colorThemeData: colorTheme))
             }
             return result
         } catch {
-            print(error.localizedDescription)
+            print(error)
             return nil
         }
     }

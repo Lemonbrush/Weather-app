@@ -9,7 +9,18 @@ import UIKit
 
 struct ColorThemeColorsModel {
     let colors: [UIColor]
-    let iconColors: UIColor
+    let iconsColor: UIColor
+    let labelsColor: UIColor
+}
+
+struct DetailReviewIconsColorsModel {
+    let cloud: UIColor
+    let sun: UIColor
+}
+
+struct BackgroundColorsModel {
+    let colors: [UIColor]
+    let ignoreColorInheritance: Bool
 }
 
 struct ColorThemeModel {
@@ -60,8 +71,14 @@ struct ColorThemeModel {
         convertToColorThemeModel(colorsModel: rowColorThemeDataModel.mist)
     }
     
-    var backgroundColors: [UIColor] {
-        makeColors(hexes: rowColorThemeDataModel.backgroundColors)
+    var backgroundColors: BackgroundColorsModel {
+        BackgroundColorsModel(colors: makeColors(hexes: rowColorThemeDataModel.backgroundColors.colors),
+                              ignoreColorInheritance: rowColorThemeDataModel.backgroundColors.ignoreColorInheritance)
+    }
+    
+    var detailReviewIconsColors: DetailReviewIconsColorsModel {
+        DetailReviewIconsColorsModel(cloud: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.cloud),
+                                     sun: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.sun))
     }
     
     // MARK: - Construction
@@ -70,11 +87,35 @@ struct ColorThemeModel {
         rowColorThemeDataModel = colorThemeData
     }
     
+    // MARK: - Functions
+    
+    func getColorByConditionId(_ conditionId: Int) -> ColorThemeColorsModel {
+        switch conditionId {
+        case 200...232:
+            return thunderstorm
+        case 300...321:
+            return rain
+        case 500...531:
+            return showerRain
+        case 600...622:
+            return snow
+        case 701...781:
+            return mist
+        case 800:
+            return clearSky
+        case 801...804:
+            return scatteredClouds
+        default:
+            return clearSky
+        }
+    }
+    
     // MARK: - Private functions
     
     private func convertToColorThemeModel(colorsModel: Colors) -> ColorThemeColorsModel {
         return ColorThemeColorsModel(colors: makeColors(hexes: colorsModel.colors),
-                                     iconColors: makeColor(hex: colorsModel.iconColors))
+                                     iconsColor: makeColor(hex: colorsModel.iconColors),
+                                     labelsColor: makeColor(hex: colorsModel.labelsColor))
     }
     
     private func makeColors(hexes: [String]) -> [UIColor] {

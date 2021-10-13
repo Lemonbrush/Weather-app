@@ -33,14 +33,14 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
         let cityName = viewController?.displayWeather[indexPath.row]?.cityName ?? "-"
         let temperature = weatherDataForCell.temperatureString
         let timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
-        let cellImageName = WeatherModel.getConditionNameBy(conditionId: weatherDataForCell.conditionId)
 
         cell = builder
             .erase()
+            .build(colorThemeModel: colorThemeComponent?.colorTheme, conditionId: weatherDataForCell.conditionId)
             .build(cityLabelByString: cityName)
             .build(degreeLabelByString: temperature)
             .build(timeLabelByTimeZone: timeZone)
-            .build(imageByConditionName: cellImageName)
+            .build(imageByConditionId: weatherDataForCell.conditionId, colorThemeModel: colorThemeComponent?.colorTheme)
             .build(colorThemeModel: colorThemeComponent?.colorTheme,
                    conditionId: weatherDataForCell.conditionId,
                    isDay: true)

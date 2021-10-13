@@ -81,7 +81,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             cell.imageView.image = imageBuilder
                 .erase(.defaultColors)
                 .build(systemImageName: cellImageName)
-                .buildColor()
+                .buildColor(.black)
                 .content
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
 

@@ -22,7 +22,7 @@ protocol ConditionImageBuilderProtocol: AnyObject {
     func build(systemImageName imageName: String) -> Self
     
     @discardableResult
-    func buildColor() -> Self
+    func buildColor(_ color: UIColor) -> Self
     
     var content: UIImage { get }
     var colorConfigurator: ConditionImageColorConfiguratorProtocol { get set }
@@ -56,19 +56,8 @@ extension ConditionImageBuilder: ConditionImageBuilderProtocol {
         return self
     }
     
-    func buildColor() -> Self {
-        guard let imageName = _content.accessibilityIdentifier else {
-            _content = _content.withTintColor(colorConfigurator.makeColorForDefaultImage)
-            return self
-        }
-        
-        switch imageName {
-        case K.systemImageName.sunMaxFill:
-            _content = _content.withTintColor(colorConfigurator.makeColorForSunImage)
-        default:
-            _content = _content.withTintColor(colorConfigurator.makeColorForDefaultImage)
-        }
-
+    func buildColor(_ color: UIColor) -> Self {
+        _content = _content.withTintColor(color)
         return self
     }
     

@@ -55,9 +55,7 @@ class ColorThemeSettingsView: UIView {
     }
     
     private func refreshCheckedColorTmeme() {
-        if let newPosition = UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber() {
-            chosenColorThemePosition = newPosition
-        }
+        chosenColorThemePosition = UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()
         tableView.reloadData()
     }
 }

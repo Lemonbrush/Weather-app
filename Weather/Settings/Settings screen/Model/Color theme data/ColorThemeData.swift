@@ -18,10 +18,22 @@ struct ColorThemeData: Codable {
     let thunderstorm: Colors
     let snow: Colors
     let mist: Colors
-    let backgroundColors: [String]
+    let backgroundColors: BackgroundColors
+    let detailReviewIconsColors: DetailReviewIconsColors
 }
 
 struct Colors: Codable {
     let colors: [String]
     let iconColors: String
+    let labelsColor: String
+}
+
+struct BackgroundColors: Codable {
+    let colors: [String]
+    let ignoreColorInheritance: Bool
+}
+
+struct DetailReviewIconsColors: Codable {
+    let cloud: String
+    let sun: String
 }
