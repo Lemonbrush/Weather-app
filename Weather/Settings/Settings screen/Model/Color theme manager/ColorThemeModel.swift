@@ -110,6 +110,15 @@ struct ColorThemeModel {
         }
     }
     
+    func getDetailReviewIconColorByConditionId(_ conditionId: Int) -> UIColor {
+        switch conditionId {
+        case 800:
+            return detailReviewIconsColors.sun
+        default:
+            return detailReviewIconsColors.cloud
+        }
+    }
+    
     // MARK: - Private functions
     
     private func convertToColorThemeModel(colorsModel: Colors) -> ColorThemeColorsModel {

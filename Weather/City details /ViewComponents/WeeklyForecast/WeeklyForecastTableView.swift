@@ -12,6 +12,7 @@ class WeeklyForecastTableView: UIView {
     // MARK: - Public properties
 
     var dataSource: WeatherModel?
+    var colorTheme: ColorThemeProtocol?
 
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -110,12 +111,14 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         cell.temperatureLabel.text = String(format: "%.0f°", targetWeather.temp.max)
         cell.minTemperatureLabel.text = String(format: "%.0f°", targetWeather.temp.min)
 
-        let cellImageName = WeatherModel.getConditionNameBy(conditionId: targetWeather.weather[0].id)
+        let conditionId = targetWeather.weather[0].id
+        let cellImageName = WeatherModel.getConditionNameBy(conditionId: conditionId)
         let conditionImageBuilder = ConditionImageBuilder()
+        let iconColor = colorTheme!.colorTheme!.getDetailReviewIconColorByConditionId(conditionId)
         cell.conditionImage.image = conditionImageBuilder
             .erase(.defaultColors)
             .build(systemImageName: cellImageName)
-            .buildColor(.black)
+            .buildColor(iconColor)
             .content
         return cell
     }

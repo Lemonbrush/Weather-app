@@ -170,6 +170,8 @@ class CityDetailViewController: UIViewController {
         scrollContentView.addSubview(topTranslucentBackground)
 
         degreeStackView.addArrangedSubview(conditionImage)
+        
+        tempLebel.textColor = colorThemeComponent!.colorTheme!.getColorByConditionId(localWeatherData!.conditionId).labelsColor
         degreeStackView.addArrangedSubview(tempLebel)
         degreeStackView.addArrangedSubview(descriptionLabel)
         degreeStackView.addArrangedSubview(feelsLikeLabel)
@@ -178,7 +180,10 @@ class CityDetailViewController: UIViewController {
         scrollContentView.addSubview(bottomWhiteBackground)
 
         hourlyCollectionView.dataSource = localWeatherData
+        hourlyCollectionView.colorTheme = colorThemeComponent
         bottomWhiteBackground.addSubview(hourlyCollectionView)
+        
+        weeklyForecastTableView.colorTheme = colorThemeComponent
         extraContentStackView.addArrangedSubview(weeklyForecastTableView)
         extraContentStackView.addArrangedSubview(weatherQualityInfoView)
         bottomWhiteBackground.addSubview(extraContentStackView)
@@ -431,7 +436,18 @@ extension CityDetailViewController {
     private func setupGradientBackground() {
         gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradientBackground.endPoint = CGPoint(x: 1.0, y: 0.0)
-        gradientBackground.colors = DesignManager.getStandartGradientColor(withStyle: .day)
+        let uiColors = colorThemeComponent!.colorTheme!.backgroundColors.colors
+        var cgColors: [CGColor] = []
+        for uiColor in uiColors {
+            cgColors.append(uiColor.cgColor)
+        }
+        
+        if cgColors.count == 1 {
+            cgColors.append(cgColors.first!)
+        }
+        
+        
+        gradientBackground.colors = cgColors
         self.view.layer.insertSublayer(gradientBackground, at: 0)
     }
 }
