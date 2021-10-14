@@ -12,6 +12,7 @@ class HourlyForecastView: UIView {
     // MARK: - Public properties
 
     var dataSource: WeatherModel?
+    var colorTheme: ColorThemeProtocol?
 
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -75,13 +76,15 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             dateFormatter.dateFormat = "h a"
 
             cell.topLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
-            let cellImageName = WeatherModel.getConditionNameBy(conditionId: currentHour.weather[0].id)
+            let conditionId = currentHour.weather[0].id
+            let cellImageName = WeatherModel.getConditionNameBy(conditionId: conditionId)
+            let iconColor = colorTheme!.colorTheme!.getDetailReviewIconColorByConditionId(conditionId)
             
             let imageBuilder = ConditionImageBuilder()
             cell.imageView.image = imageBuilder
                 .erase(.defaultColors)
                 .build(systemImageName: cellImageName)
-                .buildColor(.black)
+                .buildColor(iconColor)
                 .content
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
 
@@ -103,7 +106,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill)
             }
 
-            cell.imageView.tintColor = K.Colors.WeatherIcons.defaultSunColor
+            cell.imageView.tintColor = colorTheme!.colorTheme!.detailReviewIconsColors.sun
 
             return cell
         }
