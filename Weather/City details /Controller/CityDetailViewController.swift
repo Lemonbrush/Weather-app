@@ -184,6 +184,7 @@ class CityDetailViewController: UIViewController {
         bottomWhiteBackground.addSubview(hourlyCollectionView)
         
         weeklyForecastTableView.colorTheme = colorThemeComponent
+        weatherQualityInfoView.colorThemeComponent = colorThemeComponent
         extraContentStackView.addArrangedSubview(weeklyForecastTableView)
         extraContentStackView.addArrangedSubview(weatherQualityInfoView)
         bottomWhiteBackground.addSubview(extraContentStackView)

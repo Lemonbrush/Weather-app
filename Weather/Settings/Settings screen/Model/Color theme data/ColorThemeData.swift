@@ -36,4 +36,10 @@ struct BackgroundColors: Codable {
 struct DetailReviewIconsColors: Codable {
     let cloud: String
     let sun: String
+    let humidity: String
+    let uvIndex: String
+    let wind: String
+    let cloudiness: String
+    let pressure: String
+    let visibility: String
 }
