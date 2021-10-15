@@ -16,6 +16,12 @@ struct ColorThemeColorsModel {
 struct DetailReviewIconsColorsModel {
     let cloud: UIColor
     let sun: UIColor
+    let humidity: UIColor
+    let uvIndex: UIColor
+    let wind: UIColor
+    let cloudiness: UIColor
+    let pressure: UIColor
+    let visibility: UIColor
 }
 
 struct BackgroundColorsModel {
@@ -78,7 +84,13 @@ struct ColorThemeModel {
     
     var detailReviewIconsColors: DetailReviewIconsColorsModel {
         DetailReviewIconsColorsModel(cloud: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.cloud),
-                                     sun: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.sun))
+                                     sun: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.sun),
+                                     humidity: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.humidity),
+                                     uvIndex: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.uvIndex),
+                                     wind: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.wind),
+                                     cloudiness: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.cloudiness),
+                                     pressure: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.pressure),
+                                     visibility: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.visibility))
     }
     
     // MARK: - Construction

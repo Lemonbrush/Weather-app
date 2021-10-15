@@ -3,10 +3,10 @@
     "title": "Default",
     "clear_sky": {
       "colors": [
-        "#ffffff"
+        "#468ad6"
       ],
       "iconColors": "#f8c957",
-      "labelsColor": "#000000"
+      "labelsColor": "#ffffff"
     },
     "few_clouds": {
       "colors": [
@@ -72,7 +72,13 @@
     },
     "detailReviewIconsColors": {
       "cloud": "#92ddef",
-      "sun": "#f8c957"
+      "sun": "#f8c957",
+      "humidity": "#92ddef",
+      "uvIndex": "#f8c957",
+      "wind": "#92ddef",
+      "cloudiness": "#92ddef",
+      "pressure": "#92ddef",
+      "visibility": "#92ddef"
     }
   }
 ]
