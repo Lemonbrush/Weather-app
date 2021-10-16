@@ -30,6 +30,8 @@ struct Colors: Codable {
 
 struct BackgroundColors: Codable {
     let colors: [String]
+    let mainIconColor: String
+    let mainLabelsColor: String
     let ignoreColorInheritance: Bool
 }
 

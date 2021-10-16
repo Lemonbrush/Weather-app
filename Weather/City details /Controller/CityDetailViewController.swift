@@ -12,7 +12,7 @@ class CityDetailViewController: UIViewController {
     // MARK: - Public properties
 
     var localWeatherData: WeatherModel?
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
 
@@ -100,20 +100,20 @@ class CityDetailViewController: UIViewController {
         return view
     }()
 
-    private var hourlyCollectionView: HourlyForecastView = {
-        let hourlyCollectionView = HourlyForecastView()
+    private lazy var hourlyCollectionView: HourlyForecastView = {
+        let hourlyCollectionView = HourlyForecastView(colorThemeComponent: colorThemeComponent)
         hourlyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return hourlyCollectionView
     }()
 
-    private var weeklyForecastTableView: WeeklyForecastTableView = {
-        let weeklyTableView = WeeklyForecastTableView()
+    private lazy var weeklyForecastTableView: WeeklyForecastTableView = {
+        let weeklyTableView = WeeklyForecastTableView(colorThemeComponent: colorThemeComponent)
         weeklyTableView.translatesAutoresizingMaskIntoConstraints = false
         return weeklyTableView
     }()
 
-    private var weatherQualityInfoView: WeatherQualityInfoView = {
-        let qualityView = WeatherQualityInfoView()
+    private lazy var weatherQualityInfoView: WeatherQualityInfoView = {
+        let qualityView = WeatherQualityInfoView(colorThemeComponent: colorThemeComponent)
         qualityView.translatesAutoresizingMaskIntoConstraints = false
         return qualityView
     }()
@@ -150,7 +150,16 @@ class CityDetailViewController: UIViewController {
     private var updateTimer: Timer?
 
     // MARK: - Lifecycle
-
+    
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -171,7 +180,13 @@ class CityDetailViewController: UIViewController {
 
         degreeStackView.addArrangedSubview(conditionImage)
         
-        tempLebel.textColor = colorThemeComponent!.colorTheme!.getColorByConditionId(localWeatherData!.conditionId).labelsColor
+        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).labelsColor
+        let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainLabelsColor : currentThemeLabelColor
+        tempLebel.textColor = labelColor
+        descriptionLabel.textColor = labelColor
+        feelsLikeLabel.textColor = labelColor
+        
         degreeStackView.addArrangedSubview(tempLebel)
         degreeStackView.addArrangedSubview(descriptionLabel)
         degreeStackView.addArrangedSubview(feelsLikeLabel)
@@ -180,11 +195,8 @@ class CityDetailViewController: UIViewController {
         scrollContentView.addSubview(bottomWhiteBackground)
 
         hourlyCollectionView.dataSource = localWeatherData
-        hourlyCollectionView.colorTheme = colorThemeComponent
         bottomWhiteBackground.addSubview(hourlyCollectionView)
         
-        weeklyForecastTableView.colorTheme = colorThemeComponent
-        weatherQualityInfoView.colorThemeComponent = colorThemeComponent
         extraContentStackView.addArrangedSubview(weeklyForecastTableView)
         extraContentStackView.addArrangedSubview(weatherQualityInfoView)
         bottomWhiteBackground.addSubview(extraContentStackView)
@@ -211,10 +223,8 @@ class CityDetailViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        // Set tableview height according to its contents
-        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height
-        // Calculate gradient size
-        gradientBackground.frame = view.bounds
+        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height // Set tableview height according to its contents
+        gradientBackground.frame = view.bounds // Calculate gradient size
         scrollView.contentSize = scrollContentView.bounds.size
     }
 
@@ -258,11 +268,15 @@ class CityDetailViewController: UIViewController {
     private func setLabelsAndImages(with newData: WeatherModel) {
         let conditionImageName = WeatherModel.getConditionNameBy(conditionId: newData.conditionId)
         
+        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let inheritedIconColor = colorThemeComponent.colorTheme.getColorByConditionId(newData.conditionId).iconsColor
+        let imageColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainIconColor : inheritedIconColor
+        
         let imageBuilder = ConditionImageBuilder()
         conditionImage.image = imageBuilder
             .erase(.onlyWhite)
             .build(systemImageName: conditionImageName)
-            .buildColor((colorThemeComponent?.colorTheme?.getColorByConditionId(newData.conditionId).iconsColor)!)
+            .buildColor(imageColor)
             .content
 
         tempLebel.text = newData.temperatureString
@@ -300,7 +314,6 @@ class CityDetailViewController: UIViewController {
 // MARK: - ScrollView
 
 extension CityDetailViewController: UIScrollViewDelegate {
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Check if CollectionView is currently scrolling and break if so
         if hourlyCollectionView.collectionView.isDragging ||
@@ -437,16 +450,19 @@ extension CityDetailViewController {
     private func setupGradientBackground() {
         gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradientBackground.endPoint = CGPoint(x: 1.0, y: 0.0)
-        let uiColors = colorThemeComponent!.colorTheme!.backgroundColors.colors
+        
+        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let currentWeatherColors = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).colors
+        let uiColors = backgroundColors.ignoreColorInheritance ? backgroundColors.colors : currentWeatherColors
+        
         var cgColors: [CGColor] = []
         for uiColor in uiColors {
             cgColors.append(uiColor.cgColor)
         }
         
-        if cgColors.count == 1 {
-            cgColors.append(cgColors.first!)
+        if let firstColor = cgColors.first, cgColors.count == 1 {
+            cgColors.append(firstColor)
         }
-        
         
         gradientBackground.colors = cgColors
         self.view.layer.insertSublayer(gradientBackground, at: 0)

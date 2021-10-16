@@ -16,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let appComponents = AppComponents()
-        appComponents.colorTheme = UserDefaultsManager.ColorTheme.getCurrentColorTheme()
+        let appComponents = AppComponents(UserDefaultsManager.ColorTheme.getCurrentColorTheme())
         
-        let rootViewController = MainMenuViewController()
-        rootViewController.appComponents = appComponents
+        let rootViewController = MainMenuViewController(appComponents: appComponents)
         rootViewController.dataStorage = WeatherCoreDataManager(managedContext:
                                                                     persistentContainer.newBackgroundContext())
         let navigationController = UINavigationController(rootViewController: rootViewController)

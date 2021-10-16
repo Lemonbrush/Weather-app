@@ -15,10 +15,19 @@ class ColorThemeSettingsViewController: UIViewController {
     
     // MARK: - Public properties
     
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
     var mainMenuDelegate: MainMenuDelegate?
     
     // MARK: - Lifecycle
+    
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = mainView
@@ -34,7 +43,7 @@ class ColorThemeSettingsViewController: UIViewController {
     // MARK: - Public properties
     
     func refreshCurrentColorThemeSettingsCell(colorThemePosition: Int) {
-        colorThemeComponent?.colorTheme = UserDefaultsManager.ColorTheme.getColorTheme(colorThemePosition)
+        colorThemeComponent.colorTheme = UserDefaultsManager.ColorTheme.getColorTheme(colorThemePosition)
         mainMenuDelegate?.reloadTable()
     }
 }

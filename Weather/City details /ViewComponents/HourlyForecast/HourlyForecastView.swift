@@ -12,7 +12,7 @@ class HourlyForecastView: UIView {
     // MARK: - Public properties
 
     var dataSource: WeatherModel?
-    var colorTheme: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -30,8 +30,9 @@ class HourlyForecastView: UIView {
 
     // MARK: - Construction
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(frame: .zero)
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -78,7 +79,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             cell.topLabel.text = indexPath.row == 0 ? "Now" : dateFormatter.string(from: date)
             let conditionId = currentHour.weather[0].id
             let cellImageName = WeatherModel.getConditionNameBy(conditionId: conditionId)
-            let iconColor = colorTheme!.colorTheme!.getDetailReviewIconColorByConditionId(conditionId)
+            let iconColor = colorThemeComponent.colorTheme.getDetailReviewIconColorByConditionId(conditionId)
             
             let imageBuilder = ConditionImageBuilder()
             cell.imageView.image = imageBuilder
@@ -106,7 +107,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill)
             }
 
-            cell.imageView.tintColor = colorTheme!.colorTheme!.detailReviewIconsColors.sun
+            cell.imageView.tintColor = colorThemeComponent.colorTheme.detailReviewIconsColors.sun
 
             return cell
         }

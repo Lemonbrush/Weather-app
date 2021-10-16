@@ -31,7 +31,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // MARK: - Public properties
 
-    var appComponents: AppComponents?
+    var appComponents: AppComponents
     var dataStorage: DataStorageProtocol?
     var displayWeather: [WeatherModel?] = []
 
@@ -40,7 +40,16 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     // MARK: - Lifecycle
-
+    
+    init(appComponents: AppComponents) {
+        self.appComponents = appComponents
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = mainManuView
         mainManuView.viewController = self
@@ -79,7 +88,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func showDetailViewVC() {
-        let destinationVC = CityDetailViewController()
+        let destinationVC = CityDetailViewController(colorThemeComponent: appComponents)
         let indexPath = self.tableView?.indexPathForSelectedRow!
         destinationVC.localWeatherData = displayWeather[indexPath!.row]
         destinationVC.colorThemeComponent = appComponents
@@ -87,7 +96,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func showSettingsVC() {
-        let destinationVC = SettingsViewController()
+        let destinationVC = SettingsViewController(colorThemeComponent: appComponents)
         destinationVC.mainMenuDelegate = self
         destinationVC.colorThemeComponent = appComponents
 

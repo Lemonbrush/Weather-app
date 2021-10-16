@@ -26,6 +26,8 @@ struct DetailReviewIconsColorsModel {
 
 struct BackgroundColorsModel {
     let colors: [UIColor]
+    let mainIconColor: UIColor
+    let mainLabelsColor: UIColor
     let ignoreColorInheritance: Bool
 }
 
@@ -79,6 +81,8 @@ struct ColorThemeModel {
     
     var backgroundColors: BackgroundColorsModel {
         BackgroundColorsModel(colors: makeColors(hexes: rowColorThemeDataModel.backgroundColors.colors),
+                              mainIconColor: makeColor(hex: rowColorThemeDataModel.backgroundColors.mainIconColor),
+                              mainLabelsColor: makeColor(hex: rowColorThemeDataModel.backgroundColors.mainLabelsColor),
                               ignoreColorInheritance: rowColorThemeDataModel.backgroundColors.ignoreColorInheritance)
     }
     
@@ -94,6 +98,38 @@ struct ColorThemeModel {
     }
     
     // MARK: - Construction
+    
+    init() {
+        let black = "#000000"
+        let white = "#ffffff"
+        let defaultColors = Colors(colors: [white],
+                                  iconColors: black,
+                                  labelsColor: black)
+        let defaultBackgroundColors = BackgroundColors(colors: [white],
+                                                       mainIconColor: black,
+                                                       mainLabelsColor: black,
+                                                       ignoreColorInheritance: false)
+        let defaultDetailReviewIconsColors = DetailReviewIconsColors(cloud: black,
+                                                                     sun: black,
+                                                                     humidity: black,
+                                                                     uvIndex: black,
+                                                                     wind: black,
+                                                                     cloudiness: black,
+                                                                     pressure: black,
+                                                                     visibility: black)
+        rowColorThemeDataModel = ColorThemeData(title: "Default",
+                                                clear_sky: defaultColors,
+                                                few_clouds: defaultColors,
+                                                scattered_clouds: defaultColors,
+                                                broken_clouds: defaultColors,
+                                                shower_rain: defaultColors,
+                                                rain: defaultColors,
+                                                thunderstorm: defaultColors,
+                                                snow: defaultColors,
+                                                mist: defaultColors,
+                                                backgroundColors: defaultBackgroundColors,
+                                                detailReviewIconsColors: defaultDetailReviewIconsColors)
+    }
     
     init(colorThemeData: ColorThemeData) {
         rowColorThemeDataModel = colorThemeData
