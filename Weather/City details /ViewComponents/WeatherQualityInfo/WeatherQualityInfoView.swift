@@ -11,7 +11,7 @@ class WeatherQualityInfoView: UIView {
     
     // MARK: - Properties
     
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
 
@@ -90,8 +90,17 @@ class WeatherQualityInfoView: UIView {
 
     // MARK: - Construction
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(frame: .zero)
+        
+        let detailReviewIconsColors = colorThemeComponent.colorTheme.detailReviewIconsColors
+        humidityItemView.tintColor = detailReviewIconsColors.humidity
+        windItemView.tintColor = detailReviewIconsColors.wind
+        cloudinessItemView.tintColor = detailReviewIconsColors.cloudiness
+        pressureItemView.tintColor = detailReviewIconsColors.pressure
+        visibilityItemView.tintColor = detailReviewIconsColors.visibility
+        uvIndexItemView.tintColor = detailReviewIconsColors.uvIndex
 
         let firstColumnStackView = makeStackViewItems(stackViews: [humidityItemView, cloudinessItemView])
         let secondColumnStackView = makeStackViewItems(stackViews: [uvIndexItemView, pressureItemView])
@@ -114,15 +123,6 @@ class WeatherQualityInfoView: UIView {
     // MARK: - Functions
 
     func setupValues(weatherData: WeatherModel) {
-        if let detailReviewIconsColors = colorThemeComponent?.colorTheme?.detailReviewIconsColors {
-            humidityItemView.tintColor = detailReviewIconsColors.humidity
-            windItemView.tintColor = detailReviewIconsColors.wind
-            cloudinessItemView.tintColor = detailReviewIconsColors.cloudiness
-            pressureItemView.tintColor = detailReviewIconsColors.pressure
-            visibilityItemView.tintColor = detailReviewIconsColors.visibility
-            uvIndexItemView.tintColor = detailReviewIconsColors.uvIndex
-        }
-        
         humidityItemView.subTitleLabel.text = weatherData.humidityString
         windItemView.subTitleLabel.text = weatherData.windString
         cloudinessItemView.subTitleLabel.text = weatherData.cloudinessString

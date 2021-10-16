@@ -224,7 +224,7 @@
 				DD42149626EFDDE100BD4C4F /* Entities */,
 				7017AAB5261B191200953C5B /* Assets.xcassets */,
 				7017AAB7261B191200953C5B /* LaunchScreen.storyboard */,
-				DD2A876326FE5C8E002AC36C /* Color themes */,
+				DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -399,7 +399,7 @@
 		DD2A876326FE5C8E002AC36C /* Color themes */ = {
 			isa = PBXGroup;
 			children = (
-				DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */,
+				DD2A876526FE611F002AC36C /* Model */,
 			);
 			path = "Color themes";
 			sourceTree = "<group>";
@@ -407,7 +407,6 @@
 		DD2A876426FE60D1002AC36C /* Settings screen */ = {
 			isa = PBXGroup;
 			children = (
-				DD2A876526FE611F002AC36C /* Model */,
 				DD2A874726FD02D8002AC36C /* Controller */,
 				DD2A874826FD02E2002AC36C /* View */,
 			);
@@ -699,6 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB4A628270B648700CE9FFB /* AppComponents.swift */,
+				DD2A876326FE5C8E002AC36C /* Color themes */,
 			);
 			path = "App components";
 			sourceTree = "<group>";

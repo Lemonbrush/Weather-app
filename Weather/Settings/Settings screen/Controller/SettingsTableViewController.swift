@@ -24,9 +24,18 @@ class SettingsViewController: UIViewController {
     // MARK: - Public properties
 
     var mainMenuDelegate: MainMenuDelegate?
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Lifecycle
+    
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = mainView
@@ -74,7 +83,7 @@ extension SettingsViewController: UnitSwitchCellDelegate {
 
 extension SettingsViewController: ColorThemeSettingsCellDelegste {
     func presentColorThemes() {
-        let colorThemeSettingsViewController = ColorThemeSettingsViewController()
+        let colorThemeSettingsViewController = ColorThemeSettingsViewController(colorThemeComponent: colorThemeComponent)
         colorThemeSettingsViewController.mainMenuDelegate = mainMenuDelegate
         colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
         

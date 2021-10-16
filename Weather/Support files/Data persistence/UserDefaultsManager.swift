@@ -27,22 +27,21 @@ struct UserDefaultsManager {
             UserDefaults.standard.setValue(position, forKey: K.UserDefaults.colorThemePositionNumber)
         }
         
-        static func getColorTheme(_ num: Int) -> ColorThemeModel? {
+        static func getColorTheme(_ num: Int) -> ColorThemeModel {
             guard let colorThemes = ColorThemeManager.getColorThemes(),
                   colorThemes.count >= num else {
-                return nil
+                return ColorThemeModel()
             }
             
             return colorThemes[num]
         }
         
-        static func getCurrentColorTheme() -> ColorThemeModel? {
+        static func getCurrentColorTheme() -> ColorThemeModel {
             let currentColorThemeNumber = self.getCurrentColorThemeNumber()
             
             guard let colorThemes = ColorThemeManager.getColorThemes(),
                   currentColorThemeNumber < colorThemes.count else {
-                      
-                return nil
+                return ColorThemeModel()
             }
             
             return colorThemes[currentColorThemeNumber]

@@ -12,7 +12,7 @@ class WeeklyForecastTableView: UIView {
     // MARK: - Public properties
 
     var dataSource: WeatherModel?
-    var colorTheme: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -36,7 +36,8 @@ class WeeklyForecastTableView: UIView {
 
     // MARK: - Construction
 
-    override init(frame: CGRect) {
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
 
         tableView.dataSource = self
@@ -114,7 +115,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         let conditionId = targetWeather.weather[0].id
         let cellImageName = WeatherModel.getConditionNameBy(conditionId: conditionId)
         let conditionImageBuilder = ConditionImageBuilder()
-        let iconColor = colorTheme!.colorTheme!.getDetailReviewIconColorByConditionId(conditionId)
+        let iconColor = colorThemeComponent.colorTheme.getDetailReviewIconColorByConditionId(conditionId)
         cell.conditionImage.image = conditionImageBuilder
             .erase(.defaultColors)
             .build(systemImageName: cellImageName)
