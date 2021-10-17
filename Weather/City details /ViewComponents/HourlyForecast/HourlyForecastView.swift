@@ -107,7 +107,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill)
             }
 
-            cell.imageView.tintColor = colorThemeComponent.colorTheme.detailReviewIconsColors.sun
+            cell.imageView.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.sun
 
             return cell
         }

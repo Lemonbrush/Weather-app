@@ -180,7 +180,7 @@ class CityDetailViewController: UIViewController {
 
         degreeStackView.addArrangedSubview(conditionImage)
         
-        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.background
         let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).labelsColor
         let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainLabelsColor : currentThemeLabelColor
         tempLebel.textColor = labelColor
@@ -268,7 +268,7 @@ class CityDetailViewController: UIViewController {
     private func setLabelsAndImages(with newData: WeatherModel) {
         let conditionImageName = WeatherModel.getConditionNameBy(conditionId: newData.conditionId)
         
-        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.background
         let inheritedIconColor = colorThemeComponent.colorTheme.getColorByConditionId(newData.conditionId).iconsColor
         let imageColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainIconColor : inheritedIconColor
         
@@ -448,10 +448,11 @@ extension CityDetailViewController {
     }
 
     private func setupGradientBackground() {
-        gradientBackground.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientBackground.endPoint = CGPoint(x: 1.0, y: 0.0)
+        let cityDetails = colorThemeComponent.colorTheme.cityDetails
+        gradientBackground.startPoint = cityDetails.background.gradient.startPoint
+        gradientBackground.endPoint = cityDetails.background.gradient.endPoint
         
-        let backgroundColors = colorThemeComponent.colorTheme.backgroundColors
+        let backgroundColors = cityDetails.background
         let currentWeatherColors = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).colors
         let uiColors = backgroundColors.ignoreColorInheritance ? backgroundColors.colors : currentWeatherColors
         

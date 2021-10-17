@@ -11,7 +11,6 @@ class MainMenuTableViewCell: UITableViewCell {
 
     // MARK: - Private properties
 
-    private let gradient = CAGradientLayer()
     private let cellShapeMask = UIView()
 
     private var mainStackView: UIStackView = {
@@ -45,6 +44,8 @@ class MainMenuTableViewCell: UITableViewCell {
     }()
 
     // MARK: - Public properties
+    
+    let gradient = CAGradientLayer()
     
     var weatherBackgroundView: UIView = {
         let view = UIView()
@@ -104,8 +105,8 @@ class MainMenuTableViewCell: UITableViewCell {
         backgroundColor = .clear
 
         // Setting up gradient layer
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         gradient.colors = DesignManager.getStandartGradientColor(withStyle: .blank)
 
         weatherBackgroundView.layer.insertSublayer(gradient, at: 0) // Adding gradient at the bottom

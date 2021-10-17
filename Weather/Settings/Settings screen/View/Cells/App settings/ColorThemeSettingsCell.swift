@@ -49,13 +49,14 @@ class ColorThemeSettingsCell: UITableViewCell {
     
     // MARK: - Public functions
     
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
     var delegate: ColorThemeSettingsCellDelegste?
     
     // MARK: - Constructions
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(style: .default, reuseIdentifier: nil)
         
         refresh()
         
@@ -89,15 +90,12 @@ class ColorThemeSettingsCell: UITableViewCell {
     }
     
     func refresh() {
-        guard let safeColorThemeAppComponent = colorThemeComponent?.colorTheme else {
-            return
-        }
         var colors: [UIColor] = []
-        colors.append(safeColorThemeAppComponent.clearSky.colors.first ?? .white)
-        colors.append(safeColorThemeAppComponent.fewClouds.colors.first ?? .white)
-        colors.append(safeColorThemeAppComponent.showerRain.colors.first ?? .white)
-        colors.append(safeColorThemeAppComponent.thunderstorm.colors.first ?? .white)
-        colors.append(safeColorThemeAppComponent.snow.colors.first ?? .white)
+        colors.append(colorThemeComponent.colorTheme .mainMenu.clearSky.colors.first ?? .white)
+        colors.append(colorThemeComponent.colorTheme .mainMenu.fewClouds.colors.first ?? .white)
+        colors.append(colorThemeComponent.colorTheme .mainMenu.showerRain.colors.first ?? .white)
+        colors.append(colorThemeComponent.colorTheme .mainMenu.thunderstorm.colors.first ?? .white)
+        colors.append(colorThemeComponent.colorTheme .mainMenu.snow.colors.first ?? .white)
         
         themeColorBlocksView.setupColors(colors)
     }

@@ -94,13 +94,13 @@ class WeatherQualityInfoView: UIView {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
         
-        let detailReviewIconsColors = colorThemeComponent.colorTheme.detailReviewIconsColors
-        humidityItemView.tintColor = detailReviewIconsColors.humidity
-        windItemView.tintColor = detailReviewIconsColors.wind
-        cloudinessItemView.tintColor = detailReviewIconsColors.cloudiness
-        pressureItemView.tintColor = detailReviewIconsColors.pressure
-        visibilityItemView.tintColor = detailReviewIconsColors.visibility
-        uvIndexItemView.tintColor = detailReviewIconsColors.uvIndex
+        let detailReviewIconsColors = colorThemeComponent.colorTheme.cityDetails
+        humidityItemView.tintColor = detailReviewIconsColors.iconColors.humidity
+        windItemView.tintColor = detailReviewIconsColors.iconColors.wind
+        cloudinessItemView.tintColor = detailReviewIconsColors.iconColors.cloudiness
+        pressureItemView.tintColor = detailReviewIconsColors.iconColors.pressure
+        visibilityItemView.tintColor = detailReviewIconsColors.iconColors.visibility
+        uvIndexItemView.tintColor = detailReviewIconsColors.iconColors.uvIndex
 
         let firstColumnStackView = makeStackViewItems(stackViews: [humidityItemView, cloudinessItemView])
         let secondColumnStackView = makeStackViewItems(stackViews: [uvIndexItemView, pressureItemView])

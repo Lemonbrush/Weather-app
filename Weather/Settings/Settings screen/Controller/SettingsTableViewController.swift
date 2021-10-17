@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
     // MARK: - Private properties
     
     private let unitsSettingsCell = UnitsSettingsCell()
-    private lazy var colorThemeSettingsCell = ColorThemeSettingsCell()
+    private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
     
     private let mainView = SettingsView()
 
@@ -50,8 +50,6 @@ class SettingsViewController: UIViewController {
         
         unitsSettingsCell.delegate = self
         colorThemeSettingsCell.delegate = self
-        colorThemeSettingsCell.colorThemeComponent = colorThemeComponent
-        colorThemeSettingsCell.refresh()
         
         let appSettingsSection = SettingsSection(title: "APP",
                                                  cells: [unitsSettingsCell,

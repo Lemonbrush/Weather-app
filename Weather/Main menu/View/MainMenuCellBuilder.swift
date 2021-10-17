@@ -26,7 +26,7 @@ protocol MainMenuCellBuilderProtocol: AnyObject {
     func build(timeLabelByTimeZone: TimeZone?) -> Self
 
     @discardableResult
-    func build(imageByConditionId conditionId: Int, colorThemeModel: ColorThemeModel?) -> Self
+    func build(imageByConditionId conditionId: Int) -> Self
 
     @discardableResult
     func build(colorThemeModel: ColorThemeModel?, conditionId: Int, isDay: Bool)-> Self
@@ -37,8 +37,6 @@ protocol MainMenuCellBuilderProtocol: AnyObject {
 final class MainMenuCellBuilder {
 
     private var _content = MainMenuTableViewCell()
-    private var colorTheme: ColorThemeModel?
-    private var conditionId: Int?
 }
 
 extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
@@ -49,20 +47,30 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
     }
     
     func build(colorThemeModel: ColorThemeModel?, conditionId: Int) -> Self {
-        self.colorTheme = colorThemeModel
-        self.conditionId = conditionId
+        guard let safeColortheme = colorThemeModel else {
+            return self
+        }
+        
+        _content.cityNameLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
+        _content.degreeLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
+        _content.timeLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
+        _content.gradient.startPoint = safeColortheme.mainMenu.gradient.startPoint
+        _content.gradient.endPoint = safeColortheme.mainMenu.gradient.endPoint
+        
+        if let currentImage = _content.conditionImage.image {
+            _content.conditionImage.image = currentImage.withTintColor(safeColortheme.getColorByConditionId(conditionId).iconsColor)
+        }
+        
         return self
     }
 
     func build(cityLabelByString cityNameString: String) -> Self {
         _content.cityNameLabel.text = cityNameString
-        _content.cityNameLabel.textColor = colorTheme?.getColorByConditionId(conditionId!).labelsColor
         return self
     }
 
     func build(degreeLabelByString degreeString: String) -> Self {
         _content.degreeLabel.text = degreeString
-        _content.degreeLabel.textColor = colorTheme?.getColorByConditionId(conditionId!).labelsColor
         return self
     }
 
@@ -73,17 +81,14 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         dateFormatter.dateFormat = "hh:mm"
 
         _content.timeLabel.text = dateFormatter.string(from: date)
-        _content.timeLabel.textColor = colorTheme?.getColorByConditionId(conditionId!).labelsColor
         return self
     }
 
-    func build(imageByConditionId conditionId: Int, colorThemeModel: ColorThemeModel?) -> Self {
+    func build(imageByConditionId conditionId: Int) -> Self {
         let imageBuilder = ConditionImageBuilder()
-        let imageColor = colorThemeModel?.getColorByConditionId(conditionId).iconsColor ?? .black
         let newImage = imageBuilder
             .erase(.defaultColors)
             .build(systemImageName: WeatherModel.getConditionNameBy(conditionId: conditionId))
-            .buildColor(imageColor)
             .content
         
         _content.conditionImage.image = newImage
@@ -92,12 +97,10 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
     }
 
     func build(colorThemeModel: ColorThemeModel?, conditionId: Int, isDay: Bool) -> Self {
-        guard let safeColorThemeModel = colorThemeModel else {
+        guard let backgroundColors = colorThemeModel?.getColorByConditionId(conditionId).colors else {
             return self
         }
-        let imageColor = colorThemeModel?.getColorByConditionId(conditionId).colors.first ?? .white
-        
-        _content.weatherBackgroundView.backgroundColor = imageColor
+        _content.gradient.colors = ColorThemeModel.convertUiColorsToCg(backgroundColors)
         return self
     }
 

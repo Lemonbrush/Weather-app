@@ -97,11 +97,12 @@ class MainMenuView: UIView {
     }()
 
     weak var viewController: MainMenuViewController?
-    var colorThemeComponent: ColorThemeProtocol?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Construction
 
-    required init() {
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
 
         let currentDate = Date()

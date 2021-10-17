@@ -36,14 +36,14 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
         cell = builder
             .erase()
-            .build(colorThemeModel: colorThemeComponent?.colorTheme, conditionId: weatherDataForCell.conditionId)
             .build(cityLabelByString: cityName)
             .build(degreeLabelByString: temperature)
             .build(timeLabelByTimeZone: timeZone)
-            .build(imageByConditionId: weatherDataForCell.conditionId, colorThemeModel: colorThemeComponent?.colorTheme)
-            .build(colorThemeModel: colorThemeComponent?.colorTheme,
+            .build(imageByConditionId: weatherDataForCell.conditionId)
+            .build(colorThemeModel: colorThemeComponent.colorTheme,
                    conditionId: weatherDataForCell.conditionId,
                    isDay: true)
+            .build(colorThemeModel: colorThemeComponent.colorTheme, conditionId: weatherDataForCell.conditionId)
             .content
 
         cell.layoutIfNeeded() // Eliminate layouts left from loading cells

@@ -27,7 +27,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     private var weatherManager = NetworkManager()
     private var tableView: UITableView?
     private var savedCities = [SavedCity]()
-    private let mainManuView = MainMenuView()
+    private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents)
 
     // MARK: - Public properties
 
