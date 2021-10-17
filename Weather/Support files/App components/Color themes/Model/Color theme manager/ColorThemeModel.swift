@@ -13,7 +13,7 @@ struct ColorThemeColorsModel {
     let labelsColor: UIColor
 }
 
-struct DetailReviewIconsColorsModel {
+struct IconColorsColorThemeModel {
     let cloud: UIColor
     let sun: UIColor
     let humidity: UIColor
@@ -24,77 +24,85 @@ struct DetailReviewIconsColorsModel {
     let visibility: UIColor
 }
 
-struct BackgroundColorsModel {
+struct BackgroundColorsColorThemeModel {
     let colors: [UIColor]
+    let gradient: GradientColorThemeModel
     let mainIconColor: UIColor
     let mainLabelsColor: UIColor
     let ignoreColorInheritance: Bool
+}
+
+struct MainMenuColorThemeModel {
+    let gradient: GradientColorThemeModel
+    var clearSky: ColorThemeColorsModel
+    var fewClouds: ColorThemeColorsModel
+    var scatteredClouds: ColorThemeColorsModel
+    var brokenClouds: ColorThemeColorsModel
+    var showerRain: ColorThemeColorsModel
+    var rain: ColorThemeColorsModel
+    var thunderstorm: ColorThemeColorsModel
+    var snow: ColorThemeColorsModel
+    var mist: ColorThemeColorsModel
+}
+
+struct CityDetailsColorThemeModel {
+    let background: BackgroundColorsColorThemeModel
+    let iconColors: IconColorsColorThemeModel
+}
+
+struct GradientColorThemeModel {
+    let startPoint: CGPoint
+    let endPoint: CGPoint
 }
 
 struct ColorThemeModel {
     
     // MARK: - Private properties
     
-    private let rowColorThemeDataModel: ColorThemeData
+    private let rawColorThemeDataModel: ColorThemeData
     
     // MARK: - Public properties
     
     var title: String {
-        rowColorThemeDataModel.title
+        rawColorThemeDataModel.title
     }
     
-    var clearSky: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.clear_sky)
+    var mainMenu: MainMenuColorThemeModel {
+        let mainMenu = rawColorThemeDataModel.mainMenu
+        let mainMenuGradient = GradientColorThemeModel(startPoint: CGPoint(x: mainMenu.gradient.startPoint.x, y: mainMenu.gradient.startPoint.y),
+                                                       endPoint: CGPoint(x: mainMenu.gradient.endPoint.x, y: mainMenu.gradient.endPoint.y))
+        return MainMenuColorThemeModel(gradient: mainMenuGradient,
+                                       clearSky: convertToColorThemeModel(colorsModel: mainMenu.clear_sky),
+                                       fewClouds: convertToColorThemeModel(colorsModel: mainMenu.few_clouds),
+                                       scatteredClouds: convertToColorThemeModel(colorsModel: mainMenu.scattered_clouds),
+                                       brokenClouds: convertToColorThemeModel(colorsModel: mainMenu.broken_clouds),
+                                       showerRain: convertToColorThemeModel(colorsModel: mainMenu.shower_rain),
+                                       rain: convertToColorThemeModel(colorsModel: mainMenu.rain),
+                                       thunderstorm: convertToColorThemeModel(colorsModel: mainMenu.thunderstorm),
+                                       snow: convertToColorThemeModel(colorsModel: mainMenu.snow),
+                                       mist: convertToColorThemeModel(colorsModel: mainMenu.mist))
     }
     
-    var fewClouds: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.few_clouds)
-    }
-    
-    var scatteredClouds: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.scattered_clouds)
-    }
-    
-    var brokenClouds: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.broken_clouds)
-    }
-    
-    var showerRain: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.shower_rain)
-    }
-    
-    var rain: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.rain)
-    }
-    
-    var thunderstorm: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.thunderstorm)
-    }
-    
-    var snow: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.snow)
-    }
-    
-    var mist: ColorThemeColorsModel {
-        convertToColorThemeModel(colorsModel: rowColorThemeDataModel.mist)
-    }
-    
-    var backgroundColors: BackgroundColorsModel {
-        BackgroundColorsModel(colors: makeColors(hexes: rowColorThemeDataModel.backgroundColors.colors),
-                              mainIconColor: makeColor(hex: rowColorThemeDataModel.backgroundColors.mainIconColor),
-                              mainLabelsColor: makeColor(hex: rowColorThemeDataModel.backgroundColors.mainLabelsColor),
-                              ignoreColorInheritance: rowColorThemeDataModel.backgroundColors.ignoreColorInheritance)
-    }
-    
-    var detailReviewIconsColors: DetailReviewIconsColorsModel {
-        DetailReviewIconsColorsModel(cloud: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.cloud),
-                                     sun: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.sun),
-                                     humidity: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.humidity),
-                                     uvIndex: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.uvIndex),
-                                     wind: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.wind),
-                                     cloudiness: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.cloudiness),
-                                     pressure: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.pressure),
-                                     visibility: makeColor(hex: rowColorThemeDataModel.detailReviewIconsColors.visibility))
+    var cityDetails: CityDetailsColorThemeModel {
+        let cityDetails = rawColorThemeDataModel.cityDetails
+        let backgroundRawGradient = cityDetails.background.gradient
+        let backgroundGradient = GradientColorThemeModel(startPoint: CGPoint(x: backgroundRawGradient.startPoint.x, y: backgroundRawGradient.startPoint.y),
+                                                         endPoint: CGPoint(x: backgroundRawGradient.endPoint.x, y: backgroundRawGradient.endPoint.y))
+        let background = BackgroundColorsColorThemeModel(colors: makeColors(hexes: cityDetails.background.colors),
+                                                         gradient: backgroundGradient,
+                                                         mainIconColor: makeColor(hex: cityDetails.background.mainIconColor),
+                                                         mainLabelsColor: makeColor(hex: cityDetails.background.mainLabelsColor),
+                                                         ignoreColorInheritance: cityDetails.background.ignoreColorInheritance)
+        let iconColors = IconColorsColorThemeModel(cloud: makeColor(hex: cityDetails.iconColors.cloud),
+                                                   sun: makeColor(hex: cityDetails.iconColors.sun),
+                                                   humidity: makeColor(hex: cityDetails.iconColors.humidity),
+                                                   uvIndex: makeColor(hex: cityDetails.iconColors.uvIndex),
+                                                   wind: makeColor(hex: cityDetails.iconColors.wind),
+                                                   cloudiness: makeColor(hex: cityDetails.iconColors.cloudiness),
+                                                   pressure: makeColor(hex: cityDetails.iconColors.pressure),
+                                                   visibility: makeColor(hex: cityDetails.iconColors.visibility))
+        return CityDetailsColorThemeModel(background: background,
+                                          iconColors: iconColors)
     }
     
     // MARK: - Construction
@@ -105,34 +113,42 @@ struct ColorThemeModel {
         let defaultColors = Colors(colors: [white],
                                   iconColors: black,
                                   labelsColor: black)
-        let defaultBackgroundColors = BackgroundColors(colors: [white],
-                                                       mainIconColor: black,
-                                                       mainLabelsColor: black,
-                                                       ignoreColorInheritance: false)
-        let defaultDetailReviewIconsColors = DetailReviewIconsColors(cloud: black,
-                                                                     sun: black,
-                                                                     humidity: black,
-                                                                     uvIndex: black,
-                                                                     wind: black,
-                                                                     cloudiness: black,
-                                                                     pressure: black,
-                                                                     visibility: black)
-        rowColorThemeDataModel = ColorThemeData(title: "Default",
-                                                clear_sky: defaultColors,
-                                                few_clouds: defaultColors,
-                                                scattered_clouds: defaultColors,
-                                                broken_clouds: defaultColors,
-                                                shower_rain: defaultColors,
-                                                rain: defaultColors,
-                                                thunderstorm: defaultColors,
-                                                snow: defaultColors,
-                                                mist: defaultColors,
-                                                backgroundColors: defaultBackgroundColors,
-                                                detailReviewIconsColors: defaultDetailReviewIconsColors)
+        let defaultGradient = Gradient(startPoint: StartPoint(x: 0.0,
+                                                              y: 0.0),
+                                       endPoint: EndPoint(x: 0.0,
+                                                          y: 0.0))
+        let defaultMainMenu = MainMenu(gradient: defaultGradient,
+                                       clear_sky: defaultColors,
+                                       few_clouds: defaultColors,
+                                       scattered_clouds: defaultColors,
+                                       broken_clouds: defaultColors,
+                                       shower_rain: defaultColors,
+                                       rain: defaultColors,
+                                       thunderstorm: defaultColors,
+                                       snow: defaultColors,
+                                       mist: defaultColors)
+        let defaultBackground = Background(colors: [white],
+                                           gradient: defaultGradient,
+                                           mainIconColor: black,
+                                           mainLabelsColor: black,
+                                           ignoreColorInheritance: false)
+        let defaultIconColors = IconColors(cloud: black,
+                                           sun: black,
+                                           humidity: black,
+                                           uvIndex: black,
+                                           wind: black,
+                                           cloudiness: black,
+                                           pressure: black,
+                                           visibility: black)
+        let defaultCityDetails = CityDetails(background: defaultBackground,
+                                             iconColors: defaultIconColors)
+        rawColorThemeDataModel = ColorThemeData(title: "Default",
+                                                mainMenu: defaultMainMenu,
+                                                cityDetails: defaultCityDetails)
     }
     
     init(colorThemeData: ColorThemeData) {
-        rowColorThemeDataModel = colorThemeData
+        rawColorThemeDataModel = colorThemeData
     }
     
     // MARK: - Functions
@@ -140,31 +156,39 @@ struct ColorThemeModel {
     func getColorByConditionId(_ conditionId: Int) -> ColorThemeColorsModel {
         switch conditionId {
         case 200...232:
-            return thunderstorm
+            return mainMenu.thunderstorm
         case 300...321:
-            return rain
+            return mainMenu.rain
         case 500...531:
-            return showerRain
+            return mainMenu.showerRain
         case 600...622:
-            return snow
+            return mainMenu.snow
         case 701...781:
-            return mist
+            return mainMenu.mist
         case 800:
-            return clearSky
+            return mainMenu.clearSky
         case 801...804:
-            return scatteredClouds
+            return mainMenu.scatteredClouds
         default:
-            return clearSky
+            return mainMenu.clearSky
         }
     }
     
     func getDetailReviewIconColorByConditionId(_ conditionId: Int) -> UIColor {
         switch conditionId {
         case 800:
-            return detailReviewIconsColors.sun
+            return cityDetails.iconColors.sun
         default:
-            return detailReviewIconsColors.cloud
+            return cityDetails.iconColors.cloud
         }
+    }
+    
+    static func convertUiColorsToCg(_ uiColors: [UIColor]) -> [CGColor] {
+        var cgColors: [CGColor] = []
+        for uiColor in uiColors {
+            cgColors.append(uiColor.cgColor)
+        }
+        return cgColors
     }
     
     // MARK: - Private functions
