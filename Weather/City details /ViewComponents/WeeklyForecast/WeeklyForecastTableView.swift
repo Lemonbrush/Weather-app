@@ -93,6 +93,8 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
               let safeWeatherData = dataSource else {
             return UITableViewCell()
         }
+        
+        cell.prepareForReuse()
 
         let targetWeather = safeWeatherData.daily[indexPath.row]
 

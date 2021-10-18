@@ -79,6 +79,13 @@ class WeeklyForecastCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Functions
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        monthLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+    }
 
     // MARK: - Private functions
 
