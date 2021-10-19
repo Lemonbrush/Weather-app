@@ -81,13 +81,13 @@ class CityDetailViewController: UIViewController {
 
     private var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
         return label
     }()
 
     private var feelsLikeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         return label
     }()
 

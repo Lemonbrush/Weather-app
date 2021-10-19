@@ -65,6 +65,11 @@ struct Background: Codable {
 }
 
 struct IconColors: Codable {
+    let mist: String
+    let snow: String
+    let rain: String
+    let showerRain: String
+    let thunderstorm: String
     let cloud: String
     let sun: String
     let humidity: String

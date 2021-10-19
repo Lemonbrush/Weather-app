@@ -17,94 +17,222 @@
           "#ffffff"
         ],
         "iconColors": "#f8c957",
-        "labelsColor": "#000000"
+        "labelsColor": "#2B2B2B"
       },
       "few_clouds": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "scattered_clouds": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "broken_clouds": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "shower_rain": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "rain": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "thunderstorm": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "snow": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       },
       "mist": {
         "colors": [
           "#ffffff"
         ],
-        "iconColors": "#92ddef",
-        "labelsColor": "#000000"
+        "iconColors": "#5BB7FC",
+        "labelsColor": "#2B2B2B"
       }
     },
     "cityDetails": {
       "background": {
         "colors": [
-          "#72E1FD",
-          "#44A6FC"
+          "#5BB7FC",
+          "#0381ef"
         ],
         "gradient": {
           "startPoint": {
-            "x": 1,
+            "x": 0,
+            "y": 1
+          },
+          "endPoint": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        "mainIconColor": "#ffffff",
+        "mainLabelsColor": "#ffffff",
+        "ignoreColorInheritance": true
+      },
+      "iconColors": {
+        "sun": "#f8c957",
+        "cloud": "#87CFF2",
+        "mist": "#87CFF2",
+        "snow": "#87CFF2",
+        "rain": "#87CFF2",
+        "showerRain": "#87CFF2",
+        "thunderstorm": "#87CFF2",
+        "humidity": "#87CFF2",
+        "uvIndex": "#f8c957",
+        "wind": "#87CFF2",
+        "cloudiness": "#87CFF2",
+        "pressure": "#87CFF2",
+        "visibility": "#87CFF2"
+      }
+    }
+  },
+  {
+    "title": "Colorful",
+    "mainMenu": {
+      "gradient": {
+        "startPoint": {
+          "x": 0,
+          "y": 0
+        },
+        "endPoint": {
+          "x": 1,
+          "y": 0
+        }
+      },
+      "clear_sky": {
+        "colors": [
+          "#44A6FC",
+          "#87CFF2"
+        ],
+        "iconColors": "#f8c957",
+        "labelsColor": "#ffffff"
+      },
+      "few_clouds": {
+        "colors": [
+          "#44A6FC",
+          "#87CFF2"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "scattered_clouds": {
+        "colors": [
+          "#44A6FC",
+          "#87CFF2"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "broken_clouds": {
+        "colors": [
+          "#002D55",
+          "#5883BC"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "shower_rain": {
+        "colors": [
+          "#3141A4",
+          "#44AAFA"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "rain": {
+        "colors": [
+          "#3141A4",
+          "#44AAFA"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "thunderstorm": {
+        "colors": [
+          "#002D55",
+          "#5883BC"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "snow": {
+        "colors": [
+          "#718CBA",
+          "#ABCCF6"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      },
+      "mist": {
+        "colors": [
+          "#718CBA",
+          "#ABCCF6"
+        ],
+        "iconColors": "#ffffff",
+        "labelsColor": "#ffffff"
+      }
+    },
+    "cityDetails": {
+      "background": {
+        "colors": [
+          "#ffffff",
+          "#ffffff"
+        ],
+        "gradient": {
+          "startPoint": {
+            "x": 0,
             "y": 0
           },
           "endPoint": {
             "x": 0,
-            "y": 0.5
+            "y": 1
           }
         },
         "mainIconColor": "#ffffff",
         "mainLabelsColor": "#000000",
-        "ignoreColorInheritance": true
+        "ignoreColorInheritance": false
       },
       "iconColors": {
-        "cloud": "#92ddef",
         "sun": "#f8c957",
-        "humidity": "#92ddef",
+        "cloud": "#87CFF2",
+        "mist": "#ABCCF6",
+        "snow": "#ABCCF6",
+        "rain": "#87CFF2",
+        "showerRain": "#87CFF2",
+        "thunderstorm": "#718CBA",
+        "humidity": "#87CFF2",
         "uvIndex": "#f8c957",
-        "wind": "#92ddef",
-        "cloudiness": "#92ddef",
-        "pressure": "#92ddef",
-        "visibility": "#92ddef"
+        "wind": "#87CFF2",
+        "cloudiness": "#87CFF2",
+        "pressure": "#87CFF2",
+        "visibility": "#87CFF2"
       }
     }
   }

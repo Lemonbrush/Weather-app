@@ -14,6 +14,11 @@ struct ColorThemeColorsModel {
 }
 
 struct IconColorsColorThemeModel {
+    let mist: UIColor
+    let snow: UIColor
+    let rain: UIColor
+    let showerRain: UIColor
+    let thunderstorm: UIColor
     let cloud: UIColor
     let sun: UIColor
     let humidity: UIColor
@@ -93,7 +98,12 @@ struct ColorThemeModel {
                                                          mainIconColor: makeColor(hex: cityDetails.background.mainIconColor),
                                                          mainLabelsColor: makeColor(hex: cityDetails.background.mainLabelsColor),
                                                          ignoreColorInheritance: cityDetails.background.ignoreColorInheritance)
-        let iconColors = IconColorsColorThemeModel(cloud: makeColor(hex: cityDetails.iconColors.cloud),
+        let iconColors = IconColorsColorThemeModel(mist: makeColor(hex: cityDetails.iconColors.mist),
+                                                   snow: makeColor(hex: cityDetails.iconColors.snow),
+                                                   rain: makeColor(hex: cityDetails.iconColors.rain),
+                                                   showerRain: makeColor(hex: cityDetails.iconColors.showerRain),
+                                                   thunderstorm: makeColor(hex: cityDetails.iconColors.thunderstorm),
+                                                   cloud: makeColor(hex: cityDetails.iconColors.cloud),
                                                    sun: makeColor(hex: cityDetails.iconColors.sun),
                                                    humidity: makeColor(hex: cityDetails.iconColors.humidity),
                                                    uvIndex: makeColor(hex: cityDetails.iconColors.uvIndex),
@@ -132,7 +142,12 @@ struct ColorThemeModel {
                                            mainIconColor: black,
                                            mainLabelsColor: black,
                                            ignoreColorInheritance: false)
-        let defaultIconColors = IconColors(cloud: black,
+        let defaultIconColors = IconColors(mist: black,
+                                           snow: black,
+                                           rain: black,
+                                           showerRain: black,
+                                           thunderstorm: black,
+                                           cloud: black,
                                            sun: black,
                                            humidity: black,
                                            uvIndex: black,
@@ -175,11 +190,24 @@ struct ColorThemeModel {
     }
     
     func getDetailReviewIconColorByConditionId(_ conditionId: Int) -> UIColor {
+        let iconColors = cityDetails.iconColors
         switch conditionId {
+        case 200...232:
+            return iconColors.thunderstorm
+        case 300...321:
+            return iconColors.rain
+        case 500...531:
+            return iconColors.showerRain
+        case 600...622:
+            return iconColors.snow
+        case 701...781:
+            return iconColors.mist
         case 800:
-            return cityDetails.iconColors.sun
+            return iconColors.sun
+        case 801...804:
+            return iconColors.cloud
         default:
-            return cityDetails.iconColors.cloud
+            return iconColors.sun
         }
     }
     
