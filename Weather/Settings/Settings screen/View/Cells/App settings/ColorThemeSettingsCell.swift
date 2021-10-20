@@ -90,12 +90,13 @@ class ColorThemeSettingsCell: UITableViewCell {
     }
     
     func refresh() {
+        let cellsColors = colorThemeComponent.colorTheme.mainMenu.cells
         var colors: [UIColor] = []
-        colors.append(colorThemeComponent.colorTheme .mainMenu.clearSky.colors.first ?? .white)
-        colors.append(colorThemeComponent.colorTheme .mainMenu.fewClouds.colors.first ?? .white)
-        colors.append(colorThemeComponent.colorTheme .mainMenu.showerRain.colors.first ?? .white)
-        colors.append(colorThemeComponent.colorTheme .mainMenu.thunderstorm.colors.first ?? .white)
-        colors.append(colorThemeComponent.colorTheme .mainMenu.snow.colors.first ?? .white)
+        colors.append(cellsColors.clearSky.colors.first ?? .white)
+        colors.append(cellsColors.fewClouds.colors.first ?? .white)
+        colors.append(cellsColors.showerRain.colors.first ?? .white)
+        colors.append(cellsColors.thunderstorm.colors.first ?? .white)
+        colors.append(cellsColors.snow.colors.first ?? .white)
         
         themeColorBlocksView.setupColors(colors)
     }

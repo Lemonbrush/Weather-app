@@ -180,9 +180,9 @@ class CityDetailViewController: UIViewController {
 
         degreeStackView.addArrangedSubview(conditionImage)
         
-        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.background
+        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.screenBackground
         let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).labelsColor
-        let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainLabelsColor : currentThemeLabelColor
+        let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.labelsColor : currentThemeLabelColor
         tempLebel.textColor = labelColor
         descriptionLabel.textColor = labelColor
         feelsLikeLabel.textColor = labelColor
@@ -268,7 +268,7 @@ class CityDetailViewController: UIViewController {
     private func setLabelsAndImages(with newData: WeatherModel) {
         let conditionImageName = WeatherModel.getConditionNameBy(conditionId: newData.conditionId)
         
-        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.background
+        let backgroundColors = colorThemeComponent.colorTheme.cityDetails.screenBackground
         let inheritedIconColor = colorThemeComponent.colorTheme.getColorByConditionId(newData.conditionId).iconsColor
         let imageColor = backgroundColors.ignoreColorInheritance ? backgroundColors.mainIconColor : inheritedIconColor
         
@@ -449,10 +449,10 @@ extension CityDetailViewController {
 
     private func setupGradientBackground() {
         let cityDetails = colorThemeComponent.colorTheme.cityDetails
-        gradientBackground.startPoint = cityDetails.background.gradient.startPoint
-        gradientBackground.endPoint = cityDetails.background.gradient.endPoint
+        gradientBackground.startPoint = cityDetails.screenBackground.gradient.startPoint
+        gradientBackground.endPoint = cityDetails.screenBackground.gradient.endPoint
         
-        let backgroundColors = cityDetails.background
+        let backgroundColors = cityDetails.screenBackground
         let currentWeatherColors = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).colors
         let uiColors = backgroundColors.ignoreColorInheritance ? backgroundColors.colors : currentWeatherColors
         

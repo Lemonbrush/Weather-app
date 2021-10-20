@@ -54,8 +54,8 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         _content.cityNameLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
         _content.degreeLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
         _content.timeLabel.textColor = safeColortheme.getColorByConditionId(conditionId).labelsColor
-        _content.gradient.startPoint = safeColortheme.mainMenu.gradient.startPoint
-        _content.gradient.endPoint = safeColortheme.mainMenu.gradient.endPoint
+        _content.gradient.startPoint = safeColortheme.mainMenu.cells.gradient.startPoint
+        _content.gradient.endPoint = safeColortheme.mainMenu.cells.gradient.endPoint
         
         if let currentImage = _content.conditionImage.image {
             _content.conditionImage.image = currentImage.withTintColor(safeColortheme.getColorByConditionId(conditionId).iconsColor)
