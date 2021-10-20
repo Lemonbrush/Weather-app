@@ -20,12 +20,14 @@ class WeeklyForecastCell: UITableViewCell {
 
     var temperatureLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
     var minTemperatureLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .lightGray
         return label
@@ -52,7 +54,7 @@ class WeeklyForecastCell: UITableViewCell {
 
     private var degreeStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         stackView.axis = .horizontal
         stackView.spacing = 18
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +105,7 @@ class WeeklyForecastCell: UITableViewCell {
         conditionImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
         // Degree stackView
-        degreeStackView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        degreeStackView.widthAnchor.constraint(equalToConstant: 85).isActive = true
 
         // MonthLabel
         monthLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 95).isActive = true
