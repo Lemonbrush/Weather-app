@@ -7,59 +7,6 @@
 
 import UIKit
 
-struct ColorThemeColorsModel {
-    let colors: [UIColor]
-    let iconsColor: UIColor
-    let labelsColor: UIColor
-}
-
-struct IconColorsColorThemeModel {
-    let mist: UIColor
-    let snow: UIColor
-    let rain: UIColor
-    let showerRain: UIColor
-    let thunderstorm: UIColor
-    let cloud: UIColor
-    let sun: UIColor
-    let humidity: UIColor
-    let uvIndex: UIColor
-    let wind: UIColor
-    let cloudiness: UIColor
-    let pressure: UIColor
-    let visibility: UIColor
-}
-
-struct BackgroundColorsColorThemeModel {
-    let colors: [UIColor]
-    let gradient: GradientColorThemeModel
-    let mainIconColor: UIColor
-    let mainLabelsColor: UIColor
-    let ignoreColorInheritance: Bool
-}
-
-struct MainMenuColorThemeModel {
-    let gradient: GradientColorThemeModel
-    var clearSky: ColorThemeColorsModel
-    var fewClouds: ColorThemeColorsModel
-    var scatteredClouds: ColorThemeColorsModel
-    var brokenClouds: ColorThemeColorsModel
-    var showerRain: ColorThemeColorsModel
-    var rain: ColorThemeColorsModel
-    var thunderstorm: ColorThemeColorsModel
-    var snow: ColorThemeColorsModel
-    var mist: ColorThemeColorsModel
-}
-
-struct CityDetailsColorThemeModel {
-    let background: BackgroundColorsColorThemeModel
-    let iconColors: IconColorsColorThemeModel
-}
-
-struct GradientColorThemeModel {
-    let startPoint: CGPoint
-    let endPoint: CGPoint
-}
-
 struct ColorThemeModel {
     
     // MARK: - Private properties
@@ -74,30 +21,38 @@ struct ColorThemeModel {
     
     var mainMenu: MainMenuColorThemeModel {
         let mainMenu = rawColorThemeDataModel.mainMenu
-        let mainMenuGradient = GradientColorThemeModel(startPoint: CGPoint(x: mainMenu.gradient.startPoint.x, y: mainMenu.gradient.startPoint.y),
-                                                       endPoint: CGPoint(x: mainMenu.gradient.endPoint.x, y: mainMenu.gradient.endPoint.y))
-        return MainMenuColorThemeModel(gradient: mainMenuGradient,
-                                       clearSky: convertToColorThemeModel(colorsModel: mainMenu.clear_sky),
-                                       fewClouds: convertToColorThemeModel(colorsModel: mainMenu.few_clouds),
-                                       scatteredClouds: convertToColorThemeModel(colorsModel: mainMenu.scattered_clouds),
-                                       brokenClouds: convertToColorThemeModel(colorsModel: mainMenu.broken_clouds),
-                                       showerRain: convertToColorThemeModel(colorsModel: mainMenu.shower_rain),
-                                       rain: convertToColorThemeModel(colorsModel: mainMenu.rain),
-                                       thunderstorm: convertToColorThemeModel(colorsModel: mainMenu.thunderstorm),
-                                       snow: convertToColorThemeModel(colorsModel: mainMenu.snow),
-                                       mist: convertToColorThemeModel(colorsModel: mainMenu.mist))
+        
+        let cellsGradient = GradientColorThemeModel(startPoint: CGPoint(x: mainMenu.cells.gradient.startPoint.x, y: mainMenu.cells.gradient.startPoint.y),
+                                                    endPoint: CGPoint(x: mainMenu.cells.gradient.endPoint.x, y: mainMenu.cells.gradient.endPoint.y))
+        let cellsMenu = CellsColorThemeModel(isShadowVisible: mainMenu.cells.isShadowVisible,
+                                             gradient: cellsGradient,
+                                             clearSky: convertToColorThemeModel(mainMenu.cells.clear_sky),
+                                             fewClouds: convertToColorThemeModel(mainMenu.cells.few_clouds),
+                                             scatteredClouds: convertToColorThemeModel(mainMenu.cells.scattered_clouds),
+                                             brokenClouds: convertToColorThemeModel(mainMenu.cells.broken_clouds),
+                                             showerRain: convertToColorThemeModel(mainMenu.cells.shower_rain),
+                                             rain: convertToColorThemeModel(mainMenu.cells.rain),
+                                             thunderstorm: convertToColorThemeModel(mainMenu.cells.rain),
+                                             snow: convertToColorThemeModel(mainMenu.cells.snow),
+                                             mist: convertToColorThemeModel(mainMenu.cells.mist))
+        return MainMenuColorThemeModel(backgroundColor: makeColor(hex: mainMenu.backgroundColor),
+                                       dateLabelColor: makeColor(hex: mainMenu.dateLabelColor),
+                                       todayColor: makeColor(hex: mainMenu.todayColor),
+                                       settingsIconColor: makeColor(hex: mainMenu.settingsIconColor),
+                                       searchButtonColor: makeColor(hex: mainMenu.searchButtonColor),
+                                       cells: cellsMenu)
     }
     
     var cityDetails: CityDetailsColorThemeModel {
         let cityDetails = rawColorThemeDataModel.cityDetails
-        let backgroundRawGradient = cityDetails.background.gradient
-        let backgroundGradient = GradientColorThemeModel(startPoint: CGPoint(x: backgroundRawGradient.startPoint.x, y: backgroundRawGradient.startPoint.y),
-                                                         endPoint: CGPoint(x: backgroundRawGradient.endPoint.x, y: backgroundRawGradient.endPoint.y))
-        let background = BackgroundColorsColorThemeModel(colors: makeColors(hexes: cityDetails.background.colors),
-                                                         gradient: backgroundGradient,
-                                                         mainIconColor: makeColor(hex: cityDetails.background.mainIconColor),
-                                                         mainLabelsColor: makeColor(hex: cityDetails.background.mainLabelsColor),
-                                                         ignoreColorInheritance: cityDetails.background.ignoreColorInheritance)
+        
+        let screenBackground = ScreenBackgroundColorThemeModel(colors: makeColors(hexes: cityDetails.screenBackground.colors),
+                                                               gradient: convertToGradientColorThemeModel(cityDetails.screenBackground.gradient),
+                                                               mainIconColor: makeColor(hex: cityDetails.screenBackground.mainIconColor),
+                                                               labelsColor: makeColor(hex: cityDetails.screenBackground.labelsColor),
+                                                               labelsSecondaryColor: makeColor(hex: cityDetails.screenBackground.labelsSecondaryColor),
+                                                               ignoreColorInheritance: cityDetails.screenBackground.ignoreColorInheritance)
+        
         let iconColors = IconColorsColorThemeModel(mist: makeColor(hex: cityDetails.iconColors.mist),
                                                    snow: makeColor(hex: cityDetails.iconColors.snow),
                                                    rain: makeColor(hex: cityDetails.iconColors.rain),
@@ -111,7 +66,13 @@ struct ColorThemeModel {
                                                    cloudiness: makeColor(hex: cityDetails.iconColors.cloudiness),
                                                    pressure: makeColor(hex: cityDetails.iconColors.pressure),
                                                    visibility: makeColor(hex: cityDetails.iconColors.visibility))
-        return CityDetailsColorThemeModel(background: background,
+        
+        return CityDetailsColorThemeModel(hourlyForecast: convertToBackgroundColorColorThemeModel(cityDetails.hourlyForecast),
+                                          weeklyForecast: convertToBackgroundColorColorThemeModel(cityDetails.weeklyForecast),
+                                          weatherQuality: convertToBackgroundColorColorThemeModel(cityDetails.weatherQuality),
+                                          contentBackground: ContentBackgroundColorTheme(color: makeColor(hex: cityDetails.contentBackground.color),
+                                                                                         isClearBackground: cityDetails.contentBackground.isClearBackground),
+                                          screenBackground: screenBackground,
                                           iconColors: iconColors)
     }
     
@@ -127,21 +88,29 @@ struct ColorThemeModel {
                                                               y: 0.0),
                                        endPoint: EndPoint(x: 0.0,
                                                           y: 0.0))
-        let defaultMainMenu = MainMenu(gradient: defaultGradient,
-                                       clear_sky: defaultColors,
-                                       few_clouds: defaultColors,
-                                       scattered_clouds: defaultColors,
-                                       broken_clouds: defaultColors,
-                                       shower_rain: defaultColors,
-                                       rain: defaultColors,
-                                       thunderstorm: defaultColors,
-                                       snow: defaultColors,
-                                       mist: defaultColors)
-        let defaultBackground = Background(colors: [white],
-                                           gradient: defaultGradient,
-                                           mainIconColor: black,
-                                           mainLabelsColor: black,
-                                           ignoreColorInheritance: false)
+        
+        let defaultCells = Cells(isShadowVisible: true,
+                                 gradient: defaultGradient,
+                                 clear_sky: defaultColors,
+                                 few_clouds: defaultColors,
+                                 scattered_clouds: defaultColors,
+                                 broken_clouds: defaultColors,
+                                 shower_rain: defaultColors,
+                                 rain: defaultColors,
+                                 thunderstorm: defaultColors,
+                                 snow: defaultColors,
+                                 mist: defaultColors)
+        let defaultMainMenu = MainMenu(backgroundColor: white,
+                                       dateLabelColor: black,
+                                       todayColor: black,
+                                       settingsIconColor: black,
+                                       searchButtonColor: black,
+                                       cells: defaultCells)
+        let defaultBackgroundColor = BackgroundColor(backgroundColor: white,
+                                                     isClearBackground: false,
+                                                     isShadowVisible: true,
+                                                     labelsColor: black,
+                                                     labelsSecondaryColor: black)
         let defaultIconColors = IconColors(mist: black,
                                            snow: black,
                                            rain: black,
@@ -155,7 +124,16 @@ struct ColorThemeModel {
                                            cloudiness: black,
                                            pressure: black,
                                            visibility: black)
-        let defaultCityDetails = CityDetails(background: defaultBackground,
+        let defaultCityDetails = CityDetails(hourlyForecast: defaultBackgroundColor,
+                                             weeklyForecast: defaultBackgroundColor,
+                                             weatherQuality: defaultBackgroundColor,
+                                             contentBackground: ContentBackground(color: white, isClearBackground: false),
+                                             screenBackground: ScreenBackground(colors: [white],
+                                                                                gradient: defaultGradient,
+                                                                                mainIconColor: black,
+                                                                                labelsColor: black,
+                                                                                labelsSecondaryColor: black,
+                                                                                ignoreColorInheritance: true),
                                              iconColors: defaultIconColors)
         rawColorThemeDataModel = ColorThemeData(title: "Default",
                                                 mainMenu: defaultMainMenu,
@@ -171,21 +149,21 @@ struct ColorThemeModel {
     func getColorByConditionId(_ conditionId: Int) -> ColorThemeColorsModel {
         switch conditionId {
         case 200...232:
-            return mainMenu.thunderstorm
+            return mainMenu.cells.thunderstorm
         case 300...321:
-            return mainMenu.rain
+            return mainMenu.cells.rain
         case 500...531:
-            return mainMenu.showerRain
+            return mainMenu.cells.showerRain
         case 600...622:
-            return mainMenu.snow
+            return mainMenu.cells.snow
         case 701...781:
-            return mainMenu.mist
+            return mainMenu.cells.mist
         case 800:
-            return mainMenu.clearSky
+            return mainMenu.cells.clearSky
         case 801...804:
-            return mainMenu.scatteredClouds
+            return mainMenu.cells.scatteredClouds
         default:
-            return mainMenu.clearSky
+            return mainMenu.cells.clearSky
         }
     }
     
@@ -220,8 +198,21 @@ struct ColorThemeModel {
     }
     
     // MARK: - Private functions
+                                                               
+    private func convertToGradientColorThemeModel(_ gradient: Gradient) -> GradientColorThemeModel {
+        return GradientColorThemeModel(startPoint: CGPoint(x: gradient.startPoint.x, y: gradient.startPoint.y),
+                                       endPoint: CGPoint(x: gradient.endPoint.x, y: gradient.endPoint.y))
+    }
     
-    private func convertToColorThemeModel(colorsModel: Colors) -> ColorThemeColorsModel {
+    private func convertToBackgroundColorColorThemeModel(_ backgroundColorModel: BackgroundColor) -> BackgroundColorColorThemeModel {
+        return BackgroundColorColorThemeModel(backgroundColor: makeColor(hex: backgroundColorModel.backgroundColor),
+                                              isClearBackground: backgroundColorModel.isClearBackground,
+                                              isShadowVisible: backgroundColorModel.isShadowVisible,
+                                              labelsColor: makeColor(hex: backgroundColorModel.labelsColor),
+                                              labelsSecondaryColor: makeColor(hex: backgroundColorModel.labelsSecondaryColor))
+    }
+    
+    private func convertToColorThemeModel(_ colorsModel: Colors) -> ColorThemeColorsModel {
         return ColorThemeColorsModel(colors: makeColors(hexes: colorsModel.colors),
                                      iconsColor: makeColor(hex: colorsModel.iconColors),
                                      labelsColor: makeColor(hex: colorsModel.labelsColor))

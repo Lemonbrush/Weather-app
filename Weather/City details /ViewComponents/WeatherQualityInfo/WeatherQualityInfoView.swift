@@ -15,66 +15,81 @@ class WeatherQualityInfoView: UIView {
 
     // MARK: - Private properties
 
-    private var backgroundView: UIView = {
+    private lazy var backgroundView: UIView = {
         let view = UIView()
         DesignManager.setBackgroundStandartShape(layer: view.layer)
-        DesignManager.setBackgroundStandartShadow(layer: view.layer)
-        view.backgroundColor = .white
+        if colorThemeComponent.colorTheme.cityDetails.weatherQuality.isShadowVisible {
+            DesignManager.setBackgroundStandartShadow(layer: view.layer)
+        }
+        let weatherQualityColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality
+        view.backgroundColor = weatherQualityColor.isClearBackground ? .clear : weatherQualityColor.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private var uvIndexItemView: WeatherQualityItemView = {
+    private lazy var uvIndexItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.sunMaxFill)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultSunColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.uvIndex
         qualityItem.titleLabel.text = "UV index"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
-    private var humidityItemView: WeatherQualityItemView = {
+    private lazy var humidityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.drop)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.humidity
         qualityItem.titleLabel.text = "Humidity"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
-    private var cloudinessItemView: WeatherQualityItemView = {
+    private lazy var cloudinessItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.cloudFill)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.cloudiness
         qualityItem.titleLabel.text = "Cloudiness"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
-    private var windItemView: WeatherQualityItemView = {
+    private lazy var windItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.wind)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.wind
         qualityItem.titleLabel.text = "Wind"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
-    private var pressureItemView: WeatherQualityItemView = {
+    private lazy var pressureItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.arrowDownLine)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.pressure
         qualityItem.titleLabel.text = "Pressure"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
-    private var visibilityItemView: WeatherQualityItemView = {
+    private lazy var visibilityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
         qualityItem.imageView.image = UIImage(systemName: K.systemImageName.eyeFill)?.withRenderingMode(.alwaysTemplate)
-        qualityItem.tintColor = K.Colors.WeatherIcons.defaultColor
+        qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.visibility
         qualityItem.titleLabel.text = "Visibility"
+        qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
         qualityItem.subTitleLabel.text = "-"
+        qualityItem.subTitleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsSecondaryColor
         return qualityItem
     }()
 
@@ -93,14 +108,6 @@ class WeatherQualityInfoView: UIView {
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
-        
-        let detailReviewIconsColors = colorThemeComponent.colorTheme.cityDetails
-        humidityItemView.tintColor = detailReviewIconsColors.iconColors.humidity
-        windItemView.tintColor = detailReviewIconsColors.iconColors.wind
-        cloudinessItemView.tintColor = detailReviewIconsColors.iconColors.cloudiness
-        pressureItemView.tintColor = detailReviewIconsColors.iconColors.pressure
-        visibilityItemView.tintColor = detailReviewIconsColors.iconColors.visibility
-        uvIndexItemView.tintColor = detailReviewIconsColors.iconColors.uvIndex
 
         let firstColumnStackView = makeStackViewItems(stackViews: [humidityItemView, cloudinessItemView])
         let secondColumnStackView = makeStackViewItems(stackViews: [uvIndexItemView, pressureItemView])

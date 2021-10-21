@@ -13,9 +13,19 @@ struct ColorThemeData: Codable {
     let cityDetails: CityDetails
 }
 
-// Main menu
+// MARK: - Main menu
 
 struct MainMenu: Codable {
+    let backgroundColor: String
+    let dateLabelColor: String
+    let todayColor: String
+    let settingsIconColor: String
+    let searchButtonColor: String
+    let cells: Cells
+}
+
+struct Cells: Codable {
+    let isShadowVisible: Bool
     let gradient: Gradient
     let clear_sky: Colors
     let few_clouds: Colors
@@ -49,18 +59,36 @@ struct EndPoint: Codable {
     let y: Double
 }
 
-// City details
+// MARK: - City details
 
 struct CityDetails: Codable {
-    let background: Background
+    let hourlyForecast: BackgroundColor
+    let weeklyForecast: BackgroundColor
+    let weatherQuality: BackgroundColor
+    let contentBackground: ContentBackground
+    let screenBackground: ScreenBackground
     let iconColors: IconColors
 }
 
-struct Background: Codable {
+struct ContentBackground: Codable {
+    let color: String
+    let isClearBackground: Bool
+}
+
+struct BackgroundColor: Codable {
+    let backgroundColor: String
+    let isClearBackground: Bool
+    let isShadowVisible: Bool
+    let labelsColor: String
+    let labelsSecondaryColor: String
+}
+
+struct ScreenBackground: Codable {
     let colors: [String]
     let gradient: Gradient
     let mainIconColor: String
-    let mainLabelsColor: String
+    let labelsColor: String
+    let labelsSecondaryColor: String
     let ignoreColorInheritance: Bool
 }
 

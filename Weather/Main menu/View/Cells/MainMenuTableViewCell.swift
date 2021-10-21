@@ -63,7 +63,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -98,7 +98,6 @@ class MainMenuTableViewCell: UITableViewCell {
 
         // Setting up cell appearance
         DesignManager.setBackgroundStandartShape(layer: weatherBackgroundView.layer)
-        DesignManager.setBackgroundStandartShadow(layer: weatherBackgroundView.layer)
 
         // Making cells shadow be able to spill over other cells
         layer.masksToBounds = false

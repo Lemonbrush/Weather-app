@@ -18,6 +18,7 @@ class WeeklyForecastTableView: UIView {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(WeeklyForecastCell.self, forCellReuseIdentifier: K.CellIdentifier.dailyForecastCell)
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -25,11 +26,14 @@ class WeeklyForecastTableView: UIView {
 
     // MARK: - Private properties
 
-    private var backgroundView: UIView = {
+    private lazy var backgroundView: UIView = {
         let view = UIView()
         DesignManager.setBackgroundStandartShape(layer: view.layer)
-        DesignManager.setBackgroundStandartShadow(layer: view.layer)
-        view.backgroundColor = .white
+        if colorThemeComponent.colorTheme.cityDetails.weeklyForecast.isShadowVisible {
+            DesignManager.setBackgroundStandartShadow(layer: view.layer)
+        }
+        let weeklyColor = colorThemeComponent.colorTheme.cityDetails.weeklyForecast
+        view.backgroundColor = weeklyColor.isClearBackground ? .clear : weeklyColor.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -81,20 +85,18 @@ class WeeklyForecastTableView: UIView {
 
 extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
 
-    // TODO: here should be weekly forecast
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource?.daily.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:
-                                                        K.CellIdentifier.dailyForecastCell) as? WeeklyForecastCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.dailyForecastCell) as? WeeklyForecastCell,
               let safeWeatherData = dataSource else {
             return UITableViewCell()
         }
         
         cell.prepareForReuse()
+        cell.setupColorTheme(colorThemeComponent)
 
         let targetWeather = safeWeatherData.daily[indexPath.row]
 
@@ -103,9 +105,9 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(secondsFromGMT: safeWeatherData.timezone)
         dateFormatter.dateFormat = "d EEEE"
-
         cell.monthLabel.text = dateFormatter.string(from: date)
 
+        // Make first cell bold
         if indexPath.row == 0 {
             cell.monthLabel.text = "Today"
             cell.monthLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)

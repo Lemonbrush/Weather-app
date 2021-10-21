@@ -33,6 +33,10 @@ class HourlyForecastView: UIView {
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
+        
+        let hourlyColor = colorThemeComponent.colorTheme.cityDetails.hourlyForecast
+        backgroundColor = hourlyColor.isClearBackground ? .clear : hourlyColor.backgroundColor
+        
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -65,6 +69,8 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
                                                             for: indexPath) as? HourlyCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        cell.setupColorTheme(colorThemeComponent)
 
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(secondsFromGMT: safeWeatherData.timezone)

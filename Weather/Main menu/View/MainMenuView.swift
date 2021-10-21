@@ -17,36 +17,37 @@ class MainMenuView: UIView {
         return view
     }()
 
-    private var currentDateLabel: UILabel = {
+    private lazy var currentDateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        label.textColor = .darkGray
+        label.textColor = colorThemeComponent.colorTheme.mainMenu.dateLabelColor
         label.text = "date label"
         return label
     }()
 
-    private var todayLabel: UILabel = {
+    private lazy var todayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.text = "Today"
+        label.textColor = colorThemeComponent.colorTheme.mainMenu.todayColor
         return label
     }()
 
-    private var settingsButton: UIButton = {
+    private lazy var settingsButton: UIButton = {
         let button = UIButton()
         button.accessibilityIdentifier = "SettingsButton"
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "switch.2"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = colorThemeComponent.colorTheme.mainMenu.settingsIconColor
         return button
     }()
 
-    private var searchButton: UIButton = {
+    private lazy var searchButton: UIButton = {
         let button = UIButton()
         button.accessibilityIdentifier = "SearchButton"
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = .darkGray
+        button.tintColor = colorThemeComponent.colorTheme.mainMenu.searchButtonColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -105,6 +106,8 @@ class MainMenuView: UIView {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
 
+        backgroundColor = colorThemeComponent.colorTheme.mainMenu.backgroundColor
+        
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE d MMMM"
