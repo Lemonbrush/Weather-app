@@ -29,7 +29,7 @@ class WeeklyForecastCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = .lightGray
+        label.textColor = .gray
         return label
     }()
 
@@ -66,6 +66,7 @@ class WeeklyForecastCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        backgroundColor = .clear
         selectionStyle = .none
 
         degreeStackView.addArrangedSubview(temperatureLabel)
@@ -84,9 +85,19 @@ class WeeklyForecastCell: UITableViewCell {
     
     // MARK: - Functions
     
+    func setupColorTheme(_ colorTheme: ColorThemeProtocol) {
+        let weeklyColors = colorTheme.colorTheme.cityDetails.weeklyForecast
+        monthLabel.textColor = weeklyColors.labelsColor
+        temperatureLabel.textColor = weeklyColors.labelsColor
+        minTemperatureLabel.textColor = weeklyColors.labelsSecondaryColor
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         monthLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        monthLabel.textColor = .black
+        temperatureLabel.textColor = .black
+        minTemperatureLabel.textColor = .black
     }
 
     // MARK: - Private functions

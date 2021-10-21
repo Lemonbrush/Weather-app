@@ -93,9 +93,10 @@ class CityDetailViewController: UIViewController {
 
     // MARK: - Screen's second part
 
-    private var bottomWhiteBackground: UIView = {
+    private lazy var secondScreenPartBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        let contentBackground = colorThemeComponent.colorTheme.cityDetails.contentBackground
+        view.backgroundColor = contentBackground.isClearBackground ? .clear : contentBackground.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -192,14 +193,14 @@ class CityDetailViewController: UIViewController {
         degreeStackView.addArrangedSubview(feelsLikeLabel)
         topTranslucentBackground.addSubview(degreeStackView)
 
-        scrollContentView.addSubview(bottomWhiteBackground)
+        scrollContentView.addSubview(secondScreenPartBackground)
 
         hourlyCollectionView.dataSource = localWeatherData
-        bottomWhiteBackground.addSubview(hourlyCollectionView)
+        secondScreenPartBackground.addSubview(hourlyCollectionView)
         
         extraContentStackView.addArrangedSubview(weeklyForecastTableView)
         extraContentStackView.addArrangedSubview(weatherQualityInfoView)
-        bottomWhiteBackground.addSubview(extraContentStackView)
+        secondScreenPartBackground.addSubview(extraContentStackView)
 
         setupBlurableNavBar()
         view.addSubview(navigationBarBlurBackground)
@@ -257,11 +258,11 @@ class CityDetailViewController: UIViewController {
                                               attribute: .bottom,
                                               multiplier: 1, constant: 65)
         springConstraint.isActive = true
-        extraContentStackView.leadingAnchor.constraint(equalTo: bottomWhiteBackground.leadingAnchor,
+        extraContentStackView.leadingAnchor.constraint(equalTo: secondScreenPartBackground.leadingAnchor,
                                                        constant: 20).isActive = true
-        extraContentStackView.trailingAnchor.constraint(equalTo: bottomWhiteBackground.trailingAnchor,
+        extraContentStackView.trailingAnchor.constraint(equalTo: secondScreenPartBackground.trailingAnchor,
                                                         constant: -20).isActive = true
-        extraContentStackView.bottomAnchor.constraint(equalTo: bottomWhiteBackground.bottomAnchor,
+        extraContentStackView.bottomAnchor.constraint(equalTo: secondScreenPartBackground.bottomAnchor,
                                                       constant: -springDefaultConstant).isActive = true
     }
 
@@ -383,10 +384,10 @@ extension CityDetailViewController {
     }
 
     private func setUpBottombackgroundView() {
-        bottomWhiteBackground.topAnchor.constraint(equalTo: topTranslucentBackground.bottomAnchor).isActive = true
-        bottomWhiteBackground.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor).isActive = true
-        bottomWhiteBackground.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor).isActive = true
-        bottomWhiteBackground.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor).isActive = true
+        secondScreenPartBackground.topAnchor.constraint(equalTo: topTranslucentBackground.bottomAnchor).isActive = true
+        secondScreenPartBackground.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor).isActive = true
+        secondScreenPartBackground.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor).isActive = true
+        secondScreenPartBackground.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor).isActive = true
     }
 
     private func setUpTopTranslucentView() {
@@ -424,8 +425,8 @@ extension CityDetailViewController {
     }
 
     private func setUpHourlyCollectionView() {
-        hourlyCollectionView.leadingAnchor.constraint(equalTo: bottomWhiteBackground.leadingAnchor).isActive = true
-        hourlyCollectionView.trailingAnchor.constraint(equalTo: bottomWhiteBackground.trailingAnchor).isActive = true
+        hourlyCollectionView.leadingAnchor.constraint(equalTo: secondScreenPartBackground.leadingAnchor).isActive = true
+        hourlyCollectionView.trailingAnchor.constraint(equalTo: secondScreenPartBackground.trailingAnchor).isActive = true
 
         hourlyHeightConstraint = NSLayoutConstraint(item: hourlyCollectionView,
                                                     attribute: .height, relatedBy: .equal,
@@ -435,7 +436,7 @@ extension CityDetailViewController {
                                                     constant: hourlyForecastHeightConstant)
         hourlyCollectionView.addConstraint(hourlyHeightConstraint)
         hourlyCollectionView.heightAnchor.constraint(equalToConstant: hourlyForecastHeightConstant).isActive = true
-        hourlyCollectionView.topAnchor.constraint(equalTo: bottomWhiteBackground.topAnchor,
+        hourlyCollectionView.topAnchor.constraint(equalTo: secondScreenPartBackground.topAnchor,
                                                   constant: hourlyTopConstant).isActive = true
     }
 

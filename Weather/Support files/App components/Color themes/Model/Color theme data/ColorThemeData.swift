@@ -72,12 +72,12 @@ struct CityDetails: Codable {
 
 struct ContentBackground: Codable {
     let color: String
-    let alpha: Int
+    let isClearBackground: Bool
 }
 
 struct BackgroundColor: Codable {
     let backgroundColor: String
-    let alpha: Int
+    let isClearBackground: Bool
     let isShadowVisible: Bool
     let labelsColor: String
     let labelsSecondaryColor: String

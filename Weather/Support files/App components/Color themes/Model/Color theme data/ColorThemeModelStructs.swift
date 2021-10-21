@@ -54,7 +54,7 @@ struct CellsColorThemeModel {
 
 struct BackgroundColorColorThemeModel {
     let backgroundColor: UIColor
-    let alpha: Int
+    let isClearBackground: Bool
     let isShadowVisible: Bool
     let labelsColor: UIColor
     let labelsSecondaryColor: UIColor
@@ -62,7 +62,7 @@ struct BackgroundColorColorThemeModel {
 
 struct ContentBackgroundColorTheme {
     let color: UIColor
-    let alpha: Int
+    let isClearBackground: Bool
 }
 
 struct ScreenBackgroundColorThemeModel {

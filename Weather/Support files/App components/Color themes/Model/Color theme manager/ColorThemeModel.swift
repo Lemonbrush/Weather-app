@@ -71,7 +71,7 @@ struct ColorThemeModel {
                                           weeklyForecast: convertToBackgroundColorColorThemeModel(cityDetails.weeklyForecast),
                                           weatherQuality: convertToBackgroundColorColorThemeModel(cityDetails.weatherQuality),
                                           contentBackground: ContentBackgroundColorTheme(color: makeColor(hex: cityDetails.contentBackground.color),
-                                                                                         alpha: cityDetails.contentBackground.alpha),
+                                                                                         isClearBackground: cityDetails.contentBackground.isClearBackground),
                                           screenBackground: screenBackground,
                                           iconColors: iconColors)
     }
@@ -107,7 +107,7 @@ struct ColorThemeModel {
                                        searchButtonColor: black,
                                        cells: defaultCells)
         let defaultBackgroundColor = BackgroundColor(backgroundColor: white,
-                                                     alpha: 1,
+                                                     isClearBackground: false,
                                                      isShadowVisible: true,
                                                      labelsColor: black,
                                                      labelsSecondaryColor: black)
@@ -127,7 +127,7 @@ struct ColorThemeModel {
         let defaultCityDetails = CityDetails(hourlyForecast: defaultBackgroundColor,
                                              weeklyForecast: defaultBackgroundColor,
                                              weatherQuality: defaultBackgroundColor,
-                                             contentBackground: ContentBackground(color: white, alpha: 1),
+                                             contentBackground: ContentBackground(color: white, isClearBackground: false),
                                              screenBackground: ScreenBackground(colors: [white],
                                                                                 gradient: defaultGradient,
                                                                                 mainIconColor: black,
@@ -206,7 +206,7 @@ struct ColorThemeModel {
     
     private func convertToBackgroundColorColorThemeModel(_ backgroundColorModel: BackgroundColor) -> BackgroundColorColorThemeModel {
         return BackgroundColorColorThemeModel(backgroundColor: makeColor(hex: backgroundColorModel.backgroundColor),
-                                              alpha: backgroundColorModel.alpha,
+                                              isClearBackground: backgroundColorModel.isClearBackground,
                                               isShadowVisible: backgroundColorModel.isShadowVisible,
                                               labelsColor: makeColor(hex: backgroundColorModel.labelsColor),
                                               labelsSecondaryColor: makeColor(hex: backgroundColorModel.labelsSecondaryColor))

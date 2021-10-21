@@ -57,6 +57,13 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Functions
+    
+    func setupColorTheme(_ colorTheme: ColorThemeProtocol) {
+        topLabel.textColor = colorTheme.colorTheme.cityDetails.hourlyForecast.labelsColor
+        bottomLabel.textColor = colorTheme.colorTheme.cityDetails.hourlyForecast.labelsSecondaryColor
+    }
 
     // MARK: - Private functions
 

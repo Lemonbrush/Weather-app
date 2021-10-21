@@ -3,7 +3,7 @@
     "title": "Only white",
     "mainMenu": {
       "backgroundColor": "#ffffff",
-      "dateLabelColor": "#c4c4c4",
+      "dateLabelColor": "#848484",
       "todayColor": "#000000",
       "settingsIconColor": "#000000",
       "searchButtonColor": "#000000",
@@ -87,28 +87,28 @@
     "cityDetails": {
       "hourlyForecast": {
         "backgroundColor": "#ffffff",
-        "alpha": 0,
-        "isShadowVisible": false,
-        "labelsColor": "#000000",
-        "labelsSecondaryColor": "#e7e7e7"
-      },
-      "weeklyForecast": {
-        "backgroundColor": "#ffffff",
-        "alpha": 1,
-        "isShadowVisible": true,
-        "labelsColor": "#000000",
-        "labelsSecondaryColor": "#e7e7e7"
-      },
-      "weatherQuality": {
-        "backgroundColor": "#ffffff",
-        "alpha": 1,
+        "isClearBackground": false,
         "isShadowVisible": true,
         "labelsColor": "#000000",
         "labelsSecondaryColor": "#000000"
       },
+      "weeklyForecast": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#000000",
+        "labelsSecondaryColor": "#595959"
+      },
+      "weatherQuality": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#595959",
+        "labelsSecondaryColor": "#000000"
+      },
       "contentBackground": {
         "color": "#ffffff",
-        "alpha": 1
+        "isClearBackground": false
       },
       "screenBackground": {
         "colors": [
@@ -144,6 +144,154 @@
         "cloudiness": "#87CFF2",
         "pressure": "#87CFF2",
         "visibility": "#87CFF2"
+      }
+    }
+  },
+  {
+    "title": "White accents",
+    "mainMenu": {
+      "backgroundColor": "#ffffff",
+      "dateLabelColor": "#848484",
+      "todayColor": "#000000",
+      "settingsIconColor": "#000000",
+      "searchButtonColor": "#000000",
+      "cells": {
+        "isShadowVisible": true,
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 0.5
+          },
+          "endPoint": {
+            "x": 1,
+            "y": 0.5
+          }
+        },
+        "clear_sky": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#f8c957",
+          "labelsColor": "#2B2B2B"
+        },
+        "few_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "scattered_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "broken_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "shower_rain": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "rain": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "thunderstorm": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "snow": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "mist": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        }
+      }
+    },
+    "cityDetails": {
+      "hourlyForecast": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": true,
+        "isShadowVisible": false,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "weeklyForecast": {
+        "backgroundColor": "#f2f2f2",
+        "isClearBackground": true,
+        "isShadowVisible": true,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "weatherQuality": {
+        "backgroundColor": "#f2f2f2",
+        "isClearBackground": true,
+        "isShadowVisible": true,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "contentBackground": {
+        "color": "#ffffff",
+        "isClearBackground": true
+      },
+      "screenBackground": {
+        "colors": [
+          "#5BB7FC",
+          "#0381ef"
+        ],
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 1
+          },
+          "endPoint": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        "mainIconColor": "#ffffff",
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff",
+        "ignoreColorInheritance": true
+      },
+      "iconColors": {
+        "sun": "#ffffff",
+        "cloud": "#ffffff",
+        "mist": "#ffffff",
+        "snow": "#ffffff",
+        "rain": "#ffffff",
+        "showerRain": "#ffffff",
+        "thunderstorm": "#ffffff",
+        "humidity": "#ffffff",
+        "uvIndex": "#ffffff",
+        "wind": "#ffffff",
+        "cloudiness": "#ffffff",
+        "pressure": "#ffffff",
+        "visibility": "#ffffff"
       }
     }
   }

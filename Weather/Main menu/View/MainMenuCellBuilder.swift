@@ -57,6 +57,10 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         _content.gradient.startPoint = safeColortheme.mainMenu.cells.gradient.startPoint
         _content.gradient.endPoint = safeColortheme.mainMenu.cells.gradient.endPoint
         
+        if safeColortheme.mainMenu.cells.isShadowVisible {
+            DesignManager.setBackgroundStandartShadow(layer: _content.weatherBackgroundView.layer)
+        }
+        
         if let currentImage = _content.conditionImage.image {
             _content.conditionImage.image = currentImage.withTintColor(safeColortheme.getColorByConditionId(conditionId).iconsColor)
         }
