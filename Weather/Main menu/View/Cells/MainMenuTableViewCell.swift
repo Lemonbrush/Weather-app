@@ -35,7 +35,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     private var rightStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 30
+        stackView.spacing = 10
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .horizontal
@@ -58,6 +58,7 @@ class MainMenuTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
         return label
     }()
 
@@ -167,7 +168,9 @@ class MainMenuTableViewCell: UITableViewCell {
         conditionImage.widthAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
 
         // Degree label
-        degreeLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        let degreeLabelConstraint = degreeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 90)
+        degreeLabelConstraint.isActive = true
+        
 
         // MainStackView
         mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: 10).isActive = true
@@ -176,7 +179,7 @@ class MainMenuTableViewCell: UITableViewCell {
         mainStackView.leadingAnchor.constraint(equalTo:
                                                 weatherBackgroundView.leadingAnchor, constant: 20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo:
-                                                    weatherBackgroundView.trailingAnchor, constant: -10).isActive = true
+                                                    weatherBackgroundView.trailingAnchor, constant: -20).isActive = true
     }
 
     // MARK: - Public functions
