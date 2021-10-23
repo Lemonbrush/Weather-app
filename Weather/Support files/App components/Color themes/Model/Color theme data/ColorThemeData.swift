@@ -9,8 +9,15 @@ import Foundation
 
 struct ColorThemeData: Codable {
     let title: String
+    let settingsScreen: SettingsScreen
     let mainMenu: MainMenu
     let cityDetails: CityDetails
+}
+
+// MARK: - Settings screen
+
+struct SettingsScreen: Codable {
+    let colorBoxesColors: [String]
 }
 
 // MARK: - Main menu

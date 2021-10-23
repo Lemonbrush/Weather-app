@@ -11,7 +11,7 @@ class ColorThemeSettingsViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private let mainView = ColorThemeSettingsView()
+    private let mainView = ColorThemeSettingsView(colorThemes: ColorThemeManager.getColorThemes())
     
     // MARK: - Public properties
     
@@ -32,7 +32,6 @@ class ColorThemeSettingsViewController: UIViewController {
     override func loadView() {
         view = mainView
         mainView.viewControllerOwner = self
-        mainView.colorThemes = ColorThemeManager.getColorThemes()
     }
     
     override func viewDidLoad() {

@@ -9,9 +9,7 @@ import UIKit
 
 class ThemeColorsBlocksView: UIView {
     
-    // MARK: - Private functions
-    
-    private let numberOfBlocks = 5
+    // MARK: - Private properties
     
     private var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -22,8 +20,6 @@ class ThemeColorsBlocksView: UIView {
         return stackView
     }()
     
-    private var blocks: [UIView] = []
-    
     // MARK: - Construction
     
     required init() {
@@ -33,7 +29,6 @@ class ThemeColorsBlocksView: UIView {
         addSubview(stackView)
         
         setupConstraints()
-        setupBlocks()
     }
     
     required init?(coder: NSCoder) {
@@ -47,14 +42,6 @@ class ThemeColorsBlocksView: UIView {
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    }
-    
-    private func setupBlocks() {
-        for _ in 0...numberOfBlocks {
-            let block = makeColorBlock(color: .white)
-            blocks.append(block)
-            stackView.addArrangedSubview(block)
-        }
     }
     
     private func makeColorBlock(color: UIColor) -> UIView {
@@ -77,13 +64,14 @@ class ThemeColorsBlocksView: UIView {
     
     // MARK: - Public functions
     
-    func setupColors(_ colors: [UIColor]?) {
-        guard let safeColors = colors, colors?.count == numberOfBlocks else {
-            return
+    func setupBlocks(_ colors: [UIColor]) {
+        for subview in stackView.arrangedSubviews {
+            subview.removeFromSuperview()
         }
         
-        for (i, color) in safeColors.enumerated() {
-            blocks[i].backgroundColor = color
+        for color in colors {
+            let block = makeColorBlock(color: color)
+            stackView.addArrangedSubview(block)
         }
     }
 }

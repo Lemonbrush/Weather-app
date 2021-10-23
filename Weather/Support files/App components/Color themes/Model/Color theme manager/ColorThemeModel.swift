@@ -19,6 +19,13 @@ struct ColorThemeModel {
         rawColorThemeDataModel.title
     }
     
+    var settingsScreen: SettingsScreenColorTheme {
+        let settingsScreen = rawColorThemeDataModel.settingsScreen
+        let colorBoxesColors = makeColors(hexes: settingsScreen.colorBoxesColors)
+
+        return SettingsScreenColorTheme(colorBoxesColors: colorBoxesColors)
+    }
+    
     var mainMenu: MainMenuColorThemeModel {
         let mainMenu = rawColorThemeDataModel.mainMenu
         
@@ -89,6 +96,10 @@ struct ColorThemeModel {
                                        endPoint: EndPoint(x: 0.0,
                                                           y: 0.0))
         
+        let settingsScreen = SettingsScreen(colorBoxesColors: [white,
+                                                               white,
+                                                               white,
+                                                               white])
         let defaultCells = Cells(isShadowVisible: true,
                                  gradient: defaultGradient,
                                  clear_sky: defaultColors,
@@ -136,6 +147,7 @@ struct ColorThemeModel {
                                                                                 ignoreColorInheritance: true),
                                              iconColors: defaultIconColors)
         rawColorThemeDataModel = ColorThemeData(title: "Default",
+                                                settingsScreen: settingsScreen,
                                                 mainMenu: defaultMainMenu,
                                                 cityDetails: defaultCityDetails)
     }

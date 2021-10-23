@@ -1,6 +1,14 @@
 [
   {
     "title": "Only white",
+    "settingsScreen": {
+      "colorBoxesColors": [
+        "#ffffff",
+        "#5BB7FC",
+        "#f8c957",
+        "#2B2B2B"
+      ]
+    },
     "mainMenu": {
       "backgroundColor": "#ffffff",
       "dateLabelColor": "#848484",
@@ -149,6 +157,12 @@
   },
   {
     "title": "White accents",
+    "settingsScreen": {
+      "colorBoxesColors": [
+        "#ffffff",
+        "#5BB7FC"
+      ]
+    },
     "mainMenu": {
       "backgroundColor": "#ffffff",
       "dateLabelColor": "#848484",
