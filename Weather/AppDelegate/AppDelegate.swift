@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appComponents = AppComponents(UserDefaultsManager.ColorTheme.getCurrentColorTheme())
         
         let rootViewController = MainMenuViewController(appComponents: appComponents)
-        rootViewController.dataStorage = WeatherCoreDataManager(managedContext:
-                                                                    persistentContainer.newBackgroundContext())
+        rootViewController.dataStorage = WeatherCoreDataManager(managedContext: persistentContainer.newBackgroundContext())
         let navigationController = UINavigationController(rootViewController: rootViewController)
 
         let window = UIWindow(frame: UIScreen.main.bounds)

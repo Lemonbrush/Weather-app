@@ -11,12 +11,10 @@ struct ColorThemeManager {
     
     // MARK: - Public functions
     
-    static func getColorThemes() -> [ColorThemeModel]? {
-        
+    static func getColorThemes() -> [ColorThemeModel] {
         guard let colorThemesFile = readLocalFile(forName: "ColorThemes"),
               let result = parseJSON(colorThemesFile) else {
-                  
-            return nil
+            return []
         }
         
         return result

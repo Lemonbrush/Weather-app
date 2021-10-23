@@ -21,14 +21,17 @@ class ColorThemeSettingsView: UIView {
     
     private var chosenColorThemePosition = 0
     
+    private var colorThemes: [ColorThemeModel]
+    
     // MARK: - Public properties
     
     var viewControllerOwner: ColorThemeSettingsViewController?
-    var colorThemes: [ColorThemeModel]?
     
     // MARK: - Construction
     
-    required init() {
+    init(colorThemes: [ColorThemeModel]) {
+        self.colorThemes = colorThemes
+        
         super.init(frame: .zero)
         
         refreshCheckedColorTmeme()
@@ -63,29 +66,22 @@ class ColorThemeSettingsView: UIView {
 extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colorThemes?.count ?? 0
+        return colorThemes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "colorThemeCell") as? ColorThemeCell,
-              let colorTheme = colorThemes?[indexPath.row] else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "colorThemeCell") as? ColorThemeCell else {
             return UITableViewCell()
         }
         
+        let colorTheme = colorThemes[indexPath.row]
         cell.resetCell()
         cell.subtitle.text = colorTheme.title
         if chosenColorThemePosition == indexPath.row {
             cell.checkmarkImage.isHidden = false
         }
-        var colors: [UIColor] = []
         
-        colors.append(colorTheme.mainMenu.cells.clearSky.colors.first ?? .white)
-        colors.append(colorTheme.mainMenu.cells.fewClouds.colors.first ?? .white)
-        colors.append(colorTheme.mainMenu.cells.showerRain.colors.first ?? .white)
-        colors.append(colorTheme.mainMenu.cells.thunderstorm.colors.first ?? .white)
-        colors.append(colorTheme.mainMenu.cells.snow.colors.first ?? .white)
-        
-        cell.colorBoxesView.setupColors(colors)
+        cell.colorBoxesView.setupBlocks(colorTheme.settingsScreen.colorBoxesColors)
         
         return cell
     }

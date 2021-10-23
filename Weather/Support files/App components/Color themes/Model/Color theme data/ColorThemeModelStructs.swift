@@ -87,3 +87,7 @@ struct GradientColorThemeModel {
     let startPoint: CGPoint
     let endPoint: CGPoint
 }
+
+struct SettingsScreenColorTheme {
+    let colorBoxesColors: [UIColor]
+}
