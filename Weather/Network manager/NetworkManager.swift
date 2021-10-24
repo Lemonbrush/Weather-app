@@ -7,64 +7,63 @@
 
 import Foundation
 
-protocol NetworkManagerDelegate {
+protocol NetworkManagerDelegate: AnyObject {
     func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int)
     func didFailWithError(error: Error)
 }
 
 struct NetworkManager {
-    let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?"
-    var city = ""
-    let appid = K.weatherAPIKey
-    var units: String {
-        return UserDefaultsManager.getUnitData() ?? "metric"
-    }
-    
+
+    // MARK: - Public functions
+
     var delegate: NetworkManagerDelegate?
-    
-    //MARK: - Fetching weather data
+
+    // MARK: - Fetching weather data
+
     func fetchWeather(by city: SavedCity, at position: Int = 0) {
-        
-        let urlString = "\(weatherURL)lat=\(city.latitude)&lon=\(city.longitude)&appid=\(appid)&units=\(units)&exclude=minutely"
+        let baseURL = K.Network.baseURL
+        let lat = city.latitude
+        let lon = city.longitude
+        let appid = K.Network.apiKey
+        let units = UserDefaultsManager.getUnitData() ?? "metric"
+        let minutely = "minutely"
+
+        let urlString = "\(baseURL)lat=\(lat)&lon=\(lon)&appid=\(appid)&units=\(units)&exclude=\(minutely)"
         performRequest(with: urlString, at: position)
     }
-    
-    //MARK: - Networking
-    func performRequest(with urlString: String, at position: Int) {
-        
-        //Getting rid of any spaces in the URL string
+
+    // MARK: - Private functions
+
+    private func performRequest(with urlString: String, at position: Int) {
+        // Getting rid of any spaces in the URL string
         let encodedURLString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        
+
         if let url = URL(string: encodedURLString) {
-            
             let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
-                let str = String(decoding: data!, as: UTF8.self)
-                print("\n\n\n\(str)\n\n\n")
-                //In case of error
-                guard (error == nil) else{
-                    delegate?.didFailWithError(error: error!) //let the delegate handle the error
+            let task = session.dataTask(with: url) { data, _, error in
+                //let str = String(decoding: data!, as: UTF8.self)
+                //print("\n\n\n\(str)\n\n\n")
+                // In case of error
+                guard error == nil else {
+                    delegate?.didFailWithError(error: error!) // let the delegate handle the error
                     return
                 }
-                
-                //Handling result
+
+                // Handling result
                 if let safeData = data {
                     if let weather = self.parseJSON(safeData) {
-                        delegate?.didUpdateWeather(self, weather: weather, at: position) //Let the delegate refresh data tables
+                        delegate?.didUpdateWeather(self, weather: weather, at: position)
                     }
                 }
             }
-            
             task.resume()
         }
     }
-    
-    func parseJSON(_ weatherData: Data) -> WeatherModel? {
-        let decoder = JSONDecoder() //Create decoder
-        
+
+    private func parseJSON(_ weatherData: Data) -> WeatherModel? {
+        let decoder = JSONDecoder() // Create decoder
         do {
-            let decodedData = try decoder.decode(WeatherData.self, from: weatherData) //Decode data to conform WeatherData properties
-            
+            let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
             let result = WeatherModel(lat: decodedData.lat,
                                       lon: decodedData.lon,
                                       conditionId: decodedData.current.weather[0].id,
@@ -83,14 +82,10 @@ struct NetworkManager {
                                       sunset: decodedData.current.sunset,
                                       daily: decodedData.daily,
                                       hourly: decodedData.hourly)
-            
             return result
-            
         } catch {
             delegate?.didFailWithError(error: error)
             return nil
         }
-        
     }
 }
-

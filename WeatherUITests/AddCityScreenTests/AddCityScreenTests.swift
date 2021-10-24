@@ -8,9 +8,9 @@
 import XCTest
 
 class AddCityScreenTests: XCTestCase {
-    
+
     var app: XCUIApplication!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         continueAfterFailure = false
@@ -19,7 +19,7 @@ class AddCityScreenTests: XCTestCase {
     }
 
     func testExample() throws {
-        MainMenuScreenPageObject(app: app)
+        _ = MainMenuScreenPageObject(app: app)
             .tapAddCityButton()
             .typeCityName("Moscow")
             .chooseCity()

@@ -8,7 +8,7 @@
 import XCTest
 
 class SettingsScreenTests: XCTestCase {
-    
+
     var app: XCUIApplication!
 
     override func setUpWithError() throws {

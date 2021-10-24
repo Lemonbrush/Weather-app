@@ -9,7 +9,7 @@ import XCTest
 import UIKit
 
 class MainMenuTableViewCellBuilderTests: XCTestCase {
-    
+
     let builder = MainMenuCellBuilder()
 
     func testMainMenuTableViewCellBuilderMakeCellWithCityLabel() throws {
@@ -23,7 +23,7 @@ class MainMenuTableViewCellBuilderTests: XCTestCase {
         // assert
         XCTAssertEqual(result.cityNameLabel.text, cityName)
     }
-    
+
     func testMainMenuTableViewCellBuilderMakeCellDegreeLabel() throws {
         // arrange
         let cityDegree = "10"
@@ -35,7 +35,7 @@ class MainMenuTableViewCellBuilderTests: XCTestCase {
         // assert
         XCTAssertEqual(result.degreeLabel.text, cityDegree)
     }
-    
+
     func testMainMenuTableViewCellBuilderMakeCellCityTimeZone() throws {
         // arrange
         let cityTimeZone = TimeZone.current
@@ -51,7 +51,7 @@ class MainMenuTableViewCellBuilderTests: XCTestCase {
         // assert
         XCTAssertEqual(result.timeLabel.text, dateFormatter.string(from: date))
     }
-    
+
     func testMainMenuTableViewCellBuilderMakeCell() throws {
         // arrange
         let conditionId = 500
