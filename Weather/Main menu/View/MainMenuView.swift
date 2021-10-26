@@ -92,7 +92,7 @@ class MainMenuView: UIView {
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = UIColor(named: "White98")
+        tableView.backgroundColor = .clear
 
         return tableView
     }()
