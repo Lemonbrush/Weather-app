@@ -35,7 +35,6 @@ protocol MainMenuCellBuilderProtocol: AnyObject {
 }
 
 final class MainMenuCellBuilder {
-
     private var _content = MainMenuTableViewCell()
 }
 
@@ -104,7 +103,14 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         guard let backgroundColors = colorThemeModel?.getColorByConditionId(conditionId).colors else {
             return self
         }
-        _content.gradient.colors = ColorThemeModel.convertUiColorsToCg(backgroundColors)
+        
+        var colors = ColorThemeModel.convertUiColorsToCg(backgroundColors)
+        
+        if let firstColor = colors.first, colors.count < 2 {
+            colors.append(firstColor)
+        }
+        
+        _content.gradient.colors = colors
         return self
     }
 
