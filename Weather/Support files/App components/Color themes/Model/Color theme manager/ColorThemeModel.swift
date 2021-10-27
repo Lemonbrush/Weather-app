@@ -19,6 +19,14 @@ struct ColorThemeModel {
         rawColorThemeDataModel.title
     }
     
+    var addCityScreen: AddCityColorTheme {
+        return AddCityColorTheme(backgroundColor: makeColor(hex: rawColorThemeDataModel.addCity.backgroundColor),
+                                 searchFieldBackground: makeColor(hex: rawColorThemeDataModel.addCity.searchFieldBackground),
+                                 isShadowVisible: rawColorThemeDataModel.addCity.isShadowVisible,
+                                 labelsColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsColor),
+                                 labelsSecondaryColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsSecondaryColor))
+    }
+    
     var settingsScreen: SettingsScreenColorTheme {
         let settingsScreen = rawColorThemeDataModel.settingsScreen
         let colorBoxesColors = makeColors(hexes: settingsScreen.colorBoxesColors)
@@ -95,6 +103,11 @@ struct ColorThemeModel {
                                                               y: 0.0),
                                        endPoint: EndPoint(x: 0.0,
                                                           y: 0.0))
+        let addCity = AddCity(backgroundColor: white,
+                              searchFieldBackground: white,
+                              isShadowVisible: true,
+                              labelsColor: black,
+                              labelsSecondaryColor: black)
         
         let settingsScreen = SettingsScreen(colorBoxesColors: [white,
                                                                white,
@@ -149,6 +162,7 @@ struct ColorThemeModel {
         rawColorThemeDataModel = ColorThemeData(title: "Default",
                                                 settingsScreen: settingsScreen,
                                                 mainMenu: defaultMainMenu,
+                                                addCity: addCity,
                                                 cityDetails: defaultCityDetails)
     }
     
