@@ -11,6 +11,7 @@ struct ColorThemeData: Codable {
     let title: String
     let settingsScreen: SettingsScreen
     let mainMenu: MainMenu
+    let addCity: AddCity
     let cityDetails: CityDetails
 }
 
@@ -18,6 +19,16 @@ struct ColorThemeData: Codable {
 
 struct SettingsScreen: Codable {
     let colorBoxesColors: [String]
+}
+
+// MARK: - AddCity screen
+
+struct AddCity: Codable {
+    let backgroundColor: String
+    let searchFieldBackground: String
+    let isShadowVisible: Bool
+    let labelsColor: String
+    let labelsSecondaryColor: String
 }
 
 // MARK: - Main menu

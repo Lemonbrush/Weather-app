@@ -13,6 +13,14 @@ struct ColorThemeColorsModel {
     let labelsColor: UIColor
 }
 
+struct AddCityColorTheme {
+    let backgroundColor: UIColor
+    let searchFieldBackground: UIColor
+    let isShadowVisible: Bool
+    let labelsColor: UIColor
+    let labelsSecondaryColor: UIColor
+}
+
 struct IconColorsColorThemeModel {
     let mist: UIColor
     let snow: UIColor
