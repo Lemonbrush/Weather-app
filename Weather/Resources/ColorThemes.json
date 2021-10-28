@@ -9,11 +9,11 @@
       ]
     },
     "addCity": {
-        "backgroundColor": "#343436",
-        "searchFieldBackground": "#343436",
-        "isShadowVisible": false,
-        "labelsColor": "#ffffff",
-        "labelsSecondaryColor": "#ffffff"
+      "backgroundColor": "#29292b",
+      "searchFieldBackground": "#343436",
+      "isShadowVisible": false,
+      "labelsColor": "#ffffff",
+      "labelsSecondaryColor": "#fe8c08"
     },
     "mainMenu": {
       "backgroundColor": "#29292b",
