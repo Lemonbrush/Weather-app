@@ -12,36 +12,46 @@ class AddCityView: UIView {
 
     // MARK: - Private properties
 
-    private var headerBackgroundView: UIView = {
+    private lazy var headerBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private var searchBackgroundView: UIView = {
+    private lazy var searchBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
         view.layer.cornerRadius = 10
         view.layer.cornerCurve = CALayerCornerCurve.continuous
         view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let shouldAddShadow = colorThemeComponent.colorTheme.addCityScreen.isShadowVisible
+        if shouldAddShadow {
+            DesignManager.setBackgroundStandartShadow(layer: searchBackgroundView.layer)
+        }
         return view
     }()
 
-    private var textField: UITextField = {
+    private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.accessibilityIdentifier = "AddCityTextField"
-        textField.placeholder = "City"
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.textColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
+        textField.tintColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
+        
+        var placeHolder = NSAttributedString(string: "City", attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.labelsColor])
+        textField.attributedPlaceholder = placeHolder
+        
         return textField
     }()
 
-    private var cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.accessibilityIdentifier = "AddCityCancelButton"
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(.systemGray3, for: .highlighted)
+        button.setTitleColor(colorThemeComponent.colorTheme.addCityScreen.labelsColor, for: .normal)
         button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -55,15 +65,15 @@ class AddCityView: UIView {
 
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .systemGray6
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
-    private var handleView: UIView = {
+    private lazy var handleView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
         view.layer.cornerRadius = 5 / 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -71,6 +81,8 @@ class AddCityView: UIView {
 
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
+    
+    private let colorThemeComponent: ColorThemeProtocol
 
     // private var welcomeImage: UIImageView!
 
@@ -80,9 +92,12 @@ class AddCityView: UIView {
 
     // MARK: - Lifecycle
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(frame: .zero)
 
+        backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
+        
         searchCompleter.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -95,8 +110,6 @@ class AddCityView: UIView {
         headerBackgroundView.addSubview(searchBackgroundView)
         searchBackgroundView.addSubview(searchStackView)
         addSubview(tableView)
-
-        DesignManager.setBackgroundStandartShadow(layer: searchBackgroundView.layer)
 
         setUpConstraints()
     }
@@ -204,9 +217,15 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchResult = searchResults[indexPath.row]
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+    
         cell.textLabel?.text = searchResult.title
+        cell.textLabel?.textColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
+        
         cell.detailTextLabel?.text = searchResult.subtitle
-        cell.detailTextLabel?.textColor = .darkGray
+        cell.detailTextLabel?.textColor = colorThemeComponent.colorTheme.addCityScreen.labelsSecondaryColor
+        
+        cell.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
+        
         cell.contentView.backgroundColor = .none
         cell.accessibilityIdentifier = "AddCityCell"
         return cell

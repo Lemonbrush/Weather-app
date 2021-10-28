@@ -10,14 +10,26 @@ import MapKit
 
 class AddCityViewController: UIViewController {
 
-    // MARK: - Public properties
+    // MARK: - Properties
 
     var delegate: AddCityDelegate?
 
-    private let addCityView = AddCityView()
+    // MARK: - Private properties
+    
+    private lazy var addCityView = AddCityView(colorThemeComponent: colorThemeComponent)
+    private let colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Lifecycle
-
+    
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = addCityView
         addCityView.viewControllerOwner = self

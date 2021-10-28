@@ -82,7 +82,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // Navigation functions
     func showAddCityVC() {
-        let destinationVC = AddCityViewController()
+        let destinationVC = AddCityViewController(colorThemeComponent: appComponents)
         destinationVC.delegate = self
         present(destinationVC, animated: true, completion: nil)
     }
