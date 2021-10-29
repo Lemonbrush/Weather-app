@@ -2,6 +2,11 @@
   {
     "title": "Dark",
     "settingsScreen": {
+      "backgroundColor": "#29292b",
+      "cellsBackgroundColor": "#343436",
+      "labelsColor": "#fe8c08",
+      "labelsSecondaryColor": "#ffffff",
+      "temperatureSwitchColor": "#fe8c08",
       "colorBoxesColors": [
         "#fe8c08",
         "#29292b",

@@ -30,8 +30,14 @@ struct ColorThemeModel {
     var settingsScreen: SettingsScreenColorTheme {
         let settingsScreen = rawColorThemeDataModel.settingsScreen
         let colorBoxesColors = makeColors(hexes: settingsScreen.colorBoxesColors)
+        let settings = rawColorThemeDataModel.settingsScreen
 
-        return SettingsScreenColorTheme(colorBoxesColors: colorBoxesColors)
+        return SettingsScreenColorTheme(backgroundColor: makeColor(hex: settings.backgroundColor),
+                                        cellsBackgroundColor: makeColor(hex: settings.cellsBackgroundColor),
+                                        labelsColor: makeColor(hex: settings.labelsColor),
+                                        labelsSecondaryColor: makeColor(hex: settings.labelsSecondaryColor),
+                                        temperatureSwitchColor: makeColor(hex: settings.temperatureSwitchColor),
+                                        colorBoxesColors: colorBoxesColors)
     }
     
     var mainMenu: MainMenuColorThemeModel {
@@ -109,10 +115,12 @@ struct ColorThemeModel {
                               labelsColor: black,
                               labelsSecondaryColor: black)
         
-        let settingsScreen = SettingsScreen(colorBoxesColors: [white,
-                                                               white,
-                                                               white,
-                                                               white])
+        let settingsScreen = SettingsScreen(backgroundColor: white,
+                                            cellsBackgroundColor: white,
+                                            labelsColor: black,
+                                            labelsSecondaryColor: black,
+                                            temperatureSwitchColor: white,
+                                            colorBoxesColors: Array.init(repeating: white, count: 4))
         let defaultCells = Cells(isShadowVisible: true,
                                  gradient: defaultGradient,
                                  clear_sky: defaultColors,

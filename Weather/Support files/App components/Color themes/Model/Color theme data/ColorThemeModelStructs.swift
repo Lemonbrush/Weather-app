@@ -97,5 +97,10 @@ struct GradientColorThemeModel {
 }
 
 struct SettingsScreenColorTheme {
+    let backgroundColor: UIColor
+    let cellsBackgroundColor: UIColor
+    let labelsColor: UIColor
+    let labelsSecondaryColor: UIColor
+    let temperatureSwitchColor: UIColor
     let colorBoxesColors: [UIColor]
 }

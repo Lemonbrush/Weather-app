@@ -18,6 +18,11 @@ struct ColorThemeData: Codable {
 // MARK: - Settings screen
 
 struct SettingsScreen: Codable {
+    let backgroundColor: String
+    let cellsBackgroundColor: String
+    let labelsColor: String
+    let labelsSecondaryColor: String
+    let temperatureSwitchColor: String
     let colorBoxesColors: [String]
 }
 
