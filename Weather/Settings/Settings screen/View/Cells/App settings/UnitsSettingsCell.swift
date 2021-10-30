@@ -13,30 +13,35 @@ protocol UnitSwitchCellDelegate {
 
 class UnitsSettingsCell: UITableViewCell {
     
+    // MARK: - Public functions
+    
+    var delegate: UnitSwitchCellDelegate?
+    
     // MARK: - Private properties
     
-    private var unitSwitch: UISegmentedControl = {
+    private lazy var unitSwitch: UISegmentedControl = {
         let items = ["°C", "°F"]
         let switcher = UISegmentedControl(items: items)
         switcher.accessibilityIdentifier = "SettingsUnitSwitch"
         switcher.selectedSegmentIndex = 0
-        switcher.backgroundColor = K.Colors.WeatherIcons.defaultColor
+        switcher.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.temperatureSwitchColor
         switcher.addTarget(self, action: #selector(unitSwitchToggled), for: .valueChanged)
         return switcher
     }()
 
-    private let temperatureLabel: UILabel = {
+    private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.text = "Temperature"
+        label.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         return label
     }()
     
-    private let settingsIcon: UIImageView = {
+    private lazy var settingsIcon: UIImageView = {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
         imageView.image = UIImage(systemName: "ruler", withConfiguration: imageConfiguration) ?? UIImage()
-        imageView.tintColor = .black
+        imageView.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -54,14 +59,15 @@ class UnitsSettingsCell: UITableViewCell {
         return stack
     }()
     
-    // MARK: - Public functions
-    
-    var delegate: UnitSwitchCellDelegate?
+    private let colorThemeComponent: ColorThemeProtocol
     
     // MARK: - Construction
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+        super.init(style: .default, reuseIdentifier: nil)
+        
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
         
         switch UserDefaultsManager.getUnitData() {
         case K.UserDefaults.metric:

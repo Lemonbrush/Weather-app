@@ -16,10 +16,10 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private let unitsSettingsCell = UnitsSettingsCell()
+    private lazy var unitsSettingsCell = UnitsSettingsCell(colorThemeComponent: colorThemeComponent)
     private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
     
-    private let mainView = SettingsView()
+    private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)
 
     // MARK: - Public properties
 
@@ -46,6 +46,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
         navigationItem.title = "Settings"
         
         unitsSettingsCell.delegate = self

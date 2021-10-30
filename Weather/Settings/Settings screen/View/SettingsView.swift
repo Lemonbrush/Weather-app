@@ -9,24 +9,31 @@ import UIKit
 
 class SettingsView: UIView {
     
-    // MARK: - Private properties
-
-     var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.accessibilityIdentifier = "SettingsTableView"
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
-    // MARK: - Public properties
+    // MARK: - Properties
     
     weak var viewControllerOwner: SettingsViewController?
     var settingsSections: [SettingsSection]? = []
     
+    // MARK: - Private properties
+
+     private var tableView: UITableView = {
+         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+         tableView.accessibilityIdentifier = "SettingsTableView"
+         tableView.translatesAutoresizingMaskIntoConstraints = false
+         tableView.backgroundColor = .clear
+         return tableView
+    }()
+    
+    private let colorTheme: ColorThemeProtocol
+    
     // MARK: - Construction
     
-    required init() {
+    required init(colorTheme: ColorThemeProtocol) {
+        self.colorTheme = colorTheme
         super.init(frame: .zero)
+        
+        backgroundColor = colorTheme.colorTheme.settingsScreen.backgroundColor
+        
         tableView.delegate = self
         tableView.dataSource = self
 

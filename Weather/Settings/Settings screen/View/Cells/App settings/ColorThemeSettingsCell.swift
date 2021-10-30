@@ -16,19 +16,20 @@ class ColorThemeSettingsCell: UITableViewCell {
     
     // MARK: - Private properties
     
-    private let themeIcon: UIImageView = {
+    private lazy var themeIcon: UIImageView = {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
         imageView.image = UIImage(systemName: "paintbrush", withConfiguration: imageConfiguration) ?? UIImage()
-        imageView.tintColor = .black
+        imageView.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    private let themeLabel: UILabel = {
+    private lazy var themeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.text = "Theme"
+        label.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         return label
     }()
     
@@ -57,6 +58,7 @@ class ColorThemeSettingsCell: UITableViewCell {
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(style: .default, reuseIdentifier: nil)
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
         
         refresh()
         
