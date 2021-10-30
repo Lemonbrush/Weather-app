@@ -16,6 +16,7 @@ class ColorThemeSettingsView: UIView {
         tableView.accessibilityIdentifier = "ColorSettingsTableView"
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ColorThemeCell.self, forCellReuseIdentifier: "colorThemeCell")
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
