@@ -11,7 +11,8 @@ class ColorThemeSettingsViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private let mainView = ColorThemeSettingsView(colorThemes: ColorThemeManager.getColorThemes())
+    private lazy var mainView = ColorThemeSettingsView(currentColorTheme: colorThemeComponent,
+                                                  colorThemes: ColorThemeManager.getColorThemes())
     
     // MARK: - Public properties
     

@@ -14,6 +14,11 @@ protocol ColorThemeSettingsCellDelegste {
 
 class ColorThemeSettingsCell: UITableViewCell {
     
+    // MARK: - Properties
+    
+    var colorThemeComponent: ColorThemeProtocol
+    var delegate: ColorThemeSettingsCellDelegste?
+    
     // MARK: - Private properties
     
     private lazy var themeIcon: UIImageView = {
@@ -47,11 +52,6 @@ class ColorThemeSettingsCell: UITableViewCell {
         stack.spacing = 10
         return stack
     }()
-    
-    // MARK: - Public functions
-    
-    var colorThemeComponent: ColorThemeProtocol
-    var delegate: ColorThemeSettingsCellDelegste?
     
     // MARK: - Constructions
     

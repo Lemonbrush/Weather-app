@@ -21,7 +21,7 @@ class ColorThemeSettingsView: UIView {
     }()
     
     private var chosenColorThemePosition = 0
-    
+    private var currentColorTheme: ColorThemeProtocol
     private var colorThemes: [ColorThemeModel]
     
     // MARK: - Public properties
@@ -30,10 +30,13 @@ class ColorThemeSettingsView: UIView {
     
     // MARK: - Construction
     
-    init(colorThemes: [ColorThemeModel]) {
+    init(currentColorTheme: ColorThemeProtocol ,colorThemes: [ColorThemeModel]) {
+        self.currentColorTheme = currentColorTheme
         self.colorThemes = colorThemes
         
         super.init(frame: .zero)
+        
+        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
         
         refreshCheckedColorTmeme()
         
@@ -82,7 +85,10 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
             cell.checkmarkImage.isHidden = false
         }
         
+        cell.checkmarkImage.tintColor = colorTheme.settingsScreen.labelsColor
+        cell.subtitle.textColor = colorTheme.settingsScreen.labelsSecondaryColor
         cell.colorBoxesView.setupBlocks(colorTheme.settingsScreen.colorBoxesColors)
+        cell.backgroundColor = currentColorTheme.colorTheme.settingsScreen.cellsBackgroundColor
         
         return cell
     }
