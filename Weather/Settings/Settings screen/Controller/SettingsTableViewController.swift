@@ -86,7 +86,6 @@ extension SettingsViewController: ColorThemeSettingsCellDelegste {
         colorThemeSettingsViewController.mainMenuDelegate = mainMenuDelegate
         colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
         
-        navigationController?.pushViewController(colorThemeSettingsViewController,
-                                                 animated: true)
+        navigationController?.pushViewController(colorThemeSettingsViewController, animated: true)
     }
 }
