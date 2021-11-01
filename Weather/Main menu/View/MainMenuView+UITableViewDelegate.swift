@@ -16,15 +16,14 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let loadingCell = tableView.dequeueReusableCell(withIdentifier:
-                                                                K.CellIdentifier.cityLoadingCell) as? LoadingCell else {
+        guard let loadingCell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityLoadingCell) as? LoadingCell else {
             return UITableViewCell()
         }
 
         guard viewController?.displayWeather[indexPath.row] != nil,
               let weatherDataForCell = viewController?.displayWeather[indexPath.row],
-              var cell = tableView.dequeueReusableCell(withIdentifier:
-                                                        K.CellIdentifier.cityCell) as? MainMenuTableViewCell else {
+              var cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.cityCell) as? MainMenuTableViewCell else {
+                  loadingCell.setupColorTheme(colorTheme: colorThemeComponent)
             return loadingCell
         }
 
