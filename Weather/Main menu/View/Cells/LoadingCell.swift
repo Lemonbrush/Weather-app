@@ -69,6 +69,8 @@ class LoadingCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private let activityIndicator = UIActivityIndicatorView()
 
     // MARK: - Lifecycle
 
@@ -93,13 +95,12 @@ class LoadingCell: UITableViewCell {
 
         weatherBackgroundView.layer.insertSublayer(gradient, at: 0) // Adding gradient at the bottom
 
-        let loader = UIActivityIndicatorView()
-        loader.startAnimating()
+        activityIndicator.startAnimating()
 
         leftStackView.addArrangedSubview(cityLoadView)
         leftStackView.addArrangedSubview(timeLoadView)
 
-        rightStackView.addArrangedSubview(loader)
+        rightStackView.addArrangedSubview(activityIndicator)
         rightStackView.addArrangedSubview(degreeLoadView)
 
         mainStackView.addArrangedSubview(leftStackView)
@@ -128,11 +129,24 @@ class LoadingCell: UITableViewCell {
 
         setUpConstraints()
     }
+    
+    // MARK: - Functions
+    
+    func setupColorTheme(colorTheme: ColorThemeProtocol) {
+        let thirdColor = colorTheme.colorTheme.mainMenu.todayColor
+        
+        weatherBackgroundView.backgroundColor = colorTheme.colorTheme.mainMenu.cells.clearSky.colors.first ?? .white
+        
+        cityLoadView.backgroundColor = thirdColor
+        timeLoadView.backgroundColor = thirdColor
+        degreeLoadView.backgroundColor = thirdColor
+        activityIndicator.color = thirdColor
+        
+    }
 
     // MARK: - Private functions
 
     private func setUpConstraints() {
-
         // Background
         weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
         weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
