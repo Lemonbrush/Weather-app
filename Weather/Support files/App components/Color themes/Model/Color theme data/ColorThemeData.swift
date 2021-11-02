@@ -50,6 +50,9 @@ struct MainMenu: Codable {
 struct Cells: Codable {
     let isShadowVisible: Bool
     let gradient: Gradient
+    let defaultBackground: String
+    let defaultLoadingViewsColor: String
+    let activityViewColor: String
     let clear_sky: Colors
     let few_clouds: Colors
     let scattered_clouds: Colors
