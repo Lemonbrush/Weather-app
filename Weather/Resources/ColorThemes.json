@@ -38,6 +38,9 @@
             "y": 0.5
           }
         },
+        "defaultBackground": "#343436",
+        "defaultLoadingViewsColor": "#454549",
+        "activityViewColor": "#fe8c08",
         "clear_sky": {
           "colors": [
             "#343436"

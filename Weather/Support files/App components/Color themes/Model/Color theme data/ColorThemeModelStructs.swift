@@ -49,15 +49,18 @@ struct MainMenuColorThemeModel {
 struct CellsColorThemeModel {
     let isShadowVisible: Bool
     let gradient: GradientColorThemeModel
-    var clearSky: ColorThemeColorsModel
-    var fewClouds: ColorThemeColorsModel
-    var scatteredClouds: ColorThemeColorsModel
-    var brokenClouds: ColorThemeColorsModel
-    var showerRain: ColorThemeColorsModel
-    var rain: ColorThemeColorsModel
-    var thunderstorm: ColorThemeColorsModel
-    var snow: ColorThemeColorsModel
-    var mist: ColorThemeColorsModel
+    let defaultBackground: UIColor
+    let defaultLoadingViewsColor: UIColor
+    let activityViewColor: UIColor
+    let clearSky: ColorThemeColorsModel
+    let fewClouds: ColorThemeColorsModel
+    let scatteredClouds: ColorThemeColorsModel
+    let brokenClouds: ColorThemeColorsModel
+    let showerRain: ColorThemeColorsModel
+    let rain: ColorThemeColorsModel
+    let thunderstorm: ColorThemeColorsModel
+    let snow: ColorThemeColorsModel
+    let mist: ColorThemeColorsModel
 }
 
 struct BackgroundColorColorThemeModel {

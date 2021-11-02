@@ -47,6 +47,9 @@ struct ColorThemeModel {
                                                     endPoint: CGPoint(x: mainMenu.cells.gradient.endPoint.x, y: mainMenu.cells.gradient.endPoint.y))
         let cellsMenu = CellsColorThemeModel(isShadowVisible: mainMenu.cells.isShadowVisible,
                                              gradient: cellsGradient,
+                                             defaultBackground: makeColor(hex: mainMenu.cells.defaultBackground),
+                                             defaultLoadingViewsColor: makeColor(hex: mainMenu.cells.defaultLoadingViewsColor),
+                                             activityViewColor: makeColor(hex: mainMenu.cells.activityViewColor),
                                              clearSky: convertToColorThemeModel(mainMenu.cells.clear_sky),
                                              fewClouds: convertToColorThemeModel(mainMenu.cells.few_clouds),
                                              scatteredClouds: convertToColorThemeModel(mainMenu.cells.scattered_clouds),
@@ -123,6 +126,9 @@ struct ColorThemeModel {
                                             colorBoxesColors: Array.init(repeating: white, count: 4))
         let defaultCells = Cells(isShadowVisible: true,
                                  gradient: defaultGradient,
+                                 defaultBackground: white,
+                                 defaultLoadingViewsColor: white,
+                                 activityViewColor: black,
                                  clear_sky: defaultColors,
                                  few_clouds: defaultColors,
                                  scattered_clouds: defaultColors,
