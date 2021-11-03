@@ -101,6 +101,16 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         destinationVC.colorThemeComponent = appComponents
 
         let navigationController = UINavigationController(rootViewController: destinationVC)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = appComponents.colorTheme.settingsScreen.backgroundColor
+        let titleAttribute = [NSAttributedString.Key.foregroundColor: appComponents.colorTheme.settingsScreen.labelsColor]
+        appearance.largeTitleTextAttributes = titleAttribute
+        appearance.titleTextAttributes = titleAttribute
+        navigationController.navigationBar.standardAppearance = appearance
+        
+        navigationController.navigationBar.tintColor = appComponents.colorTheme.settingsScreen.labelsSecondaryColor
+        
         present(navigationController, animated: true, completion: nil)
     }
 
