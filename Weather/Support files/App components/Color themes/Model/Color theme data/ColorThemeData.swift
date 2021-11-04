@@ -39,6 +39,7 @@ struct AddCity: Codable {
 // MARK: - Main menu
 
 struct MainMenu: Codable {
+    let isStatusBarDark: Bool
     let backgroundColor: String
     let dateLabelColor: String
     let todayColor: String

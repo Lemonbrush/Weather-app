@@ -36,7 +36,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     var displayWeather: [WeatherModel?] = []
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return appComponents.colorTheme.mainMenu.isStatusBarDark ? .darkContent : .lightContent
     }
 
     // MARK: - Lifecycle

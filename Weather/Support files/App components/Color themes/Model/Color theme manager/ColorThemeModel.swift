@@ -59,7 +59,8 @@ struct ColorThemeModel {
                                              thunderstorm: convertToColorThemeModel(mainMenu.cells.rain),
                                              snow: convertToColorThemeModel(mainMenu.cells.snow),
                                              mist: convertToColorThemeModel(mainMenu.cells.mist))
-        return MainMenuColorThemeModel(backgroundColor: makeColor(hex: mainMenu.backgroundColor),
+        return MainMenuColorThemeModel(isStatusBarDark: rawColorThemeDataModel.mainMenu.isStatusBarDark,
+                                       backgroundColor: makeColor(hex: mainMenu.backgroundColor),
                                        dateLabelColor: makeColor(hex: mainMenu.dateLabelColor),
                                        todayColor: makeColor(hex: mainMenu.todayColor),
                                        settingsIconColor: makeColor(hex: mainMenu.settingsIconColor),
@@ -138,7 +139,8 @@ struct ColorThemeModel {
                                  thunderstorm: defaultColors,
                                  snow: defaultColors,
                                  mist: defaultColors)
-        let defaultMainMenu = MainMenu(backgroundColor: white,
+        let defaultMainMenu = MainMenu(isStatusBarDark: true,
+                                       backgroundColor: white,
                                        dateLabelColor: black,
                                        todayColor: black,
                                        settingsIconColor: black,

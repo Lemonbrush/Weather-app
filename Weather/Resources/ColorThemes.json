@@ -21,6 +21,7 @@
       "labelsSecondaryColor": "#fe8c08"
     },
     "mainMenu": {
+      "isStatusBarDark": false,
       "backgroundColor": "#29292b",
       "dateLabelColor": "#ffffff",
       "todayColor": "#fe8c08",
