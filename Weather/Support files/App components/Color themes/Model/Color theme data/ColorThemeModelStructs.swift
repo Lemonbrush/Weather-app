@@ -38,6 +38,7 @@ struct IconColorsColorThemeModel {
 }
 
 struct MainMenuColorThemeModel {
+    let isStatusBarDark: Bool
     let backgroundColor: UIColor
     let dateLabelColor: UIColor
     let todayColor: UIColor
