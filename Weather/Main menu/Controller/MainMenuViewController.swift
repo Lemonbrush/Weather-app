@@ -192,7 +192,6 @@ extension MainMenuViewController: UIViewControllerTransitioningDelegate, UINavig
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-
         return fadeTransitionAnimator
     }
 }

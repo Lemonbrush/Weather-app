@@ -13,6 +13,10 @@ class CityDetailViewController: UIViewController {
 
     var localWeatherData: WeatherModel?
     var colorThemeComponent: ColorThemeProtocol
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     // MARK: - Private properties
 
@@ -21,7 +25,7 @@ class CityDetailViewController: UIViewController {
                                      style: .plain,
                                      target: self,
                                      action: #selector(backButtonPressed))
-        button.tintColor = .black
+        button.tintColor = .white
         return button
     }()
 
@@ -163,13 +167,10 @@ class CityDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let button = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"),
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(backButtonPressed))
-        button.tintColor = .black
-        self.navigationItem.leftBarButtonItem = button
+        
+        backButtonNavBarItem.action = #selector(backButtonPressed)
+        backButtonNavBarItem.target = self
+        self.navigationItem.leftBarButtonItem = backButtonNavBarItem
 
         weatherManager.delegate = self
 
@@ -208,6 +209,7 @@ class CityDetailViewController: UIViewController {
         setupGradientBackground()
 
         if let safeWeatherData = localWeatherData {
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor]
             title = safeWeatherData.cityName
             setLabelsAndImages(with: safeWeatherData)
         }
@@ -227,6 +229,11 @@ class CityDetailViewController: UIViewController {
         weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height // Set tableview height according to its contents
         gradientBackground.frame = view.bounds // Calculate gradient size
         scrollView.contentSize = scrollContentView.bounds.size
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

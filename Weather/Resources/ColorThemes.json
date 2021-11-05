@@ -108,6 +108,7 @@
       }
     },
     "cityDetails": {
+      "isStatusBarDark": false,
       "hourlyForecast": {
         "backgroundColor": "#343436",
         "isClearBackground": true,
