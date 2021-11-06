@@ -15,7 +15,7 @@ class CityDetailViewController: UIViewController {
     var colorThemeComponent: ColorThemeProtocol
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return colorThemeComponent.colorTheme.cityDetails.isStatusBarDark ? .darkContent : .lightContent
     }
 
     // MARK: - Private properties
@@ -230,11 +230,6 @@ class CityDetailViewController: UIViewController {
         gradientBackground.frame = view.bounds // Calculate gradient size
         scrollView.contentSize = scrollContentView.bounds.size
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -448,7 +443,6 @@ extension CityDetailViewController {
     }
 
     private func setupBlurableNavBar() {
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.backgroundColor = .clear
