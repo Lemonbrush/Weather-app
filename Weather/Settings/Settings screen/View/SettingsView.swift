@@ -78,6 +78,11 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
         return settingsSections?[section].title
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = colorTheme.colorTheme.settingsScreen.labelsSecondaryColor
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = settingsSections?[indexPath.section].cells[indexPath.row] as? SettingsCellTappableProtocol {
             cell.tapCell()
