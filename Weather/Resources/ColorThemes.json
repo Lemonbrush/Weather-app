@@ -42,7 +42,7 @@
         },
         "defaultBackground": "#ffffff",
         "defaultLoadingViewsColor": "#e8e8e8",
-        "activityViewColor": "#fe8c08",
+        "activityViewColor": "#3c374a",
         "clear_sky": {
           "colors": [
             "#ffffff"

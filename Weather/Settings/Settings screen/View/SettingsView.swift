@@ -49,7 +49,6 @@ class SettingsView: UIView {
     // MARK: - Private functions
 
     private func setUpConstraints() {
-        // TableView
         tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
