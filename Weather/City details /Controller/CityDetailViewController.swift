@@ -142,7 +142,6 @@ class CityDetailViewController: UIViewController {
 
     private var weeklyTableViewBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

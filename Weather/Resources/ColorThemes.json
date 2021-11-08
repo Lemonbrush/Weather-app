@@ -1,5 +1,178 @@
 [
   {
+    "title": "Light",
+    "settingsScreen": {
+      "backgroundColor": "#EFEEF4",
+      "cellsBackgroundColor": "#ffffff",
+      "labelsColor": "#3c374a",
+      "labelsSecondaryColor": "#3c374a",
+      "temperatureSwitchColor": "#5BB7FC",
+      "colorBoxesColors": [
+        "#ffffff",
+        "#5BB7FC",
+        "#f8c957",
+        "#3c374a"
+      ]
+    },
+    "addCity": {
+      "backgroundColor": "#EFEEF4",
+      "searchFieldBackground": "#ffffff",
+      "isShadowVisible": true,
+      "labelsColor": "#3c374a",
+      "labelsSecondaryColor": "#848484"
+    },
+    "mainMenu": {
+      "isStatusBarDark": true,
+      "backgroundColor": "#ffffff",
+      "dateLabelColor": "#848484",
+      "todayColor": "#3c374a",
+      "settingsIconColor": "#3c374a",
+      "searchButtonColor": "#3c374a",
+      "cells": {
+        "isShadowVisible": true,
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 0.5
+          },
+          "endPoint": {
+            "x": 1,
+            "y": 0.5
+          }
+        },
+        "defaultBackground": "#ffffff",
+        "defaultLoadingViewsColor": "#e8e8e8",
+        "activityViewColor": "#fe8c08",
+        "clear_sky": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#f8c957",
+          "labelsColor": "#2B2B2B"
+        },
+        "few_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "scattered_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "broken_clouds": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "shower_rain": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "rain": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "thunderstorm": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "snow": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        },
+        "mist": {
+          "colors": [
+            "#ffffff"
+          ],
+          "iconColors": "#5BB7FC",
+          "labelsColor": "#2B2B2B"
+        }
+      }
+    },
+    "cityDetails": {
+      "isStatusBarDark": false,
+      "hourlyForecast": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#000000",
+        "labelsSecondaryColor": "#000000"
+      },
+      "weeklyForecast": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#000000",
+        "labelsSecondaryColor": "#595959"
+      },
+      "weatherQuality": {
+        "backgroundColor": "#ffffff",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#595959",
+        "labelsSecondaryColor": "#000000"
+      },
+      "contentBackground": {
+        "color": "#ffffff",
+        "isClearBackground": false
+      },
+      "screenBackground": {
+        "colors": [
+          "#5BB7FC",
+          "#0381ef"
+        ],
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 1
+          },
+          "endPoint": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        "mainIconColor": "#ffffff",
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff",
+        "ignoreColorInheritance": true
+      },
+      "iconColors": {
+        "sun": "#f8c957",
+        "cloud": "#87CFF2",
+        "mist": "#87CFF2",
+        "snow": "#87CFF2",
+        "rain": "#87CFF2",
+        "showerRain": "#87CFF2",
+        "thunderstorm": "#87CFF2",
+        "humidity": "#87CFF2",
+        "uvIndex": "#f8c957",
+        "wind": "#87CFF2",
+        "cloudiness": "#87CFF2",
+        "pressure": "#87CFF2",
+        "visibility": "#87CFF2"
+      }
+    }
+  },
+  {
     "title": "Dark",
     "settingsScreen": {
       "backgroundColor": "#29292b",

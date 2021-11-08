@@ -271,7 +271,7 @@ struct ColorThemeModel {
     }
     
     private func makeColor(hex: String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)

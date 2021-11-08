@@ -28,7 +28,7 @@ class AddCityView: UIView {
         
         let shouldAddShadow = colorThemeComponent.colorTheme.addCityScreen.isShadowVisible
         if shouldAddShadow {
-            DesignManager.setBackgroundStandartShadow(layer: searchBackgroundView.layer)
+            DesignManager.setBackgroundStandartShadow(layer: view.layer)
         }
         return view
     }()
