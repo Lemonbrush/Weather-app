@@ -20,12 +20,13 @@ class CityDetailViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private let backButtonNavBarItem: UIBarButtonItem = {
+    private lazy var backButtonNavBarItem: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"),
                                      style: .plain,
                                      target: self,
                                      action: #selector(backButtonPressed))
-        button.tintColor = .white
+        button.tintColor = colorThemeComponent.colorTheme.cityDetails.isStatusBarDark ? .black : .white
+        
         return button
     }()
 
@@ -208,7 +209,8 @@ class CityDetailViewController: UIViewController {
         setupGradientBackground()
 
         if let safeWeatherData = localWeatherData {
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor]
+            let navBarTitleColor: UIColor = colorThemeComponent.colorTheme.cityDetails.isStatusBarDark ? .black : .white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: navBarTitleColor]
             title = safeWeatherData.cityName
             setLabelsAndImages(with: safeWeatherData)
         }
