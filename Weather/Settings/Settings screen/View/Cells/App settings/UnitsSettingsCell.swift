@@ -11,7 +11,7 @@ protocol UnitSwitchCellDelegate {
     func unitSwitchToggled(_ value: Int)
 }
 
-class UnitsSettingsCell: UITableViewCell {
+class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     // MARK: - Public functions
     
@@ -24,7 +24,6 @@ class UnitsSettingsCell: UITableViewCell {
         let switcher = UISegmentedControl(items: items)
         switcher.accessibilityIdentifier = "SettingsUnitSwitch"
         switcher.selectedSegmentIndex = 0
-        switcher.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.temperatureSwitchColor
         switcher.addTarget(self, action: #selector(unitSwitchToggled), for: .valueChanged)
         return switcher
     }()
@@ -33,7 +32,6 @@ class UnitsSettingsCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.text = "Temperature"
-        label.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         return label
     }()
     
@@ -41,7 +39,6 @@ class UnitsSettingsCell: UITableViewCell {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
         imageView.image = UIImage(systemName: "ruler", withConfiguration: imageConfiguration) ?? UIImage()
-        imageView.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -67,8 +64,6 @@ class UnitsSettingsCell: UITableViewCell {
         self.colorThemeComponent = colorThemeComponent
         super.init(style: .default, reuseIdentifier: nil)
         
-        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
-        
         switch UserDefaultsManager.getUnitData() {
         case K.UserDefaults.metric:
             unitSwitch.selectedSegmentIndex = 0
@@ -89,11 +84,21 @@ class UnitsSettingsCell: UITableViewCell {
         
         unitSwitch.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
+        reloadColorTheme()
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
+        unitSwitch.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.temperatureSwitchColor
+        temperatureLabel.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
+        settingsIcon.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
     }
     
     // MARK: - Private functions

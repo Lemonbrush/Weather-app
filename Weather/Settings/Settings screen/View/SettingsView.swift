@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsView: UIView {
+class SettingsView: UIView, ReloadColorThemeProtocol {
     
     // MARK: - Properties
     
@@ -24,26 +24,32 @@ class SettingsView: UIView {
          return tableView
     }()
     
-    private let colorTheme: ColorThemeProtocol
+    private let colorThemeComponent: ColorThemeProtocol
     
     // MARK: - Construction
     
     required init(colorTheme: ColorThemeProtocol) {
-        self.colorTheme = colorTheme
+        self.colorThemeComponent = colorTheme
         super.init(frame: .zero)
-        
-        backgroundColor = colorTheme.colorTheme.settingsScreen.backgroundColor
         
         tableView.delegate = self
         tableView.dataSource = self
 
         addSubview(tableView)
 
+        reloadColorTheme()
         setUpConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.backgroundColor
+        tableView.reloadData()
     }
     
     // MARK: - Private functions
@@ -79,7 +85,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = colorTheme.colorTheme.settingsScreen.labelsSecondaryColor
+        header.textLabel?.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

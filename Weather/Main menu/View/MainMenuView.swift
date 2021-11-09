@@ -20,7 +20,6 @@ class MainMenuView: UIView {
     private lazy var currentDateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        label.textColor = colorThemeComponent.colorTheme.mainMenu.dateLabelColor
         label.text = "date label"
         return label
     }()
@@ -29,7 +28,6 @@ class MainMenuView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.text = "Today"
-        label.textColor = colorThemeComponent.colorTheme.mainMenu.todayColor
         return label
     }()
 
@@ -38,7 +36,6 @@ class MainMenuView: UIView {
         button.accessibilityIdentifier = "SettingsButton"
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "switch.2"), for: .normal)
-        button.tintColor = colorThemeComponent.colorTheme.mainMenu.settingsIconColor
         return button
     }()
 
@@ -47,7 +44,6 @@ class MainMenuView: UIView {
         button.accessibilityIdentifier = "SearchButton"
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = colorThemeComponent.colorTheme.mainMenu.searchButtonColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -105,8 +101,6 @@ class MainMenuView: UIView {
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
-
-        backgroundColor = colorThemeComponent.colorTheme.mainMenu.backgroundColor
         
         let currentDate = Date()
         let dateFormatter = DateFormatter()
@@ -137,12 +131,23 @@ class MainMenuView: UIView {
 
         tableView.tableHeaderView = tableViewHeaderView
 
+        reloadViews()
         setUpConstraints()
         tableView.layoutIfNeeded()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadViews() {
+        searchButton.tintColor = colorThemeComponent.colorTheme.mainMenu.searchButtonColor
+        settingsButton.tintColor = colorThemeComponent.colorTheme.mainMenu.settingsIconColor
+        todayLabel.textColor = colorThemeComponent.colorTheme.mainMenu.todayColor
+        currentDateLabel.textColor = colorThemeComponent.colorTheme.mainMenu.dateLabelColor
+        backgroundColor = colorThemeComponent.colorTheme.mainMenu.backgroundColor
     }
 
     // MARK: - Private Fucnctions

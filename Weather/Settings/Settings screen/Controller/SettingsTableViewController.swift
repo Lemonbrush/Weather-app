@@ -12,7 +12,7 @@ struct SettingsSection {
     var cells: [UITableViewCell]
 }
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
@@ -45,9 +45,10 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
+        reloadColorTheme()
+        
         navigationItem.title = "Settings"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         unitsSettingsCell.delegate = self
         colorThemeSettingsCell.delegate = self
@@ -62,6 +63,26 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         colorThemeSettingsCell.refresh()
+    }
+    
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.backgroundColor
+        let titleAttribute = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
+        appearance.largeTitleTextAttributes = titleAttribute
+        appearance.titleTextAttributes = titleAttribute
+        navigationController?.navigationBar.standardAppearance = appearance
+    
+        navigationController?.navigationBar.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
+        
+        unitsSettingsCell.reloadColorTheme()
+        colorThemeSettingsCell.reloadColorTheme()
+        mainView.reloadColorTheme()
     }
 }
 
@@ -83,9 +104,11 @@ extension SettingsViewController: UnitSwitchCellDelegate {
 extension SettingsViewController: ColorThemeSettingsCellDelegste {
     func presentColorThemes() {
         let colorThemeSettingsViewController = ColorThemeSettingsViewController(colorThemeComponent: colorThemeComponent)
-        colorThemeSettingsViewController.mainMenuDelegate = mainMenuDelegate
         colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
-        
+        colorThemeSettingsViewController.reloadingViews.append(self)
+        if let safeMainMenuDelegate = mainMenuDelegate {
+            colorThemeSettingsViewController.reloadingViews.append(safeMainMenuDelegate)
+        }
         navigationController?.pushViewController(colorThemeSettingsViewController, animated: true)
     }
 }
