@@ -22,6 +22,8 @@ struct ColorThemeModel {
     var addCityScreen: AddCityColorTheme {
         return AddCityColorTheme(backgroundColor: makeColor(hex: rawColorThemeDataModel.addCity.backgroundColor),
                                  searchFieldBackground: makeColor(hex: rawColorThemeDataModel.addCity.searchFieldBackground),
+                                 cancelButtonColor: makeColor(hex: rawColorThemeDataModel.addCity.cancelButtonColor),
+                                 handleColor: makeColor(hex: rawColorThemeDataModel.addCity.handleColor),
                                  isShadowVisible: rawColorThemeDataModel.addCity.isShadowVisible,
                                  labelsColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsColor),
                                  labelsSecondaryColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsSecondaryColor))
@@ -116,6 +118,8 @@ struct ColorThemeModel {
                                                           y: 0.0))
         let addCity = AddCity(backgroundColor: white,
                               searchFieldBackground: white,
+                              cancelButtonColor: black,
+                              handleColor: black,
                               isShadowVisible: true,
                               labelsColor: black,
                               labelsSecondaryColor: black)

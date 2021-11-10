@@ -17,6 +17,8 @@
     "addCity": {
       "backgroundColor": "#EFEEF4",
       "searchFieldBackground": "#ffffff",
+      "cancelButtonColor": "#3c374a",
+      "handleColor": "#d2d2d3",
       "isShadowVisible": true,
       "labelsColor": "#3c374a",
       "labelsSecondaryColor": "#848484"
@@ -189,6 +191,8 @@
     "addCity": {
       "backgroundColor": "#29292b",
       "searchFieldBackground": "#343436",
+      "cancelButtonColor": "#ffffff",
+      "handleColor": "#343436",
       "isShadowVisible": false,
       "labelsColor": "#ffffff",
       "labelsSecondaryColor": "#fe8c08"
@@ -361,6 +365,8 @@
     "addCity": {
       "backgroundColor": "#EFEEF4",
       "searchFieldBackground": "#ffffff",
+      "cancelButtonColor": "#3c374a",
+      "handleColor": "#d2d2d3",
       "isShadowVisible": true,
       "labelsColor": "#3c374a",
       "labelsSecondaryColor": "#848484"

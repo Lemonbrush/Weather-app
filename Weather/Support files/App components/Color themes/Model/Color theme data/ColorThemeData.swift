@@ -31,6 +31,8 @@ struct SettingsScreen: Codable {
 struct AddCity: Codable {
     let backgroundColor: String
     let searchFieldBackground: String
+    let cancelButtonColor: String
+    let handleColor: String
     let isShadowVisible: Bool
     let labelsColor: String
     let labelsSecondaryColor: String
