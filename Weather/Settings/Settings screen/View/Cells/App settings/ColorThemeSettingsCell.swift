@@ -12,7 +12,7 @@ protocol ColorThemeSettingsCellDelegste {
     func presentColorThemes()
 }
 
-class ColorThemeSettingsCell: UITableViewCell {
+class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     // MARK: - Properties
     
@@ -25,7 +25,6 @@ class ColorThemeSettingsCell: UITableViewCell {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
         imageView.image = UIImage(systemName: "paintbrush", withConfiguration: imageConfiguration) ?? UIImage()
-        imageView.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -34,7 +33,6 @@ class ColorThemeSettingsCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.text = "Theme"
-        label.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         return label
     }()
     
@@ -58,7 +56,6 @@ class ColorThemeSettingsCell: UITableViewCell {
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(style: .default, reuseIdentifier: nil)
-        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
         
         refresh()
         
@@ -71,11 +68,24 @@ class ColorThemeSettingsCell: UITableViewCell {
         contentView.addSubview(mainStackView)
         selectionStyle = .none
         
+        reloadColorTheme()
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
+        themeIcon.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
+        themeLabel.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
+    }
+    
+    func refresh() {
+        themeColorBlocksView.setupBlocks(colorThemeComponent.colorTheme.settingsScreen.colorBoxesColors)
     }
     
     // MARK: - Private functions
@@ -89,10 +99,6 @@ class ColorThemeSettingsCell: UITableViewCell {
                                                           constant: 20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                            constant: -20).isActive = true
-    }
-    
-    func refresh() {
-        themeColorBlocksView.setupBlocks(colorThemeComponent.colorTheme.settingsScreen.colorBoxesColors)
     }
 }
 

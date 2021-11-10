@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ColorThemeSettingsView: UIView {
+class ColorThemeSettingsView: UIView, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
@@ -36,8 +36,6 @@ class ColorThemeSettingsView: UIView {
         
         super.init(frame: .zero)
         
-        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
-        
         refreshCheckedColorTmeme()
         
         tableView.delegate = self
@@ -52,6 +50,13 @@ class ColorThemeSettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
+        tableView.reloadData()
+    }
+    
     // MARK: - Private functions
 
     private func setUpConstraints() {
@@ -63,6 +68,7 @@ class ColorThemeSettingsView: UIView {
     
     private func refreshCheckedColorTmeme() {
         chosenColorThemePosition = UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()
+        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
         tableView.reloadData()
     }
 }
