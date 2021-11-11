@@ -51,7 +51,7 @@ class AddCityView: UIView {
         button.accessibilityIdentifier = "AddCityCancelButton"
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
-        button.setTitleColor(colorThemeComponent.colorTheme.addCityScreen.labelsColor, for: .normal)
+        button.setTitleColor(colorThemeComponent.colorTheme.addCityScreen.cancelButtonColor, for: .normal)
         button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -73,7 +73,7 @@ class AddCityView: UIView {
 
     private lazy var handleView: UIView = {
         let view = UIView()
-        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
+        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.handleColor
         view.layer.cornerRadius = 5 / 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

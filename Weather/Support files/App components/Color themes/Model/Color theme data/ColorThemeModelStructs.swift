@@ -16,6 +16,8 @@ struct ColorThemeColorsModel {
 struct AddCityColorTheme {
     let backgroundColor: UIColor
     let searchFieldBackground: UIColor
+    let cancelButtonColor: UIColor
+    let handleColor: UIColor
     let isShadowVisible: Bool
     let labelsColor: UIColor
     let labelsSecondaryColor: UIColor
