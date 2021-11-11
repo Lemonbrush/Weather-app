@@ -66,7 +66,6 @@ class CityDetailViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.alignment = .center
-        stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -78,10 +77,11 @@ class CityDetailViewController: UIViewController {
         return imageView
     }()
 
-    private var tempLebel: UILabel = {
-        let label = UILabel()
+    private var tempLebel: DegreeLabel = {
+        let label = DegreeLabel()
         label.accessibilityIdentifier = "CityDetailsMainDegreeLabel"
         label.font = UIFont.systemFont(ofSize: 90, weight: .medium)
+        label.textAlignment = .center
         return label
     }()
 
@@ -180,8 +180,6 @@ class CityDetailViewController: UIViewController {
 
         scrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(topTranslucentBackground)
-
-        degreeStackView.addArrangedSubview(conditionImage)
         
         let backgroundColors = colorThemeComponent.colorTheme.cityDetails.screenBackground
         let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).labelsColor
@@ -189,7 +187,7 @@ class CityDetailViewController: UIViewController {
         tempLebel.textColor = labelColor
         descriptionLabel.textColor = labelColor
         feelsLikeLabel.textColor = labelColor
-        
+        degreeStackView.addArrangedSubview(conditionImage)
         degreeStackView.addArrangedSubview(tempLebel)
         degreeStackView.addArrangedSubview(descriptionLabel)
         degreeStackView.addArrangedSubview(feelsLikeLabel)
