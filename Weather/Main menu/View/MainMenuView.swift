@@ -35,7 +35,8 @@ class MainMenuView: UIView {
         let button = UIButton()
         button.accessibilityIdentifier = "SettingsButton"
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "switch.2"), for: .normal)
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        button.setImage(UIImage(systemName: "switch.2", withConfiguration: imageConfiguration), for: .normal)
         return button
     }()
 
@@ -43,7 +44,8 @@ class MainMenuView: UIView {
         let button = UIButton()
         button.accessibilityIdentifier = "SearchButton"
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        button.setImage(UIImage(systemName: "magnifyingglass", withConfiguration: imageConfiguration), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -72,8 +74,6 @@ class MainMenuView: UIView {
     }()
 
     private var refreshControl = UIRefreshControl()
-
-    private var welcomeImage: UIImageView!
 
     // MARK: - Public properties
 
@@ -178,8 +178,8 @@ class MainMenuView: UIView {
                                                  constant: 5).isActive = true
 
         // Search button
-        searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        searchButton.heightAnchor.constraint(equalTo: settingsButton.heightAnchor).isActive = true
+        searchButton.widthAnchor.constraint(equalTo: settingsButton.widthAnchor).isActive = true
     }
 
     // MARK: - Actions

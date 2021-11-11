@@ -170,7 +170,7 @@ class WeatherQualityInfoView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 30
+        stackView.spacing = 15
         for stack in stackViews {
             stackView.addArrangedSubview(stack)
         }
