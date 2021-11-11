@@ -91,6 +91,7 @@ struct EndPoint: Codable {
 // MARK: - City details
 
 struct CityDetails: Codable {
+    let isNavBarDark: Bool
     let isStatusBarDark: Bool
     let hourlyForecast: BackgroundColor
     let weeklyForecast: BackgroundColor

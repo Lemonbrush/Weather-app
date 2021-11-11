@@ -111,6 +111,7 @@
       }
     },
     "cityDetails": {
+      "isNavBarDark": false,
       "isStatusBarDark": false,
       "hourlyForecast": {
         "backgroundColor": "#ffffff",
@@ -285,6 +286,7 @@
       }
     },
     "cityDetails": {
+      "isNavBarDark": true,
       "isStatusBarDark": false,
       "hourlyForecast": {
         "backgroundColor": "#343436",
@@ -468,6 +470,7 @@
       }
     },
     "cityDetails": {
+      "isNavBarDark": false,
       "isStatusBarDark": false,
       "hourlyForecast": {
         "backgroundColor": "#ffffff",

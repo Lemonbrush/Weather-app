@@ -30,8 +30,9 @@ class CityDetailViewController: UIViewController {
         return button
     }()
 
-    private let navigationBarBlurBackground: UIVisualEffectView = {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    private lazy var navigationBarBlurBackground: UIVisualEffectView = {
+        let isNavBarDark = colorThemeComponent.colorTheme.cityDetails.isNavBarDark
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: isNavBarDark ? .dark : .light))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
