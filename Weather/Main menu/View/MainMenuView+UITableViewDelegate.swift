@@ -56,8 +56,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
 
     // Cell editing
-    func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completionHandler in
 
             self.viewController?.displayWeather.remove(at: indexPath.row)
@@ -67,9 +66,12 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
             completionHandler(true)
         }
-
-        deleteAction.image = UIImage(named: K.ImageName.deleteImage)
-        deleteAction.backgroundColor = .white
+        
+        let imageSize = 60
+        deleteAction.image = UIGraphicsImageRenderer(size: CGSize(width: imageSize, height: imageSize)).image { _ in
+            UIImage(named: K.ImageName.deleteImage)?.draw(in: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
+        }
+        deleteAction.backgroundColor = UIColor(white: 1, alpha: 0)
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         configuration.performsFirstActionWithFullSwipe = false
