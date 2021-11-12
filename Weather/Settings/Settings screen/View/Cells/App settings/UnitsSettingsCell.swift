@@ -97,6 +97,8 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     func reloadColorTheme() {
         backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
         unitSwitch.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.temperatureSwitchColor
+        unitSwitch.selectedSegmentTintColor = .white
+        unitSwitch.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         temperatureLabel.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
         settingsIcon.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
     }
