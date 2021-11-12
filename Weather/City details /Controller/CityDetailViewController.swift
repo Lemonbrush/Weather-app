@@ -318,6 +318,12 @@ class CityDetailViewController: UIViewController {
 
 extension CityDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.height {
+            scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.height
+            return
+        }
+        
         // Check if CollectionView is currently scrolling and break if so
         if hourlyCollectionView.collectionView.isDragging ||
             hourlyCollectionView.collectionView.isDecelerating { return }
@@ -338,10 +344,6 @@ extension CityDetailViewController: UIScrollViewDelegate {
                 self.springConstraint.constant = newConstant
                 self.view.layoutIfNeeded()
             }
-        }
-
-        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
-            scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.height
         }
     }
 }
