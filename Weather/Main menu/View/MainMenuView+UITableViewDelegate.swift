@@ -46,6 +46,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
             .content
 
         cell.layoutIfNeeded() // Eliminate layouts left from loading cells
+        
 
         return cell
 

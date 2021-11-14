@@ -122,6 +122,8 @@ class MainMenuTableViewCell: UITableViewCell {
 
         addSubview(weatherBackgroundView)
         weatherBackgroundView.addSubview(mainStackView)
+        
+        setUpConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -133,7 +135,6 @@ class MainMenuTableViewCell: UITableViewCell {
         // Configuring gradient frame when views calculating
         gradient.frame = weatherBackgroundView.bounds
         DesignManager.setBackgroundStandartShape(layer: gradient)
-        setUpConstraints()
     }
 
     // MARK: - Private functions
