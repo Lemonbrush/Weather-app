@@ -94,7 +94,8 @@ struct ColorThemeModel {
                                                    pressure: makeColor(hex: cityDetails.iconColors.pressure),
                                                    visibility: makeColor(hex: cityDetails.iconColors.visibility))
         
-        return CityDetailsColorThemeModel(isStatusBarDark: rawColorThemeDataModel.cityDetails.isStatusBarDark,
+        return CityDetailsColorThemeModel(isNavBarDark: rawColorThemeDataModel.cityDetails.isNavBarDark,
+                                          isStatusBarDark: rawColorThemeDataModel.cityDetails.isStatusBarDark,
                                           hourlyForecast: convertToBackgroundColorColorThemeModel(cityDetails.hourlyForecast),
                                           weeklyForecast: convertToBackgroundColorColorThemeModel(cityDetails.weeklyForecast),
                                           weatherQuality: convertToBackgroundColorColorThemeModel(cityDetails.weatherQuality),
@@ -169,7 +170,8 @@ struct ColorThemeModel {
                                            cloudiness: black,
                                            pressure: black,
                                            visibility: black)
-        let defaultCityDetails = CityDetails(isStatusBarDark: true,
+        let defaultCityDetails = CityDetails(isNavBarDark: false,
+                                             isStatusBarDark: true,
                                              hourlyForecast: defaultBackgroundColor,
                                              weeklyForecast: defaultBackgroundColor,
                                              weatherQuality: defaultBackgroundColor,

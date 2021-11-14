@@ -89,6 +89,7 @@ struct ScreenBackgroundColorThemeModel {
 }
 
 struct CityDetailsColorThemeModel {
+    let isNavBarDark: Bool
     let isStatusBarDark: Bool
     let hourlyForecast: BackgroundColorColorThemeModel
     let weeklyForecast: BackgroundColorColorThemeModel

@@ -22,7 +22,7 @@ struct DesignManager {
 
     // Making shadow
     static func setBackgroundStandartShadow(layer: CALayer) {
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.white.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowRadius = 7

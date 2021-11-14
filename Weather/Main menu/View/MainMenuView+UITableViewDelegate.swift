@@ -56,8 +56,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
 
     // Cell editing
-    func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completionHandler in
 
             self.viewController?.displayWeather.remove(at: indexPath.row)
@@ -67,9 +66,12 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
             completionHandler(true)
         }
-
-        deleteAction.image = UIImage(named: K.ImageName.deleteImage)
-        deleteAction.backgroundColor = .white
+        
+        let imageSize = 60
+        deleteAction.image = UIGraphicsImageRenderer(size: CGSize(width: imageSize, height: imageSize)).image { _ in
+            UIImage(named: K.ImageName.deleteImage)?.draw(in: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
+        }
+        deleteAction.backgroundColor = UIColor(white: 1, alpha: 0)
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         configuration.performsFirstActionWithFullSwipe = false
@@ -96,15 +98,13 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
         let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
         viewController?.displayWeather.insert(mover, at: destinationIndexPath.row)
 
         self.viewController?.dataStorage?.rearrangeItems(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 
-    func tableView(_ tableView: UITableView,
-                   itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
         dragItem.localObject = viewController?.displayWeather[indexPath.row]
 
@@ -114,8 +114,7 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
 
     // Setting up cell appearance while dragging and dropping
-    func tableView(_ tableView: UITableView,
-                   dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         // Haptic effect
         let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
         selectionFeedbackGenerator.selectionChanged()
@@ -123,17 +122,19 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
         return getDragAndDropCellAppearance(tableView, forCellAt: indexPath)
     }
 
-    func tableView(_ tableView: UITableView,
-                   dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+    func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         return getDragAndDropCellAppearance(tableView, forCellAt: indexPath)
     }
 
-    func getDragAndDropCellAppearance(_ tableView: UITableView,
-                                      forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+    func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
         // Getting rid of system design
         let param = UIDragPreviewParameters()
         param.backgroundColor = .clear
-        // param.shadowPath = UIBezierPath(rect: .zero)
+        if #available(iOS 14.0, *) {
+            param.shadowPath = UIBezierPath(rect: .zero)
+        } else {
+            // Fallback on earlier versions
+        }
 
         return param
     }

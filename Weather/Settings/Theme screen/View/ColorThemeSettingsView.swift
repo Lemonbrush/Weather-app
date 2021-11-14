@@ -86,13 +86,12 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
         
         let colorTheme = colorThemes[indexPath.row]
         cell.resetCell()
-        cell.subtitle.text = colorTheme.title
         if chosenColorThemePosition == indexPath.row {
             cell.checkmarkImage.isHidden = false
         }
-        
-        cell.checkmarkImage.tintColor = colorTheme.settingsScreen.labelsColor
-        cell.subtitle.textColor = colorTheme.settingsScreen.labelsSecondaryColor
+        cell.subtitle.text = colorTheme.title
+        cell.checkmarkImage.tintColor = currentColorTheme.colorTheme.settingsScreen.labelsColor
+        cell.subtitle.textColor = currentColorTheme.colorTheme.settingsScreen.labelsSecondaryColor
         cell.colorBoxesView.setupBlocks(colorTheme.settingsScreen.colorBoxesColors)
         cell.backgroundColor = currentColorTheme.colorTheme.settingsScreen.cellsBackgroundColor
         

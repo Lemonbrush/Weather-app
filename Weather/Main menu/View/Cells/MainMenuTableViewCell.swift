@@ -140,17 +140,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     // Cell bounce animation
     private func bounce(_ bounce: Bool) {
-        // Animation settings and allowing user to interact while the animation is running
-        UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 1.0,
-                       options: [.curveEaseOut, .allowUserInteraction],
-                       animations: {
-                        // Scale in and out
-                        self.transform = bounce ? CGAffineTransform(scaleX: 0.95, y: 0.95) :
-                            CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
-                       }, completion: nil)
+        self.transform = bounce ? CGAffineTransform(scaleX: 0.95, y: 0.95) : CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
     }
 
     private func setUpConstraints() {
