@@ -18,6 +18,12 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     private lazy var unitsSettingsCell = UnitsSettingsCell(colorThemeComponent: colorThemeComponent)
     private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
+    private lazy var appIconSettingsCell: AppIconSettingsCell = {
+        let testImage = UIImage(named: "AppIcon")!
+        
+        return AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
+                                   appIconsData: Array.init(repeating: testImage, count: 10))
+    }()
     
     private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)
 
@@ -57,7 +63,10 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
                                                  cells: [unitsSettingsCell,
                                                          colorThemeSettingsCell])
         
-        mainView.settingsSections?.append(appSettingsSection)
+        let appIconSection = SettingsSection(title: "APP ICON",
+                                                 cells: [appIconSettingsCell])
+        
+        mainView.settingsSections? = [appSettingsSection, appIconSection]
     }
     
     override func viewWillAppear(_ animated: Bool) {

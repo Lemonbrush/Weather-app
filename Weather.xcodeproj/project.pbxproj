@@ -81,6 +81,8 @@
 		DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
 		DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */; };
 		DD608F42273DA15300C9DE96 /* DegreeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F41273DA15300C9DE96 /* DegreeLabel.swift */; };
+		DD608F4627414A6E00C9DE96 /* AppIconSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */; };
+		DD608F4827414D1300C9DE96 /* AppIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */; };
 		DD94D553272075BD00A8A600 /* ColorThemeModelStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94D552272075BD00A8A600 /* ColorThemeModelStructs.swift */; };
 		DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5826EA887300DD5FAC /* AddCityView.swift */; };
 		DDAE0B5B26ED092600DD5FAC /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5A26ED092600DD5FAC /* HourlyForecastView.swift */; };
@@ -163,6 +165,8 @@
 		DD55457926E4CA6A005DB276 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuView+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		DD608F41273DA15300C9DE96 /* DegreeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeLabel.swift; sourceTree = "<group>"; };
+		DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSettingsCell.swift; sourceTree = "<group>"; };
+		DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD94D552272075BD00A8A600 /* ColorThemeModelStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModelStructs.swift; sourceTree = "<group>"; };
 		DDAE0B5826EA887300DD5FAC /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
 		DDAE0B5A26ED092600DD5FAC /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 		DD2A874326FD01DE002AC36C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DD608F4427414A2C00C9DE96 /* App icon */,
 				DD2A874426FD01F3002AC36C /* App settings */,
 				DD2A875D26FE3DEF002AC36C /* Protocols */,
 			);
@@ -622,6 +627,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD608F4427414A2C00C9DE96 /* App icon */ = {
+			isa = PBXGroup;
+			children = (
+				DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */,
+				DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */,
+			);
+			path = "App icon";
+			sourceTree = "<group>";
+		};
 		DDAE0B5426EA881B00DD5FAC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,6 +875,7 @@
 				707011002675648800B1B0F4 /* WeeklyForecastCell.swift in Sources */,
 				7017AAC7261B242400953C5B /* MainMenuTableViewCell.swift in Sources */,
 				DD2A874A26FD0339002AC36C /* SettingsView.swift in Sources */,
+				DD608F4827414D1300C9DE96 /* AppIconCollectionViewCell.swift in Sources */,
 				DD42149926EFDE1F00BD4C4F /* City+CoreDataClass.swift in Sources */,
 				DD42155A26F1515300BD4C4F /* CitiesModel.xcdatamodeld in Sources */,
 				DD2A875C26FE3D7F002AC36C /* SettingsCellTappableProtocol.swift in Sources */,
@@ -874,6 +889,7 @@
 				DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */,
 				DD2A876B26FE6800002AC36C /* ColorThemeManager.swift in Sources */,
 				DDAE0B6326ED0B1500DD5FAC /* CityDetailViewController.swift in Sources */,
+				DD608F4627414A6E00C9DE96 /* AppIconSettingsCell.swift in Sources */,
 				DDAE0B5B26ED092600DD5FAC /* HourlyForecastView.swift in Sources */,
 				70E7E1EA262712A100187412 /* FadeTransitionAnimator.swift in Sources */,
 				DD2A875A26FE395D002AC36C /* ColorThemeSettingsView.swift in Sources */,
