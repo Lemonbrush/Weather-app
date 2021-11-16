@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol AppIconSettingsCellDelegate: AnyObject {
+    func getCurrentAppIconPosition() -> Int
+    func changeAppIcon(_ num: Int)
+}
+
 class AppIconSettingsCell: UITableViewCell {
+    
+    // MARK: - Functions
+    
+    weak var delegate: AppIconSettingsCellDelegate?
     
     // MARK: - Private properties
     

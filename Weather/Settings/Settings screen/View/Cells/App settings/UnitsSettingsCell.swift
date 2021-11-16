@@ -64,7 +64,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
         self.colorThemeComponent = colorThemeComponent
         super.init(style: .default, reuseIdentifier: nil)
         
-        switch UserDefaultsManager.getUnitData() {
+        switch UserDefaultsManager.UnitData.get() {
         case K.UserDefaults.metric:
             unitSwitch.selectedSegmentIndex = 0
         case K.UserDefaults.imperial:
