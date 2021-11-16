@@ -25,7 +25,7 @@ struct NetworkManager {
         let lat = city.latitude
         let lon = city.longitude
         let appid = K.Network.apiKey
-        let units = UserDefaultsManager.getUnitData() ?? "metric"
+        let units = UserDefaultsManager.UnitData.get() ?? "metric"
         let minutely = "minutely"
 
         let urlString = "\(baseURL)lat=\(lat)&lon=\(lon)&appid=\(appid)&units=\(units)&exclude=\(minutely)"

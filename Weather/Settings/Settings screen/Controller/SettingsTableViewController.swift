@@ -58,6 +58,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         
         unitsSettingsCell.delegate = self
         colorThemeSettingsCell.delegate = self
+        appIconSettingsCell.delegate = self
         
         let appSettingsSection = SettingsSection(title: "APP",
                                                  cells: [unitsSettingsCell,
@@ -99,9 +100,9 @@ extension SettingsViewController: UnitSwitchCellDelegate {
     func unitSwitchToggled(_ value: Int) {
         switch value {
         case 0:
-            UserDefaultsManager.setUnitData(with: K.UserDefaults.metric)
+            UserDefaultsManager.UnitData.set(with: K.UserDefaults.metric)
         case 1:
-            UserDefaultsManager.setUnitData(with: K.UserDefaults.imperial)
+            UserDefaultsManager.UnitData.set(with: K.UserDefaults.imperial)
         default:
             break
         }
@@ -119,5 +120,15 @@ extension SettingsViewController: ColorThemeSettingsCellDelegste {
             colorThemeSettingsViewController.reloadingViews.append(safeMainMenuDelegate)
         }
         navigationController?.pushViewController(colorThemeSettingsViewController, animated: true)
+    }
+}
+
+extension SettingsViewController: AppIconSettingsCellDelegate {
+    func getCurrentAppIconPosition() -> Int {
+        return UserDefaultsManager.AppIcon.get()
+    }
+    
+    func changeAppIcon(_ num: Int) {
+        UserDefaultsManager.AppIcon.set(with: num)
     }
 }
