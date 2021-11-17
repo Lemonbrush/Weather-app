@@ -20,9 +20,9 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
     private lazy var appIconSettingsCell: AppIconSettingsCell = {
         let testImage = UIImage(named: "AppIcon")!
-        
         return AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
-                                   appIconsData: Array.init(repeating: testImage, count: 10))
+                                   appIconsData: Array.init(repeating: testImage, count: 10),
+                                   chosenIconNum: getCurrentAppIconPosition())
     }()
     
     private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)

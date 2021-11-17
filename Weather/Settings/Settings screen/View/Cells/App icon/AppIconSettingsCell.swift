@@ -34,14 +34,18 @@ class AppIconSettingsCell: UITableViewCell {
         return collectionView
     }()
     
+    private var selectedCellNum: Int
+    private var selectedCell: AppIconCollectionViewCell?
+    
     private let colorThemeComponent: ColorThemeProtocol
     private let appIconsData: [UIImage]
 
     // MARK: - Construction
     
-    init(colorThemeComponent: ColorThemeProtocol, appIconsData: [UIImage]) {
+    init(colorThemeComponent: ColorThemeProtocol, appIconsData: [UIImage], chosenIconNum: Int) {
         self.colorThemeComponent = colorThemeComponent
         self.appIconsData = appIconsData
+        self.selectedCellNum = chosenIconNum
         super.init(style: .default, reuseIdentifier: nil)
         
         selectionStyle = .none
@@ -52,8 +56,10 @@ class AppIconSettingsCell: UITableViewCell {
         contentView.addSubview(collectionView)
         
         collectionView.reloadData()
-        
         setupConstraints()
+        
+        collectionView.scrollToItem(at: IndexPath(row: chosenIconNum, section: 0),
+                                    at: [.centeredHorizontally], animated: false)
     }
     
     required init?(coder: NSCoder) {
@@ -83,6 +89,10 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         cell.prepareForReuse()
+        if indexPath.row == selectedCellNum {
+            cell.selectCell(true)
+            selectedCell = cell
+        }
         
         cell.iconImage.image = appIconsData[indexPath.row]
         
@@ -93,7 +103,13 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         guard let cell = collectionView.cellForItem(at: indexPath) as? AppIconCollectionViewCell else {
             return
         }
+        
+        selectedCell?.selectCell(false)
         cell.selectCell(true)
+        selectedCell = cell
+        selectedCellNum = indexPath.row
+        
+        delegate?.changeAppIcon(indexPath.row)
     }
     
     // Space insets

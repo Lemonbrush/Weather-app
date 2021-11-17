@@ -14,7 +14,7 @@ class AppIconCollectionViewCell: UICollectionViewCell {
     var iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 15
         imageView.layer.borderWidth = 1
         return imageView
     }()
@@ -36,8 +36,8 @@ class AppIconCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     
     func selectCell(_ select: Bool) {
-        iconImage.layer.borderColor = select ? UIColor.gray.cgColor : UIColor.lightGray.cgColor
-        iconImage.backgroundColor = select ? .red : .clear
+        iconImage.layer.borderColor = select ? UIColor.black.cgColor : UIColor.lightGray.cgColor
+        iconImage.layer.borderWidth = select ? 2 : 1
     }
     
     override func prepareForReuse() {
