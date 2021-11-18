@@ -83,6 +83,11 @@
 		DD608F42273DA15300C9DE96 /* DegreeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F41273DA15300C9DE96 /* DegreeLabel.swift */; };
 		DD608F4627414A6E00C9DE96 /* AppIconSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */; };
 		DD608F4827414D1300C9DE96 /* AppIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */; };
+		DD608F4C2746B2FD00C9DE96 /* whiteSunAppIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD608F4A2746B2FD00C9DE96 /* whiteSunAppIcon@3x.png */; };
+		DD608F4D2746B2FD00C9DE96 /* whiteSunAppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD608F4B2746B2FD00C9DE96 /* whiteSunAppIcon@2x.png */; };
+		DD608F502746B47600C9DE96 /* darkWhiteCloudAppIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD608F4E2746B47600C9DE96 /* darkWhiteCloudAppIcon@3x.png */; };
+		DD608F512746B47600C9DE96 /* darkWhiteCloudAppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD608F4F2746B47600C9DE96 /* darkWhiteCloudAppIcon@2x.png */; };
+		DD608F542746B66E00C9DE96 /* AppIconManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F532746B66E00C9DE96 /* AppIconManger.swift */; };
 		DD94D553272075BD00A8A600 /* ColorThemeModelStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94D552272075BD00A8A600 /* ColorThemeModelStructs.swift */; };
 		DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5826EA887300DD5FAC /* AddCityView.swift */; };
 		DDAE0B5B26ED092600DD5FAC /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B5A26ED092600DD5FAC /* HourlyForecastView.swift */; };
@@ -167,6 +172,11 @@
 		DD608F41273DA15300C9DE96 /* DegreeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeLabel.swift; sourceTree = "<group>"; };
 		DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSettingsCell.swift; sourceTree = "<group>"; };
 		DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD608F4A2746B2FD00C9DE96 /* whiteSunAppIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteSunAppIcon@3x.png"; sourceTree = "<group>"; };
+		DD608F4B2746B2FD00C9DE96 /* whiteSunAppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteSunAppIcon@2x.png"; sourceTree = "<group>"; };
+		DD608F4E2746B47600C9DE96 /* darkWhiteCloudAppIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkWhiteCloudAppIcon@3x.png"; sourceTree = "<group>"; };
+		DD608F4F2746B47600C9DE96 /* darkWhiteCloudAppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkWhiteCloudAppIcon@2x.png"; sourceTree = "<group>"; };
+		DD608F532746B66E00C9DE96 /* AppIconManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManger.swift; sourceTree = "<group>"; };
 		DD94D552272075BD00A8A600 /* ColorThemeModelStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModelStructs.swift; sourceTree = "<group>"; };
 		DDAE0B5826EA887300DD5FAC /* AddCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityView.swift; sourceTree = "<group>"; };
 		DDAE0B5A26ED092600DD5FAC /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 		7001F8BF26334E7B00E5E593 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
+				DD608F522746B65800C9DE96 /* App Icon Manager */,
 				DDB4A627270B646F00CE9FFB /* App components */,
 				DD55272926FBC9FD0098A8B2 /* Constants */,
 				DD55272326FBACAE0098A8B2 /* Design Manager */,
@@ -227,6 +238,7 @@
 		7001F8C22633525C00E5E593 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD608F492746B2D100C9DE96 /* App Icons */,
 				7017AABA261B191200953C5B /* Info.plist */,
 				DD42148D26EFB3D500BD4C4F /* CitiesModel.xcdatamodeld */,
 				DD42149626EFDDE100BD4C4F /* Entities */,
@@ -636,6 +648,25 @@
 			path = "App icon";
 			sourceTree = "<group>";
 		};
+		DD608F492746B2D100C9DE96 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				DD608F4B2746B2FD00C9DE96 /* whiteSunAppIcon@2x.png */,
+				DD608F4F2746B47600C9DE96 /* darkWhiteCloudAppIcon@2x.png */,
+				DD608F4E2746B47600C9DE96 /* darkWhiteCloudAppIcon@3x.png */,
+				DD608F4A2746B2FD00C9DE96 /* whiteSunAppIcon@3x.png */,
+			);
+			path = "App Icons";
+			sourceTree = "<group>";
+		};
+		DD608F522746B65800C9DE96 /* App Icon Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DD608F532746B66E00C9DE96 /* AppIconManger.swift */,
+			);
+			path = "App Icon Manager";
+			sourceTree = "<group>";
+		};
 		DDAE0B5426EA881B00DD5FAC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,8 +857,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7017AAB9261B191200953C5B /* LaunchScreen.storyboard in Resources */,
+				DD608F4D2746B2FD00C9DE96 /* whiteSunAppIcon@2x.png in Resources */,
 				DDDDF3D827149F8F00F8F6C3 /* ColorThemes.json in Resources */,
+				DD608F512746B47600C9DE96 /* darkWhiteCloudAppIcon@2x.png in Resources */,
+				DD608F502746B47600C9DE96 /* darkWhiteCloudAppIcon@3x.png in Resources */,
 				7017AAB6261B191200953C5B /* Assets.xcassets in Resources */,
+				DD608F4C2746B2FD00C9DE96 /* whiteSunAppIcon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +908,7 @@
 				DD55272726FBC5070098A8B2 /* ConditionImageConfigurator.swift in Sources */,
 				704173CD2656852A001B1335 /* LoadingCell.swift in Sources */,
 				707011002675648800B1B0F4 /* WeeklyForecastCell.swift in Sources */,
+				DD608F542746B66E00C9DE96 /* AppIconManger.swift in Sources */,
 				7017AAC7261B242400953C5B /* MainMenuTableViewCell.swift in Sources */,
 				DD2A874A26FD0339002AC36C /* SettingsView.swift in Sources */,
 				DD608F4827414D1300C9DE96 /* AppIconCollectionViewCell.swift in Sources */,

@@ -130,5 +130,6 @@ extension SettingsViewController: AppIconSettingsCellDelegate {
     
     func changeAppIcon(_ num: Int) {
         UserDefaultsManager.AppIcon.set(with: num)
+        AppIconManager().setIcon(.darkWhiteCloudAppIcon)
     }
 }
