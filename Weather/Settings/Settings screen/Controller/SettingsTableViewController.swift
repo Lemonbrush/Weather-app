@@ -21,7 +21,9 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     private lazy var appIconSettingsCell: AppIconSettingsCell = {
         let testImage = UIImage(named: "AppIcon")!
         return AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
-                                   appIconsData: Array.init(repeating: testImage, count: 10),
+                                   appIconsData: [.classic,
+                                                  .darkWhiteCloudAppIcon,
+                                                  .whiteSunAppIcon],
                                    chosenIconNum: getCurrentAppIconPosition())
     }()
     
@@ -128,8 +130,8 @@ extension SettingsViewController: AppIconSettingsCellDelegate {
         return UserDefaultsManager.AppIcon.get()
     }
     
-    func changeAppIcon(_ num: Int) {
+    func changeAppIcon(_ appIconModel: BMAppIcon, _ num: Int) {
         UserDefaultsManager.AppIcon.set(with: num)
-        AppIconManager().setIcon(.darkWhiteCloudAppIcon)
+        AppIconManager().setIcon(appIconModel)
     }
 }

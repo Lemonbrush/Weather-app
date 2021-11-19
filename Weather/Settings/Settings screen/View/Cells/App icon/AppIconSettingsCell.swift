@@ -9,7 +9,7 @@ import UIKit
 
 protocol AppIconSettingsCellDelegate: AnyObject {
     func getCurrentAppIconPosition() -> Int
-    func changeAppIcon(_ num: Int)
+    func changeAppIcon(_ appIconModel: BMAppIcon, _ num: Int)
 }
 
 class AppIconSettingsCell: UITableViewCell {
@@ -38,11 +38,13 @@ class AppIconSettingsCell: UITableViewCell {
     private var selectedCell: AppIconCollectionViewCell?
     
     private let colorThemeComponent: ColorThemeProtocol
-    private let appIconsData: [UIImage]
+    private let appIconsData: [BMAppIcon]
 
     // MARK: - Construction
     
-    init(colorThemeComponent: ColorThemeProtocol, appIconsData: [UIImage], chosenIconNum: Int) {
+    init(colorThemeComponent: ColorThemeProtocol,
+         appIconsData: [BMAppIcon],
+         chosenIconNum: Int) {
         self.colorThemeComponent = colorThemeComponent
         self.appIconsData = appIconsData
         self.selectedCellNum = chosenIconNum
@@ -88,13 +90,18 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
         
+        let settingsColors = colorThemeComponent.colorTheme.settingsScreen
+        
+        cell.selectedBorderColor = settingsColors.temperatureSwitchColor.cgColor
+        cell.deSelectedBorderColor = settingsColors.backgroundColor.cgColor
+        
         cell.prepareForReuse()
         if indexPath.row == selectedCellNum {
             cell.selectCell(true)
             selectedCell = cell
         }
         
-        cell.iconImage.image = appIconsData[indexPath.row]
+        cell.iconImage.image = appIconsData[indexPath.row].preview
         
         return cell
     }
@@ -109,7 +116,7 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         selectedCell = cell
         selectedCellNum = indexPath.row
         
-        delegate?.changeAppIcon(indexPath.row)
+        delegate?.changeAppIcon(appIconsData[indexPath.row], indexPath.row)
     }
     
     // Space insets

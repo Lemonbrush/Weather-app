@@ -18,9 +18,20 @@ enum BMAppIcon: CaseIterable {
         case .classic:
             return nil
         case .darkWhiteCloudAppIcon:
-            return "cloud"
+            return "cloudNight"
         case .whiteSunAppIcon:
-            return "sun"
+            return "sunSet"
+        }
+    }
+    
+    var preview: UIImage? {
+        switch self {
+        case .classic:
+            return UIImage(named: "AppIcon")
+        case .darkWhiteCloudAppIcon:
+            return UIImage(named: "darkWhiteCloudAppIcon@3x.png")
+        case .whiteSunAppIcon:
+            return UIImage(named: "whiteSunAppIcon@3x.png")
         }
     }
 }

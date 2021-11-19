@@ -16,8 +16,12 @@ class AppIconCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 15
         imageView.layer.borderWidth = 1
+        imageView.clipsToBounds = true
         return imageView
     }()
+    
+    var selectedBorderColor: CGColor = UIColor.black.cgColor
+    var deSelectedBorderColor: CGColor = UIColor.lightGray.cgColor
     
     // MARK: - Constructions
     
@@ -36,7 +40,7 @@ class AppIconCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     
     func selectCell(_ select: Bool) {
-        iconImage.layer.borderColor = select ? UIColor.black.cgColor : UIColor.lightGray.cgColor
+        iconImage.layer.borderColor = select ? selectedBorderColor : deSelectedBorderColor
         iconImage.layer.borderWidth = select ? 2 : 1
     }
     
