@@ -12,7 +12,7 @@ protocol AppIconSettingsCellDelegate: AnyObject {
     func changeAppIcon(_ appIconModel: BMAppIcon, _ num: Int)
 }
 
-class AppIconSettingsCell: UITableViewCell {
+class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     // MARK: - Functions
     
@@ -30,6 +30,8 @@ class AppIconSettingsCell: UITableViewCell {
         collectionView.register(AppIconCollectionViewCell.self, forCellWithReuseIdentifier: "AppIconCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
+        
+        collectionView.backgroundColor = .clear
         
         return collectionView
     }()
@@ -62,10 +64,19 @@ class AppIconSettingsCell: UITableViewCell {
         
         collectionView.scrollToItem(at: IndexPath(row: chosenIconNum, section: 0),
                                     at: [.centeredHorizontally], animated: false)
+        
+        reloadColorTheme()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.cellsBackgroundColor
+        collectionView.reloadData()
     }
     
     // MARK: - Private functions

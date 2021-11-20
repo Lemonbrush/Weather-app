@@ -95,6 +95,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         unitsSettingsCell.reloadColorTheme()
         colorThemeSettingsCell.reloadColorTheme()
         mainView.reloadColorTheme()
+        appIconSettingsCell.reloadColorTheme()
     }
 }
 
