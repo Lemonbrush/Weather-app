@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum BMAppIcon: CaseIterable {
+enum BMAppIcon: Int, CaseIterable {
     case classic,
     darkWhiteCloudAppIcon,
     whiteSunAppIcon

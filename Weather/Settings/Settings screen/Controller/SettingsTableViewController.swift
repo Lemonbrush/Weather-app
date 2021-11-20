@@ -131,8 +131,8 @@ extension SettingsViewController: AppIconSettingsCellDelegate {
         return UserDefaultsManager.AppIcon.get()
     }
     
-    func changeAppIcon(_ appIconModel: BMAppIcon, _ num: Int) {
-        UserDefaultsManager.AppIcon.set(with: num)
+    func changeAppIcon(_ appIconModel: BMAppIcon) {
+        UserDefaultsManager.AppIcon.set(with: appIconModel.rawValue)
         AppIconManager().setIcon(appIconModel)
     }
 }
