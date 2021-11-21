@@ -9,7 +9,7 @@ import UIKit
 
 protocol AppIconSettingsCellDelegate: AnyObject {
     func getCurrentAppIconPosition() -> Int
-    func changeAppIcon(_ appIconModel: BMAppIcon, _ num: Int)
+    func changeAppIcon(_ appIconModel: BMAppIcon)
 }
 
 class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
@@ -127,7 +127,7 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         selectedCell = cell
         selectedCellNum = indexPath.row
         
-        delegate?.changeAppIcon(appIconsData[indexPath.row], indexPath.row)
+        delegate?.changeAppIcon(appIconsData[indexPath.row])
     }
     
     // Space insets
