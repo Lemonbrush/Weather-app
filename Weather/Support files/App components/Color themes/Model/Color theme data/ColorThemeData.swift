@@ -22,6 +22,8 @@ struct SettingsScreen: Codable {
     let cellsBackgroundColor: String
     let labelsColor: String
     let labelsSecondaryColor: String
+    let appIconSelectBorderColor: String
+    let appIconDeselectBorderColor: String
     let temperatureSwitchColor: String
     let colorBoxesColors: [String]
 }

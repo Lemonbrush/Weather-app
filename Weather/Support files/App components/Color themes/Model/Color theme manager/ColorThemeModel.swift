@@ -38,6 +38,8 @@ struct ColorThemeModel {
                                         cellsBackgroundColor: makeColor(hex: settings.cellsBackgroundColor),
                                         labelsColor: makeColor(hex: settings.labelsColor),
                                         labelsSecondaryColor: makeColor(hex: settings.labelsSecondaryColor),
+                                        appIconSelectBorderColor: makeColor(hex: settings.appIconSelectBorderColor),
+                                        appIconDeselectBorderColor: makeColor(hex: settings.appIconDeselectBorderColor),
                                         temperatureSwitchColor: makeColor(hex: settings.temperatureSwitchColor),
                                         colorBoxesColors: colorBoxesColors)
     }
@@ -129,6 +131,8 @@ struct ColorThemeModel {
                                             cellsBackgroundColor: white,
                                             labelsColor: black,
                                             labelsSecondaryColor: black,
+                                            appIconSelectBorderColor: black,
+                                            appIconDeselectBorderColor: white,
                                             temperatureSwitchColor: white,
                                             colorBoxesColors: Array.init(repeating: white, count: 4))
         let defaultCells = Cells(isShadowVisible: true,

@@ -109,6 +109,8 @@ struct SettingsScreenColorTheme {
     let cellsBackgroundColor: UIColor
     let labelsColor: UIColor
     let labelsSecondaryColor: UIColor
+    let appIconSelectBorderColor: UIColor
+    let appIconDeselectBorderColor: UIColor
     let temperatureSwitchColor: UIColor
     let colorBoxesColors: [UIColor]
 }

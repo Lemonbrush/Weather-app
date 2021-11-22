@@ -103,8 +103,8 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         
         let settingsColors = colorThemeComponent.colorTheme.settingsScreen
         
-        cell.selectedBorderColor = settingsColors.temperatureSwitchColor.cgColor
-        cell.deSelectedBorderColor = settingsColors.backgroundColor.cgColor
+        cell.selectedBorderColor = settingsColors.appIconSelectBorderColor.cgColor
+        cell.deSelectedBorderColor = settingsColors.appIconDeselectBorderColor.cgColor
         
         cell.prepareForReuse()
         if indexPath.row == selectedCellNum {

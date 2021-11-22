@@ -15,7 +15,6 @@ class AppIconCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 15
-        imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -41,7 +40,7 @@ class AppIconCollectionViewCell: UICollectionViewCell {
     
     func selectCell(_ select: Bool) {
         iconImage.layer.borderColor = select ? selectedBorderColor : deSelectedBorderColor
-        iconImage.layer.borderWidth = select ? 2 : 1
+        iconImage.layer.borderWidth = select ? 3 : 2
     }
     
     override func prepareForReuse() {
