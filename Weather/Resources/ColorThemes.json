@@ -6,6 +6,8 @@
       "cellsBackgroundColor": "#ffffff",
       "labelsColor": "#3c374a",
       "labelsSecondaryColor": "#3c374a",
+      "appIconSelectBorderColor": "#5BB7FC",
+      "appIconDeselectBorderColor": "#EFEEF4",
       "temperatureSwitchColor": "#5BB7FC",
       "colorBoxesColors": [
         "#ffffff",
@@ -182,6 +184,8 @@
       "cellsBackgroundColor": "#343436",
       "labelsColor": "#fe8c08",
       "labelsSecondaryColor": "#ffffff",
+      "appIconSelectBorderColor": "#EFEEF4",
+      "appIconDeselectBorderColor": "#29292b",
       "temperatureSwitchColor": "#fe8c08",
       "colorBoxesColors": [
         "#fe8c08",
@@ -356,6 +360,8 @@
       "cellsBackgroundColor": "#ffffff",
       "labelsColor": "#3c374a",
       "labelsSecondaryColor": "#3c374a",
+      "appIconSelectBorderColor": "#5BB7FC",
+      "appIconDeselectBorderColor": "#EFEEF4",
       "temperatureSwitchColor": "#5BB7FC",
       "colorBoxesColors": [
         "#3141A4",
