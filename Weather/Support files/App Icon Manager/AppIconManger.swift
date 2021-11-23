@@ -10,8 +10,13 @@ import UIKit
 
 enum BMAppIcon: Int, CaseIterable {
     case classic,
-    darkWhiteCloudAppIcon,
-    whiteSunAppIcon
+         darkWhiteCloudAppIcon,
+         whiteSunAppIcon,
+         cornerSun,
+         orangeCloud,
+         moon,
+         yellowSun,
+         blueWhiteCloud
     
     var name: String? {
         switch self {
@@ -21,6 +26,16 @@ enum BMAppIcon: Int, CaseIterable {
             return "cloudNight"
         case .whiteSunAppIcon:
             return "sunSet"
+        case .cornerSun:
+            return "cornerSun"
+        case .orangeCloud:
+            return "orangeCloud"
+        case .moon:
+            return "moon"
+        case .yellowSun:
+            return "yellowSun"
+        case .blueWhiteCloud:
+            return "blueWhiteCloud"
         }
     }
     
@@ -32,6 +47,16 @@ enum BMAppIcon: Int, CaseIterable {
             return UIImage(named: "darkWhiteCloudAppIcon@3x.png")
         case .whiteSunAppIcon:
             return UIImage(named: "whiteSunAppIcon@3x.png")
+        case .cornerSun:
+            return UIImage(named: "cornerSun@3x.png")
+        case .orangeCloud:
+            return UIImage(named: "orangeCloud@3x.png")
+        case .moon:
+            return UIImage(named: "moon@3x.png")
+        case .yellowSun:
+            return UIImage(named: "yellowSun@3x.png")
+        case .blueWhiteCloud:
+            return UIImage(named: "blueWhiteCloud@3x.png")
         }
     }
 }

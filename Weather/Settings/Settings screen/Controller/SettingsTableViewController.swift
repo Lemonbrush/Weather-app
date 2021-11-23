@@ -23,7 +23,12 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         return AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
                                    appIconsData: [.classic,
                                                   .darkWhiteCloudAppIcon,
-                                                  .whiteSunAppIcon],
+                                                  .whiteSunAppIcon,
+                                                  .cornerSun,
+                                                  .orangeCloud,
+                                                  .moon,
+                                                  .yellowSun,
+                                                  .blueWhiteCloud],
                                    chosenIconNum: getCurrentAppIconPosition())
     }()
     
