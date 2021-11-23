@@ -24,6 +24,41 @@
 					<string>whiteSunAppIcon</string>
 				</array>
 			</dict>
+			<key>cornerSun</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>cornerSun</string>
+				</array>
+			</dict>
+			<key>orangeCloud</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>orangeCloud</string>
+				</array>
+			</dict>
+			<key>moon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>moon</string>
+				</array>
+			</dict>
+			<key>yellowSun</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>yellowSun</string>
+				</array>
+			</dict>
+			<key>blueWhiteCloud</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>blueWhiteCloud</string>
+				</array>
+			</dict>
 		</dict>
 		<key>UINewsstandIcon</key>
 		<dict>
