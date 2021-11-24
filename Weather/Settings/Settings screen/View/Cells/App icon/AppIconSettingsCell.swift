@@ -24,6 +24,9 @@ class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = CGSize(width: 70, height: 70)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 20
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         layout.shouldInvalidateLayout(forBoundsChange: CGRect())
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -128,18 +131,5 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
         selectedCellNum = indexPath.row
         
         delegate?.changeAppIcon(appIconsData[indexPath.row])
-    }
-    
-    // Space insets
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
     }
 }
