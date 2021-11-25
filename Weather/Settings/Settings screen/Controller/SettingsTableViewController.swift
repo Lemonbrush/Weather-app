@@ -18,19 +18,17 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     private lazy var unitsSettingsCell = UnitsSettingsCell(colorThemeComponent: colorThemeComponent)
     private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
-    private lazy var appIconSettingsCell: AppIconSettingsCell = {
-        let testImage = UIImage(named: "AppIcon")!
-        return AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
-                                   appIconsData: [.classic,
-                                                  .darkWhiteCloudAppIcon,
-                                                  .whiteSunAppIcon,
-                                                  .cornerSun,
-                                                  .orangeCloud,
-                                                  .moon,
-                                                  .yellowSun,
-                                                  .blueWhiteCloud],
-                                   chosenIconNum: getCurrentAppIconPosition())
-    }()
+    private lazy var appIconSettingsCell = AppIconSettingsCell(colorThemeComponent: colorThemeComponent,
+                                                               appIconsData: [.classic,
+                                                                              .darkWhiteCloudAppIcon,
+                                                                              .whiteSunAppIcon,
+                                                                              .cornerSun,
+                                                                              .orangeCloud,
+                                                                              .moon,
+                                                                              .yellowSun,
+                                                                              .blueWhiteCloud],
+                                                               chosenIconNum: getCurrentAppIconPosition())
+    private lazy var telegramChatSupportCell = TelegramChatSupportCell(colorThemeComponent: colorThemeComponent)
     
     private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)
 
@@ -66,6 +64,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         unitsSettingsCell.delegate = self
         colorThemeSettingsCell.delegate = self
         appIconSettingsCell.delegate = self
+        telegramChatSupportCell.delegate = self
         
         let appSettingsSection = SettingsSection(title: "APP",
                                                  cells: [unitsSettingsCell,
@@ -74,7 +73,12 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         let appIconSection = SettingsSection(title: "APP ICON",
                                                  cells: [appIconSettingsCell])
         
-        mainView.settingsSections? = [appSettingsSection, appIconSection]
+        let supportSection = SettingsSection(title: "SUPPORT",
+                                             cells: [telegramChatSupportCell])
+        
+        mainView.settingsSections? = [appSettingsSection,
+                                      appIconSection,
+                                      supportSection]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +105,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         colorThemeSettingsCell.reloadColorTheme()
         mainView.reloadColorTheme()
         appIconSettingsCell.reloadColorTheme()
+        telegramChatSupportCell.reloadColorTheme()
     }
 }
 
@@ -139,5 +144,15 @@ extension SettingsViewController: AppIconSettingsCellDelegate {
     func changeAppIcon(_ appIconModel: BMAppIcon) {
         UserDefaultsManager.AppIcon.set(with: appIconModel.rawValue)
         AppIconManager().setIcon(appIconModel)
+    }
+}
+
+extension SettingsViewController: TelegramChatSupportDelegate {
+    func moveToTelegramChat() {
+        if let safeUrl = URL.init(string: "https://t.me/climaWeather"), UIApplication.shared.canOpenURL(safeUrl) {
+            UIApplication.shared.open(safeUrl)
+        } else if let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807"), UIApplication.shared.canOpenURL(urlAppStore)  {
+            UIApplication.shared.open(urlAppStore)
+        }
     }
 }
