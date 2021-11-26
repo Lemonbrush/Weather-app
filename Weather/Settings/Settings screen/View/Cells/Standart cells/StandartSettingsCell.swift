@@ -61,8 +61,8 @@ class StandartSettingsCell: UITableViewCell {
     // MARK: - Private functions
     
     func setupConstraints() {
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20).isActive = true
     }

@@ -92,9 +92,9 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     func setupConstraints() {
         mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                      constant: 10).isActive = true
+                                                      constant: 20).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                         constant: -10).isActive = true
+                                                         constant: -20).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                           constant: 20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,

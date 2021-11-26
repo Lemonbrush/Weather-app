@@ -73,8 +73,8 @@ class ColorThemeCell: UITableViewCell {
     // MARK: - Private functions
     
     private func setupConstraints() {
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         mainStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }

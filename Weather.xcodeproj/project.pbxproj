@@ -37,6 +37,7 @@
 		DD2A877126FF0FF0002AC36C /* ColorThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A877026FF0FF0002AC36C /* ColorThemeCell.swift */; };
 		DD3C299A274FAAEF00453ABF /* TelegramChatSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3C2999274FAAEF00453ABF /* TelegramChatSupportCell.swift */; };
 		DD3C299C274FAE3500453ABF /* StandartSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3C299B274FAE3500453ABF /* StandartSettingsCell.swift */; };
+		DD3C299F27510CBF00453ABF /* EmailMeSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3C299E27510CBF00453ABF /* EmailMeSupportCell.swift */; };
 		DD42149126EFB7D100BD4C4F /* WeatherCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */; };
 		DD42149926EFDE1F00BD4C4F /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */; };
 		DD42149A26EFDE1F00BD4C4F /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149826EFDE1F00BD4C4F /* City+CoreDataProperties.swift */; };
@@ -162,6 +163,7 @@
 		DD2A877026FF0FF0002AC36C /* ColorThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeCell.swift; sourceTree = "<group>"; };
 		DD3C2999274FAAEF00453ABF /* TelegramChatSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramChatSupportCell.swift; sourceTree = "<group>"; };
 		DD3C299B274FAE3500453ABF /* StandartSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartSettingsCell.swift; sourceTree = "<group>"; };
+		DD3C299E27510CBF00453ABF /* EmailMeSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailMeSupportCell.swift; sourceTree = "<group>"; };
 		DD42148E26EFB3D500BD4C4F /* CitiesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CitiesModel.xcdatamodel; sourceTree = "<group>"; };
 		DD42149026EFB7D100BD4C4F /* WeatherCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoreDataManager.swift; sourceTree = "<group>"; };
 		DD42149726EFDE1F00BD4C4F /* City+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "City+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 			isa = PBXGroup;
 			children = (
 				DD3C2999274FAAEF00453ABF /* TelegramChatSupportCell.swift */,
+				DD3C299E27510CBF00453ABF /* EmailMeSupportCell.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */,
 				705BB8CF261EFB8300D658C4 /* WeatherModel.swift in Sources */,
 				DD94D553272075BD00A8A600 /* ColorThemeModelStructs.swift in Sources */,
+				DD3C299F27510CBF00453ABF /* EmailMeSupportCell.swift in Sources */,
 				7070112F267FDDD200B1B0F4 /* UserDefaultsManager.swift in Sources */,
 				705BB8D2261EFC3D00D658C4 /* WeatherData.swift in Sources */,
 				DD608F42273DA15300C9DE96 /* DegreeLabel.swift in Sources */,
