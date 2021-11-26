@@ -108,9 +108,9 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     func setupConstraints() {
         // TemperatureCell
         temperatureCellStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                      constant: 10).isActive = true
+                                                      constant: 20).isActive = true
         temperatureCellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                         constant: -10).isActive = true
+                                                         constant: -20).isActive = true
         temperatureCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                           constant: 20).isActive = true
         temperatureCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,

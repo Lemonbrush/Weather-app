@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 struct SettingsSection {
     var title: String?
@@ -29,6 +30,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
                                                                               .blueWhiteCloud],
                                                                chosenIconNum: getCurrentAppIconPosition())
     private lazy var telegramChatSupportCell = TelegramChatSupportCell(colorThemeComponent: colorThemeComponent)
+    private lazy var emailMeSupportCell = EmailMeSupportCell(colorThemeComponent: colorThemeComponent)
     
     private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)
 
@@ -65,6 +67,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         colorThemeSettingsCell.delegate = self
         appIconSettingsCell.delegate = self
         telegramChatSupportCell.delegate = self
+        emailMeSupportCell.delegate = self
         
         let appSettingsSection = SettingsSection(title: "APP",
                                                  cells: [unitsSettingsCell,
@@ -74,7 +77,8 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
                                                  cells: [appIconSettingsCell])
         
         let supportSection = SettingsSection(title: "SUPPORT",
-                                             cells: [telegramChatSupportCell])
+                                             cells: [telegramChatSupportCell,
+                                                     emailMeSupportCell])
         
         mainView.settingsSections? = [appSettingsSection,
                                       appIconSection,
@@ -106,6 +110,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         mainView.reloadColorTheme()
         appIconSettingsCell.reloadColorTheme()
         telegramChatSupportCell.reloadColorTheme()
+        emailMeSupportCell.reloadColorTheme()
     }
 }
 
@@ -154,5 +159,48 @@ extension SettingsViewController: TelegramChatSupportDelegate {
         } else if let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807"), UIApplication.shared.canOpenURL(urlAppStore)  {
             UIApplication.shared.open(urlAppStore)
         }
+    }
+}
+
+extension SettingsViewController: EmailMeAndMailComposeSupportCellDelegate {
+    func triggerEmailForm() {
+        guard MFMailComposeViewController.canSendMail() else {
+                let alert = UIAlertController(title: "Send email",
+                                              message: "Mail app unavailable",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+                
+            }
+            
+            let email = MFMailComposeViewController()
+            email.mailComposeDelegate = self
+            email.setSubject("New post on my site!")
+            email.setToRecipients(["some@body.abc", "another@recipient.xyz", "john@thefamous.doe"])
+            email.setPreferredSendingEmailAddress("gabriel@serialcoder.dev")
+            email.setMessageBody("This is a sample text!", isHTML: false)
+            
+            self.present(email, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                                          didFinishWith result: MFMailComposeResult,
+                                          error: Error?) {
+        guard error == nil else {
+            print(error!.localizedDescription)
+            controller.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        switch result {
+            case .sent: print("The email was sent")
+            case .saved: print("The email was saved")
+            case .cancelled: print("The email was cancelled")
+            case .failed: print("Failed to send email")
+            @unknown default: break
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
     }
 }

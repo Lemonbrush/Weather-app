@@ -97,7 +97,6 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     func showSettingsVC() {
         let destinationVC = SettingsViewController(colorThemeComponent: appComponents)
         destinationVC.mainMenuDelegate = self
-        destinationVC.colorThemeComponent = appComponents
 
         let navigationController = UINavigationController(rootViewController: destinationVC)
         present(navigationController, animated: true, completion: nil)
