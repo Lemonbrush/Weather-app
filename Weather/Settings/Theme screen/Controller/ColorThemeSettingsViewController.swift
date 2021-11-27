@@ -11,7 +11,7 @@ protocol ReloadColorThemeProtocol {
     func reloadColorTheme()
 }
 
-class ColorThemeSettingsViewController: UIViewController {
+class ColorThemeSettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
@@ -46,6 +46,10 @@ class ColorThemeSettingsViewController: UIViewController {
     }
     
     // MARK: - Public properties
+    
+    func reloadColorTheme() {
+        mainView.reloadColorTheme()
+    }
     
     func refreshCurrentColorThemeSettingsCell(colorThemePosition: Int) {
         colorThemeComponent.colorTheme = UserDefaultsManager.ColorTheme.getColorTheme(colorThemePosition)
