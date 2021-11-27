@@ -10,7 +10,7 @@ import MessageUI
 
 typealias EmailMeAndMailComposeSupportCellDelegate = EmailMeSupportCellDelegate & MFMailComposeViewControllerDelegate
 
-protocol EmailMeSupportCellDelegate {
+protocol EmailMeSupportCellDelegate: AnyObject {
     func triggerEmailForm()
 }
 

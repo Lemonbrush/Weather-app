@@ -36,6 +36,7 @@ class ColorThemeSettingsView: UIView, ReloadColorThemeProtocol {
         
         super.init(frame: .zero)
         
+        reloadColorTheme()
         refreshCheckedColorTmeme()
         
         tableView.delegate = self
@@ -68,8 +69,6 @@ class ColorThemeSettingsView: UIView, ReloadColorThemeProtocol {
     
     private func refreshCheckedColorTmeme() {
         chosenColorThemePosition = UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()
-        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
-        tableView.reloadData()
     }
 }
 
