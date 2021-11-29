@@ -19,7 +19,7 @@ class MainMenuView: UIView {
 
     private lazy var currentDateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.text = "date label"
         return label
     }()
@@ -105,7 +105,7 @@ class MainMenuView: UIView {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE d MMMM"
-        let result = dateFormatter.string(from: currentDate)
+        let result = dateFormatter.string(from: currentDate).uppercased()
         currentDateLabel.text = result
 
         tableView.dataSource = self
