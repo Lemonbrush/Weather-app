@@ -8,7 +8,18 @@
 import MapKit
 import UIKit
 
+protocol AddCityViewDelegate {
+    var searchCompleter: MKLocalSearchCompleter { get }
+    func dismissView()
+    func didChoseCity(title: String, subtitle: String)
+    func addCurrentLocationWeather()
+}
+
 class AddCityView: UIView {
+    
+    // MARK: - Properties
+
+    var delegate: AddCityViewDelegate?
 
     // MARK: - Private properties
 
@@ -40,7 +51,8 @@ class AddCityView: UIView {
         textField.textColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
         textField.tintColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
         
-        var placeHolder = NSAttributedString(string: "City", attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.labelsColor])
+        var placeHolder = NSAttributedString(string: "City",
+                                             attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.labelsColor])
         textField.attributedPlaceholder = placeHolder
         
         return textField
@@ -50,25 +62,33 @@ class AddCityView: UIView {
         let button = UIButton()
         button.accessibilityIdentifier = "AddCityCancelButton"
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
         button.setTitleColor(colorThemeComponent.colorTheme.addCityScreen.cancelButtonColor, for: .normal)
         button.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return button
     }()
-
+    
+    private lazy var currentLocationButton: UIButton = {
+        let button = UIButton()
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        button.setImage(UIImage(systemName: "location.circle", withConfiguration: imageConfiguration), for: .normal)
+        button.addTarget(self, action: #selector(currentLocationButtonPressed), for: .touchUpInside)
+        button.tintColor = colorThemeComponent.colorTheme.addCityScreen.cancelButtonColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private var searchStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    private var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    private var mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
     private lazy var handleView: UIView = {
@@ -78,17 +98,27 @@ class AddCityView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private lazy var searchFieldDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.tableFooterView = nil
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 
-    private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
     
     private let colorThemeComponent: ColorThemeProtocol
-
-    // private var welcomeImage: UIImageView!
-
-    // MARK: - Public properties
-
-    var viewControllerOwner: AddCityViewController?
 
     // MARK: - Lifecycle
 
@@ -98,17 +128,20 @@ class AddCityView: UIView {
 
         backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
         
-        searchCompleter.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
 
+        searchStackView.addArrangedSubview(currentLocationButton)
+        searchStackView.addArrangedSubview(searchFieldDivider)
         searchStackView.addArrangedSubview(textField)
-        searchStackView.addArrangedSubview(cancelButton)
+        
+        mainStackView.addArrangedSubview(searchStackView)
+        mainStackView.addArrangedSubview(cancelButton)
 
         addSubview(headerBackgroundView)
         headerBackgroundView.addSubview(handleView)
         headerBackgroundView.addSubview(searchBackgroundView)
-        searchBackgroundView.addSubview(searchStackView)
+        searchBackgroundView.addSubview(mainStackView)
         addSubview(tableView)
 
         setUpConstraints()
@@ -117,11 +150,20 @@ class AddCityView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Functions
+    
+    func updateSearchResults(_ results: [MKLocalSearchCompletion]) {
+        searchResults = results
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 
     // MARK: - Private functions
 
     private func setUpConstraints() {
-
         // Header background view
         headerBackgroundView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         headerBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -135,29 +177,16 @@ class AddCityView: UIView {
 
         // Serach background
         searchBackgroundView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: 60).isActive = true
-        searchBackgroundView.leadingAnchor.constraint(equalTo:
-                                                        headerBackgroundView.leadingAnchor,
-                                                      constant: 20).isActive = true
-        searchBackgroundView.trailingAnchor.constraint(equalTo:
-                                                        headerBackgroundView.trailingAnchor,
-                                                       constant: -20).isActive = true
-        searchBackgroundView.bottomAnchor.constraint(equalTo:
-                                                        headerBackgroundView.bottomAnchor,
-                                                     constant: -15).isActive = true
+        searchBackgroundView.leadingAnchor.constraint(equalTo: headerBackgroundView.leadingAnchor, constant: 20).isActive = true
+        searchBackgroundView.trailingAnchor.constraint(equalTo: headerBackgroundView.trailingAnchor, constant: -20).isActive = true
+        searchBackgroundView.bottomAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -15).isActive = true
 
         // Search stack
-        searchStackView.topAnchor.constraint(equalTo:
-                                                searchBackgroundView.topAnchor,
-                                             constant: 5).isActive = true
-        searchStackView.bottomAnchor.constraint(equalTo:
-                                                    searchBackgroundView.bottomAnchor,
-                                                constant: -5).isActive = true
-        searchStackView.leadingAnchor.constraint(equalTo:
-                                                    searchBackgroundView.leadingAnchor,
-                                                 constant: 20).isActive = true
-        searchStackView.trailingAnchor.constraint(equalTo:
-                                                    searchBackgroundView.trailingAnchor,
-                                                  constant: -20).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: 5).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: searchBackgroundView.bottomAnchor,  constant: -5).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: searchBackgroundView.leadingAnchor, constant: 20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: searchBackgroundView.trailingAnchor, constant: -20).isActive = true
+        mainStackView.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
         cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
@@ -166,51 +195,37 @@ class AddCityView: UIView {
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
+        // CurrentLocation button
+        currentLocationButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        currentLocationButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        // Divider
+        searchFieldDivider.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        searchFieldDivider.widthAnchor.constraint(equalToConstant: 2).isActive = true
     }
 
     // MARK: - Actions
+    
+    @objc func currentLocationButtonPressed() {
+        delegate?.addCurrentLocationWeather()
+    }
 
     @objc func cancelButtonPressed() {
-        viewControllerOwner?.dismiss(animated: true, completion: nil)
+        delegate?.dismissView()
     }
 
     @objc func textFieldDidChange() {
-
-        // change searchCompleter depends on searchBar's text
-        guard let query = textField.text else { return }
-
-        searchCompleter.queryFragment = query
-        searchCompleter.resultTypes = .address
-    }
-}
-
-extension AddCityView: MKLocalSearchCompleterDelegate {
-
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        // get result, transform it to our needs and fill the dataSource
-        self.searchResults = completer.results
-        self.searchResults = completer.results.filter { result in
-            // Getting rid of any results that contain digits
-            if result.title.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
-            if result.subtitle.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
-            return true
+        guard let query = textField.text, let safeDelegate = delegate else {
+            return
         }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // TODO: handle completer error
-        print(error.localizedDescription)
+        safeDelegate.searchCompleter.queryFragment = query
+        safeDelegate.searchCompleter.resultTypes = .address
     }
 }
 
 extension AddCityView: UITableViewDelegate, UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Hide welcome image if there is something to show
-        // welcomeImage.isHidden = searchResults.count != 0 ? true : false
         return searchResults.count
     }
 
@@ -232,22 +247,8 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let result = searchResults[indexPath.row]
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = result.title + " " + result.subtitle
-
-        MKLocalSearch(request: searchRequest).start { response, error in
-            guard let response = response else {
-                self.viewControllerOwner?.didFinishedWithError(error: error)
-                return
-            }
-
-            // Save chosen city
-            if let item = response.mapItems.first {
-                let itemCoordinate = item.placemark.coordinate
-                self.viewControllerOwner?.didChoseCity(item.name ?? "---", lat: itemCoordinate.latitude,
-                                                       long: itemCoordinate.longitude)
-            }
-        }
+        let selectedCity = searchResults[indexPath.row]
+        delegate?.didChoseCity(title: selectedCity.title,
+                               subtitle: selectedCity.subtitle)
     }
 }
