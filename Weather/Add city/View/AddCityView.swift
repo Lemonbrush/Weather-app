@@ -25,7 +25,7 @@ class AddCityView: UIView {
 
     private lazy var headerBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -110,8 +110,7 @@ class AddCityView: UIView {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        tableView.tableFooterView = nil
-        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 40))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -130,6 +129,8 @@ class AddCityView: UIView {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        addSubview(tableView)
 
         searchStackView.addArrangedSubview(currentLocationButton)
         searchStackView.addArrangedSubview(searchFieldDivider)
@@ -142,7 +143,10 @@ class AddCityView: UIView {
         headerBackgroundView.addSubview(handleView)
         headerBackgroundView.addSubview(searchBackgroundView)
         searchBackgroundView.addSubview(mainStackView)
-        addSubview(tableView)
+        
+        let keyboardGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardGesture.cancelsTouchesInView = false
+        addGestureRecognizer(keyboardGesture)
 
         setUpConstraints()
     }
@@ -179,7 +183,7 @@ class AddCityView: UIView {
         searchBackgroundView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: 60).isActive = true
         searchBackgroundView.leadingAnchor.constraint(equalTo: headerBackgroundView.leadingAnchor, constant: 20).isActive = true
         searchBackgroundView.trailingAnchor.constraint(equalTo: headerBackgroundView.trailingAnchor, constant: -20).isActive = true
-        searchBackgroundView.bottomAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -15).isActive = true
+        searchBackgroundView.bottomAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: 0).isActive = true
 
         // Search stack
         mainStackView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: 5).isActive = true
@@ -191,7 +195,8 @@ class AddCityView: UIView {
         cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
         // TableView
-        tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor).isActive = true
+        //tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -20).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -222,6 +227,10 @@ class AddCityView: UIView {
         safeDelegate.searchCompleter.queryFragment = query
         safeDelegate.searchCompleter.resultTypes = .address
     }
+    
+    @objc func dismissKeyboard() {
+        endEditing(true)
+    }
 }
 
 extension AddCityView: UITableViewDelegate, UITableViewDataSource {
@@ -250,5 +259,22 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
         let selectedCity = searchResults[indexPath.row]
         delegate?.didChoseCity(title: selectedCity.title,
                                subtitle: selectedCity.subtitle)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dismissKeyboard()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(translationX: 0, y: -40)
+                   UIView.animate(
+                    withDuration: 0.2,
+                    delay: 0.01 * Double(indexPath.row),
+                    usingSpringWithDamping: 0.6,
+                    initialSpringVelocity: 0.1,
+                    options: [.curveEaseInOut],
+                    animations: {
+                        cell.transform = CGAffineTransform(translationX: 0, y: 0)
+                    })
     }
 }

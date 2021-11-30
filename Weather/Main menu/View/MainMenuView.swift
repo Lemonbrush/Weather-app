@@ -87,7 +87,7 @@ class MainMenuView: UIView {
         tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.CellIdentifier.cityCell)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
+        //tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
 
         return tableView
