@@ -12,7 +12,7 @@ protocol AddCityViewDelegate {
     var searchCompleter: MKLocalSearchCompleter { get }
     func dismissView()
     func didChoseCity(title: String, subtitle: String)
-    func addCurrentLocationWeather()
+    func tryToAddCurrentLocation()
 }
 
 class AddCityView: UIView {
@@ -213,7 +213,7 @@ class AddCityView: UIView {
     // MARK: - Actions
     
     @objc func currentLocationButtonPressed() {
-        delegate?.addCurrentLocationWeather()
+        delegate?.tryToAddCurrentLocation()
     }
 
     @objc func cancelButtonPressed() {
