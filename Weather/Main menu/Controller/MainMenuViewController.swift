@@ -69,6 +69,10 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        if displayWeather.isEmpty {
+            showAddCityVC()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
