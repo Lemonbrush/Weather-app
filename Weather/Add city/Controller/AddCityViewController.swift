@@ -29,11 +29,14 @@ class AddCityViewController: UIViewController {
     
     private var currentLocation = Location(latitude: 0, longitude: 0)
     private var isCurrentLocationUpdated = false
+    
+    private var savedCityTitles: [String]
 
     // MARK: - Lifecycle
     
-    init(colorThemeComponent: ColorThemeProtocol) {
+    init(colorThemeComponent: ColorThemeProtocol, savedCityTitles: [String]) {
         self.colorThemeComponent = colorThemeComponent
+        self.savedCityTitles = savedCityTitles
         super.init(nibName: nil, bundle: nil)
         
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -86,10 +89,9 @@ extension AddCityViewController: AddCityViewDelegate {
                 return
             }
 
-            // Save chosen city
             if let item = response.mapItems.first {
                 let itemCoordinate = item.placemark.coordinate
-                self.addCity(title: item.name ?? "---",
+                self.addCity(title: title,
                              lat: itemCoordinate.latitude,
                              long: itemCoordinate.longitude)
             }
@@ -120,8 +122,16 @@ extension AddCityViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         let searchResults = completer.results.filter { result in
             // Getting rid of any results that contain digits
-            if result.title.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
-            if result.subtitle.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil { return false }
+            if result.title.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil || (result.subtitle.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil) {
+                return false
+            }
+            
+            for savedCityTitle in savedCityTitles {
+                if result.title == savedCityTitle {
+                    return false
+                }
+            }
+            
             return true
         }
         
