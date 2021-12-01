@@ -10,8 +10,6 @@ import UIKit
 extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Hide welcome image if there is something to show
-        // welcomeImage.isHidden = viewController?.displayWeather.count != 0 ? true : false
         return viewController?.displayWeather.count ?? 0
     }
 
@@ -47,7 +45,6 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
         cell.layoutIfNeeded() // Eliminate layouts left from loading cells
         
-
         return cell
 
     }
@@ -116,8 +113,7 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
 
     // Setting up cell appearance while dragging and dropping
     func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        // Haptic effect
-        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+        let selectionFeedbackGenerator = UISelectionFeedbackGenerator() // Haptic effect
         selectionFeedbackGenerator.selectionChanged()
 
         return getDragAndDropCellAppearance(tableView, forCellAt: indexPath)
