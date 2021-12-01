@@ -52,7 +52,7 @@ class AddCityView: UIView {
         textField.tintColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
         
         var placeHolder = NSAttributedString(string: "City",
-                                             attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.labelsColor])
+                                             attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.placeholderColor])
         textField.attributedPlaceholder = placeHolder
         
         return textField
@@ -195,7 +195,6 @@ class AddCityView: UIView {
         cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
         // TableView
-        //tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -20).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
