@@ -34,6 +34,7 @@ struct AddCity: Codable {
     let backgroundColor: String
     let searchFieldBackground: String
     let cancelButtonColor: String
+    let placeholderColor: String
     let handleColor: String
     let isShadowVisible: Bool
     let labelsColor: String
