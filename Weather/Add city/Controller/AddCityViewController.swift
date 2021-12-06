@@ -29,8 +29,9 @@ class AddCityViewController: UIViewController {
     
     private var currentLocation = Location(latitude: 0, longitude: 0)
     private var isCurrentLocationUpdated = false
-    
+
     private var savedCityTitles: [String]
+    private var shouldAddNewLocation = false
 
     // MARK: - Lifecycle
     
@@ -43,9 +44,6 @@ class AddCityViewController: UIViewController {
         
         locationManager.delegate = self
         searchCompleter.delegate = self
-        
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
     }
@@ -71,6 +69,16 @@ class AddCityViewController: UIViewController {
         dismiss(animated: true) {
             self.delegate?.didAddNewCity()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 }
 
@@ -98,10 +106,19 @@ extension AddCityViewController: AddCityViewDelegate {
         }
     }
     
+    func tryToAddCurrentLocation() {
+        locationManager.requestAlwaysAuthorization()
+        shouldAddNewLocation = true
+        
+        addCurrentLocationWeather()
+    }
+    
     func addCurrentLocationWeather() {
         guard isCurrentLocationUpdated else {
             return
         }
+        
+        shouldAddNewLocation = false
         
         let location = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
@@ -153,5 +170,9 @@ extension AddCityViewController: CLLocationManagerDelegate {
         currentLocation = Location(latitude: locationValue.latitude,
                                    longitude: locationValue.longitude)
         isCurrentLocationUpdated = true
+        
+        if shouldAddNewLocation {
+            addCurrentLocationWeather()
+        }
     }
 }

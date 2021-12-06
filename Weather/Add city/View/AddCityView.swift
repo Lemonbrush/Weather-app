@@ -12,7 +12,7 @@ protocol AddCityViewDelegate {
     var searchCompleter: MKLocalSearchCompleter { get }
     func dismissView()
     func didChoseCity(title: String, subtitle: String)
-    func addCurrentLocationWeather()
+    func tryToAddCurrentLocation()
 }
 
 class AddCityView: UIView {
@@ -52,7 +52,7 @@ class AddCityView: UIView {
         textField.tintColor = colorThemeComponent.colorTheme.addCityScreen.labelsColor
         
         var placeHolder = NSAttributedString(string: "City",
-                                             attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.labelsColor])
+                                             attributes: [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.addCityScreen.placeholderColor])
         textField.attributedPlaceholder = placeHolder
         
         return textField
@@ -80,7 +80,6 @@ class AddCityView: UIView {
     private var searchStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
-        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -102,6 +101,12 @@ class AddCityView: UIView {
     private lazy var searchFieldDivider: UIView = {
         let view = UIView()
         view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.backgroundColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var searchFieldSpaceView: UIView = {
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -134,6 +139,7 @@ class AddCityView: UIView {
 
         searchStackView.addArrangedSubview(currentLocationButton)
         searchStackView.addArrangedSubview(searchFieldDivider)
+        searchStackView.addArrangedSubview(searchFieldSpaceView)
         searchStackView.addArrangedSubview(textField)
         
         mainStackView.addArrangedSubview(searchStackView)
@@ -188,22 +194,25 @@ class AddCityView: UIView {
         // Search stack
         mainStackView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: 5).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: searchBackgroundView.bottomAnchor,  constant: -5).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: searchBackgroundView.leadingAnchor, constant: 20).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: searchBackgroundView.leadingAnchor, constant: 0).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: searchBackgroundView.trailingAnchor, constant: -20).isActive = true
-        mainStackView.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
-        cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        searchFieldSpaceView.widthAnchor.constraint(equalToConstant: 20).isActive = true
 
         // TableView
-        //tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -20).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
         // CurrentLocation button
-        currentLocationButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        currentLocationButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        currentLocationButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        currentLocationButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        textField.leadingAnchor.constraint(equalTo: searchFieldDivider.trailingAnchor, constant: 20).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         // Divider
         searchFieldDivider.heightAnchor.constraint(equalToConstant: 35).isActive = true
@@ -213,7 +222,7 @@ class AddCityView: UIView {
     // MARK: - Actions
     
     @objc func currentLocationButtonPressed() {
-        delegate?.addCurrentLocationWeather()
+        delegate?.tryToAddCurrentLocation()
     }
 
     @objc func cancelButtonPressed() {
