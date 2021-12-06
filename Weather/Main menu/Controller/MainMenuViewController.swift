@@ -85,7 +85,8 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // Navigation functions
     func showAddCityVC() {
-        let destinationVC = AddCityViewController(colorThemeComponent: appComponents)
+        let savedCityTitles = displayWeather.compactMap { $0?.cityName }
+        let destinationVC = AddCityViewController(colorThemeComponent: appComponents, savedCityTitles: savedCityTitles)
         destinationVC.delegate = self
         present(destinationVC, animated: true, completion: nil)
     }
