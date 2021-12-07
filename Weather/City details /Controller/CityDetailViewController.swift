@@ -278,7 +278,7 @@ class CityDetailViewController: UIViewController {
         let imageBuilder = ConditionImageBuilder()
         conditionImage.image = imageBuilder
             .erase(.onlyWhite)
-            .build(systemImageName: conditionImageName)
+            .build(systemImageName: conditionImageName, pointConfiguration: 20)
             .buildColor(imageColor)
             .content
 

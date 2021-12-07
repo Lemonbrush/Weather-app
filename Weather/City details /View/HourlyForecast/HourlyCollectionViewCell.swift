@@ -20,7 +20,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
 
     var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

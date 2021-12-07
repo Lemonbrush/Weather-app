@@ -91,7 +91,7 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
         let imageBuilder = ConditionImageBuilder()
         let newImage = imageBuilder
             .erase(.defaultColors)
-            .build(systemImageName: WeatherModel.getConditionNameBy(conditionId: conditionId))
+            .build(systemImageName: WeatherModel.getConditionNameBy(conditionId: conditionId), pointConfiguration: 20)
             .content
         
         _content.conditionImage.image = newImage

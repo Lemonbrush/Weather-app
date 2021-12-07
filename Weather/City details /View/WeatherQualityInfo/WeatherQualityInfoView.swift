@@ -29,7 +29,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var uvIndexItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.sunMaxFill)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.sunMaxFill,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.uvIndex
         qualityItem.titleLabel.text = "UV index"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
@@ -40,7 +41,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var humidityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.drop)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.drop,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.humidity
         qualityItem.titleLabel.text = "Humidity"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
@@ -51,7 +53,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var cloudinessItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.cloudFill)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.cloudFill,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.cloudiness
         qualityItem.titleLabel.text = "Cloudiness"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
@@ -62,7 +65,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var windItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.wind)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.wind,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.wind
         qualityItem.titleLabel.text = "Wind"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
@@ -73,7 +77,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var pressureItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.arrowDownLine)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.arrowDownLine,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.pressure
         qualityItem.titleLabel.text = "Pressure"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor
@@ -84,7 +89,8 @@ class WeatherQualityInfoView: UIView {
 
     private lazy var visibilityItemView: WeatherQualityItemView = {
         let qualityItem = WeatherQualityItemView()
-        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.eyeFill)?.withRenderingMode(.alwaysTemplate)
+        qualityItem.imageView.image = UIImage(systemName: K.systemImageName.eyeFill,
+                                              withConfiguration: DesignManager.standartImageConfiguration)?.withRenderingMode(.alwaysTemplate)
         qualityItem.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.visibility
         qualityItem.titleLabel.text = "Visibility"
         qualityItem.titleLabel.textColor = colorThemeComponent.colorTheme.cityDetails.weatherQuality.labelsColor

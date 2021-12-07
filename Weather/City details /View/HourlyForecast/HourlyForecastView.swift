@@ -90,7 +90,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             let imageBuilder = ConditionImageBuilder()
             cell.imageView.image = imageBuilder
                 .erase(.defaultColors)
-                .build(systemImageName: cellImageName)
+                .build(systemImageName: cellImageName, pointConfiguration: 20)
                 .buildColor(iconColor)
                 .content
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
@@ -103,14 +103,17 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             dateFormatter.dateFormat = "h:mm a"
 
             cell.topLabel.text = dateFormatter.string(from: date)
-
+            let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25)
+            
             switch sunStete.description {
             case .sunset:
                 cell.bottomLabel.text = "Sunset"
-                cell.imageView.image = UIImage(systemName: K.systemImageName.sunsetFill)
+                cell.imageView.image = UIImage(systemName: K.systemImageName.sunsetFill,
+                                               withConfiguration: imageConfiguration) ?? UIImage()
             case .sunrise:
                 cell.bottomLabel.text = "Sunrise"
-                cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill)
+                cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill,
+                                               withConfiguration: imageConfiguration) ?? UIImage()
             }
 
             cell.imageView.tintColor = colorThemeComponent.colorTheme.cityDetails.iconColors.sun

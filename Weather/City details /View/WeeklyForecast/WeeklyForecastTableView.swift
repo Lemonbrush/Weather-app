@@ -122,7 +122,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         let iconColor = colorThemeComponent.colorTheme.getDetailReviewIconColorByConditionId(conditionId)
         cell.conditionImage.image = conditionImageBuilder
             .erase(.defaultColors)
-            .build(systemImageName: cellImageName)
+            .build(systemImageName: cellImageName, pointConfiguration: 20)
             .buildColor(iconColor)
             .content
         return cell
