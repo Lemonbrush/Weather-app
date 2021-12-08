@@ -13,7 +13,7 @@ class WeeklyForecastCell: UITableViewCell {
 
     var monthLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -21,14 +21,14 @@ class WeeklyForecastCell: UITableViewCell {
     var temperatureLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         return label
     }()
 
     var minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         label.textColor = .gray
         return label
     }()
@@ -56,7 +56,7 @@ class WeeklyForecastCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.axis = .horizontal
-        stackView.spacing = 18
+        stackView.spacing = Grid.pt16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -94,7 +94,7 @@ class WeeklyForecastCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        monthLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        monthLabel.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .regular)
         monthLabel.textColor = .black
         temperatureLabel.textColor = .black
         minTemperatureLabel.textColor = .black
@@ -104,21 +104,19 @@ class WeeklyForecastCell: UITableViewCell {
 
     private func setupConstraints() {
         // Main stack
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt12).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt12).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Grid.pt12).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt12).isActive = true
 
         // Condition image
-        // conditionImage.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        // conditionImage.heightAnchor.constraint(equalToConstant: 25).isActive = true
         conditionImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         conditionImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
         // Degree stackView
-        degreeStackView.widthAnchor.constraint(equalToConstant: 85).isActive = true
+        degreeStackView.widthAnchor.constraint(equalToConstant: Grid.pt84).isActive = true
 
         // MonthLabel
-        monthLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 95).isActive = true
+        monthLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: Grid.pt96).isActive = true
     }
 }

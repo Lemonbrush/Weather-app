@@ -33,7 +33,7 @@ class AddCityView: UIView {
     private lazy var searchBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = Grid.pt12
         view.layer.cornerCurve = CALayerCornerCurve.continuous
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -93,7 +93,7 @@ class AddCityView: UIView {
     private lazy var handleView: UIView = {
         let view = UIView()
         view.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.handleColor
-        view.layer.cornerRadius = 5 / 2
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -115,7 +115,7 @@ class AddCityView: UIView {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 40))
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: Grid.pt40))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -181,41 +181,41 @@ class AddCityView: UIView {
 
         // Handle
         handleView.widthAnchor.constraint(equalTo: headerBackgroundView.widthAnchor, multiplier: 0.3).isActive = true
-        handleView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        handleView.heightAnchor.constraint(equalToConstant: Grid.pt4).isActive = true
         handleView.centerXAnchor.constraint(equalTo: headerBackgroundView.centerXAnchor).isActive = true
-        handleView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: 10).isActive = true
+        handleView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: Grid.pt8).isActive = true
 
         // Serach background
-        searchBackgroundView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: 60).isActive = true
-        searchBackgroundView.leadingAnchor.constraint(equalTo: headerBackgroundView.leadingAnchor, constant: 20).isActive = true
-        searchBackgroundView.trailingAnchor.constraint(equalTo: headerBackgroundView.trailingAnchor, constant: -20).isActive = true
+        searchBackgroundView.topAnchor.constraint(equalTo: headerBackgroundView.topAnchor, constant: Grid.pt60).isActive = true
+        searchBackgroundView.leadingAnchor.constraint(equalTo: headerBackgroundView.leadingAnchor, constant: Grid.pt20).isActive = true
+        searchBackgroundView.trailingAnchor.constraint(equalTo: headerBackgroundView.trailingAnchor, constant: -Grid.pt20).isActive = true
         searchBackgroundView.bottomAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: 0).isActive = true
 
         // Search stack
-        mainStackView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: 5).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: searchBackgroundView.bottomAnchor,  constant: -5).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: Grid.pt4).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: searchBackgroundView.bottomAnchor,  constant: -Grid.pt4).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: searchBackgroundView.leadingAnchor, constant: 0).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: searchBackgroundView.trailingAnchor, constant: -20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: searchBackgroundView.trailingAnchor, constant: -Grid.pt20).isActive = true
 
-        cancelButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
         
-        searchFieldSpaceView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        searchFieldSpaceView.widthAnchor.constraint(equalToConstant: Grid.pt20).isActive = true
 
         // TableView
-        tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -20).isActive = true
+        tableView.topAnchor.constraint(equalTo: headerBackgroundView.bottomAnchor, constant: -Grid.pt20).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
         // CurrentLocation button
-        currentLocationButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        currentLocationButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        currentLocationButton.heightAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
+        currentLocationButton.widthAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
         
-        textField.leadingAnchor.constraint(equalTo: searchFieldDivider.trailingAnchor, constant: 20).isActive = true
-        textField.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        textField.leadingAnchor.constraint(equalTo: searchFieldDivider.trailingAnchor, constant: Grid.pt20).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
         
         // Divider
-        searchFieldDivider.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        searchFieldDivider.heightAnchor.constraint(equalToConstant: Grid.pt36).isActive = true
         searchFieldDivider.widthAnchor.constraint(equalToConstant: 2).isActive = true
     }
 
@@ -275,7 +275,7 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.transform = CGAffineTransform(translationX: 0, y: -40)
+        cell.transform = CGAffineTransform(translationX: 0, y: -Grid.pt40)
                    UIView.animate(
                     withDuration: 0.2,
                     delay: 0.01 * Double(indexPath.row),

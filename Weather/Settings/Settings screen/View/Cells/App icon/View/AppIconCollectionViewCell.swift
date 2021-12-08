@@ -14,7 +14,7 @@ class AppIconCollectionViewCell: UICollectionViewCell {
     var iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = Grid.pt16
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -55,7 +55,7 @@ class AppIconCollectionViewCell: UICollectionViewCell {
         iconImage.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         iconImage.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
-        let iconImageSize: CGFloat = 70
+        let iconImageSize: CGFloat = Grid.pt72
         iconImage.heightAnchor.constraint(equalToConstant: iconImageSize).isActive = true
         iconImage.widthAnchor.constraint(equalToConstant: iconImageSize).isActive = true
     }

@@ -115,6 +115,7 @@
 		DDAE0B6A26ED56D000DD5FAC /* WeatherQualityItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */; };
 		DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 		DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4A628270B648700CE9FFB /* AppComponents.swift */; };
+		DDB55D6A27610E3200494BFB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6927610E3200494BFB /* Grid.swift */; };
 		DDDDF3D827149F8F00F8F6C3 /* ColorThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */; };
 /* End PBXBuildFile section */
 
@@ -222,6 +223,7 @@
 		DDAE0B6926ED56D000DD5FAC /* WeatherQualityItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherQualityItemView.swift; sourceTree = "<group>"; };
 		DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellBuilder.swift; sourceTree = "<group>"; };
 		DDB4A628270B648700CE9FFB /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
+		DDB55D6927610E3200494BFB /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ColorThemes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -778,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				7001F8CB2635756000E5E593 /* Constants.swift */,
+				DDB55D6927610E3200494BFB /* Grid.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 				DD42149126EFB7D100BD4C4F /* WeatherCoreDataManager.swift in Sources */,
 				DD42149A26EFDE1F00BD4C4F /* City+CoreDataProperties.swift in Sources */,
 				DD55272726FBC5070098A8B2 /* ConditionImageConfigurator.swift in Sources */,
+				DDB55D6A27610E3200494BFB /* Grid.swift in Sources */,
 				704173CD2656852A001B1335 /* LoadingCell.swift in Sources */,
 				707011002675648800B1B0F4 /* WeeklyForecastCell.swift in Sources */,
 				DD608F542746B66E00C9DE96 /* AppIconManger.swift in Sources */,

@@ -76,10 +76,10 @@ class WeeklyForecastTableView: UIView {
         backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
         // TableView
-        tableView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20).isActive = true
+        tableView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: Grid.pt20).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -Grid.pt20).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Grid.pt20).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -Grid.pt20).isActive = true
     }
 }
 
@@ -110,7 +110,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         // Make first cell bold
         if indexPath.row == 0 {
             cell.monthLabel.text = "Today"
-            cell.monthLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            cell.monthLabel.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .semibold)
         }
 
         cell.temperatureLabel.text = String(format: "%.0f°", targetWeather.temp.max)
@@ -122,7 +122,7 @@ extension WeeklyForecastTableView: UITableViewDataSource, UITableViewDelegate {
         let iconColor = colorThemeComponent.colorTheme.getDetailReviewIconColorByConditionId(conditionId)
         cell.conditionImage.image = conditionImageBuilder
             .erase(.defaultColors)
-            .build(systemImageName: cellImageName, pointConfiguration: 20)
+            .build(systemImageName: cellImageName, pointConfiguration: Grid.pt20)
             .buildColor(iconColor)
             .content
         return cell

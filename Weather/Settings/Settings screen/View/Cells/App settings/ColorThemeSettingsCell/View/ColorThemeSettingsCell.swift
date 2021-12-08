@@ -31,7 +31,7 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     private lazy var themeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         label.text = "Theme"
         return label
     }()
@@ -47,7 +47,7 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     private var leftStackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 10
+        stack.spacing = Grid.pt12
         return stack
     }()
     
@@ -92,13 +92,13 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     func setupConstraints() {
         mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                      constant: 20).isActive = true
+                                                      constant: Grid.pt20).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                         constant: -20).isActive = true
+                                                         constant: -Grid.pt20).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                          constant: 20).isActive = true
+                                                          constant: Grid.pt20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                           constant: -20).isActive = true
+                                                           constant: -Grid.pt20).isActive = true
     }
 }
 

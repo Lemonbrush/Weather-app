@@ -19,14 +19,14 @@ class MainMenuView: UIView {
 
     private lazy var currentDateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .medium)
         label.text = "date label"
         return label
     }()
 
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Grid.pt32, weight: .bold)
         label.text = "Today"
         return label
     }()
@@ -62,14 +62,14 @@ class MainMenuView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt4
         return stackView
     }()
 
     private var todayStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = Grid.pt8
         return stackView
     }()
 
@@ -80,14 +80,13 @@ class MainMenuView: UIView {
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         // Space before the first cell
-        tableView.contentInset.top = 10 // Getting rid of any delays between user touch and cell animation
+        tableView.contentInset.top = Grid.pt8 // Getting rid of any delays between user touch and cell animation
         tableView.delaysContentTouches = false // Setting up drag and drop delegates
         tableView.dragInteractionEnabled = true
         tableView.register(LoadingCell.self, forCellReuseIdentifier: K.CellIdentifier.cityLoadingCell)
         tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.CellIdentifier.cityCell)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        //tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
 
         return tableView
@@ -160,22 +159,22 @@ class MainMenuView: UIView {
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
         // TableView header
-        tableViewHeaderView.heightAnchor.constraint(equalToConstant: 85).isActive = true
+        tableViewHeaderView.heightAnchor.constraint(equalToConstant: Grid.pt84).isActive = true
         tableViewHeaderView.widthAnchor.constraint(equalTo: tableView.widthAnchor).isActive = true
 
         // Main stackView
         mainHeaderStackView.leadingAnchor.constraint(equalTo: tableViewHeaderView.leadingAnchor,
-                                                     constant: 15).isActive = true
+                                                     constant: Grid.pt16).isActive = true
 
         let mainHeaderStackViewConstaint = mainHeaderStackView.trailingAnchor.constraint(equalTo: tableViewHeaderView.trailingAnchor,
-                                                                                         constant: -15)
+                                                                                         constant: -Grid.pt16)
         mainHeaderStackViewConstaint.priority = UILayoutPriority(999)
         mainHeaderStackViewConstaint.isActive = true
 
         mainHeaderStackView.bottomAnchor.constraint(equalTo: tableViewHeaderView.bottomAnchor,
-                                                    constant: -5).isActive = true
+                                                    constant: -Grid.pt4).isActive = true
         mainHeaderStackView.topAnchor.constraint(equalTo: tableViewHeaderView.topAnchor,
-                                                 constant: 5).isActive = true
+                                                 constant: Grid.pt4).isActive = true
 
         // Search button
         searchButton.heightAnchor.constraint(equalTo: settingsButton.heightAnchor).isActive = true

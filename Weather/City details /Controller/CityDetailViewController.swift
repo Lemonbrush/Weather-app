@@ -64,7 +64,7 @@ class CityDetailViewController: UIViewController {
     private var degreeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Grid.pt12
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -80,20 +80,20 @@ class CityDetailViewController: UIViewController {
     private var tempLebel: DegreeLabel = {
         let label = DegreeLabel()
         label.accessibilityIdentifier = "CityDetailsMainDegreeLabel"
-        label.font = UIFont.systemFont(ofSize: 90, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Grid.pt92, weight: .medium)
         label.textAlignment = .center
         return label
     }()
 
     private var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Grid.pt32, weight: .medium)
         return label
     }()
 
     private var feelsLikeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Grid.pt20, weight: .medium)
         return label
     }()
 
@@ -126,9 +126,9 @@ class CityDetailViewController: UIViewController {
     }()
 
     // Constraints
-    private let hourlyForecastHeightConstant: CGFloat = 100
-    private var hourlyTopConstant: CGFloat = 8
-    private let springDefaultConstant: CGFloat = 50
+    private let hourlyForecastHeightConstant: CGFloat = Grid.pt100
+    private var hourlyTopConstant: CGFloat = Grid.pt8
+    private let springDefaultConstant: CGFloat = Grid.pt52
 
     private var hourlyHeightConstraint = NSLayoutConstraint()
     private var weeklyTableViewHightConstraint: NSLayoutConstraint = NSLayoutConstraint()
@@ -137,7 +137,7 @@ class CityDetailViewController: UIViewController {
     private var extraContentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 25
+        stackView.spacing = Grid.pt24
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -258,12 +258,13 @@ class CityDetailViewController: UIViewController {
                                               relatedBy: .equal,
                                               toItem: hourlyCollectionView,
                                               attribute: .bottom,
-                                              multiplier: 1, constant: 65)
+                                              multiplier: 1,
+                                              constant: Grid.pt64)
         springConstraint.isActive = true
         extraContentStackView.leadingAnchor.constraint(equalTo: secondScreenPartBackground.leadingAnchor,
-                                                       constant: 20).isActive = true
+                                                       constant: Grid.pt20).isActive = true
         extraContentStackView.trailingAnchor.constraint(equalTo: secondScreenPartBackground.trailingAnchor,
-                                                        constant: -20).isActive = true
+                                                        constant: -Grid.pt20).isActive = true
         extraContentStackView.bottomAnchor.constraint(equalTo: secondScreenPartBackground.bottomAnchor,
                                                       constant: -springDefaultConstant).isActive = true
     }
@@ -278,7 +279,7 @@ class CityDetailViewController: UIViewController {
         let imageBuilder = ConditionImageBuilder()
         conditionImage.image = imageBuilder
             .erase(.onlyWhite)
-            .build(systemImageName: conditionImageName, pointConfiguration: 20)
+            .build(systemImageName: conditionImageName, pointConfiguration: Grid.pt20)
             .buildColor(imageColor)
             .content
 
@@ -337,7 +338,7 @@ extension CityDetailViewController: UIScrollViewDelegate {
 
         // Spring constant will change its value by scrolling to half of its size
         let oldConstant = hourlyTopConstant
-        let newConstant: CGFloat = scrollView.contentOffset.y < hourlyTopConstant / 2 ? springDefaultConstant : 25
+        let newConstant: CGFloat = scrollView.contentOffset.y < hourlyTopConstant / 2 ? springDefaultConstant : Grid.pt24
 
         if oldConstant != newConstant {
             UIView.animate(withDuration: 0.1) {
@@ -366,8 +367,8 @@ extension CityDetailViewController: NetworkManagerDelegate {
 
 extension CityDetailViewController {
     private func setUpConditionImage() {
-        conditionImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        conditionImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        conditionImage.widthAnchor.constraint(equalToConstant: Grid.pt152).isActive = true
+        conditionImage.heightAnchor.constraint(equalToConstant: Grid.pt152).isActive = true
     }
 
     private func setUpWeeklyTableViewHeightConstraint() {
@@ -400,7 +401,7 @@ extension CityDetailViewController {
         topTranslucentBackground.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor).isActive = true
         topTranslucentBackground.heightAnchor.constraint(equalToConstant:
                                                             UIScreen.main.bounds.height - hourlyForecastHeightConstant -
-                                                            hourlyTopConstant - 40).isActive = true
+                                                         hourlyTopConstant - Grid.pt40).isActive = true
     }
 
     private func setUpScrollView() {

@@ -14,7 +14,7 @@ class WeatherQualityItemView: UIView {
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt4
         stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,20 +31,20 @@ class WeatherQualityItemView: UIView {
     var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         return label
     }()
 
     var subTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         return label
     }()
 
     // MARK: - Private properties
 
-    private let imageSizeConstant: CGFloat = 25
+    private let imageSizeConstant: CGFloat = Grid.pt24
 
     // MARK: - Construction
 

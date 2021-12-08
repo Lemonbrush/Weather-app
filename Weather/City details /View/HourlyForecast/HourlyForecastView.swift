@@ -17,7 +17,7 @@ class HourlyForecastView: UIView {
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: 50, height: 100)
+        layout.estimatedItemSize = CGSize(width: Grid.pt52, height: Grid.pt100)
         layout.shouldInvalidateLayout(forBoundsChange: CGRect())
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HourlyCollectionViewCell.self,
@@ -90,7 +90,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             let imageBuilder = ConditionImageBuilder()
             cell.imageView.image = imageBuilder
                 .erase(.defaultColors)
-                .build(systemImageName: cellImageName, pointConfiguration: 20)
+                .build(systemImageName: cellImageName, pointConfiguration: Grid.pt20)
                 .buildColor(iconColor)
                 .content
             cell.bottomLabel.text = String(format: "%.0f°", currentHour.temp)
@@ -103,7 +103,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             dateFormatter.dateFormat = "h:mm a"
 
             cell.topLabel.text = dateFormatter.string(from: date)
-            let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25)
+            let imageConfiguration = UIImage.SymbolConfiguration(pointSize: Grid.pt24)
             
             switch sunStete.description {
             case .sunset:
@@ -126,6 +126,6 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        return UIEdgeInsets(top: 0, left: Grid.pt20, bottom: 0, right: Grid.pt20)
     }
 }

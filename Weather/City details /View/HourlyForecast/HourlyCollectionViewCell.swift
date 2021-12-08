@@ -13,7 +13,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
 
     var topLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .semibold)
         label.textAlignment = .center
         return label
     }()
@@ -27,7 +27,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
 
     var bottomLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .semibold)
         label.textAlignment = .center
         return label
     }()
@@ -38,7 +38,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.alignment = .center
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = Grid.pt12
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -71,19 +71,19 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        let stackViewLeadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5)
+        let stackViewLeadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Grid.pt4)
         stackViewLeadingConstraint.priority = UILayoutPriority(999)
         stackViewLeadingConstraint.isActive = true
         
-        let stackViewTrailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+        let stackViewTrailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt4)
         stackViewTrailingConstraint.priority = UILayoutPriority(999)
         stackViewTrailingConstraint.isActive = true
         
-        let imageViewWidthConstraint = imageView.widthAnchor.constraint(equalToConstant: 25)
+        let imageViewWidthConstraint = imageView.widthAnchor.constraint(equalToConstant: Grid.pt24)
         imageViewWidthConstraint.priority = UILayoutPriority(999)
         imageViewWidthConstraint.isActive = true
         
-        let imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 25)
+        let imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: Grid.pt24)
         imageViewHeightConstraint.priority = UILayoutPriority(999)
         imageViewHeightConstraint.isActive = true
     }

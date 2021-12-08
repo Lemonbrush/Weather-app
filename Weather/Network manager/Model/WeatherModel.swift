@@ -70,7 +70,6 @@ struct WeatherModel {
                     sunStates.remove(at: i)
                 }
             }
-
             // Add weather cell data
             let currentTemp = HourlyDataType.weatherType(currentHour)
             hourlyDataMix.append(currentTemp)
