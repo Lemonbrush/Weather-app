@@ -21,7 +21,7 @@ class ColorThemeCell: UITableViewCell {
     
     private let leftStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt8
         stackView.axis = .vertical
         stackView.alignment = .leading
         return stackView
@@ -41,7 +41,7 @@ class ColorThemeCell: UITableViewCell {
     let subtitle: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         
         return label
     }()
@@ -73,10 +73,10 @@ class ColorThemeCell: UITableViewCell {
     // MARK: - Private functions
     
     private func setupConstraints() {
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
-        mainStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt16).isActive = true
+        mainStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt20).isActive = true
     }
     
     // MARK: - Public functions

@@ -43,7 +43,7 @@ class LoadingCell: UITableViewCell {
 
     private var mainStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 8
+        stackView.spacing = Grid.pt8
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.axis = .horizontal
@@ -53,7 +53,7 @@ class LoadingCell: UITableViewCell {
 
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 8
+        stackView.spacing = Grid.pt8
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
@@ -63,7 +63,7 @@ class LoadingCell: UITableViewCell {
 
     private var rightStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 30
+        stackView.spacing = Grid.pt32
         stackView.alignment = .center
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,15 +117,12 @@ class LoadingCell: UITableViewCell {
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
 
-        // Configuring gradient frame when views calculating
-        // gradient.frame = weatherBackgroundView.bounds < -- Return
-
         DesignManager.setBackgroundStandartShape(layer: gradient)
 
         // Setting up gray lines corners
-        cityLoadView.layer.cornerRadius = 5
-        timeLoadView.layer.cornerRadius = 5
-        degreeLoadView.layer.cornerRadius = 10
+        cityLoadView.layer.cornerRadius = Grid.pt4
+        timeLoadView.layer.cornerRadius = Grid.pt4
+        degreeLoadView.layer.cornerRadius = Grid.pt8
 
         setUpConstraints()
     }
@@ -147,40 +144,40 @@ class LoadingCell: UITableViewCell {
 
     private func setUpConstraints() {
         // Background
-        weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt4).isActive = true
+        weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt4).isActive = true
+        weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Grid.pt16).isActive = true
+        weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt16).isActive = true
 
         // LoadingTitle
-        let cityLoadViewHeightConstraint = cityLoadView.heightAnchor.constraint(equalToConstant: 21)
+        let cityLoadViewHeightConstraint = cityLoadView.heightAnchor.constraint(equalToConstant: Grid.pt20)
         cityLoadViewHeightConstraint.priority = UILayoutPriority(999)
         cityLoadViewHeightConstraint.isActive = true
         
-        let cityLoadViewWidthConstraint = cityLoadView.widthAnchor.constraint(equalToConstant: 100)
+        let cityLoadViewWidthConstraint = cityLoadView.widthAnchor.constraint(equalToConstant: Grid.pt100)
         cityLoadViewWidthConstraint.priority = UILayoutPriority(999)
         cityLoadViewWidthConstraint.isActive = true
 
         // Loading time
-        let timeLoadViewHeightConstraint = timeLoadView.heightAnchor.constraint(equalToConstant: 15)
+        let timeLoadViewHeightConstraint = timeLoadView.heightAnchor.constraint(equalToConstant: Grid.pt16)
         timeLoadViewHeightConstraint.priority = UILayoutPriority(999)
         timeLoadViewHeightConstraint.isActive = true
         
-        let timeLoadViewWidthConstraint = timeLoadView.widthAnchor.constraint(equalToConstant: 60)
+        let timeLoadViewWidthConstraint = timeLoadView.widthAnchor.constraint(equalToConstant: Grid.pt60)
         timeLoadViewWidthConstraint.priority = UILayoutPriority(999)
         timeLoadViewWidthConstraint.isActive = true
 
         // Degree view
-        degreeLoadView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        degreeLoadView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        degreeLoadView.heightAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
+        degreeLoadView.widthAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
 
         // MainStackView
-        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: 10).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: Grid.pt8).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: weatherBackgroundView.bottomAnchor,
-                                              constant: -10).isActive = true
+                                              constant: -Grid.pt8).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: weatherBackgroundView.leadingAnchor,
-                                               constant: 20).isActive = true
+                                               constant: Grid.pt20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: weatherBackgroundView.trailingAnchor,
-                                                constant: -10).isActive = true
+                                                constant: -Grid.pt8).isActive = true
     }
 }

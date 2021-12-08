@@ -13,7 +13,7 @@ class ThemeColorsBlocksView: UIView {
     
     private var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt4
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,16 +45,16 @@ class ThemeColorsBlocksView: UIView {
     }
     
     private func makeColorBlock(color: UIColor) -> UIView {
-        let blockSize: CGFloat = 20
+        let blockSize: CGFloat = Grid.pt20
         let block = UIView()
         block.backgroundColor = color
-        block.layer.cornerRadius = 5
+        block.layer.cornerRadius = Grid.pt4
         block.translatesAutoresizingMaskIntoConstraints = false
        
         block.layer.shadowColor = UIColor.black.cgColor
         block.layer.shadowOpacity = 0.1
-        block.layer.shadowOffset = CGSize(width: 0, height: 3)
-        block.layer.shadowRadius = 7
+        block.layer.shadowOffset = CGSize(width: 0, height: Grid.pt4)
+        block.layer.shadowRadius = Grid.pt8
         
         block.heightAnchor.constraint(equalToConstant: blockSize).isActive = true
         block.widthAnchor.constraint(equalToConstant: blockSize).isActive = true

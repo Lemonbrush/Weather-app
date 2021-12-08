@@ -102,7 +102,7 @@ class WeatherQualityInfoView: UIView {
     // StackViews
     private var mainStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 30
+        stackView.spacing = Grid.pt32
         stackView.distribution = .equalSpacing
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -156,10 +156,10 @@ class WeatherQualityInfoView: UIView {
         backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
         // Main stackView
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt20).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt20).isActive = true
     }
 
     private func makeStackViewItemInfo(image: UIImageView, title: UILabel, subtitle: UILabel) -> UIStackView {
@@ -176,7 +176,7 @@ class WeatherQualityInfoView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 15
+        stackView.spacing = Grid.pt16
         for stack in stackViews {
             stackView.addArrangedSubview(stack)
         }

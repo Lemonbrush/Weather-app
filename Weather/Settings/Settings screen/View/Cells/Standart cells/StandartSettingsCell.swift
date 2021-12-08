@@ -13,7 +13,7 @@ class StandartSettingsCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         label.text = title
         return label
     }()
@@ -30,7 +30,7 @@ class StandartSettingsCell: UITableViewCell {
 
     private var stackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 10
+        stack.spacing = Grid.pt12
         stack.alignment = .leading
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -61,9 +61,9 @@ class StandartSettingsCell: UITableViewCell {
     // MARK: - Private functions
     
     func setupConstraints() {
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20).isActive = true
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Grid.pt20).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Grid.pt20).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Grid.pt20).isActive = true
+        stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -Grid.pt20).isActive = true
     }
 }

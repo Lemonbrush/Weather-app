@@ -23,10 +23,10 @@ class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: 70, height: 70)
-        layout.minimumLineSpacing = 20
-        layout.minimumInteritemSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        layout.estimatedItemSize = CGSize(width: Grid.pt72, height: Grid.pt72)
+        layout.minimumLineSpacing = Grid.pt20
+        layout.minimumInteritemSpacing = Grid.pt20
+        layout.sectionInset = UIEdgeInsets(top: 0, left: Grid.pt20, bottom: 0, right: Grid.pt20)
         layout.shouldInvalidateLayout(forBoundsChange: CGRect())
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -90,7 +90,7 @@ class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
         collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
-        collectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: Grid.pt112).isActive = true
     }
 }
 

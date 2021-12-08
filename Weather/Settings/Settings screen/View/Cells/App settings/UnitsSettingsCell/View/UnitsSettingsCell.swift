@@ -30,7 +30,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
 
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         label.text = "Temperature"
         return label
     }()
@@ -52,7 +52,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     
     private var leftStackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 10
+        stack.spacing = Grid.pt12
         return stack
     }()
     
@@ -82,7 +82,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
         contentView.addSubview(temperatureCellStackView)
         selectionStyle = .none
         
-        unitSwitch.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        unitSwitch.widthAnchor.constraint(equalToConstant: Grid.pt100).isActive = true
         
         reloadColorTheme()
         setupConstraints()
@@ -108,13 +108,13 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     func setupConstraints() {
         // TemperatureCell
         temperatureCellStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                      constant: 20).isActive = true
+                                                      constant: Grid.pt20).isActive = true
         temperatureCellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                         constant: -20).isActive = true
+                                                         constant: -Grid.pt20).isActive = true
         temperatureCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                          constant: 20).isActive = true
+                                                          constant: Grid.pt20).isActive = true
         temperatureCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                           constant: -20).isActive = true
+                                                           constant: -Grid.pt20).isActive = true
     }
     
     // MARK: - Actions

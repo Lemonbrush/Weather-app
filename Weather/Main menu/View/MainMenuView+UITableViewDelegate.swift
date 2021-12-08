@@ -65,7 +65,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
             completionHandler(true)
         }
         
-        let imageSize = 60
+        let imageSize = Grid.pt60
         deleteAction.image = UIGraphicsImageRenderer(size: CGSize(width: imageSize, height: imageSize)).image { _ in
             UIImage(named: K.ImageName.deleteImage)?.draw(in: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
         }
