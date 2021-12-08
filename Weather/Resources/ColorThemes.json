@@ -12,8 +12,7 @@
       "colorBoxesColors": [
         "#ffffff",
         "#5BB7FC",
-        "#f8c957",
-        "#3c374a"
+        "#f8c957"
       ]
     },
     "addCity": {
@@ -524,7 +523,7 @@
         "mainIconColor": "#ffffff",
         "labelsColor": "#ffffff",
         "labelsSecondaryColor": "#ffffff",
-        "ignoreColorInheritance": true
+        "ignoreColorInheritance": false
       },
       "iconColors": {
         "sun": "#f8c957",
@@ -540,6 +539,184 @@
         "cloudiness": "#87CFF2",
         "pressure": "#87CFF2",
         "visibility": "#87CFF2"
+      }
+    }
+  },
+  {
+    "title": "Extra Dark",
+    "settingsScreen": {
+      "backgroundColor": "#000000",
+      "cellsBackgroundColor": "#171717",
+      "labelsColor": "#ffffff",
+      "labelsSecondaryColor": "#ffffff",
+      "appIconSelectBorderColor": "#ffffff",
+      "appIconDeselectBorderColor": "#171717",
+      "temperatureSwitchColor": "#7f7f7f",
+      "colorBoxesColors": [
+        "#ffffff",
+        "#000000",
+        "#b5b5b5"
+      ]
+    },
+    "addCity": {
+      "backgroundColor": "#000000",
+      "searchFieldBackground": "#171717",
+      "cancelButtonColor": "#ffffff",
+      "placeholderColor": "#b5b5b5",
+      "handleColor": "#171717",
+      "isShadowVisible": false,
+      "labelsColor": "#ffffff",
+      "labelsSecondaryColor": "#b5b5b5"
+    },
+    "mainMenu": {
+      "isStatusBarDark": false,
+      "backgroundColor": "#000000",
+      "dateLabelColor": "#b5b5b5",
+      "todayColor": "#ffffff",
+      "settingsIconColor": "#ffffff",
+      "searchButtonColor": "#ffffff",
+      "cells": {
+        "isShadowVisible": false,
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 0.5
+          },
+          "endPoint": {
+            "x": 1,
+            "y": 0.5
+          }
+        },
+        "defaultBackground": "#171717",
+        "defaultLoadingViewsColor": "#373737",
+        "activityViewColor": "#ffffff",
+        "clear_sky": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "few_clouds": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "scattered_clouds": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "broken_clouds": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "shower_rain": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "rain": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "thunderstorm": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "snow": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        },
+        "mist": {
+          "colors": [
+            "#171717"
+          ],
+          "iconColors": "#ffffff",
+          "labelsColor": "#ffffff"
+        }
+      }
+    },
+    "cityDetails": {
+      "isNavBarDark": true,
+      "isStatusBarDark": false,
+      "hourlyForecast": {
+        "backgroundColor": "#000000",
+        "isClearBackground": false,
+        "isShadowVisible": true,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "weeklyForecast": {
+        "backgroundColor": "#171717",
+        "isClearBackground": false,
+        "isShadowVisible": false,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "weatherQuality": {
+        "backgroundColor": "#171717",
+        "isClearBackground": false,
+        "isShadowVisible": false,
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff"
+      },
+      "contentBackground": {
+        "color": "#000000",
+        "isClearBackground": false
+      },
+      "screenBackground": {
+        "colors": [
+          "#000000",
+          "#000000"
+        ],
+        "gradient": {
+          "startPoint": {
+            "x": 0,
+            "y": 1
+          },
+          "endPoint": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        "mainIconColor": "#ffffff",
+        "labelsColor": "#ffffff",
+        "labelsSecondaryColor": "#ffffff",
+        "ignoreColorInheritance": true
+      },
+      "iconColors": {
+        "sun": "#ffffff",
+        "cloud": "#ffffff",
+        "mist": "#ffffff",
+        "snow": "#ffffff",
+        "rain": "#ffffff",
+        "showerRain": "#ffffff",
+        "thunderstorm": "#ffffff",
+        "humidity": "#ffffff",
+        "uvIndex": "#ffffff",
+        "wind": "#ffffff",
+        "cloudiness": "#ffffff",
+        "pressure": "#ffffff",
+        "visibility": "#ffffff"
       }
     }
   }
