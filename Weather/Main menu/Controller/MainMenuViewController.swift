@@ -174,8 +174,14 @@ extension MainMenuViewController: NetworkManagerDelegate {
     }
 
     func didFailWithError(error: Error) {
-        print("Failed with - \(error)")
-        // TODO: handle network disconection
+        let alert = AlertViewBuilder()
+            .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
+            .build(title: "Ok", style: .default, handler: nil)
+            .content
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

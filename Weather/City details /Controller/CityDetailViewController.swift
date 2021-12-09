@@ -182,7 +182,7 @@ class CityDetailViewController: UIViewController {
         scrollContentView.addSubview(topTranslucentBackground)
         
         let backgroundColors = colorThemeComponent.colorTheme.cityDetails.screenBackground
-        let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).labelsColor
+        let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData?.conditionId ?? 0).labelsColor
         let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.labelsColor : currentThemeLabelColor
         tempLebel.textColor = labelColor
         descriptionLabel.textColor = labelColor
@@ -458,7 +458,7 @@ extension CityDetailViewController {
         gradientBackground.endPoint = cityDetails.screenBackground.gradient.endPoint
         
         let backgroundColors = cityDetails.screenBackground
-        let currentWeatherColors = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData!.conditionId).colors
+        let currentWeatherColors = colorThemeComponent.colorTheme.getColorByConditionId(localWeatherData?.conditionId ?? 0).colors
         let uiColors = backgroundColors.ignoreColorInheritance ? backgroundColors.colors : currentWeatherColors
         
         var cgColors: [CGColor] = []
