@@ -116,6 +116,7 @@
 		DDAE0B6C26EE833A00DD5FAC /* MainMenuCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */; };
 		DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4A628270B648700CE9FFB /* AppComponents.swift */; };
 		DDB55D6A27610E3200494BFB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6927610E3200494BFB /* Grid.swift */; };
+		DDB55D6D276263D700494BFB /* AlertViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */; };
 		DDDDF3D827149F8F00F8F6C3 /* ColorThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */; };
 /* End PBXBuildFile section */
 
@@ -224,6 +225,7 @@
 		DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellBuilder.swift; sourceTree = "<group>"; };
 		DDB4A628270B648700CE9FFB /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
 		DDB55D6927610E3200494BFB /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewBuilder.swift; sourceTree = "<group>"; };
 		DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ColorThemes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +266,7 @@
 		7001F8BF26334E7B00E5E593 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
+				DDB55D6B276263BE00494BFB /* AlertViewBuilder */,
 				DD608F522746B65800C9DE96 /* App Icon Manager */,
 				DDB4A627270B646F00CE9FFB /* App components */,
 				DD55272926FBC9FD0098A8B2 /* Constants */,
@@ -939,6 +942,14 @@
 			path = "App components";
 			sourceTree = "<group>";
 		};
+		DDB55D6B276263BE00494BFB /* AlertViewBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */,
+			);
+			path = AlertViewBuilder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1115,6 +1126,7 @@
 				7001F8CC2635756000E5E593 /* Constants.swift in Sources */,
 				DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */,
 				705BB8CF261EFB8300D658C4 /* WeatherModel.swift in Sources */,
+				DDB55D6D276263D700494BFB /* AlertViewBuilder.swift in Sources */,
 				DD94D553272075BD00A8A600 /* ColorThemeModelStructs.swift in Sources */,
 				DD3C29AF275254A500453ABF /* AppIconSettingsCellController.swift in Sources */,
 				DD3C299F27510CBF00453ABF /* EmailMeSupportCell.swift in Sources */,
