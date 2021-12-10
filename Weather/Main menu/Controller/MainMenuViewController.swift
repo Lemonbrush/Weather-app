@@ -153,7 +153,22 @@ extension MainMenuViewController: AddCityDelegate {
     }
 
     func didFailAddingNewCityWithError(error: Error?) {
-        // TODO: handle new city adding failure
+        let errorMessage: String
+        
+        if let strongError = error {
+            errorMessage = strongError.localizedDescription
+        } else {
+            errorMessage = "Something went wrong :<"
+        }
+        
+        let alert = AlertViewBuilder()
+            .build(title: "Oops", message: errorMessage, preferredStyle: .alert)
+            .build(title: "Ok", style: .default, handler: nil)
+            .content
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

@@ -156,8 +156,14 @@ extension AddCityViewController: MKLocalSearchCompleterDelegate {
     }
 
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // TODO: handle completer error
-        print(error.localizedDescription)
+        let alert = AlertViewBuilder()
+            .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
+            .build(title: "Ok", style: .default, handler: nil)
+            .content
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
