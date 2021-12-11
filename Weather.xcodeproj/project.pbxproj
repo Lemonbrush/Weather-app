@@ -117,6 +117,7 @@
 		DDB4A629270B648700CE9FFB /* AppComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4A628270B648700CE9FFB /* AppComponents.swift */; };
 		DDB55D6A27610E3200494BFB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6927610E3200494BFB /* Grid.swift */; };
 		DDB55D6D276263D700494BFB /* AlertViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */; };
+		DDB55D702764BDC500494BFB /* CityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D6F2764BDC500494BFB /* CityDetailView.swift */; };
 		DDDDF3D827149F8F00F8F6C3 /* ColorThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +227,7 @@
 		DDB4A628270B648700CE9FFB /* AppComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponents.swift; sourceTree = "<group>"; };
 		DDB55D6927610E3200494BFB /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewBuilder.swift; sourceTree = "<group>"; };
+		DDB55D6F2764BDC500494BFB /* CityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailView.swift; sourceTree = "<group>"; };
 		DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ColorThemes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -883,10 +885,11 @@
 		DDAE0B5D26ED097200DD5FAC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DD608F41273DA15300C9DE96 /* DegreeLabel.swift */,
+				DDB55D6E2764BD2800494BFB /* ValidatedLabel */,
 				DDAE0B6626ED4B2800DD5FAC /* WeatherQualityInfo */,
 				DDAE0B5F26ED0AD200DD5FAC /* WeeklyForecast */,
 				DDAE0B5C26ED096100DD5FAC /* HourlyForecast */,
+				DDB55D6F2764BDC500494BFB /* CityDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -948,6 +951,14 @@
 				DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */,
 			);
 			path = AlertViewBuilder;
+			sourceTree = "<group>";
+		};
+		DDB55D6E2764BD2800494BFB /* ValidatedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				DD608F41273DA15300C9DE96 /* DegreeLabel.swift */,
+			);
+			path = ValidatedLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1097,6 +1108,7 @@
 				DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */,
 				DD2A875226FE3244002AC36C /* ColorThemeSettingsCell.swift in Sources */,
 				70E7E236262861BB00187412 /* AddCityViewController.swift in Sources */,
+				DDB55D702764BDC500494BFB /* CityDetailView.swift in Sources */,
 				7017AAB1261B191000953C5B /* MainMenuViewController.swift in Sources */,
 				704173AA265131CC001B1335 /* DesignManager.swift in Sources */,
 				DD2A876926FE6306002AC36C /* ColorThemeModel.swift in Sources */,
