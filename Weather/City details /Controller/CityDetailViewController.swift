@@ -9,7 +9,6 @@ import UIKit
 
 protocol CityDetailViewControllerDelegate: AnyObject {
     func getNavigationBar() -> UINavigationBar?
-    func updateBluredNavBarTargetHeight(_ height: CGFloat)
 }
 
 class CityDetailViewController: UIViewController, CityDetailViewControllerDelegate {
@@ -25,13 +24,6 @@ class CityDetailViewController: UIViewController, CityDetailViewControllerDelega
     }
 
     // MARK: - Private properties
-    
-    private lazy var navigationBarBlurBackground: UIVisualEffectView = {
-        let isNavBarDark = colorThemeComponent.colorTheme.cityDetails.isNavBarDark
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: isNavBarDark ? .dark : .light))
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     private lazy var mainView: CityDetailViewProtocol = {
         let view = CityDetailView(colorThemeComponent: colorThemeComponent)
@@ -70,8 +62,6 @@ class CityDetailViewController: UIViewController, CityDetailViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(navigationBarBlurBackground)
-        
         backButtonNavBarItem.action = #selector(backButtonPressed)
         backButtonNavBarItem.target = self
         navigationItem.leftBarButtonItem = backButtonNavBarItem
@@ -93,13 +83,12 @@ class CityDetailViewController: UIViewController, CityDetailViewControllerDelega
                                            repeats: true)
         updateTimer?.fire()
         
-        setUpNavBar()
         setupBlurableNavBar()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        mainView.setupNavBarSizes()
+        mainView.viewWillLayoutUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,29 +102,12 @@ class CityDetailViewController: UIViewController, CityDetailViewControllerDelega
         return navigationController?.navigationBar
     }
     
-    func updateBluredNavBarTargetHeight(_ height: CGFloat) {
-        navigationBarBlurBackground.alpha = height
-    }
-    
     // MARK: - Private Functions
-    
-    private func setUpNavBar() {
-        navigationBarBlurBackground.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        navigationBarBlurBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        navigationBarBlurBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
-        let navBarHeight = getNavigationBar()?.bounds.height ?? 0
-        let statusBarHeight = UIApplication.shared.windows[0].windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let overallNavBarHeight = navBarHeight + statusBarHeight
-        
-        navigationBarBlurBackground.heightAnchor.constraint(equalToConstant: overallNavBarHeight).isActive = true
-    }
     
     private func setupBlurableNavBar() {
         getNavigationBar()?.shadowImage = UIImage()
         getNavigationBar()?.setBackgroundImage(UIImage(), for: .default)
         getNavigationBar()?.backgroundColor = .clear
-        navigationBarBlurBackground.alpha = 0
     }
 
     // MARK: - Actions

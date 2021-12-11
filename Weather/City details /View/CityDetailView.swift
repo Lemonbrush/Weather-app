@@ -9,7 +9,7 @@ import UIKit
 
 protocol CityDetailViewProtocol: UIView {
     func updateData(_ weatherModel: WeatherModel)
-    func setupNavBarSizes()
+    func viewWillLayoutUpdate()
 }
 
 class CityDetailView: UIView, CityDetailViewProtocol {
@@ -20,6 +20,14 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
+    
+    private lazy var navigationBarBlurBackground: UIVisualEffectView = {
+        let isNavBarDark = colorThemeComponent.colorTheme.cityDetails.isNavBarDark
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: isNavBarDark ? .dark : .light))
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -149,11 +157,9 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         scrollContentView.addSubview(topTranslucentBackground)
         
         let backgroundColors = colorThemeComponent.colorTheme.cityDetails.screenBackground
-        let currentThemeLabelColor = colorThemeComponent.colorTheme.getColorByConditionId(0).labelsColor
-        let labelColor = backgroundColors.ignoreColorInheritance ? backgroundColors.labelsColor : currentThemeLabelColor
-        tempLebel.textColor = labelColor
-        descriptionLabel.textColor = labelColor
-        feelsLikeLabel.textColor = labelColor
+        tempLebel.textColor = backgroundColors.labelsColor
+        descriptionLabel.textColor = backgroundColors.labelsColor
+        feelsLikeLabel.textColor = backgroundColors.labelsColor
         degreeStackView.addArrangedSubview(conditionImage)
         degreeStackView.addArrangedSubview(tempLebel)
         degreeStackView.addArrangedSubview(descriptionLabel)
@@ -167,8 +173,9 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         extraContentStackView.addArrangedSubview(weatherQualityInfoView)
         secondScreenPartBackground.addSubview(extraContentStackView)
         
-        setupGradientBackground()
+        addSubview(navigationBarBlurBackground)
         
+        setupGradientBackground()
         setUpConstraints()
     }
 
@@ -178,12 +185,13 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     
     // MARK: - Functions
     
-    func setupNavBarSizes() {
-        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height // Set tableview height according to its contents
-        gradientBackground.frame = bounds // Calculate gradient size
+    func viewWillLayoutUpdate() {
+        // Set tableview height according to its contents
+        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height
+        gradientBackground.frame = bounds
         scrollView.contentSize = scrollContentView.bounds.size
         
-        //setUpNavBar()
+        setUpNavBar()
     }
     
     func updateData(_ weatherModel: WeatherModel) {
@@ -197,8 +205,6 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     // MARK: - Private Functions
 
     private func setUpConstraints() {
-        //setUpNavBar()
-        //setupBlurableNavBar()
         setUpScrollView()
         setUpScrollContentView()
         setUpTopTranslucentView()
@@ -208,6 +214,18 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         setUpHourlyCollectionView()
         setUpAdditionalStackView()
         setUpWeeklyTableViewHeightConstraint()
+    }
+    
+    private func setUpNavBar() {
+        navigationBarBlurBackground.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        navigationBarBlurBackground.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        navigationBarBlurBackground.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
+        let navBarHeight = viewControllerOwner?.getNavigationBar()?.bounds.height ?? 0
+        let statusBarHeight = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let overallNavBarHeight = navBarHeight + statusBarHeight
+        
+        navigationBarBlurBackground.heightAnchor.constraint(equalToConstant: overallNavBarHeight).isActive = true
     }
 
     private func setUpAdditionalStackView() {
@@ -261,19 +279,16 @@ extension CityDetailView: UIScrollViewDelegate {
             scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.height
             return
         }
-        
-        // Check if CollectionView is currently scrolling and break if so
-        if hourlyCollectionView.collectionView.isDragging ||
-            hourlyCollectionView.collectionView.isDecelerating { return }
 
-        // Handle navigation bar appearance according to the scroll view offset
-        let targetHeight = (topTranslucentBackground.bounds.height - degreeStackView.bounds.height) / 2 
-        // Calculate how much has been scrolled relative to the target
+        let targetHeight = (topTranslucentBackground.bounds.height - degreeStackView.bounds.height) / 2 - navigationBarBlurBackground.bounds.height
         let offset = scrollView.contentOffset.y / targetHeight
+        navigationBarBlurBackground.alpha = offset
         
-        viewControllerOwner?.updateBluredNavBarTargetHeight(offset)
+        let hourlyCollectionView = hourlyCollectionView.collectionView
+        guard !hourlyCollectionView.isDragging && !hourlyCollectionView.isDecelerating else {
+            return
+        }
 
-        // Spring constant will change its value by scrolling to half of its size
         let oldConstant = hourlyTopConstant
         let newConstant: CGFloat = scrollView.contentOffset.y < hourlyTopConstant / 2 ? springDefaultConstant : Grid.pt24
 
@@ -296,7 +311,7 @@ extension CityDetailView {
 
     private func setUpWeeklyTableViewHeightConstraint() {
         weeklyTableViewHightConstraint = NSLayoutConstraint(item:
-                                                                weeklyForecastTableView.tableView,
+                                                            weeklyForecastTableView.tableView,
                                                             attribute: .height,
                                                             relatedBy: .equal,
                                                             toItem: nil,
