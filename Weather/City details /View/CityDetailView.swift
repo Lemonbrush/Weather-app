@@ -88,6 +88,16 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         label.font = UIFont.systemFont(ofSize: Grid.pt20, weight: .medium)
         return label
     }()
+    
+    private lazy var arrowHint: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "chevron.compact.up") ?? UIImage()
+        imageView.tintColor = .white
+        imageView.contentMode = .scaleAspectFit
+        imageView.alpha = 0.5
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
     // MARK: - Screen second part
 
@@ -165,6 +175,8 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         degreeStackView.addArrangedSubview(descriptionLabel)
         degreeStackView.addArrangedSubview(feelsLikeLabel)
         topTranslucentBackground.addSubview(degreeStackView)
+        
+        topTranslucentBackground.addSubview(arrowHint)
 
         scrollContentView.addSubview(secondScreenPartBackground)
         secondScreenPartBackground.addSubview(hourlyCollectionView)
@@ -203,6 +215,44 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     }
 
     // MARK: - Private Functions
+    
+    private func setupActivatedArrowHint(_ isActivated: Bool) {
+            let arrowDown = UIImage(systemName: "chevron.compact.down") ?? UIImage()
+            let arrowUp = UIImage(systemName: "chevron.compact.up") ?? UIImage()
+            arrowHint.image = isActivated ? arrowDown : arrowUp
+        }
+
+    private func updateAlphaViews() {
+        // Handle navigation bar appearance according to the scroll view offset
+        let targetHeight = (topTranslucentBackground.bounds.height - degreeStackView.bounds.height)
+            / 2 - navigationBarBlurBackground.bounds.height
+        // Calculate how much has been scrolled relative to the target
+        let offset = scrollView.contentOffset.y / targetHeight
+        navigationBarBlurBackground.alpha = offset
+    }
+
+    private func updateAnimatedViews() {
+        // Spring constant will change its value by scrolling to half of its size
+        let oldConstant = hourlyTopConstant
+        let newConstant: CGFloat
+        let activateArrowHint: Bool
+
+        if scrollView.contentOffset.y < hourlyTopConstant / 2 {
+            newConstant = springDefaultConstant
+            activateArrowHint = false
+        } else {
+            newConstant = Grid.pt24
+            activateArrowHint = true
+        }
+
+        if oldConstant != newConstant {
+            UIView.animate(withDuration: 0.1) {
+                self.setupActivatedArrowHint(activateArrowHint)
+                self.springConstraint.constant = newConstant
+                self.layoutIfNeeded()
+            }
+        }
+    }
 
     private func setUpConstraints() {
         setUpScrollView()
@@ -280,24 +330,14 @@ extension CityDetailView: UIScrollViewDelegate {
             return
         }
 
-        let targetHeight = (topTranslucentBackground.bounds.height - degreeStackView.bounds.height) / 2 - navigationBarBlurBackground.bounds.height
-        let offset = scrollView.contentOffset.y / targetHeight
-        navigationBarBlurBackground.alpha = offset
+        updateAlphaViews()
         
         let hourlyCollectionView = hourlyCollectionView.collectionView
         guard !hourlyCollectionView.isDragging && !hourlyCollectionView.isDecelerating else {
             return
         }
 
-        let oldConstant = hourlyTopConstant
-        let newConstant: CGFloat = scrollView.contentOffset.y < hourlyTopConstant / 2 ? springDefaultConstant : Grid.pt24
-
-        if oldConstant != newConstant {
-            UIView.animate(withDuration: 0.1) {
-                self.springConstraint.constant = newConstant
-                self.layoutIfNeeded()
-            }
-        }
+        updateAnimatedViews()
     }
 }
 
@@ -322,6 +362,11 @@ extension CityDetailView {
     }
 
     private func setUpDegreeStackView() {
+        arrowHint.heightAnchor.constraint(equalToConstant: Grid.pt40).isActive = true
+        arrowHint.widthAnchor.constraint(equalToConstant: Grid.pt40).isActive = true
+        arrowHint.bottomAnchor.constraint(equalTo: topTranslucentBackground.bottomAnchor, constant: -Grid.pt12).isActive = true
+        arrowHint.centerXAnchor.constraint(equalTo: topTranslucentBackground.centerXAnchor).isActive = true
+        
         degreeStackView.centerYAnchor.constraint(equalTo: topTranslucentBackground.centerYAnchor).isActive = true
         degreeStackView.centerXAnchor.constraint(equalTo: topTranslucentBackground.centerXAnchor).isActive = true
     }
