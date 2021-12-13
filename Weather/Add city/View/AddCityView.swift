@@ -260,7 +260,7 @@ extension AddCityView: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = colorThemeComponent.colorTheme.addCityScreen.searchFieldBackground
         
         cell.contentView.backgroundColor = .none
-        cell.accessibilityIdentifier = "AddCityCell"
+        cell.accessibilityIdentifier = K.AccessabilityIdentifier.addCityCell
         return cell
     }
 

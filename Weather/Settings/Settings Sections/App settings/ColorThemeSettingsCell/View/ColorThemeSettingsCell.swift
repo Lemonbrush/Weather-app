@@ -24,7 +24,7 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     private lazy var themeIcon: UIImageView = {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
-        imageView.image = UIImage(systemName: "paintbrush", withConfiguration: imageConfiguration) ?? UIImage()
+        imageView.image = UIImage(systemName: K.SystemImageName.paintbrush, withConfiguration: imageConfiguration) ?? UIImage()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

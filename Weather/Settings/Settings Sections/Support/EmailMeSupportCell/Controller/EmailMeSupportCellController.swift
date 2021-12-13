@@ -56,19 +56,18 @@ extension EmailMeSupportCellController: MFMailComposeViewControllerDelegate, Ema
                                           didFinishWith result: MFMailComposeResult,
                                           error: Error?) {
         guard error == nil else {
-            print(error!.localizedDescription)
-            controller.dismiss(animated: true, completion: nil)
+            let alertView = AlertViewBuilder()
+                .build(title: "Failed to send email", message: error?.localizedDescription ?? ":(", preferredStyle: .alert)
+                .build(title: "Ok", style: .default, handler: nil)
+                .content
+            
+            DispatchQueue.main.async {
+                controller.present(alertView, animated: true) {
+                    controller.dismiss(animated: true, completion: nil)
+                }
+            }
             return
         }
-        
-        switch result {
-            case .sent: print("The email was sent")
-            case .saved: print("The email was saved")
-            case .cancelled: print("The email was cancelled")
-            case .failed: print("Failed to send email")
-            @unknown default: break
-        }
-        
         controller.dismiss(animated: true, completion: nil)
     }
 }

@@ -94,7 +94,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessibilityIdentifier = "MainMenuTableViewCell"
+        accessibilityIdentifier = K.AccessabilityIdentifier.mainMenuTableViewCell
         selectionStyle = .none
 
         // Setting up cell appearance

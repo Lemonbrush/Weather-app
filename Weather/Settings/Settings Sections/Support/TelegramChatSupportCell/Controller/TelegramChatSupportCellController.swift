@@ -23,9 +23,11 @@ class TelegramChatSupportCellController: TelegramChatSupportDelegate, ReloadColo
     // MARK: - Functions
     
     func moveToTelegramChat() {
-        if let safeUrl = URL.init(string: "https://t.me/climaWeather"), UIApplication.shared.canOpenURL(safeUrl) {
+        if let safeUrl = URL.init(string: K.Links.telegramAppLink),
+            UIApplication.shared.canOpenURL(safeUrl) {
             UIApplication.shared.open(safeUrl)
-        } else if let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807"), UIApplication.shared.canOpenURL(urlAppStore)  {
+        } else if let urlAppStore = URL(string: K.Links.telegramAppstoreLink),
+                    UIApplication.shared.canOpenURL(urlAppStore)  {
             UIApplication.shared.open(urlAppStore)
         }
     }

@@ -9,8 +9,8 @@ import Foundation
 
 struct UserDefaultsManager {
     struct UnitData {
-        static func get() -> String? {
-            return UserDefaults.standard.string(forKey: K.UserDefaults.unit)
+        static func get() -> String {
+            return UserDefaults.standard.string(forKey: K.UserDefaults.unit) ?? K.UserDefaults.metric
         }
 
         static func set(with unit: String) {
@@ -22,11 +22,11 @@ struct UserDefaultsManager {
     
     struct AppIcon {
         static func get() -> Int {
-            return UserDefaults.standard.integer(forKey: "AppIconNumber")
+            return UserDefaults.standard.integer(forKey: K.UserDefaults.appIconNumber)
         }
 
         static func set(with num: Int) {
-            UserDefaults.standard.setValue(num, forKey: "AppIconNumber")
+            UserDefaults.standard.setValue(num, forKey: K.UserDefaults.appIconNumber)
         }
     }
     

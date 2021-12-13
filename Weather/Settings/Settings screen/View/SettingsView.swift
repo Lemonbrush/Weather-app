@@ -18,7 +18,7 @@ class SettingsView: UIView, ReloadColorThemeProtocol {
 
      private var tableView: UITableView = {
          let tableView = UITableView(frame: .zero, style: .insetGrouped)
-         tableView.accessibilityIdentifier = "SettingsTableView"
+         tableView.accessibilityIdentifier = K.AccessabilityIdentifier.settingsTableView
          tableView.translatesAutoresizingMaskIntoConstraints = false
          tableView.backgroundColor = .clear
          return tableView

@@ -31,7 +31,7 @@ class ColorThemeCell: UITableViewCell {
     
     let checkmarkImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = UIImage(systemName: K.SystemImageName.checkmark)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true

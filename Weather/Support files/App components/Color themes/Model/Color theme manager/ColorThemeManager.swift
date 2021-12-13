@@ -12,7 +12,7 @@ struct ColorThemeManager {
     // MARK: - Public functions
     
     static func getColorThemes() -> [ColorThemeModel] {
-        guard let colorThemesFile = readLocalFile(forName: "ColorThemes"),
+        guard let colorThemesFile = readLocalFile(forName: K.Misc.colorThemeLocalFile),
               let result = parseJSON(colorThemesFile) else {
             return []
         }

@@ -108,11 +108,11 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
             switch sunStete.description {
             case .sunset:
                 cell.bottomLabel.text = "Sunset"
-                cell.imageView.image = UIImage(systemName: K.systemImageName.sunsetFill,
+                cell.imageView.image = UIImage(systemName: K.SystemImageName.sunsetFill,
                                                withConfiguration: imageConfiguration) ?? UIImage()
             case .sunrise:
                 cell.bottomLabel.text = "Sunrise"
-                cell.imageView.image = UIImage(systemName: K.systemImageName.sunriseFill,
+                cell.imageView.image = UIImage(systemName: K.SystemImageName.sunriseFill,
                                                withConfiguration: imageConfiguration) ?? UIImage()
             }
 
