@@ -95,7 +95,7 @@ class WeatherCoreDataManager: DataStorageProtocol {
     }
 
     func addNewItem(_ city: String, lat: Double, long: Double) {
-        let entity = NSEntityDescription.entity(forEntityName: "City", in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: K.CoreData.City.entityName, in: managedContext)!
         let citySavingObject = NSManagedObject(entity: entity, insertInto: managedContext)
         citySavingObject.setValue(city, forKey: K.CoreData.City.name)
         citySavingObject.setValue(lat, forKey: K.CoreData.City.latitude)

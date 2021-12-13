@@ -347,6 +347,7 @@
 		7070112B267FD8A000B1B0F4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DD2A874326FD01DE002AC36C /* Settings Sections */,
 				DD2A875326FE375A002AC36C /* Theme screen */,
 				DD2A876426FE60D1002AC36C /* Settings screen */,
 			);
@@ -381,7 +382,7 @@
 			path = "Add city";
 			sourceTree = "<group>";
 		};
-		DD2A874326FD01DE002AC36C /* Cells */ = {
+		DD2A874326FD01DE002AC36C /* Settings Sections */ = {
 			isa = PBXGroup;
 			children = (
 				DD3C2998274FAAC300453ABF /* Support */,
@@ -390,7 +391,7 @@
 				DD2A875D26FE3DEF002AC36C /* Protocols */,
 				DD3C299D274FAE5F00453ABF /* Standart cells */,
 			);
-			path = Cells;
+			path = "Settings Sections";
 			sourceTree = "<group>";
 		};
 		DD2A874426FD01F3002AC36C /* App settings */ = {
@@ -413,7 +414,6 @@
 		DD2A874826FD02E2002AC36C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DD2A874326FD01DE002AC36C /* Cells */,
 				DD2A874926FD0339002AC36C /* SettingsView.swift */,
 			);
 			path = View;
@@ -795,7 +795,7 @@
 			children = (
 				705BB8CB261EF84600D658C4 /* NetworkManager.swift */,
 				DD42148C26EFB2F200BD4C4F /* Model */,
-				705BB8D1261EFC3D00D658C4 /* WeatherData.swift */,
+				DDB55D7327677C1500494BFB /* Data */,
 			);
 			path = "Network manager";
 			sourceTree = "<group>";
@@ -814,7 +814,7 @@
 				704173CB265684F9001B1335 /* Cells */,
 				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
 				DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */,
-				DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */,
+				DDB55D7427677C9500494BFB /* Cell builder */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -959,6 +959,22 @@
 				DD608F41273DA15300C9DE96 /* DegreeLabel.swift */,
 			);
 			path = ValidatedLabel;
+			sourceTree = "<group>";
+		};
+		DDB55D7327677C1500494BFB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				705BB8D1261EFC3D00D658C4 /* WeatherData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DDB55D7427677C9500494BFB /* Cell builder */ = {
+			isa = PBXGroup;
+			children = (
+				DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */,
+			);
+			path = "Cell builder";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

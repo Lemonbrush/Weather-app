@@ -64,7 +64,7 @@ class CityDetailView: UIView, CityDetailViewProtocol {
 
     private var conditionImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: K.ImageName.defaultImage)
+        imageView.image = UIImage(named: K.SystemImageName.cloudFill)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -217,8 +217,8 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     // MARK: - Private Functions
     
     private func setupActivatedArrowHint(_ isActivated: Bool) {
-            let arrowDown = UIImage(systemName: "chevron.compact.down") ?? UIImage()
-            let arrowUp = UIImage(systemName: "chevron.compact.up") ?? UIImage()
+        let arrowDown = UIImage(systemName: K.SystemImageName.arrowDown) ?? UIImage()
+        let arrowUp = UIImage(systemName: K.SystemImageName.arrowUp) ?? UIImage()
             arrowHint.image = isActivated ? arrowDown : arrowUp
         }
 

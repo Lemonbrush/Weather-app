@@ -28,7 +28,7 @@ class EmailMeSupportCell: StandartSettingsCell, ReloadColorThemeProtocol {
     
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
-        super.init(title: "Write to the author", systemImageName: "envelope")
+        super.init(title: "Write to the author", systemImageName: K.SystemImageName.envelope)
         
         reloadColorTheme()
     }

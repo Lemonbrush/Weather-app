@@ -27,7 +27,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
         let builder = MainMenuCellBuilder()
 
-        let cityName = viewController?.displayWeather[indexPath.row]?.cityName ?? "-"
+        let cityName = viewController?.displayWeather[indexPath.row]?.cityName ?? K.Misc.defaultSityName
         let temperature = weatherDataForCell.temperatureString
         let timeZone = TimeZone(secondsFromGMT: weatherDataForCell.timezone)
 
@@ -124,15 +124,12 @@ extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
     }
 
     func getDragAndDropCellAppearance(_ tableView: UITableView, forCellAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        // Getting rid of system design
         let param = UIDragPreviewParameters()
         param.backgroundColor = .clear
         if #available(iOS 14.0, *) {
+            // Getting rid of system design
             param.shadowPath = UIBezierPath(rect: .zero)
-        } else {
-            // Fallback on earlier versions
         }
-
         return param
     }
 }

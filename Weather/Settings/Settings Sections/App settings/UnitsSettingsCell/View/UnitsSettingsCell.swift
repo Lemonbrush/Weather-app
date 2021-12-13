@@ -22,7 +22,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     private lazy var unitSwitch: UISegmentedControl = {
         let items = ["°C", "°F"]
         let switcher = UISegmentedControl(items: items)
-        switcher.accessibilityIdentifier = "SettingsUnitSwitch"
+        switcher.accessibilityIdentifier = K.AccessabilityIdentifier.settingsUnitSwitch
         switcher.selectedSegmentIndex = 0
         switcher.addTarget(self, action: #selector(unitSwitchToggled), for: .valueChanged)
         return switcher
@@ -38,7 +38,7 @@ class UnitsSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     private lazy var settingsIcon: UIImageView = {
         let imageView = UIImageView()
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
-        imageView.image = UIImage(systemName: "ruler", withConfiguration: imageConfiguration) ?? UIImage()
+        imageView.image = UIImage(systemName: K.SystemImageName.ruler, withConfiguration: imageConfiguration) ?? UIImage()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

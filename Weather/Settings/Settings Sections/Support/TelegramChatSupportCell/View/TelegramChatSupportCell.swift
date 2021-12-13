@@ -25,7 +25,7 @@ class TelegramChatSupportCell: StandartSettingsCell, ReloadColorThemeProtocol {
     
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
-        super.init(title: "Chat to telegram", systemImageName: "paperplane")
+        super.init(title: "Chat to telegram", systemImageName: K.SystemImageName.paperplane)
         
         reloadColorTheme()
     }

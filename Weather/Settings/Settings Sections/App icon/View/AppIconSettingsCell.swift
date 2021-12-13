@@ -30,7 +30,7 @@ class AppIconSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
         layout.shouldInvalidateLayout(forBoundsChange: CGRect())
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(AppIconCollectionViewCell.self, forCellWithReuseIdentifier: "AppIconCell")
+        collectionView.register(AppIconCollectionViewCell.self, forCellWithReuseIdentifier: K.CellIdentifier.appIconCell)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         
@@ -100,7 +100,7 @@ extension AppIconSettingsCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppIconCell", for: indexPath) as? AppIconCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellIdentifier.appIconCell, for: indexPath) as? AppIconCollectionViewCell else {
             return UICollectionViewCell()
         }
         

@@ -42,21 +42,21 @@ enum BMAppIcon: Int, CaseIterable {
     var preview: UIImage? {
         switch self {
         case .classic:
-            return UIImage(named: "AppIcon")
+            return UIImage(named: K.ImageName.appIcon)
         case .darkWhiteCloudAppIcon:
-            return UIImage(named: "darkWhiteCloudAppIcon@3x.png")
+            return UIImage(named: K.ImageName.darkWhiteCloudAppIcon3x)
         case .whiteSunAppIcon:
-            return UIImage(named: "whiteSunAppIcon@3x.png")
+            return UIImage(named: K.ImageName.whiteSunAppIcon3x)
         case .cornerSun:
-            return UIImage(named: "cornerSun@3x.png")
+            return UIImage(named: K.ImageName.cornerSun3x)
         case .orangeCloud:
-            return UIImage(named: "orangeCloud@3x.png")
+            return UIImage(named: K.ImageName.orangeCloud3x)
         case .moon:
-            return UIImage(named: "moon@3x.png")
+            return UIImage(named: K.ImageName.moon3x)
         case .yellowSun:
-            return UIImage(named: "yellowSun@3x.png")
+            return UIImage(named: K.ImageName.yellowSun3x)
         case .blueWhiteCloud:
-            return UIImage(named: "blueWhiteCloud@3x.png")
+            return UIImage(named: K.ImageName.blueWhiteCloud3x)
         }
     }
 }

@@ -33,19 +33,21 @@ class MainMenuView: UIView {
 
     private lazy var settingsButton: UIButton = {
         let button = UIButton()
-        button.accessibilityIdentifier = "SettingsButton"
+        button.accessibilityIdentifier = K.AccessabilityIdentifier.settingsButton
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
-        button.setImage(UIImage(systemName: "switch.2", withConfiguration: imageConfiguration), for: .normal)
+        let image = UIImage(systemName: K.SystemImageName.switch2, withConfiguration: imageConfiguration)
+        button.setImage(image, for: .normal)
         return button
     }()
 
     private lazy var searchButton: UIButton = {
         let button = UIButton()
-        button.accessibilityIdentifier = "SearchButton"
+        button.accessibilityIdentifier = K.AccessabilityIdentifier.searchButton
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
-        button.setImage(UIImage(systemName: "magnifyingglass", withConfiguration: imageConfiguration), for: .normal)
+        let image = UIImage(systemName: K.SystemImageName.magnifyingglass, withConfiguration: imageConfiguration)
+        button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

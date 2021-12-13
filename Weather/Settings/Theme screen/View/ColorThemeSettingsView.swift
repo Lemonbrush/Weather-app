@@ -13,9 +13,9 @@ class ColorThemeSettingsView: UIView, ReloadColorThemeProtocol {
     
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.accessibilityIdentifier = "ColorSettingsTableView"
+        tableView.accessibilityIdentifier = K.AccessabilityIdentifier.colorSettingsTableView
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ColorThemeCell.self, forCellReuseIdentifier: "colorThemeCell")
+        tableView.register(ColorThemeCell.self, forCellReuseIdentifier: K.CellIdentifier.colorThemeCell)
         tableView.backgroundColor = .clear
         return tableView
     }()
@@ -79,7 +79,7 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "colorThemeCell") as? ColorThemeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.colorThemeCell) as? ColorThemeCell else {
             return UITableViewCell()
         }
         
