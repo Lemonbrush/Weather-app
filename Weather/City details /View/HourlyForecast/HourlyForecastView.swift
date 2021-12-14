@@ -9,12 +9,18 @@ import UIKit
 
 class HourlyForecastView: UIView {
 
-    // MARK: - Public properties
+    // MARK: - Properties
+    
+    var isCollectionViewStill: Bool {
+        !collectionView.isDragging && !collectionView.isDecelerating
+    }
+    
+    // MARK: - Private Properties
 
-    var dataSource: WeatherModel?
-    var colorThemeComponent: ColorThemeProtocol
+    private var dataSource: WeatherModel?
+    private var colorThemeComponent: ColorThemeProtocol
 
-    var collectionView: UICollectionView = {
+    private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = CGSize(width: Grid.pt52, height: Grid.pt100)
@@ -53,6 +59,16 @@ class HourlyForecastView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Functions
+    
+    func updateDataSource(_ newData: WeatherModel?) {
+        if let strongNewData = newData {
+            dataSource = strongNewData
+        }
+        
+        collectionView.reloadData()
+    }
 }
 
 extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -61,9 +77,7 @@ extension HourlyForecastView: UICollectionViewDelegate, UICollectionViewDelegate
         return dataSource?.hourlyDisplayData.count ?? 0
     }
 
-    @objc func collectionView(_ collectionView: UICollectionView,
-                              cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let safeWeatherData = dataSource,
               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellIdentifier.hourlyForecastCell,
                                                             for: indexPath) as? HourlyCollectionViewCell else {

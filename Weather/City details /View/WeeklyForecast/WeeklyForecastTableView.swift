@@ -9,12 +9,18 @@ import UIKit
 
 class WeeklyForecastTableView: UIView {
 
-    // MARK: - Public properties
+    // MARK: - Properties
 
-    var dataSource: WeatherModel?
-    var colorThemeComponent: ColorThemeProtocol
+    var tableViewContentHeight: CGFloat {
+        tableView.contentSize.height
+    }
 
-    var tableView: UITableView = {
+    // MARK: - Private properties
+    
+    private var dataSource: WeatherModel?
+    private var colorThemeComponent: ColorThemeProtocol
+
+    private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(WeeklyForecastCell.self, forCellReuseIdentifier: K.CellIdentifier.dailyForecastCell)
         tableView.separatorStyle = .none
@@ -23,8 +29,6 @@ class WeeklyForecastTableView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
-    // MARK: - Private properties
 
     private lazy var backgroundView: UIView = {
         let view = UIView()

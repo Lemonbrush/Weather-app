@@ -66,7 +66,6 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     override func loadView() {
         view = mainView
-        mainView.viewControllerOwner = self
     }
 
     override func viewDidLoad() {

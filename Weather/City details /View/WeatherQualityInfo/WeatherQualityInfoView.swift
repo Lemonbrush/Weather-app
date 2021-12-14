@@ -8,12 +8,10 @@
 import UIKit
 
 class WeatherQualityInfoView: UIView {
-    
-    // MARK: - Properties
-    
-    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
+    
+    private var colorThemeComponent: ColorThemeProtocol
 
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -135,7 +133,7 @@ class WeatherQualityInfoView: UIView {
 
     // MARK: - Functions
 
-    func setupValues(weatherData: WeatherModel) {
+    func updateData(weatherData: WeatherModel) {
         humidityItemView.subTitleLabel.text = weatherData.humidityString
         windItemView.subTitleLabel.text = weatherData.windString
         cloudinessItemView.subTitleLabel.text = weatherData.cloudinessString

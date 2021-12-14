@@ -52,7 +52,6 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     override func loadView() {
         view = mainManuView
         mainManuView.viewController = self
-        mainManuView.colorThemeComponent = appComponents
         tableView = mainManuView.tableView
     }
 
