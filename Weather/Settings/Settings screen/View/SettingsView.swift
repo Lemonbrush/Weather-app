@@ -10,8 +10,7 @@ import UIKit
 class SettingsView: UIView, ReloadColorThemeProtocol {
     
     // MARK: - Properties
-    
-    weak var viewControllerOwner: SettingsViewController?
+
     var settingsSections: [SettingsSection]? = []
     
     // MARK: - Private properties

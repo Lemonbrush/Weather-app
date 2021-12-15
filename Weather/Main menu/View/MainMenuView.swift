@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol MainMenuViewProtocol: UIView {
+    
+}
+
 class MainMenuView: UIView {
+    
+    // MARK: - Properties
+    
+    weak var viewController: MainMenuViewController?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
 
@@ -93,9 +102,6 @@ class MainMenuView: UIView {
 
         return tableView
     }()
-
-    weak var viewController: MainMenuViewController?
-    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Construction
 

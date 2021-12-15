@@ -199,7 +199,7 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     
     func viewWillLayoutUpdate() {
         // Set tableview height according to its contents
-        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableView.contentSize.height
+        weeklyTableViewHightConstraint.constant = weeklyForecastTableView.tableViewContentHeight
         gradientBackground.frame = bounds
         scrollView.contentSize = scrollContentView.bounds.size
         
@@ -209,9 +209,8 @@ class CityDetailView: UIView, CityDetailViewProtocol {
     func updateData(_ weatherModel: WeatherModel) {
         setLabelsAndImages(with: weatherModel)
         weeklyForecastTableView.reloadData(weatherModel)
-        hourlyCollectionView.dataSource = weatherModel
-        hourlyCollectionView.collectionView.reloadData()
-        weatherQualityInfoView.setupValues(weatherData: weatherModel)
+        hourlyCollectionView.updateDataSource(weatherModel)
+        weatherQualityInfoView.updateData(weatherData: weatherModel)
     }
 
     // MARK: - Private Functions
@@ -317,7 +316,7 @@ class CityDetailView: UIView, CityDetailViewProtocol {
         feelsLikeLabel.text = newData.feelsLikeString
 
         weeklyForecastTableView.reloadData(newData)
-        weatherQualityInfoView.setupValues(weatherData: newData)
+        weatherQualityInfoView.updateData(weatherData: newData)
     }
 }
 
@@ -331,9 +330,7 @@ extension CityDetailView: UIScrollViewDelegate {
         }
 
         updateAlphaViews()
-        
-        let hourlyCollectionView = hourlyCollectionView.collectionView
-        guard !hourlyCollectionView.isDragging && !hourlyCollectionView.isDecelerating else {
+        guard hourlyCollectionView.isCollectionViewStill else {
             return
         }
 
@@ -351,7 +348,7 @@ extension CityDetailView {
 
     private func setUpWeeklyTableViewHeightConstraint() {
         weeklyTableViewHightConstraint = NSLayoutConstraint(item:
-                                                            weeklyForecastTableView.tableView,
+                                                            weeklyForecastTableView,
                                                             attribute: .height,
                                                             relatedBy: .equal,
                                                             toItem: nil,
