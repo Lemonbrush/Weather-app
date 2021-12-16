@@ -27,6 +27,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     private var tableView: UITableView?
     private var savedCities = [SavedCity]()
     private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents)
+    private var activeErrorString: String?
 
     // MARK: - Public properties
 
@@ -82,7 +83,6 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // MARK: - Functions
 
-    // Navigation functions
     func showAddCityVC() {
         let savedCityTitles = displayWeather.compactMap { $0?.cityName }
         let destinationVC = AddCityViewController(colorThemeComponent: appComponents, savedCityTitles: savedCityTitles)
@@ -91,9 +91,21 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func showDetailViewVC() {
+        guard let displayWeatherIndex = self.tableView?.indexPathForSelectedRow?.row,
+              let strongWeatherData = displayWeather[displayWeatherIndex] else {
+                  let alert = AlertViewBuilder()
+                      .build(title: "Oops", message: activeErrorString ?? "Something went wrong", preferredStyle: .alert)
+                      .build(title: "Ok", style: .default, handler: nil)
+                      .content
+                  
+                  DispatchQueue.main.async {
+                      self.present(alert, animated: true, completion: nil)
+                  }
+            return
+        }
+        
         let destinationVC = CityDetailViewController(colorThemeComponent: appComponents)
-        let indexPath = self.tableView?.indexPathForSelectedRow!
-        destinationVC.localWeatherData = displayWeather[indexPath!.row]
+        destinationVC.localWeatherData = strongWeatherData
         destinationVC.colorThemeComponent = appComponents
         navigationController?.pushViewController(destinationVC, animated: true)
     }
@@ -107,7 +119,9 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     }
 
     func fetchWeatherData() {
-        guard let savedCities = dataStorage?.getSavedItems else { return }
+        guard let savedCities = dataStorage?.getSavedItems else {
+            return
+        }
 
         self.savedCities = savedCities
         displayWeather.removeAll()
@@ -173,21 +187,18 @@ extension MainMenuViewController: AddCityDelegate {
 
 extension MainMenuViewController: NetworkManagerDelegate {
     func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
-
         DispatchQueue.main.async {
-
             self.displayWeather[position] = weather
 
             let indexPath = IndexPath(row: position, section: 0)
-
             // Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
-
             self.tableView?.reloadRows(at: [indexPath], with: .fade)
         }
     }
 
     func didFailWithError(error: Error) {
+        activeErrorString = error.localizedDescription
         let alert = AlertViewBuilder()
             .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
             .build(title: "Ok", style: .default, handler: nil)
