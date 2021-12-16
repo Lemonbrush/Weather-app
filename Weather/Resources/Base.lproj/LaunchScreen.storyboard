@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="c73-a2-k6S">
-                                <rect key="frame" x="117" y="359.5" width="180" height="175.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.sun.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="c73-a2-k6S">
+                                <rect key="frame" x="117" y="357" width="181" height="179"/>
                                 <color key="tintColor" systemColor="separatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="ZKO-4o-AAR"/>
@@ -49,7 +49,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cloud.fill" catalog="system" width="128" height="88"/>
+        <image name="cloud.sun.fill" catalog="system" width="128" height="95"/>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
