@@ -44,7 +44,7 @@ class WeatherQualityItemView: UIView {
 
     // MARK: - Private properties
 
-    private let imageSizeConstant: CGFloat = Grid.pt24
+    private let imageSizeConstant: CGFloat = Grid.pt28
 
     // MARK: - Construction
 
