@@ -168,16 +168,16 @@ class LoadingCell: UITableViewCell {
         timeLoadViewWidthConstraint.isActive = true
 
         // Degree view
-        degreeLoadView.heightAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
-        degreeLoadView.widthAnchor.constraint(equalToConstant: Grid.pt60).isActive = true
+        degreeLoadView.heightAnchor.constraint(equalToConstant: Grid.pt44).isActive = true
+        degreeLoadView.widthAnchor.constraint(equalToConstant: Grid.pt44).isActive = true
 
         // MainStackView
-        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: Grid.pt8).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: Grid.pt16).isActive = true
         mainStackView.bottomAnchor.constraint(equalTo: weatherBackgroundView.bottomAnchor,
-                                              constant: -Grid.pt8).isActive = true
+                                              constant: -Grid.pt16).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: weatherBackgroundView.leadingAnchor,
                                                constant: Grid.pt20).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: weatherBackgroundView.trailingAnchor,
-                                                constant: -Grid.pt8).isActive = true
+                                                constant: -Grid.pt20).isActive = true
     }
 }
