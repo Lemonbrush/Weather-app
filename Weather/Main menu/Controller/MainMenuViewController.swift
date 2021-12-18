@@ -189,7 +189,6 @@ extension MainMenuViewController: NetworkManagerDelegate {
     func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
         DispatchQueue.main.async {
             self.displayWeather[position] = weather
-
             let indexPath = IndexPath(row: position, section: 0)
             // Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
@@ -198,13 +197,21 @@ extension MainMenuViewController: NetworkManagerDelegate {
     }
 
     func didFailWithError(error: Error) {
-        activeErrorString = error.localizedDescription
-        let alert = AlertViewBuilder()
-            .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
-            .build(title: "Ok", style: .default, handler: nil)
-            .content
+        let removeEmptyCells: ((UIAlertAction) -> (Void)) = { _ in
+            for (i, weatherModel) in self.displayWeather.enumerated() {
+                if weatherModel == nil {
+                    self.deleteItem(at: i)
+                    self.displayWeather.remove(at: i)
+                    self.tableView?.reloadData()
+                }
+            }
+        }
         
         DispatchQueue.main.async {
+            let alert = AlertViewBuilder()
+                .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
+                .build(title: "Ok", style: .default, handler: removeEmptyCells)
+                .content
             self.present(alert, animated: true, completion: nil)
         }
     }
