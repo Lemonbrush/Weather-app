@@ -25,8 +25,15 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     private let fadeTransitionAnimator = FadeTransitionAnimator()
     private var weatherManager = NetworkManager()
     private var tableView: UITableView?
+    private lazy var tableViewDelegate: MainMenuTableViewDelegate = {
+        let tableViewDelegate = MainMenuTableViewDelegate(colorThemeComponent: appComponents)
+        tableViewDelegate.viewController = self
+        return tableViewDelegate
+    }()
+    
     private var savedCities = [SavedCity]()
-    private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents)
+    private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents,
+                                                 tableViewDataSourceDelegate: tableViewDelegate)
     private var activeErrorString: String?
 
     // MARK: - Public properties
@@ -214,6 +221,12 @@ extension MainMenuViewController: NetworkManagerDelegate {
                 .content
             self.present(alert, animated: true, completion: nil)
         }
+    }
+}
+
+extension MainMenuViewController: MainMenuTableViewDataSourceDelegate {
+    func didSelectRow() {
+        showDetailViewVC()
     }
 }
 

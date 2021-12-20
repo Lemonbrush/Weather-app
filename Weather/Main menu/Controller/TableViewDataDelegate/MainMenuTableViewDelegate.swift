@@ -1,13 +1,34 @@
 //
-//  MainMenuView+UITableViewDelegate.swift
+//  MainMenuTableViewDelegate.swift
 //  Weather
 //
-//  Created by Alexander Rubtsov on 08.09.2021.
+//  Created by Alexander Rubtsov on 20.12.2021.
 //
 
 import UIKit
 
-extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
+protocol MainMenuTableViewDataSourceDelegate: AnyObject {
+    var displayWeather: [WeatherModel?] { get set }
+    var dataStorage: DataStorageProtocol? { get set }
+    
+    func didSelectRow()
+}
+
+class MainMenuTableViewDelegate: NSObject {
+    
+    // MARK: - Properties
+    
+    weak var viewController: MainMenuTableViewDataSourceDelegate?
+    var colorThemeComponent: ColorThemeProtocol
+    
+    // MARK: - Constructions
+    
+    init(colorThemeComponent: ColorThemeProtocol) {
+        self.colorThemeComponent = colorThemeComponent
+    }
+}
+
+extension MainMenuTableViewDelegate: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewController?.displayWeather.count ?? 0
@@ -50,7 +71,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController?.showDetailViewVC()
+        viewController?.didSelectRow()
     }
 
     // Cell editing
@@ -93,7 +114,7 @@ extension MainMenuView: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - tableView reorder functionality
 
-extension MainMenuView: UITableViewDragDelegate, UITableViewDropDelegate {
+extension MainMenuTableViewDelegate: UITableViewDragDelegate, UITableViewDropDelegate {
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let mover = viewController?.displayWeather.remove(at: sourceIndexPath.row)
