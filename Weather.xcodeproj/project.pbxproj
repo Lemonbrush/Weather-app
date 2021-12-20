@@ -148,6 +148,8 @@
 		DDB55DA22770C20700494BFB /* ColorThemeModelStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94D552272075BD00A8A600 /* ColorThemeModelStructs.swift */; };
 		DDB55DA32770C20700494BFB /* TelegramChatSupportCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3C29A3275249E800453ABF /* TelegramChatSupportCellController.swift */; };
 		DDB55DA42770C50000494BFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7001F8CB2635756000E5E593 /* Constants.swift */; };
+		DDB55DA52770CC0400494BFB /* MainMenuTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D752770987100494BFB /* MainMenuTableViewDelegate.swift */; };
+		DDB55DA62770CC0400494BFB /* MainMenuTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB55D752770987100494BFB /* MainMenuTableViewDelegate.swift */; };
 		DDDDF3D827149F8F00F8F6C3 /* ColorThemes.json in Resources */ = {isa = PBXBuildFile; fileRef = DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */; };
 /* End PBXBuildFile section */
 
@@ -1181,7 +1183,6 @@
 				DDB55D6A27610E3200494BFB /* Grid.swift in Sources */,
 				DDB55D812770C16D00494BFB /* HourlyForecastView.swift in Sources */,
 				704173CD2656852A001B1335 /* LoadingCell.swift in Sources */,
-				DDB55D762770987100494BFB /* MainMenuTableViewDelegate.swift in Sources */,
 				707011002675648800B1B0F4 /* WeeklyForecastCell.swift in Sources */,
 				DD608F542746B66E00C9DE96 /* AppIconManger.swift in Sources */,
 				DD3C29B42752573500453ABF /* ColorThemeSettingsCellController.swift in Sources */,
@@ -1194,6 +1195,7 @@
 				7001F8CC2635756000E5E593 /* Constants.swift in Sources */,
 				DDAE0B5926EA887300DD5FAC /* AddCityView.swift in Sources */,
 				705BB8CF261EFB8300D658C4 /* WeatherModel.swift in Sources */,
+				DDB55DA62770CC0400494BFB /* MainMenuTableViewDelegate.swift in Sources */,
 				DDB55D6D276263D700494BFB /* AlertViewBuilder.swift in Sources */,
 				DD94D553272075BD00A8A600 /* ColorThemeModelStructs.swift in Sources */,
 				DDB55D7F2770C14D00494BFB /* AddCityViewController.swift in Sources */,
@@ -1228,7 +1230,6 @@
 				DDB55D9F2770C20700494BFB /* ColorThemeSettingsViewController.swift in Sources */,
 				DDB55D922770C20700494BFB /* AppComponents.swift in Sources */,
 				DDB55D942770C20700494BFB /* AppIconManger.swift in Sources */,
-				DD42152C26F11B4E00BD4C4F /* MainMenuView+UITableViewDelegate.swift in Sources */,
 				DDB55DA02770C20700494BFB /* AddCityView.swift in Sources */,
 				DDB55D9D2770C20700494BFB /* UnitsSettingsCellController.swift in Sources */,
 				DD42153026F11B4E00BD4C4F /* City+CoreDataClass.swift in Sources */,
@@ -1265,6 +1266,7 @@
 				DD42155B26F152D700BD4C4F /* CitiesModel.xcdatamodeld in Sources */,
 				DD42151E26F11B4E00BD4C4F /* UserDefaultsManager.swift in Sources */,
 				DDB55D872770C20700494BFB /* StandartSettingsCell.swift in Sources */,
+				DDB55DA52770CC0400494BFB /* MainMenuTableViewDelegate.swift in Sources */,
 				DDB55D982770C20700494BFB /* ColorThemeData.swift in Sources */,
 				DDB55D952770C20700494BFB /* ConditionImageBuilder.swift in Sources */,
 				DD42152126F11B4E00BD4C4F /* MainMenuTableViewCell.swift in Sources */,
