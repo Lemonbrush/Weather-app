@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol MainMenuViewProtocol: UIView {
-    
-}
-
 class MainMenuView: UIView {
     
     // MARK: - Properties
@@ -105,7 +101,7 @@ class MainMenuView: UIView {
 
     // MARK: - Construction
 
-    init(colorThemeComponent: ColorThemeProtocol) {
+    init(colorThemeComponent: ColorThemeProtocol, tableViewDataSourceDelegate: MainMenuTableViewDelegate) {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
         
@@ -115,10 +111,10 @@ class MainMenuView: UIView {
         let result = dateFormatter.string(from: currentDate).uppercased()
         currentDateLabel.text = result
 
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
+        tableView.dataSource = tableViewDataSourceDelegate
+        tableView.delegate = tableViewDataSourceDelegate
+        tableView.dragDelegate = tableViewDataSourceDelegate
+        tableView.dropDelegate = tableViewDataSourceDelegate
         self.addSubview(tableView)
 
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")

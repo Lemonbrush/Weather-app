@@ -61,7 +61,6 @@
 		DD42152926F11B4E00BD4C4F /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42149826EFDE1F00BD4C4F /* City+CoreDataProperties.swift */; };
 		DD42152A26F11B4E00BD4C4F /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017AAB0261B191000953C5B /* MainMenuViewController.swift */; };
 		DD42152B26F11B4E00BD4C4F /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704173CC2656852A001B1335 /* LoadingCell.swift */; };
-		DD42152C26F11B4E00BD4C4F /* MainMenuView+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */; };
 		DD42152D26F11B4E00BD4C4F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705BB8CE261EFB8300D658C4 /* WeatherModel.swift */; };
 		DD42152E26F11B4E00BD4C4F /* WeeklyForecastTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAE0B6426ED0D2F00DD5FAC /* WeeklyForecastTableView.swift */; };
 		DD42152F26F11B4E00BD4C4F /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
@@ -83,7 +82,6 @@
 		DD55272526FBACCF0098A8B2 /* ConditionImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55272426FBACCF0098A8B2 /* ConditionImageBuilder.swift */; };
 		DD55272726FBC5070098A8B2 /* ConditionImageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55272626FBC5070098A8B2 /* ConditionImageConfigurator.swift */; };
 		DD55457A26E4CA6A005DB276 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457926E4CA6A005DB276 /* MainMenuView.swift */; };
-		DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */; };
 		DD608F42273DA15300C9DE96 /* DegreeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F41273DA15300C9DE96 /* DegreeLabel.swift */; };
 		DD608F4627414A6E00C9DE96 /* AppIconSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */; };
 		DD608F4827414D1300C9DE96 /* AppIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */; };
@@ -229,7 +227,6 @@
 		DD55272426FBACCF0098A8B2 /* ConditionImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionImageBuilder.swift; sourceTree = "<group>"; };
 		DD55272626FBC5070098A8B2 /* ConditionImageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionImageConfigurator.swift; sourceTree = "<group>"; };
 		DD55457926E4CA6A005DB276 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
-		DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuView+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		DD608F41273DA15300C9DE96 /* DegreeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeLabel.swift; sourceTree = "<group>"; };
 		DD608F4527414A6E00C9DE96 /* AppIconSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSettingsCell.swift; sourceTree = "<group>"; };
 		DD608F4727414D1300C9DE96 /* AppIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -260,6 +257,7 @@
 		DDB55D6927610E3200494BFB /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		DDB55D6C276263D700494BFB /* AlertViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewBuilder.swift; sourceTree = "<group>"; };
 		DDB55D6F2764BDC500494BFB /* CityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailView.swift; sourceTree = "<group>"; };
+		DDB55D752770987100494BFB /* MainMenuTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewDelegate.swift; sourceTree = "<group>"; };
 		DDDDF3D727149F8F00F8F6C3 /* ColorThemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ColorThemes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -835,6 +833,7 @@
 		DD55457726E4C994005DB276 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DDB55D7727709EE200494BFB /* TableViewDataDelegate */,
 				7017AAB0261B191000953C5B /* MainMenuViewController.swift */,
 			);
 			path = Controller;
@@ -845,7 +844,6 @@
 			children = (
 				704173CB265684F9001B1335 /* Cells */,
 				DD55457926E4CA6A005DB276 /* MainMenuView.swift */,
-				DD55457D26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift */,
 				DDB55D7427677C9500494BFB /* Cell builder */,
 			);
 			path = View;
@@ -1007,6 +1005,14 @@
 				DDAE0B6B26EE833A00DD5FAC /* MainMenuCellBuilder.swift */,
 			);
 			path = "Cell builder";
+			sourceTree = "<group>";
+		};
+		DDB55D7727709EE200494BFB /* TableViewDataDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				DDB55D752770987100494BFB /* MainMenuTableViewDelegate.swift */,
+			);
+			path = TableViewDataDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1175,6 +1181,7 @@
 				DDB55D6A27610E3200494BFB /* Grid.swift in Sources */,
 				DDB55D812770C16D00494BFB /* HourlyForecastView.swift in Sources */,
 				704173CD2656852A001B1335 /* LoadingCell.swift in Sources */,
+				DDB55D762770987100494BFB /* MainMenuTableViewDelegate.swift in Sources */,
 				707011002675648800B1B0F4 /* WeeklyForecastCell.swift in Sources */,
 				DD608F542746B66E00C9DE96 /* AppIconManger.swift in Sources */,
 				DD3C29B42752573500453ABF /* ColorThemeSettingsCellController.swift in Sources */,
@@ -1196,7 +1203,6 @@
 				705BB8D2261EFC3D00D658C4 /* WeatherData.swift in Sources */,
 				DD608F42273DA15300C9DE96 /* DegreeLabel.swift in Sources */,
 				DD3C29A4275249E800453ABF /* TelegramChatSupportCellController.swift in Sources */,
-				DD55457E26E9397B005DB276 /* MainMenuView+UITableViewDelegate.swift in Sources */,
 				DD2A876B26FE6800002AC36C /* ColorThemeManager.swift in Sources */,
 				DDAE0B6326ED0B1500DD5FAC /* CityDetailViewController.swift in Sources */,
 				DD3C299A274FAAEF00453ABF /* TelegramChatSupportCell.swift in Sources */,
