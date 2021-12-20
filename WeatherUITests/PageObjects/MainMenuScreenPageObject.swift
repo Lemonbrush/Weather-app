@@ -12,13 +12,17 @@ struct MainMenuScreenPageObject: Screen {
     let app: XCUIApplication
 
     private enum Identifiers {
-        static let cityCell = "MainMenuTableViewCell"
-        static let addCityButton = "SearchButton"
-        static let settingsButton = "SettingsButton"
+        static let cityCell = K.AccessabilityIdentifier.mainMenuTableViewCell
+        static let addCityButton = K.AccessabilityIdentifier.searchButton
+        static let settingsButton = K.AccessabilityIdentifier.settingsButton
     }
 
     func tapAddCityButton() -> AddCityScreenPageObject {
         app.buttons[Identifiers.addCityButton].tap()
+        return AddCityScreenPageObject(app: app)
+    }
+    
+    func getAddCityScreen() -> AddCityScreenPageObject {
         return AddCityScreenPageObject(app: app)
     }
 
