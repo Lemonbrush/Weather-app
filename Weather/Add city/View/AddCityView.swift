@@ -230,7 +230,9 @@ class AddCityView: UIView {
     }
 
     @objc func textFieldDidChange() {
-        guard let query = textField.text, let safeDelegate = delegate else {
+        guard let query = textField.text,
+              let safeDelegate = delegate,
+              query.count > 0 else {
             return
         }
         safeDelegate.searchCompleter.queryFragment = query
