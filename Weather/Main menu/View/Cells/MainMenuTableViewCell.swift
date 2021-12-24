@@ -141,7 +141,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     // Cell bounce animation
     private func bounce(_ bounce: Bool) {
-        self.transform = bounce ? CGAffineTransform(scaleX: 0.95, y: 0.95) : CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+        self.transform = bounce ? CGAffineTransform(scaleX: 0.97, y: 0.97) : CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
     }
 
     private func setUpConstraints() {
