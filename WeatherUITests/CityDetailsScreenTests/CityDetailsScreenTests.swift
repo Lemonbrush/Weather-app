@@ -20,9 +20,9 @@ class CityDetailsScreenTests: XCTestCase {
 
     func testCityDetailScreenOpening() throws {
         // arrange
-        app.tables.cells["MainMenuTableViewCell"].firstMatch.tap()
+        app.tables.cells[K.AccessabilityIdentifier.mainMenuTableViewCell].firstMatch.tap()
         // act
-        let mainDegreeLabel = app.staticTexts["CityDetailsMainDegreeLabel"].exists
+        let mainDegreeLabel = app.staticTexts["CityDetailsMainDegreeLabel"].waitForExistence(timeout: 5)
         // assert
         XCTAssertTrue(mainDegreeLabel)
     }

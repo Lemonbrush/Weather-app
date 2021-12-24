@@ -60,7 +60,7 @@ class MainMenuTableViewCellBuilderTests: XCTestCase {
         // act
         let result = builder
             .erase()
-            .build(imageByConditionName: cellImageName)
+            .build(imageByConditionId: conditionId)
             .content
         // assert
         XCTAssertEqual(result.conditionImage.image?.ciImage, expectedImage?.ciImage)

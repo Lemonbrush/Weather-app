@@ -20,7 +20,7 @@ class AddCityScreenTests: XCTestCase {
 
     func testExample() throws {
         _ = MainMenuScreenPageObject(app: app)
-            .tapAddCityButton()
+            .getAddCityScreen()
             .typeCityName("Moscow")
             .chooseCity()
             .checkIfAnyCellsExist()

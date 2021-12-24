@@ -42,6 +42,7 @@ extension MainMenuCellBuilder: MainMenuCellBuilderProtocol {
 
     func erase() -> Self {
         _content = MainMenuTableViewCell()
+        _content.accessibilityIdentifier = K.AccessabilityIdentifier.mainMenuTableViewCell
         return self
     }
     
