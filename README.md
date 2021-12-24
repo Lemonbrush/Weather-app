@@ -1,4 +1,4 @@
-![cover](https://github.com/Lemonbrush/Weather/blob/main/Project_description_images/images/cover.png)
+![cover](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/cover.png)
 
 ---
 
@@ -7,7 +7,7 @@
 
 #### Например:
 
-![otherWeatherApps](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Project_description_images/images/apps_examples.png)
+![otherWeatherApps](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/apps_examples.png)
 
 Это экраны приложений с прогнозом погоды от Apple, Яндекс и OpenWeather. Как можно заметить, большая часть информации, показанная на скриншотах, пользователю не нужна каждый раз, когда он хочет посмотреть прогноз погоды. Чаще всего пользователю нужено узнать только о текущей температуре на улице и прогноз на ближайшие 2-3 часа. Остальная информация захламляет обзор и только мешает. Экран превращается в газетную колонку, что тормозит восприятие информации, которая должна быть схвачена за одно мгновение  
 
@@ -33,13 +33,13 @@
 
 #### Концепт
 
-![concept](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Project_description_images/images/screen_map.png)
+![concept](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/screen_map.png)
 
 Выше показан общий макет приложения с картой экранов. Здесь можно увидеть главный экран, на котором уже можно узнать всю основную информацию о сохраненных городах. На экране с информацией о погоде в выбранном городе находится почасовой прогноз, прогноз на неделю и характеристики текущей погоды     
 
 #### Темы приложения
 
-![themes](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Project_description_images/images/color_themes.png)
+![themes](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/color_themes.png)
 
 В настройках можно выбрать тему приложения. Систма тем полностью кастомизируемая. В проекте есть JSON файл, в который можно добавить свою тему с указанием новых цветов для каждого элемента приложения
 
