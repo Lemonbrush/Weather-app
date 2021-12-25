@@ -11,18 +11,40 @@ struct ColorThemeData: Codable {
     let title: String
     let settingsScreen: SettingsScreen
     let mainMenu: MainMenu
+    let addCity: AddCity
     let cityDetails: CityDetails
 }
 
 // MARK: - Settings screen
 
 struct SettingsScreen: Codable {
+    let backgroundColor: String
+    let cellsBackgroundColor: String
+    let labelsColor: String
+    let labelsSecondaryColor: String
+    let appIconSelectBorderColor: String
+    let appIconDeselectBorderColor: String
+    let temperatureSwitchColor: String
     let colorBoxesColors: [String]
+}
+
+// MARK: - AddCity screen
+
+struct AddCity: Codable {
+    let backgroundColor: String
+    let searchFieldBackground: String
+    let cancelButtonColor: String
+    let placeholderColor: String
+    let handleColor: String
+    let isShadowVisible: Bool
+    let labelsColor: String
+    let labelsSecondaryColor: String
 }
 
 // MARK: - Main menu
 
 struct MainMenu: Codable {
+    let isStatusBarDark: Bool
     let backgroundColor: String
     let dateLabelColor: String
     let todayColor: String
@@ -34,6 +56,9 @@ struct MainMenu: Codable {
 struct Cells: Codable {
     let isShadowVisible: Bool
     let gradient: Gradient
+    let defaultBackground: String
+    let defaultLoadingViewsColor: String
+    let activityViewColor: String
     let clear_sky: Colors
     let few_clouds: Colors
     let scattered_clouds: Colors
@@ -69,6 +94,8 @@ struct EndPoint: Codable {
 // MARK: - City details
 
 struct CityDetails: Codable {
+    let isNavBarDark: Bool
+    let isStatusBarDark: Bool
     let hourlyForecast: BackgroundColor
     let weeklyForecast: BackgroundColor
     let weatherQuality: BackgroundColor

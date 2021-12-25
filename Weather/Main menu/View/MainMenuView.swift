@@ -8,6 +8,11 @@
 import UIKit
 
 class MainMenuView: UIView {
+    
+    // MARK: - Properties
+    
+    weak var viewController: MainMenuViewController?
+    var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Private properties
 
@@ -19,35 +24,35 @@ class MainMenuView: UIView {
 
     private lazy var currentDateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        label.textColor = colorThemeComponent.colorTheme.mainMenu.dateLabelColor
+        label.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .medium)
         label.text = "date label"
         return label
     }()
 
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Grid.pt32, weight: .bold)
         label.text = "Today"
-        label.textColor = colorThemeComponent.colorTheme.mainMenu.todayColor
         return label
     }()
 
     private lazy var settingsButton: UIButton = {
         let button = UIButton()
-        button.accessibilityIdentifier = "SettingsButton"
+        button.accessibilityIdentifier = K.AccessabilityIdentifier.settingsButton
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "switch.2"), for: .normal)
-        button.tintColor = colorThemeComponent.colorTheme.mainMenu.settingsIconColor
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        let image = UIImage(systemName: K.SystemImageName.switch2, withConfiguration: imageConfiguration)
+        button.setImage(image, for: .normal)
         return button
     }()
 
     private lazy var searchButton: UIButton = {
         let button = UIButton()
-        button.accessibilityIdentifier = "SearchButton"
+        button.accessibilityIdentifier = K.AccessabilityIdentifier.searchButton
         button.addTarget(self, action: #selector(addNewCityButtonPressed), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = colorThemeComponent.colorTheme.mainMenu.searchButtonColor
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .large)
+        let image = UIImage(systemName: K.SystemImageName.magnifyingglass, withConfiguration: imageConfiguration)
+        button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -64,60 +69,52 @@ class MainMenuView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt4
         return stackView
     }()
 
     private var todayStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = Grid.pt8
         return stackView
     }()
 
     private var refreshControl = UIRefreshControl()
-
-    private var welcomeImage: UIImageView!
 
     // MARK: - Public properties
 
     var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         // Space before the first cell
-        tableView.contentInset.top = 10 // Getting rid of any delays between user touch and cell animation
+        tableView.contentInset.top = Grid.pt8 // Getting rid of any delays between user touch and cell animation
         tableView.delaysContentTouches = false // Setting up drag and drop delegates
         tableView.dragInteractionEnabled = true
         tableView.register(LoadingCell.self, forCellReuseIdentifier: K.CellIdentifier.cityLoadingCell)
         tableView.register(MainMenuTableViewCell.self, forCellReuseIdentifier: K.CellIdentifier.cityCell)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = UIColor(named: "White98")
+        tableView.backgroundColor = .clear
 
         return tableView
     }()
 
-    weak var viewController: MainMenuViewController?
-    var colorThemeComponent: ColorThemeProtocol
-
     // MARK: - Construction
 
-    init(colorThemeComponent: ColorThemeProtocol) {
+    init(colorThemeComponent: ColorThemeProtocol, tableViewDataSourceDelegate: MainMenuTableViewDelegate) {
         self.colorThemeComponent = colorThemeComponent
         super.init(frame: .zero)
-
-        backgroundColor = colorThemeComponent.colorTheme.mainMenu.backgroundColor
         
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE d MMMM"
-        let result = dateFormatter.string(from: currentDate)
+        let result = dateFormatter.string(from: currentDate).uppercased()
         currentDateLabel.text = result
 
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
+        tableView.dataSource = tableViewDataSourceDelegate
+        tableView.delegate = tableViewDataSourceDelegate
+        tableView.dragDelegate = tableViewDataSourceDelegate
+        tableView.dropDelegate = tableViewDataSourceDelegate
         self.addSubview(tableView)
 
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -137,12 +134,23 @@ class MainMenuView: UIView {
 
         tableView.tableHeaderView = tableViewHeaderView
 
+        reloadViews()
         setUpConstraints()
         tableView.layoutIfNeeded()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Functions
+    
+    func reloadViews() {
+        searchButton.tintColor = colorThemeComponent.colorTheme.mainMenu.searchButtonColor
+        settingsButton.tintColor = colorThemeComponent.colorTheme.mainMenu.settingsIconColor
+        todayLabel.textColor = colorThemeComponent.colorTheme.mainMenu.todayColor
+        currentDateLabel.textColor = colorThemeComponent.colorTheme.mainMenu.dateLabelColor
+        backgroundColor = colorThemeComponent.colorTheme.mainMenu.backgroundColor
     }
 
     // MARK: - Private Fucnctions
@@ -155,26 +163,26 @@ class MainMenuView: UIView {
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
         // TableView header
-        tableViewHeaderView.heightAnchor.constraint(equalToConstant: 85).isActive = true
+        tableViewHeaderView.heightAnchor.constraint(equalToConstant: Grid.pt84).isActive = true
         tableViewHeaderView.widthAnchor.constraint(equalTo: tableView.widthAnchor).isActive = true
 
         // Main stackView
         mainHeaderStackView.leadingAnchor.constraint(equalTo: tableViewHeaderView.leadingAnchor,
-                                                     constant: 15).isActive = true
+                                                     constant: Grid.pt16).isActive = true
 
         let mainHeaderStackViewConstaint = mainHeaderStackView.trailingAnchor.constraint(equalTo: tableViewHeaderView.trailingAnchor,
-                                                                                         constant: -15)
+                                                                                         constant: -Grid.pt16)
         mainHeaderStackViewConstaint.priority = UILayoutPriority(999)
         mainHeaderStackViewConstaint.isActive = true
 
         mainHeaderStackView.bottomAnchor.constraint(equalTo: tableViewHeaderView.bottomAnchor,
-                                                    constant: -5).isActive = true
+                                                    constant: -Grid.pt4).isActive = true
         mainHeaderStackView.topAnchor.constraint(equalTo: tableViewHeaderView.topAnchor,
-                                                 constant: 5).isActive = true
+                                                 constant: Grid.pt4).isActive = true
 
         // Search button
-        searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        searchButton.heightAnchor.constraint(equalTo: settingsButton.heightAnchor).isActive = true
+        searchButton.widthAnchor.constraint(equalTo: settingsButton.widthAnchor).isActive = true
     }
 
     // MARK: - Actions

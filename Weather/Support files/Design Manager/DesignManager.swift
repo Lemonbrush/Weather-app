@@ -27,6 +27,8 @@ struct DesignManager {
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowRadius = 7
     }
+    
+    static let standartImageConfiguration = UIImage.SymbolConfiguration(pointSize: 20)
 
     // Gradient
     static func getStandartGradientColor(withStyle style: GradientColors) -> [CGColor] {

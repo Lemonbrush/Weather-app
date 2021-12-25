@@ -21,7 +21,7 @@ class ColorThemeCell: UITableViewCell {
     
     private let leftStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt8
         stackView.axis = .vertical
         stackView.alignment = .leading
         return stackView
@@ -31,7 +31,7 @@ class ColorThemeCell: UITableViewCell {
     
     let checkmarkImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = UIImage(systemName: K.SystemImageName.checkmark)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
@@ -41,7 +41,7 @@ class ColorThemeCell: UITableViewCell {
     let subtitle: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16)
         
         return label
     }()
@@ -52,6 +52,8 @@ class ColorThemeCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
         
         leftStackView.addArrangedSubview(colorBoxesView)
         leftStackView.addArrangedSubview(subtitle)
@@ -71,10 +73,10 @@ class ColorThemeCell: UITableViewCell {
     // MARK: - Private functions
     
     private func setupConstraints() {
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        mainStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt16).isActive = true
+        mainStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt20).isActive = true
     }
     
     // MARK: - Public functions

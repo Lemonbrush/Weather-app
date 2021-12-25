@@ -7,22 +7,28 @@
 
 import UIKit
 
-class ColorThemeSettingsViewController: UIViewController {
+protocol ReloadColorThemeProtocol {
+    func reloadColorTheme()
+}
+
+class ColorThemeSettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
-    private let mainView = ColorThemeSettingsView(colorThemes: ColorThemeManager.getColorThemes())
+    private lazy var mainView = ColorThemeSettingsView(currentColorTheme: colorThemeComponent,
+                                                  colorThemes: ColorThemeManager.getColorThemes())
     
     // MARK: - Public properties
     
     var colorThemeComponent: ColorThemeProtocol
-    var mainMenuDelegate: MainMenuDelegate?
+    var reloadingViews: [ReloadColorThemeProtocol] = []
     
     // MARK: - Lifecycle
     
     init(colorThemeComponent: ColorThemeProtocol) {
         self.colorThemeComponent = colorThemeComponent
         super.init(nibName: nil, bundle: nil)
+        reloadingViews.append(mainView)
     }
     
     required init?(coder: NSCoder) {
@@ -41,8 +47,14 @@ class ColorThemeSettingsViewController: UIViewController {
     
     // MARK: - Public properties
     
+    func reloadColorTheme() {
+        mainView.reloadColorTheme()
+    }
+    
     func refreshCurrentColorThemeSettingsCell(colorThemePosition: Int) {
         colorThemeComponent.colorTheme = UserDefaultsManager.ColorTheme.getColorTheme(colorThemePosition)
-        mainMenuDelegate?.reloadTable()
+        for reloadingView in reloadingViews {
+            reloadingView.reloadColorTheme()
+        }
     }
 }

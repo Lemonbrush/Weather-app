@@ -2,10 +2,113 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+<string>Will you allow this app to always know your location?</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Do you allow this app to know your current location?</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Do you allow this app to know your current location?</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>cloudNight</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>darkWhiteCloudAppIcon</string>
+				</array>
+			</dict>
+			<key>sunSet</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>whiteSunAppIcon</string>
+				</array>
+			</dict>
+			<key>cornerSun</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>cornerSun</string>
+				</array>
+			</dict>
+			<key>orangeCloud</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>orangeCloud</string>
+				</array>
+			</dict>
+			<key>moon</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>moon</string>
+				</array>
+			</dict>
+			<key>yellowSun</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>yellowSun</string>
+				</array>
+			</dict>
+			<key>blueWhiteCloud</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>blueWhiteCloud</string>
+				</array>
+			</dict>
+		</dict>
+		<key>UINewsstandIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>cloud</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>darkWhiteCloudAppIcon</string>
+				</array>
+			</dict>
+			<key>sun</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>whiteSunAppIcon</string>
+				</array>
+			</dict>
+		</dict>
+		<key>UINewsstandIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -47,5 +150,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

@@ -15,7 +15,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     private var mainStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 8
+        stackView.spacing = Grid.pt8
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.axis = .horizontal
@@ -25,7 +25,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     private var leftStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = Grid.pt4
         stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
@@ -35,7 +35,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     private var rightStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.spacing = 10
+        stackView.spacing = Grid.pt12
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.axis = .horizontal
@@ -56,7 +56,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     var degreeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: Grid.pt44, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
         return label
@@ -64,14 +64,14 @@ class MainMenuTableViewCell: UITableViewCell {
 
     var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: Grid.pt16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     var cityNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: Grid.pt24, weight: .regular)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -94,7 +94,7 @@ class MainMenuTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessibilityIdentifier = "MainMenuTableViewCell"
+        accessibilityIdentifier = K.AccessabilityIdentifier.mainMenuTableViewCell
         selectionStyle = .none
 
         // Setting up cell appearance
@@ -122,6 +122,8 @@ class MainMenuTableViewCell: UITableViewCell {
 
         addSubview(weatherBackgroundView)
         weatherBackgroundView.addSubview(mainStackView)
+        
+        setUpConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -133,53 +135,38 @@ class MainMenuTableViewCell: UITableViewCell {
         // Configuring gradient frame when views calculating
         gradient.frame = weatherBackgroundView.bounds
         DesignManager.setBackgroundStandartShape(layer: gradient)
-        setUpConstraints()
     }
 
     // MARK: - Private functions
 
     // Cell bounce animation
     private func bounce(_ bounce: Bool) {
-        // Animation settings and allowing user to interact while the animation is running
-        UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 1.0,
-                       options: [.curveEaseOut, .allowUserInteraction],
-                       animations: {
-                        // Scale in and out
-                        self.transform = bounce ? CGAffineTransform(scaleX: 0.95, y: 0.95) :
-                            CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
-                       }, completion: nil)
+        self.transform = bounce ? CGAffineTransform(scaleX: 0.97, y: 0.97) : CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
     }
 
     private func setUpConstraints() {
         // Background
-        weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        let weatherBackgroundViewBottomConstraint = weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+        weatherBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: Grid.pt4).isActive = true
+        let weatherBackgroundViewBottomConstraint = weatherBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Grid.pt4)
         weatherBackgroundViewBottomConstraint.priority = UILayoutPriority(999)
         weatherBackgroundViewBottomConstraint.isActive = true
-        weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        weatherBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Grid.pt16).isActive = true
+        weatherBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Grid.pt16).isActive = true
         
 
         // Condition image
-        conditionImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        conditionImage.widthAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+        conditionImage.heightAnchor.constraint(greaterThanOrEqualToConstant: Grid.pt40).isActive = true
+        conditionImage.widthAnchor.constraint(greaterThanOrEqualToConstant: Grid.pt40).isActive = true
 
         // Degree label
-        let degreeLabelConstraint = degreeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 90)
+        let degreeLabelConstraint = degreeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: Grid.pt92)
         degreeLabelConstraint.isActive = true
         
-
         // MainStackView
-        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: 10).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo:
-                                                weatherBackgroundView.bottomAnchor, constant: -10).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo:
-                                                weatherBackgroundView.leadingAnchor, constant: 20).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo:
-                                                    weatherBackgroundView.trailingAnchor, constant: -20).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: weatherBackgroundView.topAnchor, constant: Grid.pt12).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: weatherBackgroundView.bottomAnchor, constant: -Grid.pt12).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: weatherBackgroundView.leadingAnchor, constant: Grid.pt20).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: weatherBackgroundView.trailingAnchor, constant: -Grid.pt20).isActive = true
     }
 
     // MARK: - Public functions

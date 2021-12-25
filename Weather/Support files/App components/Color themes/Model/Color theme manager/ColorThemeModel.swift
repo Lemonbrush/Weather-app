@@ -19,11 +19,30 @@ struct ColorThemeModel {
         rawColorThemeDataModel.title
     }
     
+    var addCityScreen: AddCityColorTheme {
+        return AddCityColorTheme(backgroundColor: makeColor(hex: rawColorThemeDataModel.addCity.backgroundColor),
+                                 searchFieldBackground: makeColor(hex: rawColorThemeDataModel.addCity.searchFieldBackground),
+                                 cancelButtonColor: makeColor(hex: rawColorThemeDataModel.addCity.cancelButtonColor),
+                                 placeholderColor: makeColor(hex: rawColorThemeDataModel.addCity.placeholderColor),
+                                 handleColor: makeColor(hex: rawColorThemeDataModel.addCity.handleColor),
+                                 isShadowVisible: rawColorThemeDataModel.addCity.isShadowVisible,
+                                 labelsColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsColor),
+                                 labelsSecondaryColor: makeColor(hex: rawColorThemeDataModel.addCity.labelsSecondaryColor))
+    }
+    
     var settingsScreen: SettingsScreenColorTheme {
         let settingsScreen = rawColorThemeDataModel.settingsScreen
         let colorBoxesColors = makeColors(hexes: settingsScreen.colorBoxesColors)
+        let settings = rawColorThemeDataModel.settingsScreen
 
-        return SettingsScreenColorTheme(colorBoxesColors: colorBoxesColors)
+        return SettingsScreenColorTheme(backgroundColor: makeColor(hex: settings.backgroundColor),
+                                        cellsBackgroundColor: makeColor(hex: settings.cellsBackgroundColor),
+                                        labelsColor: makeColor(hex: settings.labelsColor),
+                                        labelsSecondaryColor: makeColor(hex: settings.labelsSecondaryColor),
+                                        appIconSelectBorderColor: makeColor(hex: settings.appIconSelectBorderColor),
+                                        appIconDeselectBorderColor: makeColor(hex: settings.appIconDeselectBorderColor),
+                                        temperatureSwitchColor: makeColor(hex: settings.temperatureSwitchColor),
+                                        colorBoxesColors: colorBoxesColors)
     }
     
     var mainMenu: MainMenuColorThemeModel {
@@ -33,6 +52,9 @@ struct ColorThemeModel {
                                                     endPoint: CGPoint(x: mainMenu.cells.gradient.endPoint.x, y: mainMenu.cells.gradient.endPoint.y))
         let cellsMenu = CellsColorThemeModel(isShadowVisible: mainMenu.cells.isShadowVisible,
                                              gradient: cellsGradient,
+                                             defaultBackground: makeColor(hex: mainMenu.cells.defaultBackground),
+                                             defaultLoadingViewsColor: makeColor(hex: mainMenu.cells.defaultLoadingViewsColor),
+                                             activityViewColor: makeColor(hex: mainMenu.cells.activityViewColor),
                                              clearSky: convertToColorThemeModel(mainMenu.cells.clear_sky),
                                              fewClouds: convertToColorThemeModel(mainMenu.cells.few_clouds),
                                              scatteredClouds: convertToColorThemeModel(mainMenu.cells.scattered_clouds),
@@ -42,7 +64,8 @@ struct ColorThemeModel {
                                              thunderstorm: convertToColorThemeModel(mainMenu.cells.rain),
                                              snow: convertToColorThemeModel(mainMenu.cells.snow),
                                              mist: convertToColorThemeModel(mainMenu.cells.mist))
-        return MainMenuColorThemeModel(backgroundColor: makeColor(hex: mainMenu.backgroundColor),
+        return MainMenuColorThemeModel(isStatusBarDark: rawColorThemeDataModel.mainMenu.isStatusBarDark,
+                                       backgroundColor: makeColor(hex: mainMenu.backgroundColor),
                                        dateLabelColor: makeColor(hex: mainMenu.dateLabelColor),
                                        todayColor: makeColor(hex: mainMenu.todayColor),
                                        settingsIconColor: makeColor(hex: mainMenu.settingsIconColor),
@@ -74,7 +97,9 @@ struct ColorThemeModel {
                                                    pressure: makeColor(hex: cityDetails.iconColors.pressure),
                                                    visibility: makeColor(hex: cityDetails.iconColors.visibility))
         
-        return CityDetailsColorThemeModel(hourlyForecast: convertToBackgroundColorColorThemeModel(cityDetails.hourlyForecast),
+        return CityDetailsColorThemeModel(isNavBarDark: rawColorThemeDataModel.cityDetails.isNavBarDark,
+                                          isStatusBarDark: rawColorThemeDataModel.cityDetails.isStatusBarDark,
+                                          hourlyForecast: convertToBackgroundColorColorThemeModel(cityDetails.hourlyForecast),
                                           weeklyForecast: convertToBackgroundColorColorThemeModel(cityDetails.weeklyForecast),
                                           weatherQuality: convertToBackgroundColorColorThemeModel(cityDetails.weatherQuality),
                                           contentBackground: ContentBackgroundColorTheme(color: makeColor(hex: cityDetails.contentBackground.color),
@@ -95,13 +120,28 @@ struct ColorThemeModel {
                                                               y: 0.0),
                                        endPoint: EndPoint(x: 0.0,
                                                           y: 0.0))
+        let addCity = AddCity(backgroundColor: white,
+                              searchFieldBackground: white,
+                              cancelButtonColor: black,
+                              placeholderColor: black,
+                              handleColor: black,
+                              isShadowVisible: true,
+                              labelsColor: black,
+                              labelsSecondaryColor: black)
         
-        let settingsScreen = SettingsScreen(colorBoxesColors: [white,
-                                                               white,
-                                                               white,
-                                                               white])
+        let settingsScreen = SettingsScreen(backgroundColor: white,
+                                            cellsBackgroundColor: white,
+                                            labelsColor: black,
+                                            labelsSecondaryColor: black,
+                                            appIconSelectBorderColor: black,
+                                            appIconDeselectBorderColor: white,
+                                            temperatureSwitchColor: white,
+                                            colorBoxesColors: Array.init(repeating: white, count: 4))
         let defaultCells = Cells(isShadowVisible: true,
                                  gradient: defaultGradient,
+                                 defaultBackground: white,
+                                 defaultLoadingViewsColor: white,
+                                 activityViewColor: black,
                                  clear_sky: defaultColors,
                                  few_clouds: defaultColors,
                                  scattered_clouds: defaultColors,
@@ -111,7 +151,8 @@ struct ColorThemeModel {
                                  thunderstorm: defaultColors,
                                  snow: defaultColors,
                                  mist: defaultColors)
-        let defaultMainMenu = MainMenu(backgroundColor: white,
+        let defaultMainMenu = MainMenu(isStatusBarDark: true,
+                                       backgroundColor: white,
                                        dateLabelColor: black,
                                        todayColor: black,
                                        settingsIconColor: black,
@@ -135,7 +176,9 @@ struct ColorThemeModel {
                                            cloudiness: black,
                                            pressure: black,
                                            visibility: black)
-        let defaultCityDetails = CityDetails(hourlyForecast: defaultBackgroundColor,
+        let defaultCityDetails = CityDetails(isNavBarDark: false,
+                                             isStatusBarDark: true,
+                                             hourlyForecast: defaultBackgroundColor,
                                              weeklyForecast: defaultBackgroundColor,
                                              weatherQuality: defaultBackgroundColor,
                                              contentBackground: ContentBackground(color: white, isClearBackground: false),
@@ -149,6 +192,7 @@ struct ColorThemeModel {
         rawColorThemeDataModel = ColorThemeData(title: "Default",
                                                 settingsScreen: settingsScreen,
                                                 mainMenu: defaultMainMenu,
+                                                addCity: addCity,
                                                 cityDetails: defaultCityDetails)
     }
     
@@ -239,7 +283,7 @@ struct ColorThemeModel {
     }
     
     private func makeColor(hex: String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)

@@ -7,31 +7,36 @@
 
 import UIKit
 
-class SettingsView: UIView {
+class SettingsView: UIView, ReloadColorThemeProtocol {
+    
+    // MARK: - Properties
+
+    var settingsSections: [SettingsSection]? = []
     
     // MARK: - Private properties
 
-     var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.accessibilityIdentifier = "SettingsTableView"
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+     private var tableView: UITableView = {
+         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+         tableView.accessibilityIdentifier = K.AccessabilityIdentifier.settingsTableView
+         tableView.translatesAutoresizingMaskIntoConstraints = false
+         tableView.backgroundColor = .clear
+         return tableView
     }()
     
-    // MARK: - Public properties
-    
-    weak var viewControllerOwner: SettingsViewController?
-    var settingsSections: [SettingsSection]? = []
+    private let colorThemeComponent: ColorThemeProtocol
     
     // MARK: - Construction
     
-    required init() {
+    required init(colorTheme: ColorThemeProtocol) {
+        self.colorThemeComponent = colorTheme
         super.init(frame: .zero)
+        
         tableView.delegate = self
         tableView.dataSource = self
 
         addSubview(tableView)
 
+        reloadColorTheme()
         setUpConstraints()
     }
     
@@ -39,10 +44,16 @@ class SettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = colorThemeComponent.colorTheme.settingsScreen.backgroundColor
+        tableView.reloadData()
+    }
+    
     // MARK: - Private functions
 
     private func setUpConstraints() {
-        // TableView
         tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -69,6 +80,11 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return settingsSections?[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

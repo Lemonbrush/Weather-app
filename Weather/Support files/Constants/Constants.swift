@@ -24,14 +24,24 @@ struct K {
         static let cityLoadingCell = "cityLoadingCell"
         static let dailyForecastCell = "dailyForecastCell"
         static let hourlyForecastCell = "hourlyForecastCell"
+        static let colorThemeCell = "colorThemeCell"
+        static let appIconCell = "AppIconCell"
     }
 
     struct ImageName {
         static let deleteImage = "DeleteAction"
-        static let defaultImage = "WelcomeImage"
+        
+        static let appIcon = "AppIcon"
+        static let darkWhiteCloudAppIcon3x = "darkWhiteCloudAppIcon@3x.png"
+        static let whiteSunAppIcon3x = "whiteSunAppIcon@3x.png"
+        static let cornerSun3x = "cornerSun@3x.png"
+        static let orangeCloud3x = "orangeCloud@3x.png"
+        static let moon3x = "moon@3x.png"
+        static let yellowSun3x = "yellowSun@3x.png"
+        static let blueWhiteCloud3x = "blueWhiteCloud@3x.png"
     }
     
-    struct systemImageName {
+    struct SystemImageName {
         static let sunMaxFill = "sun.max.fill"
         static let sunriseFill = "sunrise.fill"
         static let sunsetFill = "sunset.fill"
@@ -45,6 +55,31 @@ struct K {
         static let cloudRainFill = "cloud.rain.fill"
         static let cloudDrizzleFill = "cloud.drizzle.fill"
         static let cloudBoltFill = "cloud.bolt.fill"
+        static let switch2 = "switch.2"
+        static let magnifyingglass = "magnifyingglass"
+        static let checkmark = "checkmark"
+        static let envelope = "envelope"
+        static let paperplane = "paperplane"
+        static let paintbrush = "paintbrush"
+        static let ruler = "ruler"
+        
+        static let arrowDown = "chevron.compact.down"
+        static let arrowUp = "chevron.compact.up"
+    }
+    
+    struct AccessabilityIdentifier {
+        static let mainMenuTableViewCell = "MainMenuTableViewCell"
+        
+        static let settingsButton = "SettingsButton"
+        static let searchButton = "SearchButton"
+        
+        static let addCityCell = "AddCityCell"
+        
+        static let colorSettingsTableView = "ColorSettingsTableView"
+        
+        static let settingsUnitSwitch = "SettingsUnitSwitch"
+        
+        static let settingsTableView = "SettingsTableView"
     }
 
     struct UserDefaults {
@@ -54,6 +89,8 @@ struct K {
         
         static let currentColorTheme = "currentColorTheme"
         static let colorThemePositionNumber = "colorThemePositionNumber"
+        
+        static let appIconNumber = "AppIconNumber"
     }
 
     struct Network {
@@ -65,6 +102,16 @@ struct K {
         static let units = "units="
         static let exclude = "exclude="
         static let minutely = "minutely"
+    }
+    
+    struct Links {
+        static let telegramAppLink = "https://t.me/climaWeather"
+        static let telegramAppstoreLink = "itms-apps://itunes.apple.com/app/id686449807"
+    }
+    
+    struct Misc {
+        static let defaultSityName = "-"
+        static let colorThemeLocalFile = "ColorThemes"
     }
 
     struct Colors {

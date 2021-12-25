@@ -25,10 +25,9 @@ struct NetworkManager {
         let lat = city.latitude
         let lon = city.longitude
         let appid = K.Network.apiKey
-        let units = UserDefaultsManager.getUnitData() ?? "metric"
-        let minutely = "minutely"
+        let units = UserDefaultsManager.UnitData.get()
 
-        let urlString = "\(baseURL)lat=\(lat)&lon=\(lon)&appid=\(appid)&units=\(units)&exclude=\(minutely)"
+        let urlString = "\(baseURL)lat=\(lat)&lon=\(lon)&appid=\(appid)&units=\(units)&exclude=\(K.Network.minutely)"
         performRequest(with: urlString, at: position)
     }
 
@@ -41,8 +40,6 @@ struct NetworkManager {
         if let url = URL(string: encodedURLString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, _, error in
-                //let str = String(decoding: data!, as: UTF8.self)
-                //print("\n\n\n\(str)\n\n\n")
                 // In case of error
                 guard error == nil else {
                     delegate?.didFailWithError(error: error!) // let the delegate handle the error
@@ -67,7 +64,7 @@ struct NetworkManager {
             let result = WeatherModel(lat: decodedData.lat,
                                       lon: decodedData.lon,
                                       conditionId: decodedData.current.weather[0].id,
-                                      cityName: "-",
+                                      cityName: K.Misc.defaultSityName,
                                       temperature: decodedData.current.temp,
                                       timezone: decodedData.timezone_offset,
                                       feelsLike: decodedData.current.feels_like,

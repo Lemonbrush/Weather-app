@@ -7,9 +7,8 @@
 
 import UIKit
 
-protocol MainMenuDelegate: AnyObject {
+protocol MainMenuDelegate: ReloadColorThemeProtocol {
     func fetchWeatherData()
-    func reloadTable()
 }
 
 protocol AddCityProtocol {
@@ -26,8 +25,16 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     private let fadeTransitionAnimator = FadeTransitionAnimator()
     private var weatherManager = NetworkManager()
     private var tableView: UITableView?
+    private lazy var tableViewDelegate: MainMenuTableViewDelegate = {
+        let tableViewDelegate = MainMenuTableViewDelegate(colorThemeComponent: appComponents)
+        tableViewDelegate.viewController = self
+        return tableViewDelegate
+    }()
+    
     private var savedCities = [SavedCity]()
-    private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents)
+    private lazy var mainManuView = MainMenuView(colorThemeComponent: appComponents,
+                                                 tableViewDataSourceDelegate: tableViewDelegate)
+    private var activeErrorString: String?
 
     // MARK: - Public properties
 
@@ -36,7 +43,7 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     var displayWeather: [WeatherModel?] = []
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return appComponents.colorTheme.mainMenu.isStatusBarDark ? .darkContent : .lightContent
     }
 
     // MARK: - Lifecycle
@@ -53,7 +60,6 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     override func loadView() {
         view = mainManuView
         mainManuView.viewController = self
-        mainManuView.colorThemeComponent = appComponents
         tableView = mainManuView.tableView
     }
 
@@ -70,6 +76,10 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        if displayWeather.isEmpty {
+            showAddCityVC()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,17 +90,29 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
 
     // MARK: - Functions
 
-    // Navigation functions
     func showAddCityVC() {
-        let destinationVC = AddCityViewController()
+        let savedCityTitles = displayWeather.compactMap { $0?.cityName }
+        let destinationVC = AddCityViewController(colorThemeComponent: appComponents, savedCityTitles: savedCityTitles)
         destinationVC.delegate = self
         present(destinationVC, animated: true, completion: nil)
     }
 
     func showDetailViewVC() {
+        guard let displayWeatherIndex = self.tableView?.indexPathForSelectedRow?.row,
+              let strongWeatherData = displayWeather[displayWeatherIndex] else {
+                  let alert = AlertViewBuilder()
+                      .build(title: "Oops", message: activeErrorString ?? "Something went wrong", preferredStyle: .alert)
+                      .build(title: "Ok", style: .default, handler: nil)
+                      .content
+                  
+                  DispatchQueue.main.async {
+                      self.present(alert, animated: true, completion: nil)
+                  }
+            return
+        }
+        
         let destinationVC = CityDetailViewController(colorThemeComponent: appComponents)
-        let indexPath = self.tableView?.indexPathForSelectedRow!
-        destinationVC.localWeatherData = displayWeather[indexPath!.row]
+        destinationVC.localWeatherData = strongWeatherData
         destinationVC.colorThemeComponent = appComponents
         navigationController?.pushViewController(destinationVC, animated: true)
     }
@@ -98,14 +120,15 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
     func showSettingsVC() {
         let destinationVC = SettingsViewController(colorThemeComponent: appComponents)
         destinationVC.mainMenuDelegate = self
-        destinationVC.colorThemeComponent = appComponents
 
         let navigationController = UINavigationController(rootViewController: destinationVC)
         present(navigationController, animated: true, completion: nil)
     }
 
     func fetchWeatherData() {
-        guard let savedCities = dataStorage?.getSavedItems else { return }
+        guard let savedCities = dataStorage?.getSavedItems else {
+            return
+        }
 
         self.savedCities = savedCities
         displayWeather.removeAll()
@@ -119,7 +142,8 @@ class MainMenuViewController: UIViewController, MainMenuDelegate {
         }
     }
     
-    func reloadTable() {
+    func reloadColorTheme() {
+        mainManuView.reloadViews()
         tableView?.reloadData()
     }
 }
@@ -149,29 +173,60 @@ extension MainMenuViewController: AddCityDelegate {
     }
 
     func didFailAddingNewCityWithError(error: Error?) {
-        // TODO: handle new city adding failure
+        let errorMessage: String
+        
+        if let strongError = error {
+            errorMessage = strongError.localizedDescription
+        } else {
+            errorMessage = "Something went wrong :<"
+        }
+        
+        let alert = AlertViewBuilder()
+            .build(title: "Oops", message: errorMessage, preferredStyle: .alert)
+            .build(title: "Ok", style: .default, handler: nil)
+            .content
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
 extension MainMenuViewController: NetworkManagerDelegate {
     func didUpdateWeather(_ weatherManager: NetworkManager, weather: WeatherModel, at position: Int) {
-
         DispatchQueue.main.async {
-
             self.displayWeather[position] = weather
-
             let indexPath = IndexPath(row: position, section: 0)
-
             // Put chosen city name from addCity autoCompletion into weather data model
             self.displayWeather[indexPath.row]?.cityName = self.savedCities[indexPath.row].name
-
             self.tableView?.reloadRows(at: [indexPath], with: .fade)
         }
     }
 
     func didFailWithError(error: Error) {
-        print("Failed with - \(error)")
-        // TODO: handle network disconection
+        let removeEmptyCells: ((UIAlertAction) -> (Void)) = { _ in
+            for (i, weatherModel) in self.displayWeather.enumerated() {
+                if weatherModel == nil {
+                    self.deleteItem(at: i)
+                    self.displayWeather.remove(at: i)
+                    self.tableView?.reloadData()
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            let alert = AlertViewBuilder()
+                .build(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
+                .build(title: "Ok", style: .default, handler: removeEmptyCells)
+                .content
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+extension MainMenuViewController: MainMenuTableViewDataSourceDelegate {
+    func didSelectRow() {
+        showDetailViewVC()
     }
 }
 
@@ -182,7 +237,6 @@ extension MainMenuViewController: UIViewControllerTransitioningDelegate, UINavig
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-
         return fadeTransitionAnimator
     }
 }

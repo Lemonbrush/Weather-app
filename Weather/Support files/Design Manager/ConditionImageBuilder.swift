@@ -19,7 +19,7 @@ protocol ConditionImageBuilderProtocol: AnyObject {
     func erase(_ customeColorMode: ConditionColorMode?) -> Self
     
     @discardableResult
-    func build(systemImageName imageName: String) -> Self
+    func build(systemImageName imageName: String, pointConfiguration: CGFloat) -> Self
     
     @discardableResult
     func buildColor(_ color: UIColor) -> Self
@@ -49,8 +49,10 @@ extension ConditionImageBuilder: ConditionImageBuilderProtocol {
         return self
     }
     
-    func build(systemImageName imageName: String) -> Self {
-        if let safeImageName = UIImage(systemName: imageName) {
+    func build(systemImageName imageName: String, pointConfiguration: CGFloat) -> Self {
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: pointConfiguration)
+        
+        if let safeImageName = UIImage(systemName: imageName, withConfiguration: imageConfiguration) {
             _content = safeImageName.withRenderingMode(.alwaysOriginal)
         }
         return self

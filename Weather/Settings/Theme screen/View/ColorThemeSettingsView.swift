@@ -7,20 +7,21 @@
 
 import UIKit
 
-class ColorThemeSettingsView: UIView {
+class ColorThemeSettingsView: UIView, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.accessibilityIdentifier = "ColorSettingsTableView"
+        tableView.accessibilityIdentifier = K.AccessabilityIdentifier.colorSettingsTableView
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ColorThemeCell.self, forCellReuseIdentifier: "colorThemeCell")
+        tableView.register(ColorThemeCell.self, forCellReuseIdentifier: K.CellIdentifier.colorThemeCell)
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
     private var chosenColorThemePosition = 0
-    
+    private var currentColorTheme: ColorThemeProtocol
     private var colorThemes: [ColorThemeModel]
     
     // MARK: - Public properties
@@ -29,11 +30,13 @@ class ColorThemeSettingsView: UIView {
     
     // MARK: - Construction
     
-    init(colorThemes: [ColorThemeModel]) {
+    init(currentColorTheme: ColorThemeProtocol ,colorThemes: [ColorThemeModel]) {
+        self.currentColorTheme = currentColorTheme
         self.colorThemes = colorThemes
         
         super.init(frame: .zero)
         
+        reloadColorTheme()
         refreshCheckedColorTmeme()
         
         tableView.delegate = self
@@ -48,6 +51,13 @@ class ColorThemeSettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        backgroundColor = currentColorTheme.colorTheme.settingsScreen.backgroundColor
+        tableView.reloadData()
+    }
+    
     // MARK: - Private functions
 
     private func setUpConstraints() {
@@ -59,7 +69,6 @@ class ColorThemeSettingsView: UIView {
     
     private func refreshCheckedColorTmeme() {
         chosenColorThemePosition = UserDefaultsManager.ColorTheme.getCurrentColorThemeNumber()
-        tableView.reloadData()
     }
 }
 
@@ -70,18 +79,20 @@ extension ColorThemeSettingsView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "colorThemeCell") as? ColorThemeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.colorThemeCell) as? ColorThemeCell else {
             return UITableViewCell()
         }
         
         let colorTheme = colorThemes[indexPath.row]
         cell.resetCell()
-        cell.subtitle.text = colorTheme.title
         if chosenColorThemePosition == indexPath.row {
             cell.checkmarkImage.isHidden = false
         }
-        
+        cell.subtitle.text = colorTheme.title
+        cell.checkmarkImage.tintColor = currentColorTheme.colorTheme.settingsScreen.labelsColor
+        cell.subtitle.textColor = currentColorTheme.colorTheme.settingsScreen.labelsSecondaryColor
         cell.colorBoxesView.setupBlocks(colorTheme.settingsScreen.colorBoxesColors)
+        cell.backgroundColor = currentColorTheme.colorTheme.settingsScreen.cellsBackgroundColor
         
         return cell
     }

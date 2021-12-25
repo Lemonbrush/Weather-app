@@ -8,13 +8,25 @@
 import Foundation
 
 struct UserDefaultsManager {
-    static func getUnitData() -> String? {
-        return UserDefaults.standard.string(forKey: K.UserDefaults.unit)
-    }
+    struct UnitData {
+        static func get() -> String {
+            return UserDefaults.standard.string(forKey: K.UserDefaults.unit) ?? K.UserDefaults.metric
+        }
 
-    static func setUnitData(with unit: String) {
-        if unit == K.UserDefaults.imperial || unit == K.UserDefaults.metric {
-            UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+        static func set(with unit: String) {
+            if unit == K.UserDefaults.imperial || unit == K.UserDefaults.metric {
+                UserDefaults.standard.setValue(unit, forKey: K.UserDefaults.unit)
+            }
+        }
+    }
+    
+    struct AppIcon {
+        static func get() -> Int {
+            return UserDefaults.standard.integer(forKey: K.UserDefaults.appIconNumber)
+        }
+
+        static func set(with num: Int) {
+            UserDefaults.standard.setValue(num, forKey: K.UserDefaults.appIconNumber)
         }
     }
     

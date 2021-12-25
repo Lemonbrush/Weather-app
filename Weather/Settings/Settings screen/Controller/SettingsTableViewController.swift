@@ -12,14 +12,41 @@ struct SettingsSection {
     var cells: [UITableViewCell]
 }
 
-class SettingsViewController: UIViewController {
+protocol SettingsViewControllerDelegate: UIViewController {
+    func refreshMainMenu()
+}
+
+class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
     
     // MARK: - Private properties
     
-    private let unitsSettingsCell = UnitsSettingsCell()
-    private lazy var colorThemeSettingsCell = ColorThemeSettingsCell(colorThemeComponent: colorThemeComponent)
+    private lazy var appIconSettingsCellController = AppIconSettingsCellController(colorThemeComponent: colorThemeComponent)
+    private lazy var telegramChatSupportCellController = TelegramChatSupportCellController(colorThemeComponent: colorThemeComponent)
+    private lazy var emailMeSupportCellController: EmailMeSupportCellController = {
+        let controller = EmailMeSupportCellController(colorThemeComponent: colorThemeComponent)
+        controller.viewControllerOwner = self
+        return controller
+    }()
+    private lazy var colorThemeSettingsCellController: ColorThemeSettingsCellController = {
+        let controller = ColorThemeSettingsCellController(colorThemeComponent: colorThemeComponent)
+        controller.viewControllerOwner = self
+        controller.reloadingViews.append(mainView)
+        controller.reloadingViews.append(self)
+        return controller
+    }()
+    private lazy var unitsSettingsCellController: UnitsSettingsCellController = {
+        let controller = UnitsSettingsCellController(colorThemeComponent: colorThemeComponent)
+        controller.viewControllerOwner = self
+        return controller
+    }()
     
-    private let mainView = SettingsView()
+    private lazy var settingsCellsControllers: [ReloadColorThemeProtocol] = [appIconSettingsCellController,
+                                                                             telegramChatSupportCellController,
+                                                                             emailMeSupportCellController,
+                                                                             colorThemeSettingsCellController,
+                                                                             unitsSettingsCellController]
+    
+    private lazy var mainView = SettingsView(colorTheme: colorThemeComponent)
 
     // MARK: - Public properties
 
@@ -39,53 +66,62 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         view = mainView
-        mainView.viewControllerOwner = self
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Settings"
-        
-        unitsSettingsCell.delegate = self
-        colorThemeSettingsCell.delegate = self
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         let appSettingsSection = SettingsSection(title: "APP",
-                                                 cells: [unitsSettingsCell,
-                                                         colorThemeSettingsCell])
+                                                 cells: [unitsSettingsCellController.cell,
+                                                         colorThemeSettingsCellController.cell])
         
-        mainView.settingsSections?.append(appSettingsSection)
+        let appIconSection = SettingsSection(title: "APP ICON",
+                                             cells: [appIconSettingsCellController.cell])
+        
+        let supportSection = SettingsSection(title: "SUPPORT",
+                                             cells: [telegramChatSupportCellController.cell,
+                                                     emailMeSupportCellController.cell])
+        
+        mainView.settingsSections? = [appSettingsSection,
+                                      appIconSection,
+                                      supportSection]
+        
+        reloadColorTheme()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        colorThemeSettingsCell.refresh()
-    }
-}
-
-extension SettingsViewController: UnitSwitchCellDelegate {
-    func unitSwitchToggled(_ value: Int) {
-        switch value {
-        case 0:
-            UserDefaultsManager.setUnitData(with: K.UserDefaults.metric)
-        case 1:
-            UserDefaultsManager.setUnitData(with: K.UserDefaults.imperial)
-        default:
-            break
+    // MARK: - Functions
+    
+    func reloadColorTheme() {
+        reloadAppearance()
+        
+        for reloadView in settingsCellsControllers {
+            reloadView.reloadColorTheme()
         }
         
-        mainMenuDelegate?.fetchWeatherData()
+        mainView.reloadColorTheme()
+        mainMenuDelegate?.reloadColorTheme()
+    }
+    
+    // MARK: - Private functions
+    
+    private func reloadAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = colorThemeComponent.colorTheme.settingsScreen.backgroundColor
+        let titleAttribute = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
+        appearance.largeTitleTextAttributes = titleAttribute
+        appearance.titleTextAttributes = titleAttribute
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.tintColor = colorThemeComponent.colorTheme.settingsScreen.labelsSecondaryColor
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colorThemeComponent.colorTheme.settingsScreen.labelsColor]
     }
 }
 
-extension SettingsViewController: ColorThemeSettingsCellDelegste {
-    func presentColorThemes() {
-        let colorThemeSettingsViewController = ColorThemeSettingsViewController(colorThemeComponent: colorThemeComponent)
-        colorThemeSettingsViewController.mainMenuDelegate = mainMenuDelegate
-        colorThemeSettingsViewController.colorThemeComponent = colorThemeComponent
-        
-        navigationController?.pushViewController(colorThemeSettingsViewController,
-                                                 animated: true)
+extension SettingsViewController: SettingsViewControllerDelegate {
+    func refreshMainMenu() {
+        mainMenuDelegate?.fetchWeatherData()
     }
 }

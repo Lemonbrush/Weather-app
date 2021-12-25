@@ -13,6 +13,17 @@ struct ColorThemeColorsModel {
     let labelsColor: UIColor
 }
 
+struct AddCityColorTheme {
+    let backgroundColor: UIColor
+    let searchFieldBackground: UIColor
+    let cancelButtonColor: UIColor
+    let placeholderColor: UIColor
+    let handleColor: UIColor
+    let isShadowVisible: Bool
+    let labelsColor: UIColor
+    let labelsSecondaryColor: UIColor
+}
+
 struct IconColorsColorThemeModel {
     let mist: UIColor
     let snow: UIColor
@@ -30,6 +41,7 @@ struct IconColorsColorThemeModel {
 }
 
 struct MainMenuColorThemeModel {
+    let isStatusBarDark: Bool
     let backgroundColor: UIColor
     let dateLabelColor: UIColor
     let todayColor: UIColor
@@ -41,15 +53,18 @@ struct MainMenuColorThemeModel {
 struct CellsColorThemeModel {
     let isShadowVisible: Bool
     let gradient: GradientColorThemeModel
-    var clearSky: ColorThemeColorsModel
-    var fewClouds: ColorThemeColorsModel
-    var scatteredClouds: ColorThemeColorsModel
-    var brokenClouds: ColorThemeColorsModel
-    var showerRain: ColorThemeColorsModel
-    var rain: ColorThemeColorsModel
-    var thunderstorm: ColorThemeColorsModel
-    var snow: ColorThemeColorsModel
-    var mist: ColorThemeColorsModel
+    let defaultBackground: UIColor
+    let defaultLoadingViewsColor: UIColor
+    let activityViewColor: UIColor
+    let clearSky: ColorThemeColorsModel
+    let fewClouds: ColorThemeColorsModel
+    let scatteredClouds: ColorThemeColorsModel
+    let brokenClouds: ColorThemeColorsModel
+    let showerRain: ColorThemeColorsModel
+    let rain: ColorThemeColorsModel
+    let thunderstorm: ColorThemeColorsModel
+    let snow: ColorThemeColorsModel
+    let mist: ColorThemeColorsModel
 }
 
 struct BackgroundColorColorThemeModel {
@@ -75,6 +90,8 @@ struct ScreenBackgroundColorThemeModel {
 }
 
 struct CityDetailsColorThemeModel {
+    let isNavBarDark: Bool
+    let isStatusBarDark: Bool
     let hourlyForecast: BackgroundColorColorThemeModel
     let weeklyForecast: BackgroundColorColorThemeModel
     let weatherQuality: BackgroundColorColorThemeModel
@@ -89,5 +106,12 @@ struct GradientColorThemeModel {
 }
 
 struct SettingsScreenColorTheme {
+    let backgroundColor: UIColor
+    let cellsBackgroundColor: UIColor
+    let labelsColor: UIColor
+    let labelsSecondaryColor: UIColor
+    let appIconSelectBorderColor: UIColor
+    let appIconDeselectBorderColor: UIColor
+    let temperatureSwitchColor: UIColor
     let colorBoxesColors: [UIColor]
 }
