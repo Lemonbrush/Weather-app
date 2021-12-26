@@ -1,4 +1,4 @@
-![cover](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/cover.png)
+![cover](https://github.com/Lemonbrush/Weather-app/blob/main/Project_description_images/images/cover.png)
 
 ---
 
@@ -7,7 +7,7 @@
 
 #### Например:
 
-![otherWeatherApps](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/apps_examples.png)
+![otherWeatherApps](https://github.com/Lemonbrush/Weather-app/blob/main/Project_description_images/images/apps_examples.png)
 
 Это экраны приложений с прогнозом погоды от Apple, Яндекс и OpenWeather. Как можно заметить, большая часть информации, показанная на скриншотах, пользователю не нужна каждый раз, когда он хочет посмотреть прогноз погоды. Чаще всего пользователю нужено узнать только о текущей температуре на улице и прогноз на ближайшие 2-3 часа. Остальная информация захламляет обзор и только мешает. Экран превращается в газетную колонку, что тормозит восприятие информации, которая должна быть схвачена за одно мгновение  
 
@@ -33,13 +33,13 @@
 
 ## Концепт
 
-![concept](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/screen_map.png)
+![concept](https://github.com/Lemonbrush/Weather-app/blob/main/Project_description_images/images/screen_map.png)
 
 Выше показан общий макет приложения с картой экранов. Здесь можно увидеть главный экран, на котором уже можно узнать всю основную информацию о сохраненных городах. На экране с информацией о погоде в выбранном городе находится почасовой прогноз, прогноз на неделю и характеристики текущей погоды     
 
 ## Темы приложения
 
-![themes](https://github.com/Lemonbrush/Weather/blob/development/Project_description_images/images/color_themes.png)
+![themes](https://github.com/Lemonbrush/Weather-app/blob/main/Project_description_images/images/color_themes.png)
 
 В настройках можно выбрать тему приложения. Систма тем полностью кастомизируемая. В проекте есть JSON файл, в который можно добавить свою тему с указанием новых цветов для каждого элемента приложения
 
@@ -56,7 +56,7 @@
 #### Архитектура и шаблоны проектирования
 
 В основу архитектуры приложения лег MVC. Значительное расширение функционала не планируется, поэтому этой архитектуры достаточно для поставленной цели 
-Для создания ячеек на главном экране [используется](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Weather/Main%20menu/View/MainMenuCellBuilder.swift) шаблон проектирования Builder 
+Для создания ячеек на главном экране [используется](https://github.com/Lemonbrush/Weather-app/blob/main/Weather/Main%20menu/View/Cell%20builder/MainMenuCellBuilder.swift) шаблон проектирования Builder 
 
 #### Использование сети
 
@@ -67,8 +67,8 @@
 
 Для хранения данных о сохраненных городах используется Core Data, и для сохранения настроек приложения UserDefaults    
 
-**Core Data** - Весь функционал Core Data вынесен в отдельный класс [WeatherCoreDataManager.swift](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Weather/Supportive%20files/WeatherCoreDataManager.swift)  
-**UserDefaults** - Для работы с UserDefaults также был сделан отдельный класс [UserDefaultsManager.swift](https://github.com/Lemonbrush/Weather/blob/SberSchoolProject/Weather/Supportive%20files/UserDefaultsManager.swift)  
+**Core Data** - Весь функционал Core Data вынесен в отдельный класс [WeatherCoreDataManager.swift](https://github.com/Lemonbrush/Weather-app/blob/main/Weather/Support%20files/Data%20persistence/WeatherCoreDataManager.swift)  
+**UserDefaults** - Для работы с UserDefaults также был сделан отдельный класс [UserDefaultsManager.swift](https://github.com/Lemonbrush/Weather-app/blob/main/Weather/Support%20files/Data%20persistence/UserDefaultsManager.swift)  
 
 ---
 
