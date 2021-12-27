@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ColorThemeSettingsCellDelegste {
+protocol ColorThemeSettingsCellDelegste: AnyObject {
     func presentColorThemes()
 }
 
@@ -17,7 +17,7 @@ class ColorThemeSettingsCell: UITableViewCell, ReloadColorThemeProtocol {
     // MARK: - Properties
     
     var colorThemeComponent: ColorThemeProtocol
-    var delegate: ColorThemeSettingsCellDelegste?
+    weak var delegate: ColorThemeSettingsCellDelegste?
     
     // MARK: - Private properties
     

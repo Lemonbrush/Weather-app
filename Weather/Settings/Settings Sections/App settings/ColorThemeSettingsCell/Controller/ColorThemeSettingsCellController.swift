@@ -14,7 +14,7 @@ class ColorThemeSettingsCellController: ReloadColorThemeProtocol {
     
     let cell: ColorThemeSettingsCell
 
-    var viewControllerOwner: SettingsViewControllerDelegate?
+    weak var viewControllerOwner: (SettingsViewControllerDelegate & ReloadColorThemeProtocol)?
     
     var reloadingViews: [ReloadColorThemeProtocol] = []
     
@@ -43,6 +43,10 @@ extension ColorThemeSettingsCellController: ColorThemeSettingsCellDelegste {
         let colorThemeSettingsViewController = ColorThemeSettingsViewController(colorThemeComponent: colorThemeComponent)
         reloadingViews.append(self)
         reloadingViews.append(colorThemeSettingsViewController)
+        
+        if let strongViewControllerOwner = viewControllerOwner {
+            reloadingViews.append(strongViewControllerOwner)
+        }
         
         colorThemeSettingsViewController.reloadingViews = reloadingViews
         
