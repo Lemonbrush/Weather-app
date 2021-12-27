@@ -31,7 +31,6 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
         let controller = ColorThemeSettingsCellController(colorThemeComponent: colorThemeComponent)
         controller.viewControllerOwner = self
         controller.reloadingViews.append(mainView)
-        controller.reloadingViews.append(self)
         return controller
     }()
     private lazy var unitsSettingsCellController: UnitsSettingsCellController = {
@@ -50,7 +49,7 @@ class SettingsViewController: UIViewController, ReloadColorThemeProtocol {
 
     // MARK: - Public properties
 
-    var mainMenuDelegate: MainMenuDelegate?
+    weak var mainMenuDelegate: MainMenuDelegate?
     var colorThemeComponent: ColorThemeProtocol
 
     // MARK: - Lifecycle

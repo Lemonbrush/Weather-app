@@ -42,7 +42,7 @@ class CityDetailViewController: UIViewController, CityDetailViewControllerDelega
     }()
     
     private var weatherManager = NetworkManager()
-    private var updateTimer: Timer?
+    private weak var updateTimer: Timer?
 
     // MARK: - Lifecycle
     

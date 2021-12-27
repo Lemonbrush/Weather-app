@@ -17,7 +17,7 @@ class AddCityViewController: UIViewController {
 
     // MARK: - Properties
 
-    var delegate: AddCityDelegate?
+    weak var delegate: AddCityDelegate?
     
     var searchCompleter = MKLocalSearchCompleter()
     let locationManager = CLLocationManager()

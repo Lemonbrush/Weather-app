@@ -16,7 +16,7 @@ struct NetworkManager {
 
     // MARK: - Public functions
 
-    var delegate: NetworkManagerDelegate?
+    weak var delegate: NetworkManagerDelegate?
 
     // MARK: - Fetching weather data
 
