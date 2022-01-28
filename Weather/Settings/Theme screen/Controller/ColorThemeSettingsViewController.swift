@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ReloadColorThemeProtocol {
+protocol ReloadColorThemeProtocol: AnyObject {
     func reloadColorTheme()
 }
 

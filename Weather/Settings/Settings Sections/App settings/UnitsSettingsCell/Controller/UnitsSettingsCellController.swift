@@ -13,7 +13,7 @@ class UnitsSettingsCellController: ReloadColorThemeProtocol {
     
     let cell: UnitsSettingsCell
 
-    var viewControllerOwner: SettingsViewControllerDelegate?
+    weak var viewControllerOwner: SettingsViewControllerDelegate?
     
     // MARK: - Private properties
     

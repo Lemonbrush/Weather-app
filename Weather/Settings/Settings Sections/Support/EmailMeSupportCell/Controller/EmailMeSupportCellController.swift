@@ -11,7 +11,7 @@ class EmailMeSupportCellController: NSObject {
     
     // MARK: - Properties
     
-    var viewControllerOwner: UIViewController?
+    weak var viewControllerOwner: UIViewController?
 
     // MARK: - Private properties
     

@@ -8,7 +8,7 @@
 import MapKit
 import UIKit
 
-protocol AddCityViewDelegate {
+protocol AddCityViewDelegate: AnyObject {
     var searchCompleter: MKLocalSearchCompleter { get }
     func dismissView()
     func didChoseCity(title: String, subtitle: String)
@@ -19,7 +19,7 @@ class AddCityView: UIView {
     
     // MARK: - Properties
 
-    var delegate: AddCityViewDelegate?
+    weak var delegate: AddCityViewDelegate?
 
     // MARK: - Private properties
 
